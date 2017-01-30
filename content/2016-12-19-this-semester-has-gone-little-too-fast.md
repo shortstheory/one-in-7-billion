@@ -1,16 +1,9 @@
----
-layout: post
 title: What I've been upto
-date: '2016-12-19T11:09:00.000+05:30'
+date: 2016-12-19 11:09
 author: Arnav Dhamija
-tags:
-- College
-- Life
-- KDE
-modified_time: '2016-12-23T21:48:39.704+05:30'
-blogger_id: tag:blogger.com,1999:blog-8556896234209226518.post-6087131666619188580
-blogger_orig_url: http://arnavdhamija.blogspot.com/2016/12/this-semester-has-gone-little-too-fast.html
----
+tags: College, Life, KDE
+category: Article
+slug: this-semester-has-gone-little-too-fast
 
 This semester has gone a _little_ too fast for my liking. Though there were
 plenty of good memories and takeaways from this semester, it has been by far

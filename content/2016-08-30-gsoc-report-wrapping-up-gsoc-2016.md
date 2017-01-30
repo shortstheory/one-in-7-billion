@@ -1,16 +1,9 @@
----
-layout: post
 title: GSoC Report - Wrapping up GSoC 2016
-date: '2016-08-30T01:45:00.001+05:30'
+date: 2016-08-30 01:45
 author: Arnav Dhamija
-tags:
-- GSoC
-- KDE
-modified_time: '2016-08-30T01:59:06.523+05:30'
-thumbnail: https://3.bp.blogspot.com/-604QoRmtLTo/V8Sa-o_LlcI/AAAAAAAAApQ/iYr-6QtMMvs5RR7C5akBnNVJh2eJRW1zgCLcB/s72-c/Screenshot_20160830_014801.png
-blogger_id: tag:blogger.com,1999:blog-8556896234209226518.post-3710349075858919433
-blogger_orig_url: http://arnavdhamija.blogspot.com/2016/08/gsoc-report-wrapping-up-gsoc-2016.html
----
+tags: GSoC, KDE
+category: Article
+slug: gsoc-report-wrapping-up-gsoc-2016
 
 That’s it. After a [combined total](https://github.com/KDE/kio-
 stash/graphs/contributors) of 217 git commits, 6,202 lines of code added, and

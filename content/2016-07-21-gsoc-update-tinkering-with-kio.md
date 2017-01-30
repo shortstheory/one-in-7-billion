@@ -1,15 +1,9 @@
----
-layout: post
 title: 'GSoC Update: Tinkering with KIO'
-date: '2016-07-21T15:18:00.002+05:30'
+date: 2016-07-21 15:18
 author: Arnav Dhamija
-tags:
-- GSoC
-- KDE
-modified_time: '2016-07-28T00:30:58.975+05:30'
-blogger_id: tag:blogger.com,1999:blog-8556896234209226518.post-5820964067663305110
-blogger_orig_url: http://arnavdhamija.blogspot.com/2016/07/gsoc-update-tinkering-with-kio.html
----
+tags: GSoC, KDE
+category: Article
+slug: gsoc-update-tinkering-with-kio
 
 I'm a lot closer to finishing the project now. Thanks to some great support
 from my GSoC mentor, my project has turned out better than what I had written
