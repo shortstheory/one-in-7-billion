@@ -1,4 +1,4 @@
-title: 'Photography: Volume 3'
+title: Photography: Volume 3
 date: 2012-05-08 14:30
 author: Arnav Dhamija
 tags: Photography

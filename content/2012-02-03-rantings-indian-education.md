@@ -1,4 +1,4 @@
-title: 'Rantings: Indian Education'
+title: Rantings: Indian Education
 date: 2012-02-03 15:40
 author: Arnav Dhamija
 tags: Rants

@@ -1,4 +1,4 @@
-title: 'GSoC Update: Tinkering with KIO'
+title: GSoC Update: Tinkering with KIO
 date: 2016-07-21 15:18
 author: Arnav Dhamija
 tags: GSoC, KDE

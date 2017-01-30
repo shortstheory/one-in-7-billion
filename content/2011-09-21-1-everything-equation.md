@@ -1,4 +1,4 @@
-title: "'The 1 = Everything' equation"
+title: 'The 1 = Everything' equation
 date: 2011-09-21 13:57
 author: Arnav Dhamija
 tags: Rants

@@ -1,4 +1,4 @@
-title: 'Photography: Volume 4'
+title: Photography: Volume 4
 date: 2012-10-25 15:11
 author: Arnav Dhamija
 tags: Photography

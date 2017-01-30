@@ -1,4 +1,4 @@
-title: 'GSoC Update 1: The Beginning'
+title: GSoC Update 1: The Beginning
 date: 2016-05-30 10:37
 author: Arnav Dhamija
 tags: GSoC, Programming, KDE

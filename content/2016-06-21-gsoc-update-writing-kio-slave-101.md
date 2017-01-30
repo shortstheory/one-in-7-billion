@@ -1,4 +1,4 @@
-title: 'GSoC Update(?): Writing a KIO slave 101!'
+title: GSoC Update(?): Writing a KIO slave 101!
 date: '2016-06-21 23:35
 author: Arnav Dhamija
 tags: GSoC, Programming, KDE

@@ -1,4 +1,4 @@
-title: 'Photography: Volume 1'
+title: Photography: Volume 1
 date: 2011-10-19 19:40
 author: Arnav Dhamija
 tags: Photography
