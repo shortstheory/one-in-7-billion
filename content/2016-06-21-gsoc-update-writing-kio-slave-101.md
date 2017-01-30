@@ -143,9 +143,9 @@ Hello::Hello(const QByteArray &pool, const QByteArray &app)
     : SlaveBase("hello", pool, app) {}   
 
 #include "hello.moc"  
+```
 
 The .moc file is, of course, auto-generated at compilation time.  
-```
 
 As mentioned earlier, the KIO Slave's .cpp file will also require a new
 KIOPluginForMetaData class to add the .json file. The following is used for
