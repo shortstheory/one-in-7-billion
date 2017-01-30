@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>'GSoC Update 1: The Beginning' — One in 7 Billion</title>
+	<meta name="description" content="Title: 'GSoC Update 1: The Beginning'; Date: 2016-05-30; Author: Arnav Dhamija">
+	<meta name="author" content="Arnav Dhamija">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+		<![endif]-->
+	<link href="/theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/css/local.css" rel="stylesheet">
+	<link href="/theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="/">One in 7 Billion</a>
+			<br>	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">'GSoC Update 1: The Beginning'</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">Arnav Dhamija</h4>
+		</span>
+		<time datetime="2016-05-30T10:37:00+05:30" itemprop="datePublished">Mon 30 May 2016</time>
+	</div>
+	<div>
+		Category:
+		<span itemprop="articleSection">
+			<a href="/category/article.html" rel="category">Article</a>
+		</span>
+	</div>
+ 
+	<div>
+		Tags:
+		<span itemprop="keywords">
+			<a href="/tag/gsoc.html" rel="tag">GSoC</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="/tag/programming.html" rel="tag">Programming</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="/tag/kde.html" rel="tag">KDE</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><p>I have officially started my <a href="https://summerofcode.withgoogle.com/projects/#5979393230897152">GSoC
+project</a> under
+the mentorship of <a href="https://blog.baloneygeek.com/">Boudhayan Gupta </a>and <a href="http://blog.pinak.me/">Pinak
+Ahuja</a>.  </p>
+<p>The project idea's implementation has undergone some changes from what I
+proposed. While the essence of the project is the same, it will now no longer
+be dependent on Baloo and xattr. Instead, it will use a QList to hold a list
+of staged files with a plugin to kiod. My next milestone before the mid-term
+evaluation is to implement this in a KIO slave which will be compatible with
+the whole suite of KDE applications.  </p>
+<p>For the last two weeks, I've been busy with going through hundreds of lines of
+source code to understand the concept of a KIO slave. The KIO API is a very
+neat feature of KDE - it provides a single, consistent way to access remote
+and local filesystems. This is further expanded to KIO slaves which are
+programs based on the KIO API which allow for a filesystem to be expressed in
+a particular way. For instance, there is a KIO slave for displaying xattr file
+<a href="http://vhanda.in/blog/2014/07/tagging-your-files/">tags</a> as a directory under
+which each file marked to a tag would be displayed. KIO slaves even expand to
+network protocols allowing for remote access using slaves such as http:/,
+ftp:/, smb:/ (for Windows samba shares), fish:/, sftp:/, nfs:/, and webdav:/.
+My project requires virtual folder constructed of URLs stored in a QList - an
+ideal fit for KIO slaves.  </p>
+<p>However, hacking on KIO slaves was not exactly straightforward. Prior to my
+GSoC selection, I had no idea on how to edit CMakeLists.txt files and it was a
+task to learn to make one by hand. Initially, it felt like installing the
+dependencies for building KIO slaves would almost certainly lead to me
+destroying my KDE installation, and sure enough, I did manage to ruin my
+installation. Most annoying. Fortunately, I managed to recover my data and
+with a fresh install of Kubuntu 16.04 with all the required KDE packages, I
+got back to working on getting the technical equivalent of a Hello World to
+work with a KIO slave.  </p>
+<p>This too, was more than a matter of just copying and pasting lines of code
+from the <a href="https://techbase.kde.org/Development/Tutorials/KIO_Sla
+ves/Hello_World">KDE tutorial</a>. KIO slaves had dropped the use of .protocol files in the KF5
+transition, instead opting for JSON files to store the properties of the KIO
+slave. Thankfully, I had the assistance of the legendary <a href="https://behindkde.org/david-faure-2">David
+Faure</a>. Under his guidance, I managed to
+port the KIO slave in the tutorial to a KF5 compatible KIO slave and after a
+full week of frustration of dealing with dependency hell, I saw the best Hello
+World I could ever hope for:  </p>
+<p>![]({{ site.url }}/assets/kioslave.png)</p>
+<p>Baby steps. The next step was to make the KIO slave capable of displaying the
+contents of a specified QUrl in a file manager. The documentation for
+KProtocolManager made it seem like a pretty straightforward task - apparently
+that all I needed to do was to add a "listing" entry in my JSON protocol file
+and I would have to re-implement the listDir method inherited from SlaveBase
+using a call to SlaveBase::listDir(&amp;QUrl). Unbeknownst to me, the SlaveBase
+class actually didn't have any code for displaying a directory! The SlaveBase
+class was only for reimplementing its member functions in a derived class as I
+found out by going through the source code of the core of kio/core. Learning
+from my mistake here I switched to using a ForwardingSlaveBase class for my
+KIO slave which instantly solved my problems of displaying a directory.  </p>
+<p>![]({{ site.url }}/assets/helloslave.png)</p>
+<p><em>Fistpump</em></p>
+<p>According to my timeline, the next steps in the project are  </p>
+<ol>
+<li>Finishing off the KIO slave by the end of this month</li>
+<li>Making GUI modifications in Dolphin to accommodate the staging area</li>
+<li>Thinking of a better name for this feature?
+So far, it's been a great experience to get so much support from the KDE
+community. Here's to another two and a half months of KDE development!</li>
+</ol></div>
+	<hr>
+	<h2>Comments</h2>
+</div>
+		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>Navigation</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="">One in 7 Billion</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Author</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="https://github.com/shortstheory">github</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Categories</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="/category/album.html">Album (6)</a></li>
+							<li><a href="/category/article.html">Article (17)</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; Arnav Dhamija 2016</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>
