@@ -1,14 +1,9 @@
----
-layout: post
 title: Photography Protips!
-date: '2012-09-09T20:26:00.002+05:30'
+date: 2012-09-09 20:26
 author: Arnav Dhamija
-tags:
-- Photography
-modified_time: '2016-03-06T00:40:57.187+05:30'
-blogger_id: tag:blogger.com,1999:blog-8556896234209226518.post-1808865272809269752
-blogger_orig_url: http://arnavdhamija.blogspot.com/2012/09/photography-protips.html
----
+tags: Photography
+category: Article
+slug: photography-protips
 
 Gosh, does time fly. It's been months since my last blog post, owing quite a
 bit to 10th grade and other activities. However, I'm back with a new, special

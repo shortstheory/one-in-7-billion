@@ -1,13 +1,9 @@
----
-layout: post
 title: My First Post on My First Blog
-date: '2011-05-09T10:58:00.000+05:30'
+date: 2011-05-09 10:58
 author: Arnav Dhamija
 tags:
-modified_time: '2012-05-02T10:06:44.531+05:30'
-blogger_id: tag:blogger.com,1999:blog-8556896234209226518.post-6366804629066101900
-blogger_orig_url: http://arnavdhamija.blogspot.com/2011/05/my-first-blog.html
----
+category: Article
+slug: my-first-blog
 
 Blogging. Well, something I've wanted to do earnestly for some time.  
 

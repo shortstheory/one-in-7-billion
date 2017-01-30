@@ -1,15 +1,9 @@
----
-layout: post
 title: 'Photography: Volume 2'
-date: '2012-03-20T15:24:00.000+05:30'
+date: 2012-03-20 15:24
 author: Arnav Dhamija
-tags:
-- Photography
-modified_time: '2016-02-16T13:57:30.937+05:30'
-thumbnail: https://1.bp.blogspot.com/-5udfQqR8ZhM/T2hJUb9_BvI/AAAAAAAAALw/MV0ncRl9SRI/s72-c/IMG_5317.JPG
-blogger_id: tag:blogger.com,1999:blog-8556896234209226518.post-4560022965735338030
-blogger_orig_url: http://arnavdhamija.blogspot.com/2012/03/photography-volume-2.html
----
+tags: Photography
+category: Album
+slug: photography-volume-2
 
 Pulling out my camera, adjusting the exposure, quietly waiting for the perfect
 shot, I present to you, my viewers, my new photography album. The old

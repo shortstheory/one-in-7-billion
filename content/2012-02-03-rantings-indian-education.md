@@ -1,14 +1,9 @@
----
-layout: post
 title: 'Rantings: Indian Education'
-date: '2012-02-03T15:40:00.000+05:30'
+date: 2012-02-03 15:40
 author: Arnav Dhamija
-tags:
-- Rants
-modified_time: '2016-03-06T00:39:19.789+05:30'
-blogger_id: tag:blogger.com,1999:blog-8556896234209226518.post-1416290294974751851
-blogger_orig_url: http://arnavdhamija.blogspot.com/2012/02/rantings-indian-education.html
----
+tags: Rants
+category: Article
+slug: rantings-indian-education
 
 The Indian education system has been one with many <strike>ups and</strike>
 downs. Viewing from not an expert's position, not from a parent's position,

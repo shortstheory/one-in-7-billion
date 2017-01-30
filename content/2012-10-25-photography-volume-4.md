@@ -1,15 +1,9 @@
----
-layout: post
 title: 'Photography: Volume 4'
-date: '2012-10-25T15:11:00.001+05:30'
+date: 2012-10-25 15:11
 author: Arnav Dhamija
-tags:
-- Photography
-modified_time: '2016-02-16T13:55:30.293+05:30'
-thumbnail: https://1.bp.blogspot.com/-RkKbHu-ZyS4/UIj_8kTVLPI/AAAAAAAAAPY/63fjYE_BecI/s72-c/IMG_1013.JPG
-blogger_id: tag:blogger.com,1999:blog-8556896234209226518.post-5325530776182457716
-blogger_orig_url: http://arnavdhamija.blogspot.com/2012/10/photography-volume-4.html
----
+tags: Photography
+category: Album
+slug: photography-volume-4
 
 Hi guys! Recently bought myself some free time to publish a brand new blog
 post, centred on my photography work!

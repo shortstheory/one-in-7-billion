@@ -1,15 +1,9 @@
----
-layout: post
 title: 'Photography: Volume 3'
-date: '2012-05-08T14:30:00.001+05:30'
+date: 2012-05-08 14:30
 author: Arnav Dhamija
-tags:
-- Photography
-modified_time: '2016-02-16T13:55:31.301+05:30'
-thumbnail: https://3.bp.blogspot.com/-ewIwzO3uszE/T6i4IhyEEXI/AAAAAAAAANY/NGYI2N-t8X8/s72-c/IMG_6748.JPG
-blogger_id: tag:blogger.com,1999:blog-8556896234209226518.post-4263335906129721052
-blogger_orig_url: http://arnavdhamija.blogspot.com/2012/05/photography-volume-3.html
----
+tags: Photography
+category: Album
+slug: photography-volume-3
 
 This is probably the shortest duration between two meaningful posts on this
 blog: just eight days! Today also represents the 1st anniversary of this blog,

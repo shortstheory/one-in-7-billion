@@ -1,15 +1,9 @@
----
-layout: post
 title: Nil Sine Pokemon
-date: '2012-04-30T17:05:00.001+05:30'
+date: 2012-04-30 17:05
 author: Arnav Dhamija
-tags:
-- Life story
-- Pokemon
-modified_time: '2016-03-06T00:41:02.604+05:30'
-blogger_id: tag:blogger.com,1999:blog-8556896234209226518.post-2193925604946351585
-blogger_orig_url: http://arnavdhamija.blogspot.com/2012/04/pokemon-yes-pokemon.html
----
+tags: Life story, Pokemon
+category: Article
+slug: pokemon-yes-pokemon
 
 I confess that I haven't been able to tend to this blog as much as I would've
 liked. It's not about time (or the lack of it), it's just laziness. Well, a

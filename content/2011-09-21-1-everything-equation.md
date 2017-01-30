@@ -1,14 +1,9 @@
----
-layout: post
 title: "'The 1 = Everything' equation"
-date: '2011-09-21T13:57:00.000+05:30'
+date: 2011-09-21 13:57
 author: Arnav Dhamija
-tags:
-- Rants
-modified_time: '2016-03-06T00:40:05.699+05:30'
-blogger_id: tag:blogger.com,1999:blog-8556896234209226518.post-8393069824180776671
-blogger_orig_url: http://arnavdhamija.blogspot.com/2011/09/1-everything-equation.html
----
+tags: Rants
+category: Article
+slug: 1-everything-equation
 
 What's your unlucky number?  
 
