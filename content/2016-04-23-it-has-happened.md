@@ -1,16 +1,9 @@
----
-layout: post
 title: It has happened - GSoC 2016 Selection!
-date: '2016-04-23T12:28:00.000+05:30'
+date: 2016-04-23 12:28
 author: Arnav Dhamija
-tags:
-- GSoC
-- KDE
-modified_time: '2016-05-03T16:23:10.511+05:30'
-thumbnail: https://4.bp.blogspot.com/-edxDvR1ymSg/Vxsc7I8jpmI/AAAAAAAAAms/1g49gAPyqr8HZCodRl-o-E5yKvI9-l1IwCLcB/s72-c/photo_2016-04-23_12-26-30.jpg
-blogger_id: tag:blogger.com,1999:blog-8556896234209226518.post-3793523904118270701
-blogger_orig_url: http://arnavdhamija.blogspot.com/2016/04/it-has-happened.html
----
+tags: GSoC, KDE
+category: Article
+slug: it-has-happened
 
 Wow!  
 

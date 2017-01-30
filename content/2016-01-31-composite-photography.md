@@ -1,15 +1,9 @@
----
-layout: post
 title: Composite Photography
-date: '2016-01-31T22:03:00.003+05:30'
+date: 2016-01-31 22:03
 author: Arnav Dhamija
-tags:
-- Photography
-modified_time: '2016-02-16T13:55:27.769+05:30'
-thumbnail: https://3.bp.blogspot.com/-boQmkGwA0pY/Vq4uvGdC0MI/AAAAAAAAAk8/bT86rSVVPS8/s72-c/StarStaX_IMG_9937-IMG_9966_lighten.jpg
-blogger_id: tag:blogger.com,1999:blog-8556896234209226518.post-3274048489856664908
-blogger_orig_url: http://arnavdhamija.blogspot.com/2016/01/composite-photography.html
----
+tags: Photography
+category: Album
+slug: composite-photography
 
 Ever since I got my new Canon 700D, I've been looking more into photography as
 an art than ever before. Thanks to internet photography guides, less light

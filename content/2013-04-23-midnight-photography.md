@@ -1,15 +1,9 @@
----
-layout: post
 title: Midnight Photography!
-date: '2013-04-23T12:23:00.002+05:30'
+date: 2013-04-23 12:23
 author: Arnav Dhamija
-tags:
-- Photography
-modified_time: '2016-02-16T13:55:29.322+05:30'
-thumbnail: https://1.bp.blogspot.com/-OiEjBFtMPRI/UXYaYY5681I/AAAAAAAAARc/-klx6O12_84/s72-c/IMG_0131.JPG
-blogger_id: tag:blogger.com,1999:blog-8556896234209226518.post-7833724187843045461
-blogger_orig_url: http://arnavdhamija.blogspot.com/2013/04/midnight-photography.html
----
+tags: Photography
+category: Album
+slug: midnight-photography
 
 Hey guys! I haven't been able to get too many scenic shots of late, so I've
 invested some of my photography time in taking photos at night. Here are some

@@ -1,16 +1,9 @@
----
-layout: post
 title: GSoC 2016 Project Survey, help me make Dolphin a better File Manager!
-date: '2016-02-15T21:16:00.003+05:30'
+date: 2016-02-15 21:16
 author: Arnav Dhamija
-tags:
-- GSoC
-- Programming
-- KDE
-modified_time: '2016-06-22T21:57:18.276+05:30'
-blogger_id: tag:blogger.com,1999:blog-8556896234209226518.post-4295361788778327231
-blogger_orig_url: http://arnavdhamija.blogspot.com/2016/02/gsoc-2016-project-survey-help-me-make.html
----
+tags: GSoC, Programming, KDE
+category: Article
+slug: gsoc-2016-project-survey-help-me-make
 
 Hey everyone!  
 

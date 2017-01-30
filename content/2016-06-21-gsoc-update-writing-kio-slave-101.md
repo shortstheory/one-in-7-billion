@@ -1,16 +1,9 @@
----
-layout: post
 title: 'GSoC Update(?): Writing a KIO slave 101!'
-date: '2016-06-21T23:35:00.001+05:30'
+date: '2016-06-21 23:35
 author: Arnav Dhamija
-tags:
-- GSoC
-- Programming
-- KDE
-modified_time: '2016-06-22T11:20:17.116+05:30'
-blogger_id: tag:blogger.com,1999:blog-8556896234209226518.post-2374459701670942340
-blogger_orig_url: http://arnavdhamija.blogspot.com/2016/06/gsoc-update-writing-kio-slave-101.html
----
+tags: GSoC, Programming, KDE
+category: Article
+slug: gsoc-update-writing-kio-slave-101
 
 This [project](https://summerofcode.withgoogle.com/projects/#5979393230897152)
 has been going well. Though it was expectedly difficult in the beginning, I

@@ -1,17 +1,9 @@
----
-layout: post
 title: 'GSoC Update 1: The Beginning'
-date: '2016-05-30T10:37:00.003+05:30'
+date: 2016-05-30 10:37
 author: Arnav Dhamija
-tags:
-- GSoC
-- Programming
-- KDE
-modified_time: '2016-06-22T11:21:13.630+05:30'
-thumbnail: https://1.bp.blogspot.com/-V15LlmM8Jec/V0tFKTF_qAI/AAAAAAAAAnY/lEQ_9F6PIxEuY_giEksDGTmBz-ZXU43WQCLcB/s72-c/kioslave.png
-blogger_id: tag:blogger.com,1999:blog-8556896234209226518.post-900295216922761291
-blogger_orig_url: http://arnavdhamija.blogspot.com/2016/05/gsoc-update-1-beginning.html
----
+tags: GSoC, Programming, KDE
+category: Article
+slug: gsoc-update-1-beginning
 
 I have officially started my [GSoC
 project](https://summerofcode.withgoogle.com/projects/#5979393230897152) under

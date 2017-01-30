@@ -1,9 +1,9 @@
 title: What do I do now?
-date: 2016-04-14
+date: 2016-04-14 01:38
 author: Arnav Dhamija
-category: article
-slug: what-do-i-do-now
 tags: Rants, College, Life
+category: Article
+slug: what-do-i-do-now
 
 I spend a lot of time thinking since I've joined college.  
 

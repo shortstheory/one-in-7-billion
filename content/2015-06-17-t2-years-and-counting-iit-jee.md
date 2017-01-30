@@ -1,15 +1,9 @@
----
-layout: post
 title: 'T+2 Years And Counting: My IIT-JEE preparation story'
-date: '2015-06-17T10:29:00.000+05:30'
+date: 2015-06-17 10:29
 author: Arnav Dhamija
-tags:
-- JEE
-- Life story
-modified_time: '2016-12-05T22:57:54.107+05:30'
-blogger_id: tag:blogger.com,1999:blog-8556896234209226518.post-6722786949819299763
-blogger_orig_url: http://arnavdhamija.blogspot.com/2015/06/t2-years-and-counting-iit-jee.html
----
+tags: JEE, Life story
+category: Article
+slug: t2-years-and-counting-iit-jee
 
 As the title indicates, it's been a while since I've written anything here. I
 don't know if anyone still reads this blog, but I sure appreciate if you do!  
