@@ -8,7 +8,7 @@ slug: it-has-happened
 Wow!  
 
 
-![]({{ site.url }}/assets/photo_2016-04-23_12-26-30.jpg)
+![](images/photo_2016-04-23_12-26-30.jpg)
 
 
 

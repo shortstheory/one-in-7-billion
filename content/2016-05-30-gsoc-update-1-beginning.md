@@ -51,7 +51,7 @@ full week of frustration of dealing with dependency hell, I saw the best Hello
 World I could ever hope for:  
 
 
-![]({{ site.url }}/assets/kioslave.png)
+![](images/kioslave.png)
 
 
 Baby steps. The next step was to make the KIO slave capable of displaying the
@@ -67,7 +67,7 @@ from my mistake here I switched to using a ForwardingSlaveBase class for my
 KIO slave which instantly solved my problems of displaying a directory.  
 
 
-![]({{ site.url }}/assets/helloslave.png)
+![](images/helloslave.png)
 
 _Fistpump_
 

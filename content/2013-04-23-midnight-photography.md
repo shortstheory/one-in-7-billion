@@ -9,14 +9,14 @@ Hey guys! I haven't been able to get too many scenic shots of late, so I've
 invested some of my photography time in taking photos at night. Here are some
 of the shots that I've recently taken with my camera.  
 
-![]({{ site.url }}/assets/IMG_0131.JPG)
+![](images/IMG_0131.JPG)
 
 I really like employing this technique. You need to get someone to hold a
 torch while the camera is mounted on a tripod. The shutter was open for 15
 seconds, ample time to draw the chosen letters. It works great for pseudo stop
 motion too!  
 
-![]({{ site.url }}/assets/IMG_0790.JPG)
+![](images/IMG_0790.JPG)
 
 Wow, I honestly admit that I didn't expect a shot like this! It was a simple
 matter to shoot it by mounting the camera and leaving the shutter open for a
@@ -33,12 +33,12 @@ I'll leave that to you to judge. I tried my best in obtaining relatively clear
 images (which is a pretty difficult feat when the camera's digital focal
 length is 2240 mm!)  
 
-![]({{ site.url }}/assets/IMG_2268.JPG)
+![](images/IMG_2268.JPG)
 
-![]({{ site.url }}/assets/IMG_0357.JPG)
+![](images/IMG_0357.JPG)
 
-![]({{ site.url }}/assets/IMG_2303.JPG)
+![](images/IMG_2303.JPG)
 
-![]({{ site.url }}/assets/IMG_2306.JPG)
+![](images/IMG_2306.JPG)
 
 I hope you enjoyed this edition. Please feel free to drop comments!

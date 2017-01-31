@@ -10,7 +10,7 @@ stash/graphs/contributors) of 217 git commits, 6,202 lines of code added, and
 4,167 lines of code deleted, GSoC 2016 is finally over.  
 
 
-![]({{ site.url }}/assets/Screenshot_20160830_014801.png)
+![](images/Screenshot_20160830_014801.png)
 
 These twelve weeks of programming have been a very enriching experience for me
 and making this project has taught me a lot about production quality software
@@ -86,7 +86,7 @@ rename and copy functions of the ioslave, I got the best terminal output I
 ever wanted from this project.  
 
 
-![]({{ site.url }}/assets/Screenshot_20160829_184812.png)
+![](images/Screenshot_20160829_184812.png)
 
 
 Definitely the highest point of the GSoC for me. From there on out, it was a
