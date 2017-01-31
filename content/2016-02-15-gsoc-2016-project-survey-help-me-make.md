@@ -10,8 +10,7 @@ Hey everyone!
 I am a first year computer science undergraduate from BITS Pilani, Hyderabad
 Campus. I am looking forward to working for KDE for the GSoC.  
 
-![](https://developers.google.com/open-
-source/gsoc/resources/downloads/GSoC2016Logo.jpg)
+![](https://developers.google.com/open-source/gsoc/resources/downloads/GSoC2016Logo.jpg)
 
 My project idea is based on solving a problem all file managers have had for
 years - the lack of an easy to use file selection tool. My project aims to

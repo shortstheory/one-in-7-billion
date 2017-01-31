@@ -1,34 +1,58 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-        <title>One in 7 Billion : GSoC Report - Wrapping up GSoC 2016</title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
-        <link href="/" type="application/atom+xml" rel="alternate" title="One in 7 Billion ATOM Feed" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="One in 7 Billion, ">
 
-        <!--[if IE]>
-                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-        <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="/css/ie.css"/>
-                <script src="/js/IE8.js" type="text/javascript"></script><![endif]-->
+        <title>GSoC Report - Wrapping up GSoC 2016 // One in 7 Billion // </title>
 
-        <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="/css/ie6.css"/><![endif]-->
 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/theme/css/pure.css">
+    <link rel="stylesheet" href="/theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
 </head>
 
 <body>
-        
-<header>
-    <h1><a href="/gsoc-report-wrapping-up-gsoc-2016.html" id="page-title">GSoC Report - Wrapping up GSoC 2016</a></h1>
-    <span id="sitename"><a href="" id="site-title">One in 7 Billion </a> &sdot;</span>
-<time datetime="2016-08-30T01:45:00+05:30">Tue 30 August 2016</time></header>
-<article>
-    <p>That’s it. After a <a href="https://github.com/KDE/kio-
+<div class="pure-g-r" id="layout">
+    <div class="sidebar sidebar-article pure-u">
+        <header class="header-article">
+            <hgroup>
+                <a href="/author/arnav-dhamija.html" title="See posts by Arnav Dhamija">
+                </a>
+                <h2 class="article-info">Arnav Dhamija</h2>
+                <small class="about-author"></small>
+                <h5>Published</h5>
+                <p>Tue 30 August 2016</p>
+                <a href="/">&larr;Home</a>
+            </hgroup>
+        </header>
+    </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>GSoC Report - Wrapping up GSoC 2016</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="/tag/gsoc.html">GSoC</a>
+                                <a class="post-category" href="/tag/kde.html">KDE</a>
+                        </p>
+                </header>
+            </section>
+            <p>That’s it. After a <a href="https://github.com/KDE/kio-
 stash/graphs/contributors">combined total</a> of 217 git commits, 6,202 lines of code added, and
 4,167 lines of code deleted, GSoC 2016 is finally over.  </p>
-<p><img alt="" src="images/Screenshot_20160830_014801.png" /></p>
+<p><img alt="" src="images/Screenshot_20160830_014801.png" style="width: 576px; height: auto; max-width: 100%;"/></p>
 <p>These twelve weeks of programming have been a very enriching experience for me
 and making this project has taught me a lot about production quality software
 development. Little did I know that a <a href="https://github.com/shortstheory/filetray-very-early-alpha-idea-
@@ -94,7 +118,7 @@ much time on making sure the ioslave was robust enough, this was a mixed
 surprise. Finally, after a week of rewriting and to an extent, refactoring the
 rename and copy functions of the ioslave, I got the best terminal output I
 ever wanted from this project.  </p>
-<p><img alt="" src="images/Screenshot_20160829_184812.png" /></p>
+<p><img alt="" src="images/Screenshot_20160829_184812.png" style="width: 1389px; height: auto; max-width: 100%;"/></p>
 <p>Definitely the highest point of the GSoC for me. From there on out, it was a
 matter of putting the code on the slow burner for cleaning up any leftover
 debug statements and for writing documentation for other obscure sections.
@@ -118,17 +142,39 @@ in competitive programming never could have.  </p>
 <p>The Google Summer of Code may be over, but my journey with open source
 development has just begun. Here’s to even bigger and better projects in the
 future!</p>
-</article>
+            <div class="hr"></div>
+            <a href="#" class="go-top">Go Top</a>
+<footer class="footer">
+    <p>&copy; One in 7 Billion &ndash;
+        Built with <a href="https://github.com/PurePelicanTheme/pure">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+</div>
+    <script>
+        var $top = $('.go-top');
 
-        <footer>
-            <nav>
-                <ul>
-                    <li>:: <a href="/categories.html">Categories</a></li>
-                    <li>:: <a href="/tags.html">Tags</a></li>
-                </ul>
-            </nav>
-                <p id="theme-credit">Proudly powered by <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a></p>
-        </footer>
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
 
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
 </body>
 </html>
