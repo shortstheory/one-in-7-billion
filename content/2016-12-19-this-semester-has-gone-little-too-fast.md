@@ -19,7 +19,6 @@ projects that I've been working on:
 
 ### GSoC 2016 Project - kio-stash
 
-
 Yup, this [project](https://github.com/KDE/kio-stash) has been in the pipeline
 for months. While it (mostly) works on a clean install of KDE, it has some
 bugs with copying with mtp:/ device slaves and isn't very well integrated with
