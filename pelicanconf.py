@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = u'Arnav Dhamija'
 SITENAME = u'One in 7 Billion'
-SITEURL = ''
+SITEURL = 'https://shortstheory.github.io'
 
 TIMEZONE = 'Asia/Calcutta'
 
