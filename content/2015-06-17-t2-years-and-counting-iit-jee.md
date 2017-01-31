@@ -4,6 +4,7 @@ author: Arnav Dhamija
 tags: JEE, Life story
 category: Article
 slug: t2-years-and-counting-iit-jee
+sidebarimage: images/wall-organic.jpg
 
 As the title indicates, it's been a while since I've written anything here. I
 don't know if anyone still reads this blog, but I sure appreciate if you do!  
