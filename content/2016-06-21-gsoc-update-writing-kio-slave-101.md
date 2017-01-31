@@ -189,8 +189,6 @@ install(TARGETS kio_hello DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/kio )
 
 ### Installation
 
-
-
 Simply run the following commands in the source folder:  
 
 ```
