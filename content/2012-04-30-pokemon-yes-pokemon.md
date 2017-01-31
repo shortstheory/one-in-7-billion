@@ -14,7 +14,7 @@ I suppose, I've found a new love as well, some people are going to hate
 this...  
 
 
-![](http://www.gamepur.com/files/images/2011/pokemon_logo.jpg)
+![](images/Pokemon-PNG-Pic.png)
 
 
 ...well actually it's not a new love, this dates back to 2004, so I'll
@@ -26,7 +26,7 @@ movies, and even had Pokemon drawing and colouring books. In 2005, I was
 introduced to the world of Pokemon video-games, which I never knew existed. I
 remember how popular Pokemon used to be in my apartment complex, it was as if
 a GameBoy Advance and a Pokemon cartridge was like a piece of clothing, which
-you could not _not _have when going outside. The rage was infectious, and I
+you could not _not_ have when going outside. The rage was infectious, and I
 soon caught on. I got my first Pokemon game as a birthday gift - Pokemon
 Sapphire.  
 
@@ -35,8 +35,7 @@ bed. The next day when I woke up, and loaded the game, I was greeted with this
 message:  
 
 
-![](http://profile.ak.fbcdn.net/hprofile-ak-
-snc4/50498_309101132410_4698696_n.jpg)
+![](images/deleted-file.jpg)
 
 
 Serious disappointment. I tried saving again, but got the same message. I

@@ -6,13 +6,11 @@ AUTHOR = u'Arnav Dhamija'
 SITENAME = u'One in 7 Billion'
 SITEURL = ''
 
-PATH = 'content'
-
 TIMEZONE = 'Asia/Calcutta'
 
 DEFAULT_LANG = u'en'
 
-THEME = 'pure'
+THEME = "themes/pure/"
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -20,6 +18,8 @@ CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
+
+PATH = 'content'
 
 COVER_IMG_URL = 'images/StarStaX_IMG_9937-IMG_9966_lighten.jpg'
 PROFILE_IMG_URL = 'images/profile.jpg'
