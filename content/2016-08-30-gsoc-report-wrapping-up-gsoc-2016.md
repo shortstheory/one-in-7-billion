@@ -22,10 +22,8 @@ lead to something as big as this!
 
 There have been many memorable moments throughout my coding period for the
 GSoC - such as the first time I got an ioslave to
-[install](http://arnavdhamija.blogspot.in/2016/05/gsoc-
-update-1-beginning.html) correctly, to writing its “Hello World”
-[equivalent](http://arnavdhamija.blogspot.in/2016/06/gsoc-update-writing-kio-
-slave-101.html), and getting a basic implementation of the project up and
+[install]({filename}/2016-05-30-gsoc-update-1-beginning.md) correctly, to writing its “Hello World”
+[equivalent]({filename}/2016-06-21-gsoc-update-writing-kio-slave-101.md), and getting a basic implementation of the project up and
 running by doing a series of dirty hacks with Dolphin’s code. There were also
 times when I was so frustrated with debugging for this project, that I wanted
 to do nothing but smash my laptop’s progressively failing display panel with
@@ -39,8 +37,7 @@ everything just fell into place.
 There’s a technical digression here, which you can feel free to skip through
 if you don’t want to get into the details of the project.  
 
-Following up from the [previous](http://arnavdhamija.blogspot.in/2016/07/gsoc-
-update-tinkering-with-kio.html) blog post, with the core features of the
+Following up from the [previous]({filename}/2016-07-21-gsoc-update-tinkering-with-kio.md) blog post, with the core features of the
 application complete, I had moved on to unit testing my project. For this
 project, unit testing involved writing test cases for each and every component
 of the application to find and fix any bugs. Despite the innocuous name, unit

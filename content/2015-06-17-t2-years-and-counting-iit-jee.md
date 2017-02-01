@@ -91,6 +91,7 @@ the middle of all this, a few competitive programming experiences realigned my
 goals with respect to computer science and I started liking it almost as much
 as I used to obsess with aerospace engineering in the past.  
 
+<a name="screwup0"></a>
 For me, this turned into the beginning of a massive decline. For whatever
 reason, I succeeded in trashing both the KVPY and the NSEP - my biggest
 targets for 12th grade. School marks were about okay, but still less than
@@ -135,6 +136,7 @@ Just the day before my last board exam, BITS Hyderabad sent an offer letter
 for taking up CSc at an 80% scholarship! For a few sweet minutes the pressure
 of the last two years was off.  
 
+<a name="entrancexams"></a>
 If you haven't slept off yet reading through all that, here's where it started
 to get interesting. Board exams done and dusted left me free to attempt the
 set of entrance exams at will - the main ones being JEE Mains/Advance and the
@@ -155,6 +157,7 @@ go for the BITSAT - after all my math was in no condition for the brunt of JEE
 Advance but I had a good shot of making up to a respectable level for the
 BITSAT, which is an objectively much easier exam.  
 
+<a name="bitsat"></a>
 This quickly turned into an obsession - with a BITSAT textbook by my side I
 started optimising and gaming the whole test to the minute with well divided
 time sections for all the subjects and strategies for almost all the possible

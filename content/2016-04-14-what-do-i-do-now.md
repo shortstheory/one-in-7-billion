@@ -12,12 +12,8 @@ away for the JEE. But now, with ample free time and practically no requirement
 to go for classes, I've finally got some time to look back and see how things
 have turned out. Things started off on the back foot, and while 1-1 had its
 charms, I wasn't exactly happy about how things had turned out at the time due
-to a bad time with the[ entrance
-exams](http://arnavdhamija.blogspot.in/2015/06/t2-years-and-counting-iit-
-jee.html#entrancexams) for all the
-[wrong](http://arnavdhamija.blogspot.in/2015/06/t2-years-and-counting-iit-
-jee.html#bitsat) [reasons](http://arnavdhamija.blogspot.in/2015/06/t2-years-
-and-counting-iit-jee.html#screwup0).  
+to a bad time with the [entrance exams]({filename}/2015-06-17-t2-years-and-counting-iit-jee.md#entrancexams) for all the
+[wrong]({filename}/2015-06-17-t2-years-and-counting-iit-jee.md#bitsat) [reasons]({filename}/2015-06-17-t2-years-and-counting-iit-jee.md#screwup0).  
 
 But I digress, as time has passed, I have learned to live with my failure a
 little better every day, though it still sticks out like a sore thumb on an
