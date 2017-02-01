@@ -4,6 +4,7 @@ author: Arnav Dhamija
 tags: GSoC, KDE
 category: Article
 slug: it-has-happened
+sidebarimage: images/code.png
 
 Wow!  
 

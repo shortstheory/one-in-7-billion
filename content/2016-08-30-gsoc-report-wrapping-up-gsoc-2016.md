@@ -4,6 +4,7 @@ author: Arnav Dhamija
 tags: GSoC, KDE
 category: Article
 slug: gsoc-report-wrapping-up-gsoc-2016
+sidebarimage: images/code.png
 
 That’s it. After a [combined total](https://github.com/KDE/kio-
 stash/graphs/contributors) of 217 git commits, 6,202 lines of code added, and

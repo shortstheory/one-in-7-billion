@@ -4,6 +4,7 @@ author: Arnav Dhamija
 tags: GSoC, Programming, KDE
 category: Article
 slug: gsoc-update-1-beginning
+sidebarimage: images/code.png
 
 I have officially started my [GSoC
 project](https://summerofcode.withgoogle.com/projects/#5979393230897152) under
