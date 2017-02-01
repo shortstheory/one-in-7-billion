@@ -4,13 +4,14 @@ from __future__ import unicode_literals
 
 AUTHOR = u'Arnav Dhamija'
 SITENAME = u'One in 7 Billion'
-SITEURL = 'https://shortstheory.github.io'
+SITEURL = ''#'https://shortstheory.github.io'
 
 TIMEZONE = 'Asia/Calcutta'
 
 DEFAULT_LANG = u'en'
 
 THEME = "pure-single"
+TAGLINE = "Thoughts and Retrospection"
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
