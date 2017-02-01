@@ -186,7 +186,7 @@ of the question. Despite all this, I realized that I couldn't just let a dream
 of 2 years fall apart for such a pathetic issue and still went on with the
 test - guessing everything I could on the math section.  
 
-I went for the extra 12 questions which were fine but the I knew the damage
+I went for the extra 12 questions which were fine but I knew that the damage
 done from fluking most of math was irreparable. With the most anxiety I've
 ever experienced, I clicked the "Submit Test" button to see how I had done.
 
