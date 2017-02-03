@@ -17,14 +17,14 @@ post two pics of the same thing.
 Moving on....(click to enlarge)  
 
 
-![](images/IMG_5317.JPG)
+![]({filename}/images/IMG_5317.JPG)
 
 
 A really neat pose of that squirrel. I didn't expect the sunlight and the
 ground to merge so well together.  
 
 
-![](images/IMG_5391.JPG)
+![]({filename}/images/IMG_5391.JPG)
 
 
 Looks like it's been pulled out of a rainforest. The truth is, i found these
@@ -32,7 +32,7 @@ little birds in my backyard. I love the way the birds sit linearly, almost
 like a family picture.  
 
 
-![](images/IMG_5575.JPG)
+![]({filename}/images/IMG_5575.JPG)
 
 
 This was a bit of an experiment, with very impressive results. Shot it under
@@ -40,14 +40,14 @@ low lighting with flash at a certain angle, so you can see all the layers of
 petals in the flower.  
 
 
-![](images/IMG_5696.JPG)
+![]({filename}/images/IMG_5696.JPG)
 
 
 Slimy snail; and although the picture doesn't exhibit too many photography
 techniques, it looks pretty decent.  
 
 
-![](images/IMG_5935.JPG)
+![]({filename}/images/IMG_5935.JPG)
 
 
 The grasshopper/mantis (I'm no entomologist) strikes an excellent pose for
@@ -55,13 +55,13 @@ this photo. The raised forearms and the spread out legs give it a great
 stance.  
 
 
-![](images/IMG_6043.JPG)
+![]({filename}/images/IMG_6043.JPG)
 
 
 A really simple pic, but that's what makes it look detailed and elegant.  
 
 
-![](images/IMG_6066.JPG)
+![]({filename}/images/IMG_6066.JPG)
 
 
 Cute little birdie. That sounds really stupid. Anyway, I like the perching
@@ -69,7 +69,7 @@ position of the bird, and the contrast of its black head to its yellow body
 (sorry if that sounds racist). Birds and insects seem to love posing for me.  
 
 
-![](images/IMG_6149.JPG)
+![]({filename}/images/IMG_6149.JPG)
 
 
 Wow, this picture was an absolute stunner for me. I heard the cat screeching
@@ -78,21 +78,21 @@ silhouetted and the light gleaming off the feline's eyes make it an amazing
 and thoughtful picture.  
 
 
-![](images/IMG_6164.JPG)
+![]({filename}/images/IMG_6164.JPG)
 
 
 Kind of a filler pic. The flower looks pretty, and I can't say much about
 this.  
 
 
-![](images/IMG_5639.JPG)
+![]({filename}/images/IMG_5639.JPG)
 
 
 Perfect pose + perfect clarity + cool insect = awesomeness. The macro worked
 exceptionally well here.  
 
 
-![](images/IMG_6177.JPG)
+![]({filename}/images/IMG_6177.JPG)
 
 
 An example of good timing, this picture was taken early in the morning. The
@@ -100,7 +100,7 @@ bees seemed to be rising with me and the sharpness in front and the blurred
 out background, make it another sweet shot.  
 
 
-![](images/IMG_6199.JPG)
+![]({filename}/images/IMG_6199.JPG)
 
 
 I don't have enough words to describe how much I love this one. At a first

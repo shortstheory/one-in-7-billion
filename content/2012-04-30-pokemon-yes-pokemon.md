@@ -14,7 +14,7 @@ I suppose, I've found a new love as well, some people are going to hate
 this...  
 
 
-![](images/Pokemon-PNG-Pic.png)
+![]({filename}/images/Pokemon-PNG-Pic.png)
 
 
 ...well actually it's not a new love, this dates back to 2004, so I'll
@@ -35,7 +35,7 @@ bed. The next day when I woke up, and loaded the game, I was greeted with this
 message:  
 
 
-![](images/deleted-file.jpg)
+![]({filename}/images/deleted-file.jpg)
 
 
 Serious disappointment. I tried saving again, but got the same message. I

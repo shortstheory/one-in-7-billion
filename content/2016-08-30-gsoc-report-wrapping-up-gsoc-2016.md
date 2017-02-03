@@ -4,14 +4,14 @@ author: Arnav Dhamija
 tags: GSoC, KDE
 category: Article
 slug: gsoc-report-wrapping-up-gsoc-2016
-sidebarimage: images/code.png
+sidebarimage: ../images/code.png
 
 That’s it. After a [combined total](https://github.com/KDE/kio-
 stash/graphs/contributors) of 217 git commits, 6,202 lines of code added, and
 4,167 lines of code deleted, GSoC 2016 is finally over.  
 
 
-![](images/Screenshot_20160830_014801.png)
+![]({filename}/images/Screenshot_20160830_014801.png)
 
 These twelve weeks of programming have been a very enriching experience for me
 and making this project has taught me a lot about production quality software
@@ -84,7 +84,7 @@ rename and copy functions of the ioslave, I got the best terminal output I
 ever wanted from this project.  
 
 
-![](images/Screenshot_20160829_184812.png)
+![]({filename}/images/Screenshot_20160829_184812.png)
 
 
 Definitely the highest point of the GSoC for me. From there on out, it was a

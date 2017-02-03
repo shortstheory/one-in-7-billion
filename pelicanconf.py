@@ -21,6 +21,27 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 PATH = 'content'
+STATIC_PATHS = ['images']
+ARTICLE_SAVE_AS = 'blog/{slug}.html'
+ARTICLE_URL = 'blog/{slug}.html'
+INDEX_SAVE_AS = 'blog/index.html'
+INDEX_URL = 'blog/'
+#now move all the category and tag stuff to that blog/ dir as well
+CATEGORY_URL = 'blog/category/{slug}.html'
+CATEGORY_SAVE_AS = 'blog/category/{slug}.html'
+CATEGORIES_URL = 'blog/category/'
+CATEGORIES_SAVE_AS = 'blog/category/index.html'
+TAG_URL = 'blog/tag/{slug}.html'
+TAG_SAVE_AS = 'blog/tag/{slug}.html'
+TAGS_URL = 'blog/tag/'
+TAGS_SAVE_AS = 'blog/tag/index.html'
+ARCHIVES_SAVE_AS = 'blog/archives/archives.html'
+ARCHIVES_URL = 'blog/archives/archives.html'
+AUTHOR_SAVE_AS = 'blog/{slug}.html'
+AUTHORS_SAVE_AS = 'blog/authors.html'
+# put pages in the root directory
+PAGE_SAVE_AS = '{slug}.html'
+PAGE_URL = '{slug}.html'
 
 COVER_IMG_URL = 'images/StarStaX_IMG_9937-IMG_9966_lighten.jpg'
 PROFILE_IMG_URL = 'images/profile.jpg'

@@ -26,9 +26,9 @@ computer. It's been very early days for me when it comes to composite
 photography, but here are a few photos I've felt are worth sharing:  
 
 
-![](images/StarStaX_IMG_9937-IMG_9966_lighten.jpg)
+![]({filename}/images/StarStaX_IMG_9937-IMG_9966_lighten.jpg)
 
-![](images/StarStaX_IMG_0095-IMG_0009_gap_filling.jpg)
+![]({filename}/images/StarStaX_IMG_0095-IMG_0009_gap_filling.jpg)
 
 
 Star trails! I've always wanted to try my hand at astrophotography, but never
@@ -46,7 +46,7 @@ for this - the slightest shift between frames would've given us terrible
 discontinuity in the final image. The final images were composited using
 [StarStaX.](http://www.markus-enzweiler.de/software/software.html)  
 
-![](images/IMG_3689%2B-%2BIMG_3725%2Bresized.png)
+![]({filename}/images/IMG_3689%2B-%2BIMG_3725%2Bresized.png)
 
 360 degree panorama image of BITS Pilani, Hyderabad Campus! Taken from the
 middle of the football field, it is a panorama of 33 images stitched using
@@ -59,7 +59,7 @@ do a really good job in keeping the differences minimal though there still are
 a couple of splotches due to my ineptitude. The uncompressed, full size
 version is here: <https://goo.gl/iY5v14>  
 
-![](images/mini-planet-footballfield.png)
+![]({filename}/images/mini-planet-footballfield.png)
 
 This little planet picture uses the same panorama as the previous image. It's
 a much simpler to post process this with a panorama than it appears. It was

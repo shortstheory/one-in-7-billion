@@ -4,7 +4,7 @@ author: Arnav Dhamija
 tags: GSoC, KDE
 category: Article
 slug: gsoc-update-tinkering-with-kio
-sidebarimage: images/code.png
+sidebarimage: ../images/code.png
 
 I'm a lot closer to finishing the project now. Thanks to some great support
 from my GSoC mentor, my project has turned out better than what I had written

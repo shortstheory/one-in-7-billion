@@ -4,12 +4,12 @@ author: Arnav Dhamija
 tags: GSoC, KDE
 category: Article
 slug: it-has-happened
-sidebarimage: images/code.png
+sidebarimage: ../images/code.png
 
 Wow!  
 
 
-![](images/photo_2016-04-23_12-26-30.jpg)
+![]({filename}/images/photo_2016-04-23_12-26-30.jpg)
 
 
 

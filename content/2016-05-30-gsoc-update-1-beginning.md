@@ -4,7 +4,7 @@ author: Arnav Dhamija
 tags: GSoC, Programming, KDE
 category: Article
 slug: gsoc-update-1-beginning
-sidebarimage: images/code.png
+sidebarimage: ../images/code.png
 
 I have officially started my [GSoC
 project](https://summerofcode.withgoogle.com/projects/#5979393230897152) under
@@ -52,7 +52,7 @@ full week of frustration of dealing with dependency hell, I saw the best Hello
 World I could ever hope for:  
 
 
-![](images/kioslave.png)
+![]({filename}/images/kioslave.png)
 
 
 Baby steps. The next step was to make the KIO slave capable of displaying the
@@ -68,7 +68,7 @@ from my mistake here I switched to using a ForwardingSlaveBase class for my
 KIO slave which instantly solved my problems of displaying a directory.  
 
 
-![](images/helloslave.png)
+![]({filename}/images/helloslave.png)
 
 _Fistpump_
 

@@ -24,7 +24,7 @@ of choice.
 Technical chatter aside; the photos (click to enlarge):  
 
 
-![](images/IMG_6748.JPG)
+![]({filename}/images/IMG_6748.JPG)
 
 
 
@@ -35,7 +35,7 @@ wonders here.
 
 
 
-![](images/IMG_6770.JPG)
+![]({filename}/images/IMG_6770.JPG)
 
 
 Another squirrel? Well, actually it's the same one as in the previous picture.
@@ -47,7 +47,7 @@ This one is 929 mm equivalent on a 35 mm film. Used f-stop 5.7 here, because
 wider apertures are beyond the camera's potential at these focal lengths.  
 
 
-![](images/IMG_6799.JPG)
+![]({filename}/images/IMG_6799.JPG)
 
 
 Pretty nice shot here as well. It looks like a macro shot, but this one was
@@ -56,7 +56,7 @@ petals is the icing on the cake (or should I say flower?). The background was
 perfectly suited for this shot, and gives a nice empty space for this photo.  
 
 
-![](images/IMG_6817.JPG)
+![]({filename}/images/IMG_6817.JPG)
 
 
 I won't lie to you by saying that this picture was taken at a different
@@ -68,14 +68,14 @@ visible at the same time. It's a hard balance to maintain, but I'm glad that
 it worked over here.  
 
 
-![](images/IMG_6972.JPG)
+![]({filename}/images/IMG_6972.JPG)
 
 
 Nothing special about the photography techniques over here, but photographing
 another creature, and a reptile at that was too good to pass up.  
 
 
-![](images/IMG_7304.JPG)
+![]({filename}/images/IMG_7304.JPG)
 
 
 I suppose the colour over here is the main part of the photo. Clarity and
@@ -85,7 +85,7 @@ photography. They are quite beautiful, move very little and you can try a
 hundred different exposures to get the right shot.  
 
 
-![](images/IMG_7327.JPG)
+![]({filename}/images/IMG_7327.JPG)
 
 
 While I'll be mean to call this an ugly butterfly (I'm sure it's not a moth!),
@@ -96,7 +96,7 @@ butterfly provide a level of detail, without which, this photo would look much
 plainer.  
 
 
-![](images/IMG_7331.JPG)
+![]({filename}/images/IMG_7331.JPG)
 
 
 Probably one of the best shots I took on that day. The coconut as a subject
@@ -105,7 +105,7 @@ The focusing was perfect here, giving the photo a very small depth of field.
 Less can be more and this shot exemplifies it.  
 
 
-![](images/IMG_7583.JPG)
+![]({filename}/images/IMG_7583.JPG)
 
 
 You might've seen that I've only done close-up shots. This is one of the very
@@ -113,7 +113,7 @@ few landscape shots I've taken. Excellent scenery and I really don't have much
 more to say about this.  
 
 
-![](images/IMG_7843.JPG)
+![]({filename}/images/IMG_7843.JPG)
 
 
 The mynah had a nice stance and perching position for this. The background is
@@ -122,7 +122,7 @@ background is great for this and the bird's details are captured with some
 success.  
 
 
-![](images/IMG_8064.JPG)
+![]({filename}/images/IMG_8064.JPG)
 
 
 It might look odd to photograph only the head of a peacock without its

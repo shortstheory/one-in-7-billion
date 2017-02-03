@@ -4,7 +4,7 @@ author: Arnav Dhamija
 tags: GSoC, Programming, KDE
 category: Article
 slug: gsoc-update-writing-kio-slave-101
-sidebarimage: images/code.png
+sidebarimage: ../images/code.png
 
 This [project](https://summerofcode.withgoogle.com/projects/#5979393230897152)
 has been going well. Though it was expectedly difficult in the beginning, I
