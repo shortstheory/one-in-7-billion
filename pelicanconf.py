@@ -11,7 +11,7 @@ TIMEZONE = 'Asia/Calcutta'
 DEFAULT_LANG = u'en'
 
 THEME = "pure-single"
-TAGLINE = "Thoughts and Retrospection"
+TAGLINE = "Arnav's Blog"
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -22,10 +22,11 @@ AUTHOR_FEED_RSS = None
 
 PATH = 'content'
 STATIC_PATHS = ['images']
+
 ARTICLE_SAVE_AS = 'blog/{slug}.html'
 ARTICLE_URL = 'blog/{slug}.html'
-INDEX_SAVE_AS = 'blog/index.html'
-INDEX_URL = 'blog/'
+INDEX_SAVE_AS = 'index.html'
+#INDEX_URL = 'blo'
 #now move all the category and tag stuff to that blog/ dir as well
 CATEGORY_URL = 'blog/category/{slug}.html'
 CATEGORY_SAVE_AS = 'blog/category/{slug}.html'
@@ -43,8 +44,8 @@ AUTHORS_SAVE_AS = 'blog/authors.html'
 PAGE_SAVE_AS = '{slug}.html'
 PAGE_URL = '{slug}.html'
 
-COVER_IMG_URL = 'images/StarStaX_IMG_9937-IMG_9966_lighten.jpg'
-PROFILE_IMG_URL = 'images/profile.jpg'
+COVER_IMG_URL = '/images/StarStaX_IMG_9937-IMG_9966_lighten.jpg'
+PROFILE_IMG_URL = '/images/profile.jpg'
 
 PLUGIN_PATHS = ['pelican-plugins']
 PLUGINS = ['better_figures_and_images']
