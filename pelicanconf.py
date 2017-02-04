@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = u'Arnav Dhamija'
 SITENAME = u'One in 7 Billion'
-SITEURL = ''#'https://shortstheory.github.io'
+SITEURL = 'https://shortstheory.github.io'
 
 TIMEZONE = 'Asia/Calcutta'
 
@@ -26,7 +26,7 @@ STATIC_PATHS = ['images']
 ARTICLE_SAVE_AS = 'blog/{slug}.html'
 ARTICLE_URL = 'blog/{slug}.html'
 INDEX_SAVE_AS = 'index.html'
-#INDEX_URL = 'blo'
+#INDEX_URL = 'blog/'
 #now move all the category and tag stuff to that blog/ dir as well
 CATEGORY_URL = 'blog/category/{slug}.html'
 CATEGORY_SAVE_AS = 'blog/category/{slug}.html'
