@@ -59,7 +59,7 @@ RESPONSIVE_IMAGES = True
 
 # Social widget
 SOCIAL = (("github", "https://github.com/shortstheory"),
-          ("youtube", "https://www.youtube.com/channel/UCzOTlzNDylDXSBxKSJlBzuQ"),
+          ("youtube", "https://www.youtube.com/user/shortstheory"),
           ("instagram", "https://www.instagram.com/arnavdhamija"),
 #          ("linkedin", "https://www.linkedin.com/in/arnav-dhamija-b98160129"),
          )
