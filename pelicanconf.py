@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 AUTHOR = u'Arnav Dhamija'
-SITENAME = u'One in 7 Billion'
+SITENAME = u'A Singularity'
 SITEURL = 'http://arnavdhamija.com'
 
 TIMEZONE = 'Asia/Calcutta'
@@ -11,7 +11,7 @@ TIMEZONE = 'Asia/Calcutta'
 DEFAULT_LANG = u'en'
 
 THEME = "pure-single"
-TAGLINE = "Arnav's Blog"
+TAGLINE = "Arnav Dhamija's Weblog"
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
