@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A Singularity, Arnav Dhamija's Weblog">
+
+
+        <title>Blog Migration Complete! // A Singularity // Arnav Dhamija's Weblog</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://arnavdhamija.com/theme/css/pure.css">
+    <link rel="stylesheet" href="http://arnavdhamija.com/theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+</head>
+
+<body>
+    <div class="pure-g-r" id="layout">
+        <div class="sidebar pure-u">
+            <div class="cover-img" style="background-image: url('/images/StarStaX_IMG_9937-IMG_9966_lighten.jpg')">
+                <div class="cover-body">
+                    <header class="header">
+                        <hgroup>
+                            <img class="avatar" src="/images/profile.jpg">
+                            <h1 class="brand-main"><a href="http://arnavdhamija.com">A Singularity</a></h1>
+                            <p class="tagline">Arnav Dhamija's Weblog</p>
+                                <p class="social">
+                                    <a href="https://github.com/shortstheory">
+                                        <i class="fa fa-github fa-3x"></i>
+                                    </a>
+                                    <a href="https://www.youtube.com/user/shortstheory">
+                                        <i class="fa fa-youtube fa-3x"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/arnavdhamija">
+                                        <i class="fa fa-instagram fa-3x"></i>
+                                    </a>
+                                </p>
+                        </hgroup>
+                    </header>
+                </div>
+            </div>
+        </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>Blog Migration Complete!</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="http://arnavdhamija.com/blog/tag/misc.html">Misc</a>
+                                <a class="post-category" href="http://arnavdhamija.com/blog/tag/programming.html">Programming</a>
+                        </p>
+                </header>
+            </section>
+            <p>Now I finally have my very own domain name! The <a href="arnavdhamija.blogspot.in">old Blogger site</a> is still available if anyone wants to see it but for all future intents and purposes, this will be the place where new blog posts will be put up. While I <em>could</em> configure all traffic to the Blogger site to redirect to this one, the old site has grown on me so much over the years that I feel that it would be a shame to hide it that way.</p>
+<p>I had to migrate from Blogger because it is more than evident that Blogger has been getting less love from Google than it deserves. Take for instance, the Blogger web-based post editor - a shining example of an undeveloped relic of Google's products. Posts never autosaved or version controlled and a few misplaced keypresses could cause you to lose all your writing progress. Inserting images is a chore and putting up more complicated parts of text such as code blocks and sub-headings is even worse.</p>
+<p>Of course as with most things in software development, there are workarounds for everything. The work-around which I had used for the last few blog posts was to write directly in Markdown and then convert it to HTML with pandoc to copy paste in the Blogger editor. Even so, this is clearly sub-optimal and I was spending more time wrestling with the Blogger editor to make my pages look good than I was writing actual content. The theme which I had been using for Blogger ever since I started it appealed to me as a 13 year old (heck, it still appeals me), but it was growing long in the tooth and only had basic support for responsive design and mobile devices. With all these things in mind, I started looking for a new home for my blog somewhere in the middle of last December on a break from college.</p>
+<p>I first looked at <a href="wordpress.com">WordPress</a>. At first, it seemed like my search for a new blogging platform would stop here. Open-sourced, a great browser editor, a cohesive Android app, direct editing in Markdown, local installation for testing, and support for plugins made WordPress everything Blogger wasn't. I loved the number of themes and customisation WordPress provided. But the love was short lived, and it ended when I started researching hosting options for WordPress. Most solutions required me to rent a web-server on a monthly basis and I had no idea what tier of server to get as my blog had only recently seen a huge surge in pageviews. Not to mention, the cost of maintaining a website with such a setup was by no means cheap. This is when I started asking to my geeky friends about how they maintained their own personal websites.</p>
+<p>The talks were very helpful, it made me realise that a dynamic blogging solution such as WordPress was overkill for a humble blog of less than 30 published posts like this one. Having a static site made so much more sense. I could write directly in Markdown, in the text editor of <em>my</em> choice. Not to mention, it made the workflow of writing a blog post just like I wrote code, <code>make</code>, <code>git commit</code>, and <code>git push</code> straight to GitHub Pages. GitHub Pages, by the way, offers completely <em>free</em> hosting for static sites. This means that the only thing I would need to pay for would be the custom domain name, a nominal ₹700 ($10) a year, an amount half of what I would be paying for a month of paid hosting. Plus, it would let me get my hands dirty with a bit of web development, something which I had pushed back for a long time.</p>
+<p>I decided to start this - what I knew was going to be painful task at about 11pm on a night I just knew I wouldn't be able to sleep.</p>
+<p>The first step was to convert all my Blogger posts to Markdown. There were some tools online but all of them messed up the conversion pretty badly. After some more digging, I ended up using Aaron Swartz's <code>html2text</code> Python library which did a better job than other solutions in generating some useful Markdown. I still needed to edit every generated Markdown file by hand to make it something I would be happy with using on my site. I then had to export all the images I had on my Blogger site. This lead to a few more laborious hours of saving each image on the site by hand (Right Click -&gt; View as Image -&gt; Save As). It did cross my mind to automate everything with a script, but it was going to take more time to automate everything and check if the automation was working than it was to do the grunt work of pulling the images. With all the resources safely on my laptop and backed on my Dropbox, I took the next step of looking at static site generators to convert my lovingly handmade Markdown files to HTML.</p>
+<p>GitHub Pages seemed to heavily advocate <a href="http://jekyllrb.com/">Jekyll</a> so I went with it first. With some tinkering to get the Ruby dependencies installed and posts adapted for Jekyll with the Front Matter content, I managed to get a pretty presentable blog running on localhost:4000/ at 5am on that day. With a quick push to my <a href="github.io">github.io</a> site, I decided to call it a night and slept off.</p>
+<p>The next few days I played with some more Jekyll themes and found that there were many things I didn't like about it. For one thing, it was written in Ruby which I have no experience with. Themes didn't look easy to work with and there was no native support for tags (there is a workaround for this, but due to my lack of Ruby-fu, it all looked terribly arcane to me). I then put the blog migration on the back burner for a while to work on projects at my college's Automation &amp; Robotics Club.</p>
+<p>A few weeks later I decided to look at the blog with the fresh perspective which comes with taking a break. Again, I poked around to look for alternatives to Jekyll. There was one such alternative which ticked all my boxes - a static site generator called <a href="https://blog.getpelican.com/">Pelican</a>. As WordPress looked inherently superior to Blogger, Pelican looked inherently superior to Jekyll for what I wanted to do with it. For example, it had built-in support for tags, had a theming engine, supported Markdown <em>and</em> reStructuredText, and had several easy to install plugins. Above all, Pelican is written in Python which made it so much easier for me to mess around with it. There were some more modifications to make to the Markdown files (particularly with the post metadata), but it was so trivial that it didn't pain one bit to modify all the files. Not too long after I settled on Pelican, I found a theme which made my blog look exactly how I wanted it to look. The <a href="https://github.com/PurePelicanTheme">Pure Single</a> theme also has nifty support for custom sidebar images, which I used on some select <a href="http://arnavdhamija.com/blog/t2-years-and-counting-iit-jee.html">blog</a> <a href="http://arnavdhamija.com/blog/gsoc-report-wrapping-up-gsoc-2016.html">posts</a>.</p>
+<p>There was some initial trouble with setting a blog subfolder in the site and getting images to work on some auto-generated sites (such as the Tags and Categories pages). It later turned out that it was some problem with localhost/ not finding the paths correctly to the images and the site actually worked totally fine when published to the GitHub Pages site. After only three days of using Pelican, I had something which I was willing to show off. The next step was much more straightforward for a change - registering a domain name. I looked into a few options such as GoDaddy and Hover, but Namecheap had a lot more positive reviews than GoDaddy and was the cheapest of the lot. The site configuration to serve pages from GitHub's servers was not more than a 10 minute procedure, and I finally had the site you are reading this article on right now.</p>
+<p>There will be a lot more changes coming up on this blog, some of them aesthetic and some functional. I'm also probably going to change the name of this blog sometime soon, to something which is more reflective of my current tastes and sensibilities.</p>
+            <a href="#" class="go-top">Go Top</a>
+<footer class="footer">
+    <p>&copy; Arnav Dhamija &ndash;
+        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+    </div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+
+</body>
+</html>
