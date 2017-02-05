@@ -1,7 +1,7 @@
 title: Before the exams...
 date: 2011-09-09 20:45
 author: Arnav Dhamija
-tags:
+tags: Misc
 category: Article
 slug: before-exams
 

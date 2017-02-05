@@ -1,7 +1,7 @@
 title: After the exams...
 date: 2011-09-20 19:39
 author: Arnav Dhamija
-tags:
+tags: Misc
 category: Article
 slug: after-exams
 

@@ -1,7 +1,7 @@
 title: My First Post on My First Blog
 date: 2011-05-09 10:58
 author: Arnav Dhamija
-tags: FirstPost
+tags: FirstPost, Misc
 category: Article
 slug: my-first-blog
 
