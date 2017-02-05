@@ -2,7 +2,7 @@ title: Blog Migration Complete!
 date: 2017-02-05 23:50
 author: Arnav Dhamija
 tags: Misc, Programming
-category: Aritcle
+category: Article
 slug: blog-migration
 
 Now I finally have my very own domain name! The [old Blogger site](http://arnavdhamija.blogspot.in/) is still available if anyone wants to see it but for all future intents and purposes, this will be the place where new blog posts will be put up. While I *could* configure all traffic to the Blogger site to redirect to this one, the old site has grown on me so much over the years that I feel that it would be a shame to hide it that way.
