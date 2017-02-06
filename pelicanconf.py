@@ -22,6 +22,9 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
+GOOGLE_ANALYTICS = "UA-91464572-1"
+GITHUB_URL = "https://github.com/shortstheory"
+
 PATH = 'content'
 STATIC_PATHS = ['images']
 
@@ -50,7 +53,10 @@ COVER_IMG_URL = '/images/StarStaX_IMG_9937-IMG_9966_lighten.jpg'
 PROFILE_IMG_URL = '/images/profile.jpg'
 
 PLUGIN_PATHS = ['pelican-plugins']
-PLUGINS = ['better_figures_and_images']
+PLUGINS = ['better_figures_and_images', 'disqus_static']
+
+
+
 RESPONSIVE_IMAGES = True
 
 # Blogroll
