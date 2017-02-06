@@ -9,7 +9,7 @@ I spend a lot of time thinking since I've joined college.
 
 I had postponed a lot of introspection during the two years I spent slogging
 away for the JEE. But now, with ample free time and practically no requirement
-to go for classes, I've finally got some time to look back and see how things
+to go to classes, I've finally got some time to look back and see how things
 have turned out. Things started off on the back foot, and while 1-1 had its
 charms, I wasn't exactly happy about how things had turned out at the time due
 to a bad time with the [entrance exams]({filename}/2015-06-17-t2-years-and-counting-iit-jee.md#entrancexams) for all the

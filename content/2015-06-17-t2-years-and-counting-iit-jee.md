@@ -221,8 +221,8 @@ BITS Pilani CSc, heck, CSc at any BITS campus through BITSAT was an
 impossibility. It felt crushing and terrible to work so hard and to get so
 close only to ruin everything on the day of the exam for some issue that I had
 no control over. That day was not the first time I cried myself to sleep in
-those two years, but at least there was a silver lining in getting another
-chance to do well in some other exam. There was none this time.  
+those two years, but at least in those times there was a silver lining in getting another
+chance to do well in some other exam. There was no other exam left to do well in this time.  
 
 Strangely the only solace at the time was that I had to give JEE Advance (is
 it spelled Advanced? My bad if it's wrong) with absolutely no preparation due
