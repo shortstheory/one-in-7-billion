@@ -1,7 +1,7 @@
 title: T+2 Years And Counting: My IIT-JEE preparation story
 date: 2015-06-17 10:29
 author: Arnav Dhamija
-tags: JEE, Life story
+tags: JEE, Life
 category: Article
 slug: t2-years-and-counting-iit-jee
 sidebarimage: ../images/wall-organic.jpg

@@ -1,7 +1,7 @@
 title: Nil Sine Pokemon
 date: 2012-04-30 17:05
 author: Arnav Dhamija
-tags: Life story, Pokemon, Misc
+tags: Pokemon, Life, Misc
 category: Article
 slug: pokemon-yes-pokemon
 
