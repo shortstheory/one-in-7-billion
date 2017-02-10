@@ -10,22 +10,22 @@ I spend a lot of time thinking since I've joined college.
 I had postponed a lot of introspection during the two years I spent slogging
 away for the JEE. But now, with ample free time and practically no requirement
 to go to classes, I've finally got some time to look back and see how things
-have turned out. Things started off on the back foot, and while 1-1 had its
+have turned out. College started off on the back foot, and while 1-1 had its
 charms, I wasn't exactly happy about how things had turned out at the time due
 to a bad time with the [entrance exams]({filename}/2015-06-17-t2-years-and-counting-iit-jee.md#entrancexams) for all the
 [wrong]({filename}/2015-06-17-t2-years-and-counting-iit-jee.md#bitsat) [reasons]({filename}/2015-06-17-t2-years-and-counting-iit-jee.md#screwup0).  
 
 But I digress, as time has passed, I have learned to live with my failure a
 little better every day, though it still sticks out like a sore thumb on an
-otherwise decent academic profile. What has turned out to be an interesting
+otherwise decent academic profile. Despite this, it has been an interesting
 exercise is to compare what I expected from college a year ago and reality.  
 
 To be fair, BITS Pilani (this applies to all campuses, but in this case,
 Hyderabad Campus) has some of best internal systems among _all_ Indian
 colleges. Optional attendance, good grading system, decent infrastructure, and
-a lot of freedom is more than what can be asked for a lot of other colleges.
-Despite some glaring flaws such as a lack of a solid technical culture, this
-college has punched above its weight for such a new institution.  
+a lot of freedom is more than what can be asked for in a lot of other colleges.
+Despite some glaring flaws such as the lack of a solid technical culture, this
+college has punched above its weight for a new institution.  
 
 But as an engineering utopia? I feel like we are way short of the mark [Aaron](http://www.slate.com/articles/technology/technology/2013/02/aaron_swartz_he_wanted_to_save_the_world_why_couldn_t_he_save_himself.html) [Swartz](https://www.youtube.com/watch?v=9vz06QO3UkQ&nohtml5=False) mentioned
 in his [blog](http://www.aaronsw.com/weblog/visitingmit):  
@@ -42,18 +42,18 @@ This aside, I am of the opinion that the version of me a year ago would have
 been sorely disappointed by the version of me today. I feel that I was _much_
 more hardworking and efficient back at that time. The two years in JEE
 preparation were undoubtedly the worst years of my school life but now looking
-back, it was the time which did bring out the best of me in the briefest of
-moments. I would have had no idea just how driven and hard-working I could be
+back, those dark days brought out the best in me in the briefest of
+moments. Had I not prepared for JEE at all, I would have had no idea just how driven and hard-working I could be
 for a goal that would always be just a touch out of view.  
 
 Despite my frustrations with life during JEE preparation, the epiphanies I
-used to have on weekly basis with studying physics during JEE kept me going.
+used to have on weekly basis with studying physics kept me going.
 It was a positive feedback loop with no goading required. On the other hand I
 can't remember the last time I actually enjoyed learning something in class in
 this college. I hope it isn't a sign of things to come when I start
-"engineering" coursework in my 2nd year but I have pretty much lost all
+"engineering" coursework in my second year but as of now, I have pretty much lost all
 motivation to study.  The unbridled enthusiasm I used to have when studying
-for entrance exams and the giddy thoughts of making batshit crazy projects in
+for the entrance exams and the giddy thoughts of making batshit crazy projects in
 college has dwindled. In my first semester, it was a convenient excuse to
 blame this on burnout after pushing my limits for two years but I've come to
 realize that the reason is probably shallower than that. It's not just with
