@@ -97,24 +97,26 @@ ocolManager.html">KProtocolManager</a> class. For creating a KIO slave capable o
 directory in a file manager such as Dolphin, the listing property must be set
 to true. As an example, the .json file for the Hello KIO slave described in
 this tutorial looks like this:  </p>
-<div class="highlight"><pre><span></span>{  
-    "KDE-KIO-Protocols" : {   
-        "hello": {   
-            "Class": ":local",   
-            "X-DocPath": "kioslave5/kio_hello.html",   
-            "exec": "kf5/kio/hello",   
-            "input": "none",   
-            "output": "filesystem",   
-            "protocol": "hello",   
-            "reading": true   
+<div class="highlight"><pre>{  
+    &quot;KDE-KIO-Protocols&quot; : {   
+        &quot;hello&quot;: {   
+            &quot;Class&quot;: &quot;:local&quot;,   
+            &quot;X-DocPath&quot;: &quot;kioslave5/kio_hello.html&quot;,   
+            &quot;exec&quot;: &quot;kf5/kio/hello&quot;,   
+            &quot;input&quot;: &quot;none&quot;,   
+            &quot;output&quot;: &quot;filesystem&quot;,   
+            &quot;protocol&quot;: &quot;hello&quot;,   
+            &quot;reading&quot;: true   
         }   
     }   
 }  
 </pre></div>
+
+
 <p>As for the CMakeLists.txt, you will need to link your KIO slave module with
 KF5::KIOCore. This can be seen in the project directory.  </p>
 <h4>kio_hello.h</h4>
-<div class="highlight"><pre><span></span><span class="cp">#ifndef HELLO_H  </span>
+<div class="highlight"><pre><span class="cp">#ifndef HELLO_H  </span>
 <span class="cp">#define HELLO_H  </span>
 
 <span class="cp">#include</span> <span class="cpf">&lt;kio/slavebase.h&gt;  </span><span class="cp"></span>
@@ -132,6 +134,8 @@ KF5::KIOCore. This can be seen in the project directory.  </p>
 
 <span class="cp">#endif  </span>
 </pre></div>
+
+
 <p>The Hello KIO slave is derived from KIO::SlaveBase. The SlaveBase class has
 some basic functions already implemented for the KIO slave. This can be found
 in the <a href="https://api.kde.org/frameworks/kio/html/classKIO_1_1Sla
@@ -145,22 +149,22 @@ pi.kde.org/frameworks/kio/html/classKIO_1_1ForwardingSlaveBase.html">KIO::Forwar
 you would only need to re-implement the rewriteUrl function to get your KIO
 slave working.  </p>
 <h4>kio_hello.cpp</h4>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">"hello.h"  </span><span class="cp"></span>
+<div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&quot;hello.h&quot;  </span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;QDebug&gt;  </span><span class="cp"></span>
 
 <span class="n">class</span> <span class="nl">KIOPluginForMetaData</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QObject</span>  
 <span class="p">{</span>  
     <span class="n">Q_OBJECT</span>   
-    <span class="n">Q_PLUGIN_METADATA</span><span class="p">(</span><span class="n">IID</span> <span class="s">"org.kde.kio.slave.hello"</span> <span class="kt">FILE</span> <span class="s">"hello.json"</span><span class="p">)</span>   
+    <span class="n">Q_PLUGIN_METADATA</span><span class="p">(</span><span class="n">IID</span> <span class="s">&quot;org.kde.kio.slave.hello&quot;</span> <span class="kt">FILE</span> <span class="s">&quot;hello.json&quot;</span><span class="p">)</span>   
 <span class="p">};</span>  
 
-<span class="k">extern</span> <span class="s">"C"</span>  
+<span class="k">extern</span> <span class="s">&quot;C&quot;</span>  
 <span class="p">{</span>  
     <span class="kt">int</span> <span class="n">Q_DECL_EXPORT</span> <span class="n">kdemain</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>   
     <span class="p">{</span>   
-        <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">"Launching KIO slave."</span><span class="p">;</span>   
+        <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Launching KIO slave.&quot;</span><span class="p">;</span>   
         <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>   
-            <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"Usage: kio_hello protocol domain-socket1 domain-socket2</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>   
+            <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Usage: kio_hello protocol domain-socket1 domain-socket2</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>   
             <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>   
         <span class="p">}</span>   
         <span class="n">Hello</span> <span class="n">slave</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>   
@@ -171,33 +175,37 @@ slave working.  </p>
 
 <span class="kt">void</span> <span class="n">Hello</span><span class="o">::</span><span class="n">get</span><span class="p">(</span><span class="k">const</span> <span class="n">QUrl</span> <span class="o">&amp;</span><span class="n">url</span><span class="p">)</span>  
 <span class="p">{</span>  
-    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">"Entering function."</span><span class="p">;</span>   
-    <span class="n">mimeType</span><span class="p">(</span><span class="s">"text/plain"</span><span class="p">);</span>   
-    <span class="n">QByteArray</span> <span class="nf">str</span><span class="p">(</span><span class="s">"Hello world!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>   
+    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Entering function.&quot;</span><span class="p">;</span>   
+    <span class="n">mimeType</span><span class="p">(</span><span class="s">&quot;text/plain&quot;</span><span class="p">);</span>   
+    <span class="n">QByteArray</span> <span class="nf">str</span><span class="p">(</span><span class="s">&quot;Hello world!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>   
     <span class="n">data</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>   
     <span class="n">finished</span><span class="p">();</span>   
-    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">"Leaving function"</span><span class="p">;</span>   
+    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Leaving function&quot;</span><span class="p">;</span>   
 <span class="p">}</span>  
 
 <span class="n">Hello</span><span class="o">::</span><span class="n">Hello</span><span class="p">(</span><span class="k">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">pool</span><span class="p">,</span> <span class="k">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">app</span><span class="p">)</span>  
-    <span class="o">:</span> <span class="n">SlaveBase</span><span class="p">(</span><span class="s">"hello"</span><span class="p">,</span> <span class="n">pool</span><span class="p">,</span> <span class="n">app</span><span class="p">)</span> <span class="p">{}</span>   
+    <span class="o">:</span> <span class="n">SlaveBase</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="n">pool</span><span class="p">,</span> <span class="n">app</span><span class="p">)</span> <span class="p">{}</span>   
 
-<span class="cp">#include</span> <span class="cpf">"hello.moc"  </span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;hello.moc&quot;  </span><span class="cp"></span>
 </pre></div>
+
+
 <p>The .moc file is, of course, auto-generated at compilation time.  </p>
 <p>As mentioned earlier, the KIO Slave's .cpp file will also require a new
 KIOPluginForMetaData class to add the .json file. The following is used for
 the hello KIO slave and can be used as an example:  </p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">KIOPluginForMetaData</span> : <span class="n">public</span> <span class="n">QObject</span>  
+<div class="highlight"><pre><span class="k">class</span> <span class="n">KIOPluginForMetaData</span> : <span class="n">public</span> <span class="n">QObject</span>  
 {  
     <span class="s">Q_OBJECT   </span>
-<span class="s">    Q_</span><span class="n">PLUGIN_METADATA</span>(<span class="n">IID</span> <span class="s">"org.kde.kio.slave.hello"</span> <span class="n">FILE</span> <span class="s">"hello.json"</span>)   
+<span class="s">    Q_</span><span class="n">PLUGIN_METADATA</span>(<span class="n">IID</span> <span class="s">&quot;org.kde.kio.slave.hello&quot;</span> <span class="n">FILE</span> <span class="s">&quot;hello.json&quot;</span>)   
 };  
 </pre></div>
+
+
 <h4>CMakeLists.txt</h4>
-<div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">3.5</span><span class="p">)</span>  
-<span class="nb">set</span><span class="p">(</span><span class="s">QT_MIN_VERSION</span> <span class="s2">"5.4.0"</span><span class="p">)</span>  
-<span class="nb">set</span><span class="p">(</span><span class="s">KF5_MIN_VERSION</span> <span class="s2">"5.16.0"</span><span class="p">)</span>  
+<div class="highlight"><pre><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">3.5</span><span class="p">)</span>  
+<span class="nb">set</span><span class="p">(</span><span class="s">QT_MIN_VERSION</span> <span class="s2">&quot;5.4.0&quot;</span><span class="p">)</span>  
+<span class="nb">set</span><span class="p">(</span><span class="s">KF5_MIN_VERSION</span> <span class="s2">&quot;5.16.0&quot;</span><span class="p">)</span>  
 
 <span class="nb">find_package</span><span class="p">(</span><span class="s">ECM</span> <span class="o">${</span><span class="nv">KF5_MIN_VERSION</span><span class="o">}</span> <span class="s">REQUIRED</span> <span class="s">NO_MODULE</span><span class="p">)</span>  
 <span class="nb">set</span><span class="p">(</span>  
@@ -215,28 +223,34 @@ the hello KIO slave and can be used as an example:  </p>
 <span class="nb">add_library</span><span class="p">(</span><span class="s">kio_hello</span> <span class="s">MODULE</span> <span class="s">hello.cpp</span><span class="p">)</span>  
 <span class="nb">find_package</span><span class="p">(</span><span class="s">KF5</span> <span class="o">${</span><span class="nv">KF5_MIN_VERSION</span><span class="o">}</span> <span class="s">REQUIRED</span> <span class="s">KIO</span><span class="p">)</span>  
 <span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">kio_hello</span> <span class="s">KF5::KIOCore</span><span class="p">)</span>  
-<span class="nb">set_target_properties</span><span class="p">(</span><span class="s">kio_hello</span> <span class="s">PROPERTIES</span> <span class="s">OUTPUT_NAME</span> <span class="s2">"hello"</span><span class="p">)</span>  
+<span class="nb">set_target_properties</span><span class="p">(</span><span class="s">kio_hello</span> <span class="s">PROPERTIES</span> <span class="s">OUTPUT_NAME</span> <span class="s2">&quot;hello&quot;</span><span class="p">)</span>  
 
 <span class="nb">install</span><span class="p">(</span><span class="s">TARGETS</span> <span class="s">kio_hello</span> <span class="s">DESTINATION</span> <span class="o">${</span><span class="nv">KDE_INSTALL_PLUGINDIR</span><span class="o">}</span><span class="s">/kf5/kio</span> <span class="p">)</span>  
 </pre></div>
+
+
 <h3>Installation</h3>
 <p>Simply run the following commands in the source folder:  </p>
-<div class="highlight"><pre><span></span>mkdir build  
+<div class="highlight"><pre>mkdir build  
 cd build  
 cmake -DCMAKE_INSTALL_PREFIX=/usr -DKDE_INSTALL_USE_QT_SYS_PATHS=TRUE ..  
 make  
 sudo make install  
 kdeinit5  
 </pre></div>
+
+
 <p>As shown above, we have to run kdeinit5 again so the new KIO slave is
 discovered by KLauncher and can be loaded when we run a command through an
-application such as kioclient5.<br/>
+application such as kioclient5.<br />
 Testing  </p>
 <p>Run:  </p>
-<div class="highlight"><pre><span></span>kioclient5 'cat' 'hello:/'  
+<div class="highlight"><pre>kioclient5 &#39;cat&#39; &#39;hello:/&#39;  
 </pre></div>
+
+
 <p>And the output should be:  </p>
-<div class="highlight"><pre><span></span>Hello_world
+<div class="highlight"><pre>Hello_world
 </pre></div>
             <a href="#" class="go-top">Go Top</a>
 <footer class="footer">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>A Singularity</title><link>http://arnavdhamija.com/</link><description></description><lastBuildDate>Sun, 12 Feb 2017 02:35:00 +0530</lastBuildDate><item><title>Blog Migration Complete!</title><link>http://arnavdhamija.com/blog/blog-migration.html</link><description>&lt;p&gt;Now I finally have my very own domain name! The &lt;a href="http://arnavdhamija.blogspot.in/"&gt;old Blogger site&lt;/a&gt; is still available if anyone wants to see it but for all future intents and purposes, this will be the place where new blog posts will be put up. While I &lt;em&gt;could&lt;/em&gt; configure all traffic to the Blogger site to redirect to this one, the old site has grown on me so much over the years that I feel that it would be a shame to hide it that way.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>A Singularity</title><link>http://arnavdhamija.com/</link><description></description><atom:link href="http://arnavdhamija.com/feeds/rss.xml" rel="self"></atom:link><lastBuildDate>Sun, 05 Feb 2017 23:50:00 +0530</lastBuildDate><item><title>Blog Migration Complete!</title><link>http://arnavdhamija.com/blog/blog-migration.html</link><description>&lt;p&gt;Now I finally have my very own domain name! The &lt;a href="http://arnavdhamija.blogspot.in/"&gt;old Blogger site&lt;/a&gt; is still available if anyone wants to see it but for all future intents and purposes, this will be the place where new blog posts will be put up. While I &lt;em&gt;could&lt;/em&gt; configure all traffic to the Blogger site to redirect to this one, the old site has grown on me so much over the years that I feel that it would be a shame to hide it that way.&lt;/p&gt;
 &lt;p&gt;I had to migrate from Blogger because it is more than evident that Blogger has been getting less love from Google than it deserves. Take for instance, the Blogger web-based post editor - a shining example of an undeveloped relic of Google's products. Posts never autosaved or had any manual version control and a few misplaced keypresses could cause you to lose all your writing progress. Inserting images is a chore and putting up more complicated parts of text such as code blocks and sub-headings is even worse.&lt;/p&gt;
 &lt;p&gt;Of course as with most things in software development, there are workarounds for everything. The work-around which I had used for the last few blog posts was to write directly in Markdown and then convert it to HTML with pandoc to copy paste in the Blogger editor. Even so, this is clearly sub-optimal and I was spending more time wrestling with the Blogger editor to make my pages look good than I was spending writing actual content. The Blogger theme which I was using appealled to me as 13 year old (heck, it still appeals to me), but it was growing long in the tooth and only had basic support for responsive design and mobile devices. With all these things in mind, I started looking for a new home for my blog somewhere in the middle of last December on a break from college.&lt;/p&gt;
 &lt;p&gt;I first looked at &lt;a href="http://wordpress.com/"&gt;WordPress&lt;/a&gt;. At first, it seemed like my search for a new blogging platform would stop here. Open-sourced, a great browser editor, a cohesive Android app, direct editing in Markdown, local installation for testing, and support for plugins made WordPress everything Blogger wasn't. I loved the number of themes and customisation WordPress provided. But the love was short lived, and it ended when I started researching hosting options for WordPress. Most solutions required me to rent a web-server on a monthly basis and I had no idea what tier of server to get as my blog had only recently seen a huge surge in pageviews. Not to mention, the cost of maintaining a website with such a setup was by no means cheap. This is when I started asking to my geeky friends about how they maintained their own personal websites.&lt;/p&gt;
@@ -10,7 +10,7 @@
 &lt;p&gt;The next few days I played with some more Jekyll themes and found that there were many things I didn't like about it. For one thing, it was written in Ruby which I have no experience with. Themes didn't look easy to work with and there was no native support for tags (there is a workaround for this, but due to my lack of Ruby-fu, it all looked terribly arcane to me). I then put the blog migration on the back burner for a while to work on projects at my college's Automation &amp;amp; Robotics Club.&lt;/p&gt;
 &lt;p&gt;A few weeks later I decided to look at the blog with the fresh perspective which comes with taking a break. Again, I poked around to look for alternatives to Jekyll. There was one such alternative which ticked all my boxes - a static site generator called &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;. As WordPress looked inherently superior to Blogger, Pelican looked inherently superior to Jekyll for what I wanted to do with it. For example, it had built-in support for tags, had a theming engine, supported Markdown &lt;em&gt;and&lt;/em&gt; reStructuredText, and had several easy to install plugins. Above all, Pelican is written in Python which made it so much easier for me to mess around with it. There were some more modifications to make to the Markdown files (particularly with the post metadata), but it was so trivial that it didn't pain one bit to modify all the files. Not too long after I settled on Pelican, I found a theme which made my blog look exactly how I wanted it to look. The &lt;a href="https://github.com/PurePelicanTheme"&gt;Pure Single&lt;/a&gt; theme also has nifty support for custom sidebar images, which I used on some select &lt;a href="http://arnavdhamija.com/blog/t2-years-and-counting-iit-jee.html"&gt;blog&lt;/a&gt; &lt;a href="http://arnavdhamija.com/blog/gsoc-report-wrapping-up-gsoc-2016.html"&gt;posts&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There was some initial trouble with setting a blog subfolder in the site and getting images to work on some auto-generated sites (such as the Tags and Categories pages). It later turned out that it was some problem with localhost/ not finding the paths correctly to the images and the site was totally fine when published to the GitHub Pages site. After only three days of using Pelican, I had something which I was willing to show off. The next step was much more straightforward for a change - registering a domain name. I looked into a few options such as GoDaddy and Hover, but Namecheap had a lot more positive reviews than GoDaddy and was the cheapest of the lot. The site configuration to serve pages from GitHub's servers was not more than a 10 minute procedure, and I finally had the site you are reading this article on right now.&lt;/p&gt;
-&lt;p&gt;There will be a lot more changes coming up on this blog, some of them aesthetic and some functional. I'm also probably going to change the name of this blog sometime soon, to something which is more reflective of my current tastes and sensibilities.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Sun, 12 Feb 2017 02:35:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2017-02-12:blog/blog-migration.html</guid><category>Misc</category><category>Programming</category></item><item><title>What I've been upto</title><link>http://arnavdhamija.com/blog/this-semester-has-gone-little-too-fast.html</link><description>&lt;p&gt;This semester has gone a &lt;em&gt;little&lt;/em&gt; too fast for my liking. Though there were
+&lt;p&gt;There will be a lot more changes coming up on this blog, some of them aesthetic and some functional. I'm also probably going to change the name of this blog sometime soon, to something which is more reflective of my current tastes and sensibilities.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Sun, 05 Feb 2017 23:50:00 +0530</pubDate><guid>tag:arnavdhamija.com,2017-02-05:blog/blog-migration.html</guid><category>Misc</category><category>Programming</category></item><item><title>What I've been upto</title><link>http://arnavdhamija.com/blog/this-semester-has-gone-little-too-fast.html</link><description>&lt;p&gt;This semester has gone a &lt;em&gt;little&lt;/em&gt; too fast for my liking. Though there were
 plenty of good memories and takeaways from this semester, it has been by far
 my most stressful time in this college yet. Between taking on a number of
 technical projects and trying to rescue a sharply falling SG due to a poor T1,
@@ -83,10 +83,10 @@ investing so much time in studying or doing projects has made me cut down my
 participation in other clubs and I've quit nearly all the non-technical clubs
 I joined last year. There's more than that too - I feel it's much harder to be
 fully immersed in anything anymore.  &lt;/p&gt;
-&lt;p&gt;Maybe it's just something else which requires more soul searching.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Mon, 19 Dec 2016 11:09:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2016-12-19:blog/this-semester-has-gone-little-too-fast.html</guid><category>College</category><category>Life</category><category>KDE</category></item><item><title>GSoC Report - Wrapping up GSoC 2016</title><link>http://arnavdhamija.com/blog/gsoc-report-wrapping-up-gsoc-2016.html</link><description>&lt;p&gt;That’s it. After a &lt;a href="https://github.com/KDE/kio-
+&lt;p&gt;Maybe it's just something else which requires more soul searching.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Mon, 19 Dec 2016 11:09:00 +0530</pubDate><guid>tag:arnavdhamija.com,2016-12-19:blog/this-semester-has-gone-little-too-fast.html</guid><category>College</category><category>Life</category><category>KDE</category></item><item><title>GSoC Report - Wrapping up GSoC 2016</title><link>http://arnavdhamija.com/blog/gsoc-report-wrapping-up-gsoc-2016.html</link><description>&lt;p&gt;That’s it. After a &lt;a href="https://github.com/KDE/kio-
 stash/graphs/contributors"&gt;combined total&lt;/a&gt; of 217 git commits, 6,202 lines of code added, and
 4,167 lines of code deleted, GSoC 2016 is finally over.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/Screenshot_20160830_014801.png" style="width: 576px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/Screenshot_20160830_014801.png" /&gt;&lt;/p&gt;
 &lt;p&gt;These twelve weeks of programming have been a very enriching experience for me
 and making this project has taught me a lot about production quality software
 development. Little did I know that a &lt;a href="https://github.com/shortstheory/filetray-very-early-alpha-idea-
@@ -149,7 +149,7 @@ much time on making sure the ioslave was robust enough, this was a mixed
 surprise. Finally, after a week of rewriting and to an extent, refactoring the
 rename and copy functions of the ioslave, I got the best terminal output I
 ever wanted from this project.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/Screenshot_20160829_184812.png" style="width: 1389px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/Screenshot_20160829_184812.png" /&gt;&lt;/p&gt;
 &lt;p&gt;Definitely the highest point of the GSoC for me. From there on out, it was a
 matter of putting the code on the slow burner for cleaning up any leftover
 debug statements and for writing documentation for other obscure sections.
@@ -172,7 +172,7 @@ on an open source project gave me a sense of gratification solving a problem
 in competitive programming never could have.  &lt;/p&gt;
 &lt;p&gt;The Google Summer of Code may be over, but my journey with open source
 development has just begun. Here’s to even bigger and better projects in the
-future!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Tue, 30 Aug 2016 01:45:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2016-08-30:blog/gsoc-report-wrapping-up-gsoc-2016.html</guid><category>GSoC</category><category>KDE</category></item><item><title>GSoC Update: Tinkering with KIO</title><link>http://arnavdhamija.com/blog/gsoc-update-tinkering-with-kio.html</link><description>&lt;p&gt;I'm a lot closer to finishing the project now. Thanks to some great support
+future!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Tue, 30 Aug 2016 01:45:00 +0530</pubDate><guid>tag:arnavdhamija.com,2016-08-30:blog/gsoc-report-wrapping-up-gsoc-2016.html</guid><category>GSoC</category><category>KDE</category></item><item><title>GSoC Update: Tinkering with KIO</title><link>http://arnavdhamija.com/blog/gsoc-update-tinkering-with-kio.html</link><description>&lt;p&gt;I'm a lot closer to finishing the project now. Thanks to some great support
 from my GSoC mentor, my project has turned out better than what I had written
 about in my proposal! Working together, we've made a lot of changes to the
 project.  &lt;/p&gt;
@@ -219,7 +219,7 @@ Dolphin and for writing a couple of unit tests along the way. I'm looking
 forward to a good finish with this project.  &lt;/p&gt;
 &lt;p&gt;You can find the source for it here: &lt;a href="https://github.com/KDE/kio-stash"&gt;https://github.com/KDE/kio-stash&lt;/a&gt; (did I
 mention it's now hosted on a &lt;a href="https://quickgit.kde.org/?p=kio-
-stash.git"&gt;KDE repo&lt;/a&gt;? ;) )&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Thu, 21 Jul 2016 15:18:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2016-07-21:blog/gsoc-update-tinkering-with-kio.html</guid><category>GSoC</category><category>KDE</category></item><item><title>GSoC Update(?): Writing a KIO slave 101!</title><link>http://arnavdhamija.com/blog/gsoc-update-writing-kio-slave-101.html</link><description>&lt;p&gt;This &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;project&lt;/a&gt;
+stash.git"&gt;KDE repo&lt;/a&gt;? ;) )&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Thu, 21 Jul 2016 15:18:00 +0530</pubDate><guid>tag:arnavdhamija.com,2016-07-21:blog/gsoc-update-tinkering-with-kio.html</guid><category>GSoC</category><category>KDE</category></item><item><title>GSoC Update(?): Writing a KIO slave 101!</title><link>http://arnavdhamija.com/blog/gsoc-update-writing-kio-slave-101.html</link><description>&lt;p&gt;This &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;project&lt;/a&gt;
 has been going well. Though it was expectedly difficult in the beginning, I
 feel like I am on the other side of the learning curve now. I will probably
 make a proper update post sometime later this month. My repo for this project
@@ -253,24 +253,26 @@ ocolManager.html"&gt;KProtocolManager&lt;/a&gt; class. For creating a KIO slave 
 directory in a file manager such as Dolphin, the listing property must be set
 to true. As an example, the .json file for the Hello KIO slave described in
 this tutorial looks like this:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{  
-    "KDE-KIO-Protocols" : {   
-        "hello": {   
-            "Class": ":local",   
-            "X-DocPath": "kioslave5/kio_hello.html",   
-            "exec": "kf5/kio/hello",   
-            "input": "none",   
-            "output": "filesystem",   
-            "protocol": "hello",   
-            "reading": true   
+&lt;div class="highlight"&gt;&lt;pre&gt;{  
+    &amp;quot;KDE-KIO-Protocols&amp;quot; : {   
+        &amp;quot;hello&amp;quot;: {   
+            &amp;quot;Class&amp;quot;: &amp;quot;:local&amp;quot;,   
+            &amp;quot;X-DocPath&amp;quot;: &amp;quot;kioslave5/kio_hello.html&amp;quot;,   
+            &amp;quot;exec&amp;quot;: &amp;quot;kf5/kio/hello&amp;quot;,   
+            &amp;quot;input&amp;quot;: &amp;quot;none&amp;quot;,   
+            &amp;quot;output&amp;quot;: &amp;quot;filesystem&amp;quot;,   
+            &amp;quot;protocol&amp;quot;: &amp;quot;hello&amp;quot;,   
+            &amp;quot;reading&amp;quot;: true   
         }   
     }   
 }  
 &lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;As for the CMakeLists.txt, you will need to link your KIO slave module with
 KF5::KIOCore. This can be seen in the project directory.  &lt;/p&gt;
 &lt;h4&gt;kio_hello.h&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#ifndef HELLO_H  &lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#ifndef HELLO_H  &lt;/span&gt;
 &lt;span class="cp"&gt;#define HELLO_H  &lt;/span&gt;
 
 &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;kio/slavebase.h&amp;gt;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
@@ -288,6 +290,8 @@ KF5::KIOCore. This can be seen in the project directory.  &lt;/p&gt;
 
 &lt;span class="cp"&gt;#endif  &lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;The Hello KIO slave is derived from KIO::SlaveBase. The SlaveBase class has
 some basic functions already implemented for the KIO slave. This can be found
 in the &lt;a href="https://api.kde.org/frameworks/kio/html/classKIO_1_1Sla
@@ -301,22 +305,22 @@ pi.kde.org/frameworks/kio/html/classKIO_1_1ForwardingSlaveBase.html"&gt;KIO::For
 you would only need to re-implement the rewriteUrl function to get your KIO
 slave working.  &lt;/p&gt;
 &lt;h4&gt;kio_hello.cpp&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;"hello.h"  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;hello.h&amp;quot;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;QDebug&amp;gt;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 
 &lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="nl"&gt;KIOPluginForMetaData&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;QObject&lt;/span&gt;  
 &lt;span class="p"&gt;{&lt;/span&gt;  
     &lt;span class="n"&gt;Q_OBJECT&lt;/span&gt;   
-    &lt;span class="n"&gt;Q_PLUGIN_METADATA&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IID&lt;/span&gt; &lt;span class="s"&gt;"org.kde.kio.slave.hello"&lt;/span&gt; &lt;span class="kt"&gt;FILE&lt;/span&gt; &lt;span class="s"&gt;"hello.json"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   
+    &lt;span class="n"&gt;Q_PLUGIN_METADATA&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IID&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;org.kde.kio.slave.hello&amp;quot;&lt;/span&gt; &lt;span class="kt"&gt;FILE&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;hello.json&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   
 &lt;span class="p"&gt;};&lt;/span&gt;  
 
-&lt;span class="k"&gt;extern&lt;/span&gt; &lt;span class="s"&gt;"C"&lt;/span&gt;  
+&lt;span class="k"&gt;extern&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C&amp;quot;&lt;/span&gt;  
 &lt;span class="p"&gt;{&lt;/span&gt;  
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;Q_DECL_EXPORT&lt;/span&gt; &lt;span class="n"&gt;kdemain&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;argc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   
     &lt;span class="p"&gt;{&lt;/span&gt;   
-        &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;"Launching KIO slave."&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
+        &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Launching KIO slave.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argc&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;   
-            &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"Usage: kio_hello protocol domain-socket1 domain-socket2&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
+            &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Usage: kio_hello protocol domain-socket1 domain-socket2&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
             &lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
         &lt;span class="p"&gt;}&lt;/span&gt;   
         &lt;span class="n"&gt;Hello&lt;/span&gt; &lt;span class="n"&gt;slave&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;   
@@ -327,33 +331,37 @@ slave working.  &lt;/p&gt;
 
 &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QUrl&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
 &lt;span class="p"&gt;{&lt;/span&gt;  
-    &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;"Entering function."&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
-    &lt;span class="n"&gt;mimeType&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"text/plain"&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
-    &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="nf"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"Hello world!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
+    &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Entering function.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
+    &lt;span class="n"&gt;mimeType&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/plain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
+    &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="nf"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello world!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
     &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
     &lt;span class="n"&gt;finished&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;   
-    &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;"Leaving function"&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
+    &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Leaving function&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
 &lt;span class="p"&gt;}&lt;/span&gt;  
 
 &lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-    &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;SlaveBase&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"hello"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;   
+    &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;SlaveBase&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;   
 
-&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;"hello.moc"  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;hello.moc&amp;quot;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;The .moc file is, of course, auto-generated at compilation time.  &lt;/p&gt;
 &lt;p&gt;As mentioned earlier, the KIO Slave's .cpp file will also require a new
 KIOPluginForMetaData class to add the .json file. The following is used for
 the hello KIO slave and can be used as an example:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="n"&gt;KIOPluginForMetaData&lt;/span&gt; : &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;QObject&lt;/span&gt;  
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="n"&gt;KIOPluginForMetaData&lt;/span&gt; : &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;QObject&lt;/span&gt;  
 {  
     &lt;span class="s"&gt;Q_OBJECT   &lt;/span&gt;
-&lt;span class="s"&gt;    Q_&lt;/span&gt;&lt;span class="n"&gt;PLUGIN_METADATA&lt;/span&gt;(&lt;span class="n"&gt;IID&lt;/span&gt; &lt;span class="s"&gt;"org.kde.kio.slave.hello"&lt;/span&gt; &lt;span class="n"&gt;FILE&lt;/span&gt; &lt;span class="s"&gt;"hello.json"&lt;/span&gt;)   
+&lt;span class="s"&gt;    Q_&lt;/span&gt;&lt;span class="n"&gt;PLUGIN_METADATA&lt;/span&gt;(&lt;span class="n"&gt;IID&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;org.kde.kio.slave.hello&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;FILE&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;hello.json&amp;quot;&lt;/span&gt;)   
 };  
 &lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;h4&gt;CMakeLists.txt&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cmake_minimum_required&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;VERSION&lt;/span&gt; &lt;span class="s"&gt;3.5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;QT_MIN_VERSION&lt;/span&gt; &lt;span class="s2"&gt;"5.4.0"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KF5_MIN_VERSION&lt;/span&gt; &lt;span class="s2"&gt;"5.16.0"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;cmake_minimum_required&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;VERSION&lt;/span&gt; &lt;span class="s"&gt;3.5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;QT_MIN_VERSION&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;5.4.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KF5_MIN_VERSION&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;5.16.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
 
 &lt;span class="nb"&gt;find_package&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;ECM&lt;/span&gt; &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;KF5_MIN_VERSION&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="s"&gt;REQUIRED&lt;/span&gt; &lt;span class="s"&gt;NO_MODULE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
 &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;  
@@ -371,29 +379,35 @@ the hello KIO slave and can be used as an example:  &lt;/p&gt;
 &lt;span class="nb"&gt;add_library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;MODULE&lt;/span&gt; &lt;span class="s"&gt;hello.cpp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
 &lt;span class="nb"&gt;find_package&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KF5&lt;/span&gt; &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;KF5_MIN_VERSION&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="s"&gt;REQUIRED&lt;/span&gt; &lt;span class="s"&gt;KIO&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
 &lt;span class="nb"&gt;target_link_libraries&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;KF5::KIOCore&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;set_target_properties&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;PROPERTIES&lt;/span&gt; &lt;span class="s"&gt;OUTPUT_NAME&lt;/span&gt; &lt;span class="s2"&gt;"hello"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;set_target_properties&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;PROPERTIES&lt;/span&gt; &lt;span class="s"&gt;OUTPUT_NAME&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
 
 &lt;span class="nb"&gt;install&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;TARGETS&lt;/span&gt; &lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;DESTINATION&lt;/span&gt; &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;KDE_INSTALL_PLUGINDIR&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="s"&gt;/kf5/kio&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;  
 &lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;h3&gt;Installation&lt;/h3&gt;
 &lt;p&gt;Simply run the following commands in the source folder:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir build  
+&lt;div class="highlight"&gt;&lt;pre&gt;mkdir build  
 cd build  
 cmake -DCMAKE_INSTALL_PREFIX=/usr -DKDE_INSTALL_USE_QT_SYS_PATHS=TRUE ..  
 make  
 sudo make install  
 kdeinit5  
 &lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;As shown above, we have to run kdeinit5 again so the new KIO slave is
 discovered by KLauncher and can be loaded when we run a command through an
-application such as kioclient5.&lt;br/&gt;
+application such as kioclient5.&lt;br /&gt;
 Testing  &lt;/p&gt;
 &lt;p&gt;Run:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;kioclient5 'cat' 'hello:/'  
+&lt;div class="highlight"&gt;&lt;pre&gt;kioclient5 &amp;#39;cat&amp;#39; &amp;#39;hello:/&amp;#39;  
 &lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;And the output should be:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Hello_world
-&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Tue, 21 Jun 2016 23:35:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2016-06-21:blog/gsoc-update-writing-kio-slave-101.html</guid><category>GSoC</category><category>Programming</category><category>KDE</category></item><item><title>GSoC Update 1: The Beginning</title><link>http://arnavdhamija.com/blog/gsoc-update-1-beginning.html</link><description>&lt;p&gt;I have officially started my &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;GSoC
+&lt;div class="highlight"&gt;&lt;pre&gt;Hello_world
+&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Tue, 21 Jun 2016 23:35:00 +0530</pubDate><guid>tag:arnavdhamija.com,2016-06-21:blog/gsoc-update-writing-kio-slave-101.html</guid><category>GSoC</category><category>Programming</category><category>KDE</category></item><item><title>GSoC Update 1: The Beginning</title><link>http://arnavdhamija.com/blog/gsoc-update-1-beginning.html</link><description>&lt;p&gt;I have officially started my &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;GSoC
 project&lt;/a&gt; under
 the mentorship of &lt;a href="https://blog.baloneygeek.com/"&gt;Boudhayan Gupta &lt;/a&gt;and &lt;a href="http://blog.pinak.me/"&gt;Pinak
 Ahuja&lt;/a&gt;.  &lt;/p&gt;
@@ -433,7 +447,7 @@ Faure&lt;/a&gt;. Under his guidance, I managed to
 port the KIO slave in the tutorial to a KF5 compatible KIO slave and after a
 full week of frustration of dealing with dependency hell, I saw the best Hello
 World I could ever hope for:  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/kioslave.png" style="width: 685px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/kioslave.png" /&gt;&lt;/p&gt;
 &lt;p&gt;Baby steps. The next step was to make the KIO slave capable of displaying the
 contents of a specified QUrl in a file manager. The documentation for
 KProtocolManager made it seem like a pretty straightforward task - apparently
@@ -445,7 +459,7 @@ class was only for reimplementing its member functions in a derived class as I
 found out by going through the source code of the core of kio/core. Learning
 from my mistake here I switched to using a ForwardingSlaveBase class for my
 KIO slave which instantly solved my problems of displaying a directory.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/helloslave.png" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/helloslave.png" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Fistpump&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;According to my timeline, the next steps in the project are  &lt;/p&gt;
 &lt;ol&gt;
@@ -454,8 +468,8 @@ KIO slave which instantly solved my problems of displaying a directory.  &lt;/p&
 &lt;li&gt;Thinking of a better name for this feature?
 So far, it's been a great experience to get so much support from the KDE
 community. Here's to another two and a half months of KDE development!&lt;/li&gt;
-&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Mon, 30 May 2016 10:37:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2016-05-30:blog/gsoc-update-1-beginning.html</guid><category>GSoC</category><category>Programming</category><category>KDE</category></item><item><title>It has happened - GSoC 2016 Selection!</title><link>http://arnavdhamija.com/blog/it-has-happened.html</link><description>&lt;p&gt;Wow!  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/photo_2016-04-23_12-26-30.jpg" style="width: 640px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Mon, 30 May 2016 10:37:00 +0530</pubDate><guid>tag:arnavdhamija.com,2016-05-30:blog/gsoc-update-1-beginning.html</guid><category>GSoC</category><category>Programming</category><category>KDE</category></item><item><title>It has happened - GSoC 2016 Selection!</title><link>http://arnavdhamija.com/blog/it-has-happened.html</link><description>&lt;p&gt;Wow!  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/photo_2016-04-23_12-26-30.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;I have been selected for the Google Summer of Code!  &lt;/p&gt;
 &lt;p&gt;For the better part of the summer vacation, I will now be committing myself to
 write code for &lt;a href="https://www.kde.org/"&gt;KDE&lt;/a&gt; to implement my project idea of
@@ -518,7 +532,7 @@ proposal as good as possible. In the end, after painstakingly checking every
 word in my proposal for what felt like the fiftieth time I submitted it on 25
 March, only to spend an anxious month waiting for the results which came out
 at 1230am IST on April 23. While it still hasn't sunk in yet (!), I am sure
-that this will make for an awesome summer vacation!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Sat, 23 Apr 2016 12:28:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2016-04-23:blog/it-has-happened.html</guid><category>GSoC</category><category>KDE</category></item><item><title>What do I do now?</title><link>http://arnavdhamija.com/blog/what-do-i-do-now.html</link><description>&lt;p&gt;I spend a lot of time thinking since I've joined college.  &lt;/p&gt;
+that this will make for an awesome summer vacation!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Sat, 23 Apr 2016 12:28:00 +0530</pubDate><guid>tag:arnavdhamija.com,2016-04-23:blog/it-has-happened.html</guid><category>GSoC</category><category>KDE</category></item><item><title>What do I do now?</title><link>http://arnavdhamija.com/blog/what-do-i-do-now.html</link><description>&lt;p&gt;I spend a lot of time thinking since I've joined college.  &lt;/p&gt;
 &lt;p&gt;I had postponed a lot of introspection during the two years I spent slogging
 away for the JEE. But now, with ample free time and practically no requirement
 to go to classes, I've finally got some time to look back and see how things
@@ -544,7 +558,7 @@ an idyllic location filled with smart people has always been attractive; even
 more so with the sense that by being there one can get smarter simply through
 osmosis. People describe a place of continual geekiness, of throwing chemicals
 into the river and building robots in free time. A magical place for hackers
-to just enjoy themselves."&lt;/em&gt; &lt;/p&gt;
+to just enjoy themselves."&lt;/em&gt;  &lt;/p&gt;
 &lt;p&gt;This aside, I am of the opinion that the version of me a year ago would have
 been sorely disappointed by the version of me today. I feel that I was &lt;em&gt;much&lt;/em&gt;
 more hardworking and efficient back at that time. The two years in JEE
@@ -576,18 +590,18 @@ first place.  &lt;/p&gt;
 but a &lt;a href="https://goo.gl/BYOWdG"&gt;GSoC project&lt;/a&gt; and a couple other projects I've
 planned in the pipeline, it's a pretty easy decision to make the choice of
 which one of these two things I would want to work on. For a CGPA for which I
-cannot care for anymore, it might be one of the worst decisions I can make.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Thu, 14 Apr 2016 01:38:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2016-04-14:blog/what-do-i-do-now.html</guid><category>Rants</category><category>College</category><category>Life</category></item><item><title>GSoC 2016 Project Survey, help me make Dolphin a better File Manager!</title><link>http://arnavdhamija.com/blog/gsoc-2016-project-survey-help-me-make.html</link><description>&lt;p&gt;Hey everyone!  &lt;/p&gt;
+cannot care for anymore, it might be one of the worst decisions I can make.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Thu, 14 Apr 2016 01:38:00 +0530</pubDate><guid>tag:arnavdhamija.com,2016-04-14:blog/what-do-i-do-now.html</guid><category>Rants</category><category>College</category><category>Life</category></item><item><title>GSoC 2016 Project Survey, help me make Dolphin a better File Manager!</title><link>http://arnavdhamija.com/blog/gsoc-2016-project-survey-help-me-make.html</link><description>&lt;p&gt;Hey everyone!  &lt;/p&gt;
 &lt;p&gt;I am a first year computer science undergraduate from BITS Pilani, Hyderabad
 Campus. I am looking forward to working for KDE for the GSoC.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://developers.google.com/open-source/gsoc/resources/downloads/GSoC2016Logo.jpg"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://developers.google.com/open-source/gsoc/resources/downloads/GSoC2016Logo.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;My project idea is based on solving a problem all file managers have had for
 years - the lack of an easy to use file selection tool. My project aims to
 simplify selecting files from multiple directory trees.  &lt;/p&gt;
 &lt;p&gt;I am running a survey to gauge community feedback on my idea and to finalize
 the user interface and features list.  &lt;/p&gt;
-&lt;p&gt;The link to my idea proposal can be found here: &lt;a href="https://goo.gl/1Nj4SY"&gt;https://goo.gl/1Nj4SY&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;And the link to my survey can be found here: &lt;a href="https://goo.gl/forms/5JSZXNganX"&gt;https://goo.gl/forms/5JSZXNganX&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;TIA for the feedback : )&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Mon, 15 Feb 2016 21:16:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2016-02-15:blog/gsoc-2016-project-survey-help-me-make.html</guid><category>GSoC</category><category>Programming</category><category>KDE</category></item><item><title>Composite Photography</title><link>http://arnavdhamija.com/blog/composite-photography.html</link><description>&lt;p&gt;Ever since I got my new Canon 700D, I've been looking more into photography as
+&lt;p&gt;The link to my idea proposal can be found here: &lt;a href="https://goo.gl/1Nj4SY"&gt;https://goo.gl/1Nj4SY&lt;/a&gt;  &lt;/p&gt;
+&lt;p&gt;And the link to my survey can be found here: &lt;a href="https://goo.gl/forms/5JSZXNganX"&gt;https://goo.gl/forms/5JSZXNganX&lt;/a&gt;  &lt;/p&gt;
+&lt;p&gt;TIA for the feedback : )&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Mon, 15 Feb 2016 21:16:00 +0530</pubDate><guid>tag:arnavdhamija.com,2016-02-15:blog/gsoc-2016-project-survey-help-me-make.html</guid><category>GSoC</category><category>Programming</category><category>KDE</category></item><item><title>Composite Photography</title><link>http://arnavdhamija.com/blog/composite-photography.html</link><description>&lt;p&gt;Ever since I got my new Canon 700D, I've been looking more into photography as
 an art than ever before. Thanks to internet photography guides, less light
 pollution in uni campus than urban Bangalore, and some more proficiency with
 editing software, I've been able to produce more interesting photos than
@@ -605,8 +619,8 @@ part about it is the surprise element of the final image - I have no idea what
 the output is going to be till I've post-processed the images on my laptop
 computer. It's been very early days for me when it comes to composite
 photography, but here are a few photos I've felt are worth sharing:  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/StarStaX_IMG_9937-IMG_9966_lighten.jpg" style="width: 703px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/StarStaX_IMG_0095-IMG_0009_gap_filling.jpg" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/StarStaX_IMG_9937-IMG_9966_lighten.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/StarStaX_IMG_0095-IMG_0009_gap_filling.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;Star trails! I've always wanted to try my hand at astrophotography, but never
 could due to Bangalore light pollution and due to not having a camera with
 good noise reduction.  &lt;/p&gt;
@@ -618,8 +632,8 @@ Each frame uses identical settings for the best stacking results.  &lt;/p&gt;
 intervalometer settings. I can't stress on how important having a tripod is
 for this - the slightest shift between frames would've given us terrible
 discontinuity in the final image. The final images were composited using
-&lt;a href="http://www.markus-enzweiler.de/software/software.html"&gt;StarStaX.&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="{filename}/images/IMG_3689%2B-%2BIMG_3725%2Bresized.png"/&gt;&lt;/p&gt;
+&lt;a href="http://www.markus-enzweiler.de/software/software.html"&gt;StarStaX.&lt;/a&gt;  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="{filename}/images/IMG_3689%2B-%2BIMG_3725%2Bresized.png" /&gt;&lt;/p&gt;
 &lt;p&gt;360 degree panorama image of BITS Pilani, Hyderabad Campus! Taken from the
 middle of the football field, it is a panorama of 33 images stitched using
 hugin for Linux. I set up the camera in a portrait orientation with the tripod
@@ -629,8 +643,8 @@ image was a whopping 70.2MP (30000x2404) and is 130 MB large. Although a
 couple of frames were shot using the wrong exposure settings, hugin managed to
 do a really good job in keeping the differences minimal though there still are
 a couple of splotches due to my ineptitude. The uncompressed, full size
-version is here: &lt;a href="https://goo.gl/iY5v14"&gt;https://goo.gl/iY5v14&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/mini-planet-footballfield.png" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+version is here: &lt;a href="https://goo.gl/iY5v14"&gt;https://goo.gl/iY5v14&lt;/a&gt;  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/mini-planet-footballfield.png" /&gt;&lt;/p&gt;
 &lt;p&gt;This little planet picture uses the same panorama as the previous image. It's
 a much simpler to post process this with a panorama than it appears. It was
 created by resizing the image to a square following a polar coordinate filter
@@ -640,7 +654,7 @@ more spacey flavor.  &lt;/p&gt;
 &lt;p&gt;As closing remarks, I'm overall pretty satisfied with how easy it is to make
 simple composite pictures using software. I will probably get back into making
 more of this again, but probably after I work on &lt;a href="https://developers.google.com/open-source/gsoc/"&gt;another
-project&lt;/a&gt; ;)&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Sun, 31 Jan 2016 22:03:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2016-01-31:blog/composite-photography.html</guid><category>Photography</category></item><item><title>T+2 Years And Counting: My IIT-JEE preparation story</title><link>http://arnavdhamija.com/blog/t2-years-and-counting-iit-jee.html</link><description>&lt;p&gt;As the title indicates, it's been a while since I've written anything here. I
+project&lt;/a&gt; ;)&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Sun, 31 Jan 2016 22:03:00 +0530</pubDate><guid>tag:arnavdhamija.com,2016-01-31:blog/composite-photography.html</guid><category>Photography</category></item><item><title>T+2 Years And Counting: My IIT-JEE preparation story</title><link>http://arnavdhamija.com/blog/t2-years-and-counting-iit-jee.html</link><description>&lt;p&gt;As the title indicates, it's been a while since I've written anything here. I
 don't know if anyone still reads this blog, but I sure appreciate if you do!  &lt;/p&gt;
 &lt;p&gt;So, I guess some explanation is due here - it's been a combination of my lack
 of cohesive thought and lack of motivation to publish anything. Part of the
@@ -793,7 +807,7 @@ fate. The invigilator gave me more rough paper than I was supposed to be given
 before the exam (the two rough booklets were somehow glued back to back), only
 to realize his mistake when I started the math section.  &lt;/p&gt;
 &lt;p&gt;&lt;em&gt;This can't be happening&lt;/em&gt;, I thought. &lt;em&gt;This isn't how it's supposed to all
-end.&lt;/em&gt; &lt;/p&gt;
+end.&lt;/em&gt;  &lt;/p&gt;
 &lt;p&gt;My extra rough sheets were confiscated by the proctor and then it hit me that
 this really was the final nail in the coffin. At that very moment the blood
 drained from my face realising that my chances were slipping by the second.
@@ -858,15 +872,15 @@ BE or trying for a dual degree program at BITS Goa, taking physics and
 eventually CSc.  &lt;/p&gt;
 &lt;p&gt;Wow, that's easily been the longest single piece of writing I've ever done. I
 typed most of it on my phone on the plane, so apologies if it doesn't make too
-much sense. If you've made it all the way here, thanks for reading!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Wed, 17 Jun 2015 10:29:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2015-06-17:blog/t2-years-and-counting-iit-jee.html</guid><category>JEE</category><category>Life</category></item><item><title>Midnight Photography!</title><link>http://arnavdhamija.com/blog/midnight-photography.html</link><description>&lt;p&gt;Hey guys! I haven't been able to get too many scenic shots of late, so I've
+much sense. If you've made it all the way here, thanks for reading!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Wed, 17 Jun 2015 10:29:00 +0530</pubDate><guid>tag:arnavdhamija.com,2015-06-17:blog/t2-years-and-counting-iit-jee.html</guid><category>JEE</category><category>Life</category></item><item><title>Midnight Photography!</title><link>http://arnavdhamija.com/blog/midnight-photography.html</link><description>&lt;p&gt;Hey guys! I haven't been able to get too many scenic shots of late, so I've
 invested some of my photography time in taking photos at night. Here are some
 of the shots that I've recently taken with my camera.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_0131.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_0131.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;I really like employing this technique. You need to get someone to hold a
 torch while the camera is mounted on a tripod. The shutter was open for 15
 seconds, ample time to draw the chosen letters. It works great for pseudo stop
 motion too!  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_0790.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_0790.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;Wow, I honestly admit that I didn't expect a shot like this! It was a simple
 matter to shoot it by mounting the camera and leaving the shutter open for a
 few seconds. The depth of field is stellar and I think the purple backdrop
@@ -880,11 +894,11 @@ under low light conditions and the digital noise at high ISOs is evident. But
 I'll leave that to you to judge. I tried my best in obtaining relatively clear
 images (which is a pretty difficult feat when the camera's digital focal
 length is 2240 mm!)  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2268.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_0357.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2303.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2306.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
-&lt;p&gt;I hope you enjoyed this edition. Please feel free to drop comments!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Tue, 23 Apr 2013 12:23:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2013-04-23:blog/midnight-photography.html</guid><category>Photography</category></item><item><title>Photography: Volume 4</title><link>http://arnavdhamija.com/blog/photography-volume-4.html</link><description>&lt;p&gt;Hi guys! Recently bought myself some free time to publish a brand new blog
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2268.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_0357.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2303.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2306.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;I hope you enjoyed this edition. Please feel free to drop comments!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Tue, 23 Apr 2013 12:23:00 +0530</pubDate><guid>tag:arnavdhamija.com,2013-04-23:blog/midnight-photography.html</guid><category>Photography</category></item><item><title>Photography: Volume 4</title><link>http://arnavdhamija.com/blog/photography-volume-4.html</link><description>&lt;p&gt;Hi guys! Recently bought myself some free time to publish a brand new blog
 post, centred on my photography work!&lt;/p&gt;
 &lt;p&gt;I guess I also owe all of my avid readers an apology: it's been a really long
 time since my last photography post, so I hope I can make it up to you in this
@@ -895,58 +909,58 @@ one!&lt;/p&gt;
 &lt;p&gt;&lt;a href="/photography"&gt;Volume 1&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;As usual, just click to enlarge!&lt;/p&gt;
 &lt;p&gt;Starting off:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_1013.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_1013.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;I'm really in need of an anthropologist here. I found this insect whilst
 walking down the road when a speck of orange caught my eye. Turns out that
 that speck of orange is one of the finest six-legged creatures I've ever seen.
 From a photography stand-point, I used a wide aperture, and a large zoom to
 capture this.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2608.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2608.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;This is probably one of the most comical insect/bug pictures that I've ever
 taken. The DoF worked excellently over here; it only puts the subject in
 focus. The first thing that came to my mind after I shot this was "suicide".
 Definitely one of my favourite shots.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4283.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4283.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;Yay, another bug! I'm really scared of wasps, but that's the good thing about
 a superzoom camera: you can stand far away and still get a crisp shot. Pretty
 much the same ingredients were used to make this shot as the previous two.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4286.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4286.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;I should really call this post "Bugs and Insects Special Album!" or something.
 Poor jokes aside, I love the way the insect was climbing on the stigma/anthers
 (not too sure) of the flower. The background is sublimely blurred, but there's
 still enough detail to keep the background interesting. Top shot.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4301.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4301.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;This is one picture I really like, but sometimes I feel remorseful seeing it.
 Although the reptile is in excellent focus, the handle of the water tap to the
 right distracts attention from it. Just goes to show that you can't always
 expect perfect conditions for photography.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4564.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4564.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;No photography album is complete without a good flower. This is easily one of
 the prettiest flowers I've ever shot. Although I'm not too happy with the
 background, the foreground more than makes up for it.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4382.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4382.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;You're probably sick of seeing close-ups now, so I thought I'd throw in this
 picture that I took at sunset.  Everything worked in this photo, the orange
 clouds, the lovely Tyndall effect coming from the sun, and the coconut trees
 below.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4479.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4479.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;Another close-up! If I had to pass any comment about this, I would point out
 the robin's leisurely stride. It seems so relaxed, almost as if in a dream-
 like trance. Never mind my comments, post your own!&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4845.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4845.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;I really like this one. It's a very personified shot, the way the bird on the
 left is trying to say something, and the one on the right is taciturn and
 unwilling to respond. Their seating on the rocks is perfect and I also like
 the way they chose to pose right in front of the water-body.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4884.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4892.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4884.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4892.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;I'm sorry if I've made you wince by showing you another insect picture (it has
 been enough of those!). Nevertheless, I'm really proud about taking these
 shots. They're both images of the same dragonfly from different angles. The
 first one has a nice background and excellent detail, while the second one
 exhibits a minimalistic appearance, with little to distract from the dragonfly
 itself.&lt;/p&gt;
-&lt;p&gt;That's all for now! Please criticize, praise, and comment!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Thu, 25 Oct 2012 15:11:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2012-10-25:blog/photography-volume-4.html</guid><category>Photography</category></item><item><title>Photography Protips!</title><link>http://arnavdhamija.com/blog/photography-protips.html</link><description>&lt;p&gt;Gosh, does time fly. It's been months since my last blog post, owing quite a
+&lt;p&gt;That's all for now! Please criticize, praise, and comment!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Thu, 25 Oct 2012 15:11:00 +0530</pubDate><guid>tag:arnavdhamija.com,2012-10-25:blog/photography-volume-4.html</guid><category>Photography</category></item><item><title>Photography Protips!</title><link>http://arnavdhamija.com/blog/photography-protips.html</link><description>&lt;p&gt;Gosh, does time fly. It's been months since my last blog post, owing quite a
 bit to 10th grade and other activities. However, I'm back with a new, special
 post on what makes me tick behind the lens!  &lt;/p&gt;
 &lt;p&gt;Take this as my guide to hobbyist digital photography. I hope you enjoy it!  &lt;/p&gt;
@@ -983,7 +997,7 @@ taking photos for one hour and a little bit of reading.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;If you've been patient enough to read all this, I wish you the best of luck in
 diving into the wonderful world of digital photography!  &lt;/p&gt;
-&lt;p&gt;Comments are much appreciated Thanks for reading!  &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Sun, 09 Sep 2012 20:26:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2012-09-09:blog/photography-protips.html</guid><category>Photography</category></item><item><title>Photography: Volume 3</title><link>http://arnavdhamija.com/blog/photography-volume-3.html</link><description>&lt;p&gt;This is probably the shortest duration between two meaningful posts on this
+&lt;p&gt;Comments are much appreciated Thanks for reading!  &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Sun, 09 Sep 2012 20:26:00 +0530</pubDate><guid>tag:arnavdhamija.com,2012-09-09:blog/photography-protips.html</guid><category>Photography</category></item><item><title>Photography: Volume 3</title><link>http://arnavdhamija.com/blog/photography-volume-3.html</link><description>&lt;p&gt;This is probably the shortest duration between two meaningful posts on this
 blog: just eight days! Today also represents the 1st anniversary of this blog,
 and hence, I present my new photography album.  &lt;/p&gt;
 &lt;p&gt;Most of you would have already seen &lt;a href="/photography-volume-2"&gt;Volume
@@ -997,12 +1011,12 @@ I like exercising full control over the camera, though the camera does a
 better job than me in choosing shutter speeds for apertures, so Av is the mode
 of choice.  &lt;/p&gt;
 &lt;p&gt;Technical chatter aside; the photos (click to enlarge):  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6748.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6748.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;Let's start off with this. A rare shot with two animals. I can't offer any
 opinion as to why the squirrel didn't run away from there or why the bird
 landed there in the first place, but using a wide aperture and high zoom did
 wonders here.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6770.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6770.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;Another squirrel? Well, actually it's the same one as in the previous picture.
 I'm at the risk of repeating photos over here, but this shot was way too good
 to pass up. The dark area which you see to the right of the image actually
@@ -1010,12 +1024,12 @@ gives this photo a subtle effect and the squirrel's pose is fantastic. Using a
 digital camera gave me a wide choice of focal lengths without much adjustment.
 This one is 929 mm equivalent on a 35 mm film. Used f-stop 5.7 here, because
 wider apertures are beyond the camera's potential at these focal lengths.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6799.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6799.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;Pretty nice shot here as well. It looks like a macro shot, but this one was
 shot from afar. The sunflower looks great here, and the tiny ladybug on the
 petals is the icing on the cake (or should I say flower?). The background was
 perfectly suited for this shot, and gives a nice empty space for this photo.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6817.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6817.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;I won't lie to you by saying that this picture was taken at a different
 location from the previous one. I like the bee's placement in the flower and
 the flower itself. The flies and the varieties of insects that adorn the
@@ -1023,50 +1037,50 @@ flower also look good over here. The background is one of my favourite parts
 of this photo, with details blurred to put emphasis on the main flower, but
 visible at the same time. It's a hard balance to maintain, but I'm glad that
 it worked over here.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6972.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6972.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;Nothing special about the photography techniques over here, but photographing
 another creature, and a reptile at that was too good to pass up.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7304.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7304.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;I suppose the colour over here is the main part of the photo. Clarity and
 contrast are also impressive. The flower itself looks exotic enough, though I
 have no idea what it is. Flowers are probably the best subjects in
 photography. They are quite beautiful, move very little and you can try a
 hundred different exposures to get the right shot.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7327.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7327.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;While I'll be mean to call this an ugly butterfly (I'm sure it's not a moth!),
 I think it looks magnificent over here. Although eye-pleasing colours are
 practically non-existent in this photo, you should look at the contrast of the
 ground to the insect. It looks pretty good, and the other insects around the
 butterfly provide a level of detail, without which, this photo would look much
 plainer.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="{filename}/images/IMG_7331.JPG"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="{filename}/images/IMG_7331.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;Probably one of the best shots I took on that day. The coconut as a subject
 may make you raise eyebrows, but it's totally unlike anything else I've shot.
 The focusing was perfect here, giving the photo a very small depth of field.
 Less can be more and this shot exemplifies it.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7583.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7583.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;You might've seen that I've only done close-up shots. This is one of the very
 few landscape shots I've taken. Excellent scenery and I really don't have much
 more to say about this.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7843.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7843.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;The mynah had a nice stance and perching position for this. The background is
 suitably blurred over here and the foreground falls into focus nicely. The
 background is great for this and the bird's details are captured with some
 success.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_8064.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_8064.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;It might look odd to photograph only the head of a peacock without its
 resplendent body. But the head itself actually has fantastic detail. The blue
 colour stands out superbly and there is a generous amount of empty space in
 the photo which is essential for greater emphasis on the bird. An unorthodox,
 but great shot.  &lt;/p&gt;
 &lt;p&gt;That's it folks! (I have no idea why I quoted that)  &lt;/p&gt;
-&lt;p&gt;Comment, criticize, and praise at your own will.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Tue, 08 May 2012 14:30:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2012-05-08:blog/photography-volume-3.html</guid><category>Photography</category></item><item><title>Nil Sine Pokemon</title><link>http://arnavdhamija.com/blog/pokemon-yes-pokemon.html</link><description>&lt;p&gt;I confess that I haven't been able to tend to this blog as much as I would've
+&lt;p&gt;Comment, criticize, and praise at your own will.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Tue, 08 May 2012 14:30:00 +0530</pubDate><guid>tag:arnavdhamija.com,2012-05-08:blog/photography-volume-3.html</guid><category>Photography</category></item><item><title>Nil Sine Pokemon</title><link>http://arnavdhamija.com/blog/pokemon-yes-pokemon.html</link><description>&lt;p&gt;I confess that I haven't been able to tend to this blog as much as I would've
 liked. It's not about time (or the lack of it), it's just laziness. Well, a
 lot of stuff has happened this month (and a lot of pics have been taken),
 which I simply can't do justice to by putting it in words.  &lt;/p&gt;
 &lt;p&gt;I suppose, I've found a new love as well, some people are going to hate
 this...  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/Pokemon-PNG-Pic.png" style="width: 2000px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/Pokemon-PNG-Pic.png" /&gt;&lt;/p&gt;
 &lt;p&gt;...well actually it's not a new love, this dates back to 2004, so I'll
 narrate my history with this incredible video-game.  &lt;/p&gt;
 &lt;p&gt;Back in 2004 when I was only 6 years-old, I was everything one could describe
@@ -1081,7 +1095,7 @@ Sapphire.  &lt;/p&gt;
 &lt;p&gt;So, with great exuberance, I got my first Gym badge, saved my game and went to
 bed. The next day when I woke up, and loaded the game, I was greeted with this
 message:  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/deleted-file.jpg" style="width: 200px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/deleted-file.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;Serious disappointment. I tried saving again, but got the same message. I
 thought my Pokemaster career had come to a standstill, which it actually had.
 So, for the next few months, all I could do was gaze in envy at my friends'
@@ -1123,54 +1137,54 @@ to sites like &lt;a href="http://smogon.com/"&gt;Smogon&lt;/a&gt;. It was incred
 community of smart, competitive Pokemon players. It was just the place for me.
 A few months ago, I became a member, and my Pokemon journey continues to
 advance.  &lt;/p&gt;
-&lt;p&gt;That's my story. Hope you guys liked it. No Poke-Haters please!  &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Mon, 30 Apr 2012 17:05:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2012-04-30:blog/pokemon-yes-pokemon.html</guid><category>Pokemon</category><category>Life</category><category>Misc</category></item><item><title>Photography: Volume 2</title><link>http://arnavdhamija.com/blog/photography-volume-2.html</link><description>&lt;p&gt;Pulling out my camera, adjusting the exposure, quietly waiting for the perfect
+&lt;p&gt;That's my story. Hope you guys liked it. No Poke-Haters please!  &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Mon, 30 Apr 2012 17:05:00 +0530</pubDate><guid>tag:arnavdhamija.com,2012-04-30:blog/pokemon-yes-pokemon.html</guid><category>Pokemon</category><category>Life</category><category>Misc</category></item><item><title>Photography: Volume 2</title><link>http://arnavdhamija.com/blog/photography-volume-2.html</link><description>&lt;p&gt;Pulling out my camera, adjusting the exposure, quietly waiting for the perfect
 shot, I present to you, my viewers, my new photography album. The old
 collection can be found
-&lt;a href="/photography"&gt;here.&lt;/a&gt; &lt;/p&gt;
+&lt;a href="/photography"&gt;here.&lt;/a&gt;  &lt;/p&gt;
 &lt;p&gt;Note: not all my photos here are "new, new" photos. Some of them are
 exceptional shots I took before publishing my last post, but I didn't want to
 post two pics of the same thing.  &lt;/p&gt;
 &lt;p&gt;Moving on....(click to enlarge)  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5317.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5317.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;A really neat pose of that squirrel. I didn't expect the sunlight and the
 ground to merge so well together.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5391.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5391.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;Looks like it's been pulled out of a rainforest. The truth is, i found these
 little birds in my backyard. I love the way the birds sit linearly, almost
 like a family picture.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5575.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5575.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;This was a bit of an experiment, with very impressive results. Shot it under
 low lighting with flash at a certain angle, so you can see all the layers of
 petals in the flower.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5696.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5696.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;Slimy snail; and although the picture doesn't exhibit too many photography
 techniques, it looks pretty decent.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5935.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5935.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;The grasshopper/mantis (I'm no entomologist) strikes an excellent pose for
 this photo. The raised forearms and the spread out legs give it a great
 stance.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6043.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6043.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;A really simple pic, but that's what makes it look detailed and elegant.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6066.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6066.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;Cute little birdie. That sounds really stupid. Anyway, I like the perching
 position of the bird, and the contrast of its black head to its yellow body
 (sorry if that sounds racist). Birds and insects seem to love posing for me.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6149.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6149.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;Wow, this picture was an absolute stunner for me. I heard the cat screeching
 in pain before I found it (probably "cat"fighting). The way its body is
 silhouetted and the light gleaming off the feline's eyes make it an amazing
 and thoughtful picture.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6164.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6164.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;Kind of a filler pic. The flower looks pretty, and I can't say much about
 this.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5639.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5639.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;Perfect pose + perfect clarity + cool insect = awesomeness. The macro worked
 exceptionally well here.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6177.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6177.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;An example of good timing, this picture was taken early in the morning. The
 bees seemed to be rising with me and the sharpness in front and the blurred
 out background, make it another sweet shot.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6199.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6199.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;I don't have enough words to describe how much I love this one. At a first
 glance, you might not see much, but look at the thing looming over the moth's
 (yes it is a moth) body. Do you count four legs a side? Yup, a spider was
@@ -1178,7 +1192,7 @@ ingesting its prey in this one, and seeing it in real life was eerie. Although
 I can't bring out all the life or death in this photo, I hope you get the
 message.  &lt;/p&gt;
 &lt;p&gt;I know you'll enjoy these photos, no need to hope.  &lt;/p&gt;
-&lt;p&gt;Comment, criticize and praise as you wish.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Tue, 20 Mar 2012 15:24:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2012-03-20:blog/photography-volume-2.html</guid><category>Photography</category></item><item><title>Rantings: Indian Education</title><link>http://arnavdhamija.com/blog/rantings-indian-education.html</link><description>&lt;p&gt;The Indian education system has been one with many &lt;strike&gt;ups and&lt;/strike&gt;
+&lt;p&gt;Comment, criticize and praise as you wish.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Tue, 20 Mar 2012 15:24:00 +0530</pubDate><guid>tag:arnavdhamija.com,2012-03-20:blog/photography-volume-2.html</guid><category>Photography</category></item><item><title>Rantings: Indian Education</title><link>http://arnavdhamija.com/blog/rantings-indian-education.html</link><description>&lt;p&gt;The Indian education system has been one with many &lt;strike&gt;ups and&lt;/strike&gt;
 downs. Viewing from not an expert's position, not from a parent's position,
 not from a teacher's position, but from a high school, bored student's
 perspective, this post is just a rant about our muddled education system.&lt;/p&gt;
@@ -1225,7 +1239,7 @@ everyone educated, not everyone can get a job in this country, leaving lots of
 wasted talent.&lt;/p&gt;
 &lt;p&gt;On a more positive note, literacy rates have jumped by over 12% since 2001's
 census. Great news, but these shortcomings give one some food for thought.&lt;/p&gt;
-&lt;p&gt;Comment, criticise and praise at your own will.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Fri, 03 Feb 2012 15:40:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2012-02-03:blog/rantings-indian-education.html</guid><category>Rants</category></item><item><title>7 Billion</title><link>http://arnavdhamija.com/blog/7-billion.html</link><description>&lt;p&gt;Today the world has reached a new milestone, which has compelled me to change
+&lt;p&gt;Comment, criticise and praise at your own will.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Fri, 03 Feb 2012 15:40:00 +0530</pubDate><guid>tag:arnavdhamija.com,2012-02-03:blog/rantings-indian-education.html</guid><category>Rants</category></item><item><title>7 Billion</title><link>http://arnavdhamija.com/blog/7-billion.html</link><description>&lt;p&gt;Today the world has reached a new milestone, which has compelled me to change
 the very name of this blog itself. Yes, we reached the population landmark of
 7,000,000,000 or seven billion according to a UN estimate. According to me
 population growth is &lt;em&gt;not&lt;/em&gt; a good trend and achieving it has some serious
@@ -1241,31 +1255,31 @@ mean higher growth rates. It's not happened in this case due to successful
 campaigns from the Chinese - 400 million less births. However, even with the
 current growth rate, it will not be sustainable to have more people on this
 planet in a few decades.  &lt;/p&gt;
-&lt;p&gt;Food for thought. Comment and express your opinions.  &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Mon, 31 Oct 2011 19:36:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2011-10-31:blog/7-billion.html</guid><category>Rants</category></item><item><title>Photography: Volume 1</title><link>http://arnavdhamija.com/blog/photography.html</link><description>&lt;p&gt;Hi guys, its been a long time since I've updated this. Got a few photos with
+&lt;p&gt;Food for thought. Comment and express your opinions.  &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Mon, 31 Oct 2011 19:36:00 +0530</pubDate><guid>tag:arnavdhamija.com,2011-10-31:blog/7-billion.html</guid><category>Rants</category></item><item><title>Photography: Volume 1</title><link>http://arnavdhamija.com/blog/photography.html</link><description>&lt;p&gt;Hi guys, its been a long time since I've updated this. Got a few photos with
 my awesome Canon SX1-IS cam. (click to enlarge)  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5067.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5067.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;A pity, because I always found that a rather attractive flower. But a great
 photo opportunity as well!  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5074.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5074.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;Why thee vile insect, must consume min winsome flower? (old English, just for
 the heck of it)  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5134.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5134.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;I love this photo. Super macro, so the spider was almost touching the lens of
 the cam. Came out really well though.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5115.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5115.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;Not much to say, but like the colours of this.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5306.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5306.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;Timing is the essence of photography. Looks good as well.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5342.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5342.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;One of my favorite bugs; the millipede. The revolting insect was dangling
 from a twig when I captured it (sounds like pokemon there).  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5366.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5366.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;Could have put a bit more emphasis on the bird, but the flowers gave the
 picture a nice setting,  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5407.JPG" style="width: 1600px; height: auto; max-width: 100%;"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5407.JPG" /&gt;&lt;/p&gt;
 &lt;p&gt;A pretty good shot to get it in that pose. Over-exposed (+2) I think, but
 that puts the bird in the spotlight.  &lt;/p&gt;
-&lt;p&gt;Hope you like the photos. Review and comment.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Wed, 19 Oct 2011 19:40:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2011-10-19:blog/photography.html</guid><category>Photography</category></item><item><title>'The 1 = Everything' equation</title><link>http://arnavdhamija.com/blog/1-everything-equation.html</link><description>&lt;p&gt;What's your unlucky number?  &lt;/p&gt;
+&lt;p&gt;Hope you like the photos. Review and comment.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Wed, 19 Oct 2011 19:40:00 +0530</pubDate><guid>tag:arnavdhamija.com,2011-10-19:blog/photography.html</guid><category>Photography</category></item><item><title>'The 1 = Everything' equation</title><link>http://arnavdhamija.com/blog/1-everything-equation.html</link><description>&lt;p&gt;What's your unlucky number?  &lt;/p&gt;
 &lt;p&gt;"13", say some people  &lt;/p&gt;
 &lt;p&gt;"Nooo, 4", say the others.  &lt;/p&gt;
 &lt;p&gt;My unlucky number's 1. Yup.  The closest whole number to zero really sucks for
@@ -1286,14 +1300,14 @@ decided not to argue. It really hurt that I screwed up on that. Every morning
 for a few months I woke up with the same question, "What good am I in anything
 else, if I can't even make it to the top six in my school?".  &lt;/p&gt;
 &lt;p&gt;Scars don't fade easily, and this one didn't heal till a month ago.  &lt;/p&gt;
-&lt;p&gt;There you have it: 'The 1 = Everything' equation.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Wed, 21 Sep 2011 13:57:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2011-09-21:blog/1-everything-equation.html</guid><category>Rants</category></item><item><title>After the exams...</title><link>http://arnavdhamija.com/blog/after-exams.html</link><description>&lt;p&gt;Well, today concluded a week's long affair of exertion. To be honest, it
+&lt;p&gt;There you have it: 'The 1 = Everything' equation.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Wed, 21 Sep 2011 13:57:00 +0530</pubDate><guid>tag:arnavdhamija.com,2011-09-21:blog/1-everything-equation.html</guid><category>Rants</category></item><item><title>After the exams...</title><link>http://arnavdhamija.com/blog/after-exams.html</link><description>&lt;p&gt;Well, today concluded a week's long affair of exertion. To be honest, it
 really wasn't a lot of work this time. Can't say that these exams really ended
 on a high note with every student's perennial fear - Hindi.  &lt;/p&gt;
-&lt;p&gt;Photography's awesome! Expect pictures in my upcoming posts.  &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Tue, 20 Sep 2011 19:39:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2011-09-20:blog/after-exams.html</guid><category>Misc</category></item><item><title>Before the exams...</title><link>http://arnavdhamija.com/blog/before-exams.html</link><description>&lt;p&gt;I really haven't been doing justice to this blog for quite some time. It's
+&lt;p&gt;Photography's awesome! Expect pictures in my upcoming posts.  &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Tue, 20 Sep 2011 19:39:00 +0530</pubDate><guid>tag:arnavdhamija.com,2011-09-20:blog/after-exams.html</guid><category>Misc</category></item><item><title>Before the exams...</title><link>http://arnavdhamija.com/blog/before-exams.html</link><description>&lt;p&gt;I really haven't been doing justice to this blog for quite some time. It's
 probably out of laziness that I couldn't bring myself to update it either.
 With the advent of Pokemon Platinum on the emulator, factor the time I want to
 spend on this to zero.  &lt;/p&gt;
-&lt;p&gt;That can change now. Queer time to restart, few days prior to the exams.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Fri, 09 Sep 2011 20:45:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2011-09-09:blog/before-exams.html</guid><category>Misc</category></item><item><title>My First Post on My First Blog</title><link>http://arnavdhamija.com/blog/my-first-blog.html</link><description>&lt;p&gt;Blogging. Well, something I've wanted to do earnestly for some time.  &lt;/p&gt;
+&lt;p&gt;That can change now. Queer time to restart, few days prior to the exams.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Fri, 09 Sep 2011 20:45:00 +0530</pubDate><guid>tag:arnavdhamija.com,2011-09-09:blog/before-exams.html</guid><category>Misc</category></item><item><title>My First Post on My First Blog</title><link>http://arnavdhamija.com/blog/my-first-blog.html</link><description>&lt;p&gt;Blogging. Well, something I've wanted to do earnestly for some time.  &lt;/p&gt;
 &lt;p&gt;And just as well, this is and will be my very first post.  &lt;/p&gt;
 &lt;p&gt;&lt;em&gt;(May 8. The day of the 2011 National NTSE round. MAT lifted my hopes but SAT
-equally crushed them. Time will tell the efforts.)&lt;/em&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Mon, 09 May 2011 10:58:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2011-05-09:blog/my-first-blog.html</guid><category>FirstPost</category><category>Misc</category></item></channel></rss>
+equally crushed them. Time will tell the efforts.)&lt;/em&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Mon, 09 May 2011 10:58:00 +0530</pubDate><guid>tag:arnavdhamija.com,2011-05-09:blog/my-first-blog.html</guid><category>FirstPost</category><category>Misc</category></item></channel></rss>
