@@ -1,9 +1,11 @@
 title: Reading List
-date: 2017-03-08 23:50
+date: 2017-03-12 23:50
 author: Arnav Dhamija
 tags: Reading
 category: Article
 slug: reading-list-1
+
+I've been trying to get myself to read more books. It's been an interesting experience to wane myself off of social media on my phone and it certainly deserves a post of its own soon. Until then, here are some of my thoughts on books I finished reading this year.
 
 * The Checklist Manifesto
 
@@ -22,7 +24,3 @@ It took me forever to find this book. I used to read Alex Rider books every once
 * Bird by Bird
 
 In this book, Anne Lammot speaks about the joys and frustrations in the solidary world of a writer. From the outset, I loved this book. Lammot's writing style is hillarious and is loaded with dry wit and sarcasm. As with 'The Checklist Manifesto', the book follows off on tangents with no central plot to speak of. On my first read of 'Bird by Bird', I couldn't help feeling that this book would read better as a blog than a novel.
-
-* to kill a mockingbird
-
-A few years prior to WW2, Boeing had released a four-engine heavy bomber aircraft - the Boeing Model 299 (now known as the Boeing B-17). The aircraft was a behemoth among its contemporary WW2 aircraft and was simply deemed too complicated for a pilot to fly safely. More often than not, crashes were due to pilot error than due to technical flaws with the aircraft
