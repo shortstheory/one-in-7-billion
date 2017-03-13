@@ -30,13 +30,13 @@ college has punched above its weight for a new institution.
 But as an engineering utopia? I feel like we are way short of the mark [Aaron](http://www.slate.com/articles/technology/technology/2013/02/aaron_swartz_he_wanted_to_save_the_world_why_couldn_t_he_save_himself.html) [Swartz](https://www.youtube.com/watch?v=9vz06QO3UkQ&nohtml5=False) mentioned
 in his [blog](http://www.aaronsw.com/weblog/visitingmit):  
 
-_"Perhaps it’s natural, when doing something so greedy and practical as a
+> "Perhaps it’s natural, when doing something so greedy and practical as a
 startup, to pine for the idealized world of academia. Its image as a place in
 an idyllic location filled with smart people has always been attractive; even
 more so with the sense that by being there one can get smarter simply through
 osmosis. People describe a place of continual geekiness, of throwing chemicals
 into the river and building robots in free time. A magical place for hackers
-to just enjoy themselves."_  
+to just enjoy themselves."
 
 This aside, I am of the opinion that the version of me a year ago would have
 been sorely disappointed by the version of me today. I feel that I was _much_
