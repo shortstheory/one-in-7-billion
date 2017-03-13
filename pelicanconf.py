@@ -21,6 +21,8 @@ CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
+TAG_FEED_ATOM = "feeds/tag_%s.atom.xml"
+TAG_FEED_RSS = "feeds/tag_%s.rss.xml"
 
 GOOGLE_ANALYTICS = "UA-91464572-1"
 GITHUB_URL = "https://github.com/shortstheory"

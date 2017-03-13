@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>A Singularity</title><link href="http://arnavdhamija.com/" rel="alternate"></link><link href="http://arnavdhamija.com/feeds/tag_photography.atom.xml" rel="self"></link><id>http://arnavdhamija.com/</id><updated>2016-01-31T22:03:00+05:30</updated><entry><title>Composite Photography</title><link href="http://arnavdhamija.com/blog/composite-photography.html" rel="alternate"></link><updated>2016-01-31T22:03:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-01-31:blog/composite-photography.html</id><summary type="html">&lt;p&gt;Ever since I got my new Canon 700D, I've been looking more into photography as
+an art than ever before. Thanks to internet photography guides, less light
+pollution in uni campus than urban Bangalore, and some more proficiency with
+editing software, I've been able to produce more interesting photos than
+before. Another thing which I've changed is my stance on editing. Until
+recently, I was of the opinion that my photos should be as virgin as possible,
+with editing restricted to nothing more than cropping or watermarking. Now, I
+subscribe to the more accepting (but still conservative) school of thought:
+that editing should be used to bring out the best of an image while keeping
+its basic elements intact.  &lt;/p&gt;
+&lt;p&gt;However, contradictory to the above, one photography art form I've &lt;em&gt;really&lt;/em&gt;
+enjoyed doing is photography using composite pictures. In composite
+photography, the photographer takes several frames of a scene and then
+combines all the frames together using special software. I guess my favorite
+part about it is the surprise element of the final image - I have no idea what
+the output is going to be till I've post-processed the images on my laptop
+computer. It's been very early days for me when it comes to composite
+photography, but here are a few photos I've felt are worth sharing:  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/StarStaX_IMG_9937-IMG_9966_lighten.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/StarStaX_IMG_0095-IMG_0009_gap_filling.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;Star trails! I've always wanted to try my hand at astrophotography, but never
+could due to Bangalore light pollution and due to not having a camera with
+good noise reduction.  &lt;/p&gt;
+&lt;p&gt;These two images take advantage of the comparatively lower light pollution in
+the campus. These photos are a stacked result of multiple exposures - the
+first one combines fifty frames and the second one combines nearly a hundred.
+Each frame uses identical settings for the best stacking results.  &lt;/p&gt;
+&lt;p&gt;We shot these from midnight till 2am using  laptops for camera tethering and
+intervalometer settings. I can't stress on how important having a tripod is
+for this - the slightest shift between frames would've given us terrible
+discontinuity in the final image. The final images were composited using
+&lt;a href="http://www.markus-enzweiler.de/software/software.html"&gt;StarStaX.&lt;/a&gt;  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="{filename}/images/IMG_3689%2B-%2BIMG_3725%2Bresized.png" /&gt;&lt;/p&gt;
+&lt;p&gt;360 degree panorama image of BITS Pilani, Hyderabad Campus! Taken from the
+middle of the football field, it is a panorama of 33 images stitched using
+hugin for Linux. I set up the camera in a portrait orientation with the tripod
+and tried to make a composite by overlapping 30-40% of each image. Post
+processing felt like it took forever due to the gigantic images and the final
+image was a whopping 70.2MP (30000x2404) and is 130 MB large. Although a
+couple of frames were shot using the wrong exposure settings, hugin managed to
+do a really good job in keeping the differences minimal though there still are
+a couple of splotches due to my ineptitude. The uncompressed, full size
+version is here: &lt;a href="https://goo.gl/iY5v14"&gt;https://goo.gl/iY5v14&lt;/a&gt;  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/mini-planet-footballfield.png" /&gt;&lt;/p&gt;
+&lt;p&gt;This little planet picture uses the same panorama as the previous image. It's
+a much simpler to post process this with a panorama than it appears. It was
+created by resizing the image to a square following a polar coordinate filter
+transformation in GIMP to roll the image and to line up the ends. If I had to
+do this image again, I would redo it at night with long exposures to give it a
+more spacey flavor.  &lt;/p&gt;
+&lt;p&gt;As closing remarks, I'm overall pretty satisfied with how easy it is to make
+simple composite pictures using software. I will probably get back into making
+more of this again, but probably after I work on &lt;a href="https://developers.google.com/open-source/gsoc/"&gt;another
+project&lt;/a&gt; ;)&lt;/p&gt;</summary><category term="Photography"></category></entry><entry><title>Midnight Photography!</title><link href="http://arnavdhamija.com/blog/midnight-photography.html" rel="alternate"></link><updated>2013-04-23T12:23:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2013-04-23:blog/midnight-photography.html</id><summary type="html">&lt;p&gt;Hey guys! I haven't been able to get too many scenic shots of late, so I've
+invested some of my photography time in taking photos at night. Here are some
+of the shots that I've recently taken with my camera.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_0131.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;I really like employing this technique. You need to get someone to hold a
+torch while the camera is mounted on a tripod. The shutter was open for 15
+seconds, ample time to draw the chosen letters. It works great for pseudo stop
+motion too!  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_0790.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;Wow, I honestly admit that I didn't expect a shot like this! It was a simple
+matter to shoot it by mounting the camera and leaving the shutter open for a
+few seconds. The depth of field is stellar and I think the purple backdrop
+gives a nice setting to the scene. My only gripe with this photo is that there
+are too many buildings in between and that it would've looked much better if I
+had shot it from around 50m above ground level.  &lt;/p&gt;
+&lt;p&gt;The other pictures you see are of the moon (if you haven't realized already :)
+) These photos were taken over different days in the span of a few months and
+hence, the lighting changes considerably. My camera isn't a champion performer
+under low light conditions and the digital noise at high ISOs is evident. But
+I'll leave that to you to judge. I tried my best in obtaining relatively clear
+images (which is a pretty difficult feat when the camera's digital focal
+length is 2240 mm!)  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2268.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_0357.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2303.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2306.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;I hope you enjoyed this edition. Please feel free to drop comments!&lt;/p&gt;</summary><category term="Photography"></category></entry><entry><title>Photography: Volume 4</title><link href="http://arnavdhamija.com/blog/photography-volume-4.html" rel="alternate"></link><updated>2012-10-25T15:11:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2012-10-25:blog/photography-volume-4.html</id><summary type="html">&lt;p&gt;Hi guys! Recently bought myself some free time to publish a brand new blog
+post, centred on my photography work!&lt;/p&gt;
+&lt;p&gt;I guess I also owe all of my avid readers an apology: it's been a really long
+time since my last photography post, so I hope I can make it up to you in this
+one!&lt;/p&gt;
+&lt;p&gt;My previous photography posts:&lt;/p&gt;
+&lt;p&gt;&lt;a href="/photography-volume-3"&gt;Volume 3&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="/photography-volume-2"&gt;Volume 2&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="/photography"&gt;Volume 1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;As usual, just click to enlarge!&lt;/p&gt;
+&lt;p&gt;Starting off:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_1013.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;I'm really in need of an anthropologist here. I found this insect whilst
+walking down the road when a speck of orange caught my eye. Turns out that
+that speck of orange is one of the finest six-legged creatures I've ever seen.
+From a photography stand-point, I used a wide aperture, and a large zoom to
+capture this.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2608.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;This is probably one of the most comical insect/bug pictures that I've ever
+taken. The DoF worked excellently over here; it only puts the subject in
+focus. The first thing that came to my mind after I shot this was "suicide".
+Definitely one of my favourite shots.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4283.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;Yay, another bug! I'm really scared of wasps, but that's the good thing about
+a superzoom camera: you can stand far away and still get a crisp shot. Pretty
+much the same ingredients were used to make this shot as the previous two.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4286.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;I should really call this post "Bugs and Insects Special Album!" or something.
+Poor jokes aside, I love the way the insect was climbing on the stigma/anthers
+(not too sure) of the flower. The background is sublimely blurred, but there's
+still enough detail to keep the background interesting. Top shot.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4301.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;This is one picture I really like, but sometimes I feel remorseful seeing it.
+Although the reptile is in excellent focus, the handle of the water tap to the
+right distracts attention from it. Just goes to show that you can't always
+expect perfect conditions for photography.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4564.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;No photography album is complete without a good flower. This is easily one of
+the prettiest flowers I've ever shot. Although I'm not too happy with the
+background, the foreground more than makes up for it.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4382.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;You're probably sick of seeing close-ups now, so I thought I'd throw in this
+picture that I took at sunset.  Everything worked in this photo, the orange
+clouds, the lovely Tyndall effect coming from the sun, and the coconut trees
+below.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4479.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;Another close-up! If I had to pass any comment about this, I would point out
+the robin's leisurely stride. It seems so relaxed, almost as if in a dream-
+like trance. Never mind my comments, post your own!&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4845.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;I really like this one. It's a very personified shot, the way the bird on the
+left is trying to say something, and the one on the right is taciturn and
+unwilling to respond. Their seating on the rocks is perfect and I also like
+the way they chose to pose right in front of the water-body.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4884.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4892.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;I'm sorry if I've made you wince by showing you another insect picture (it has
+been enough of those!). Nevertheless, I'm really proud about taking these
+shots. They're both images of the same dragonfly from different angles. The
+first one has a nice background and excellent detail, while the second one
+exhibits a minimalistic appearance, with little to distract from the dragonfly
+itself.&lt;/p&gt;
+&lt;p&gt;That's all for now! Please criticize, praise, and comment!&lt;/p&gt;</summary><category term="Photography"></category></entry><entry><title>Photography Protips!</title><link href="http://arnavdhamija.com/blog/photography-protips.html" rel="alternate"></link><updated>2012-09-09T20:26:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2012-09-09:blog/photography-protips.html</id><summary type="html">&lt;p&gt;Gosh, does time fly. It's been months since my last blog post, owing quite a
+bit to 10th grade and other activities. However, I'm back with a new, special
+post on what makes me tick behind the lens!  &lt;/p&gt;
+&lt;p&gt;Take this as my guide to hobbyist digital photography. I hope you enjoy it!  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Find something interesting to photograph:&lt;/em&gt; While this might sound obvious, this is probably one of the most difficult things to accomplish in photography. A photo is a work of art: it needs to convey feelings, emotions, and beauty. If you don't have anything which can capture any of those three important guidelines, chances are you will end up with a dull photo. Photography isn't all about luscious landscapes or crafted close-ups. If you have a good degree of imagination, you can make anything look like a professional grade photograph, which brings me to my second point.  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Be imaginative:&lt;/em&gt; It's good to have a hard drive worth of photos shot at landmarks all over the world, but to be honest, you don't need that to be a good photographer. Imagination is probably the best thing that can change a common photo into a modern masterpiece. Just look outside your window. If you look closely and carefully for long enough, you'll definitely find something that can make an excellent photograph. Mess around with perspectives and your camera's settings and shutter times, and see what you get!  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;You don't need the best camera to take good photos:&lt;/em&gt; Don't get me wrong here, you're never going to get a high-grade photo from your 5-year old smartphone's camera. However, while it is no myth that a Canon 5D Mark III will consistently outperform your handy digital point-and-shoot camera, there's so much more to photography than just the camera and lens. Photographers need to have a good eye for detail and if you're not blessed with that, you can say farewell to all the awesome photos you thought you were going to shoot with your new DSLR. Having an eye for detail results in some wonderful photographs even with the most mediocre of cameras. I wouldn't call my Canon SX1-IS PowerShot (the camera which I've used to photograph all the photos posted on this blog) mediocre: it's actually a pretty good digital prosumer, but it's true that there are a huge bunch of DSLRs which exceed it in image quality.   &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;However, if you are fortunate enough to own a high-end camera and you have a
+passion for photography, chances are that you will be shooting like a pro in
+no time. A lower end camera won't offer you all the advanced features a
+prosumer/DSLR offers, but it'll do just fine for capturing most photos. Don't
+forget to keep lighting in mind, lighting conditions are very detrimental to
+taking good photos.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Learn about your camera:&lt;/em&gt; This is very important. You might say, "Hey, my camera's got a brilliant Automatic mode, I don't need to learn about nerdy photography terms!" While it is true to an extent that camera nowadays are getting smarter and are able to deliver quality pictures even with minimal adjustment, you should learn about photography lingo right after you get comfortable with your camera. Why do you need to get comfortable first? That's because getting swamped with all the things you need to know to photograph with reasonable quality, isn't really the best way to start off your career in photography.  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Just to give you a quick example, learn about terms such as: f-stops for
+Aperture, Shutter Speed (both are very important), ISO Film, digital noise,
+chromatic aberration, focal lengths, light metering, and the golden
+combination of all these things that make a good photo! A good photographer
+needs to thoroughly understand and know all these things to figure out how
+each one affects one another. Although it may seem daunting at first, I can
+tell you from personal experience that all it needs is just a few rounds of
+taking photos for one hour and a little bit of reading.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Get out there!:&lt;/em&gt; Photos are never going to shoot themselves You need to be behind the camera and you need to be ready to experiment a lot to have a collection of quality photographs. It can seem impossible to take a good photo at times, but not everything can be photographed just the way you might want it to be. Learn from your own experiences and read up on how you can improve. I can safely bet with you that your experience will teach you more about photography than I, or any book can!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you've been patient enough to read all this, I wish you the best of luck in
+diving into the wonderful world of digital photography!  &lt;/p&gt;
+&lt;p&gt;Comments are much appreciated Thanks for reading!  &lt;/p&gt;</summary><category term="Photography"></category></entry><entry><title>Photography: Volume 3</title><link href="http://arnavdhamija.com/blog/photography-volume-3.html" rel="alternate"></link><updated>2012-05-08T14:30:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2012-05-08:blog/photography-volume-3.html</id><summary type="html">&lt;p&gt;This is probably the shortest duration between two meaningful posts on this
+blog: just eight days! Today also represents the 1st anniversary of this blog,
+and hence, I present my new photography album.  &lt;/p&gt;
+&lt;p&gt;Most of you would have already seen &lt;a href="/photography-volume-2"&gt;Volume
+2&lt;/a&gt; and &lt;a href="/photography"&gt;Volume
+1&lt;/a&gt;, so you probably
+have an idea of my photography skills. I can only say that my skills have
+improved since then, as you will see in these photos.  &lt;/p&gt;
+&lt;p&gt;All of these photos were shot in either Aperture Priority (Av) or Shutter
+Speed Priority (Tv) modes, a step forward from shooting in  Program (P) mode.
+I like exercising full control over the camera, though the camera does a
+better job than me in choosing shutter speeds for apertures, so Av is the mode
+of choice.  &lt;/p&gt;
+&lt;p&gt;Technical chatter aside; the photos (click to enlarge):  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6748.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;Let's start off with this. A rare shot with two animals. I can't offer any
+opinion as to why the squirrel didn't run away from there or why the bird
+landed there in the first place, but using a wide aperture and high zoom did
+wonders here.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6770.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;Another squirrel? Well, actually it's the same one as in the previous picture.
+I'm at the risk of repeating photos over here, but this shot was way too good
+to pass up. The dark area which you see to the right of the image actually
+gives this photo a subtle effect and the squirrel's pose is fantastic. Using a
+digital camera gave me a wide choice of focal lengths without much adjustment.
+This one is 929 mm equivalent on a 35 mm film. Used f-stop 5.7 here, because
+wider apertures are beyond the camera's potential at these focal lengths.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6799.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;Pretty nice shot here as well. It looks like a macro shot, but this one was
+shot from afar. The sunflower looks great here, and the tiny ladybug on the
+petals is the icing on the cake (or should I say flower?). The background was
+perfectly suited for this shot, and gives a nice empty space for this photo.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6817.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;I won't lie to you by saying that this picture was taken at a different
+location from the previous one. I like the bee's placement in the flower and
+the flower itself. The flies and the varieties of insects that adorn the
+flower also look good over here. The background is one of my favourite parts
+of this photo, with details blurred to put emphasis on the main flower, but
+visible at the same time. It's a hard balance to maintain, but I'm glad that
+it worked over here.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6972.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;Nothing special about the photography techniques over here, but photographing
+another creature, and a reptile at that was too good to pass up.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7304.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;I suppose the colour over here is the main part of the photo. Clarity and
+contrast are also impressive. The flower itself looks exotic enough, though I
+have no idea what it is. Flowers are probably the best subjects in
+photography. They are quite beautiful, move very little and you can try a
+hundred different exposures to get the right shot.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7327.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;While I'll be mean to call this an ugly butterfly (I'm sure it's not a moth!),
+I think it looks magnificent over here. Although eye-pleasing colours are
+practically non-existent in this photo, you should look at the contrast of the
+ground to the insect. It looks pretty good, and the other insects around the
+butterfly provide a level of detail, without which, this photo would look much
+plainer.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="{filename}/images/IMG_7331.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;Probably one of the best shots I took on that day. The coconut as a subject
+may make you raise eyebrows, but it's totally unlike anything else I've shot.
+The focusing was perfect here, giving the photo a very small depth of field.
+Less can be more and this shot exemplifies it.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7583.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;You might've seen that I've only done close-up shots. This is one of the very
+few landscape shots I've taken. Excellent scenery and I really don't have much
+more to say about this.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7843.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;The mynah had a nice stance and perching position for this. The background is
+suitably blurred over here and the foreground falls into focus nicely. The
+background is great for this and the bird's details are captured with some
+success.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_8064.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;It might look odd to photograph only the head of a peacock without its
+resplendent body. But the head itself actually has fantastic detail. The blue
+colour stands out superbly and there is a generous amount of empty space in
+the photo which is essential for greater emphasis on the bird. An unorthodox,
+but great shot.  &lt;/p&gt;
+&lt;p&gt;That's it folks! (I have no idea why I quoted that)  &lt;/p&gt;
+&lt;p&gt;Comment, criticize, and praise at your own will.&lt;/p&gt;</summary><category term="Photography"></category></entry><entry><title>Photography: Volume 2</title><link href="http://arnavdhamija.com/blog/photography-volume-2.html" rel="alternate"></link><updated>2012-03-20T15:24:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2012-03-20:blog/photography-volume-2.html</id><summary type="html">&lt;p&gt;Pulling out my camera, adjusting the exposure, quietly waiting for the perfect
+shot, I present to you, my viewers, my new photography album. The old
+collection can be found
+&lt;a href="/photography"&gt;here.&lt;/a&gt;  &lt;/p&gt;
+&lt;p&gt;Note: not all my photos here are "new, new" photos. Some of them are
+exceptional shots I took before publishing my last post, but I didn't want to
+post two pics of the same thing.  &lt;/p&gt;
+&lt;p&gt;Moving on....(click to enlarge)  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5317.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;A really neat pose of that squirrel. I didn't expect the sunlight and the
+ground to merge so well together.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5391.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;Looks like it's been pulled out of a rainforest. The truth is, i found these
+little birds in my backyard. I love the way the birds sit linearly, almost
+like a family picture.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5575.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;This was a bit of an experiment, with very impressive results. Shot it under
+low lighting with flash at a certain angle, so you can see all the layers of
+petals in the flower.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5696.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;Slimy snail; and although the picture doesn't exhibit too many photography
+techniques, it looks pretty decent.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5935.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;The grasshopper/mantis (I'm no entomologist) strikes an excellent pose for
+this photo. The raised forearms and the spread out legs give it a great
+stance.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6043.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;A really simple pic, but that's what makes it look detailed and elegant.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6066.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;Cute little birdie. That sounds really stupid. Anyway, I like the perching
+position of the bird, and the contrast of its black head to its yellow body
+(sorry if that sounds racist). Birds and insects seem to love posing for me.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6149.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;Wow, this picture was an absolute stunner for me. I heard the cat screeching
+in pain before I found it (probably "cat"fighting). The way its body is
+silhouetted and the light gleaming off the feline's eyes make it an amazing
+and thoughtful picture.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6164.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;Kind of a filler pic. The flower looks pretty, and I can't say much about
+this.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5639.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;Perfect pose + perfect clarity + cool insect = awesomeness. The macro worked
+exceptionally well here.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6177.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;An example of good timing, this picture was taken early in the morning. The
+bees seemed to be rising with me and the sharpness in front and the blurred
+out background, make it another sweet shot.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6199.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;I don't have enough words to describe how much I love this one. At a first
+glance, you might not see much, but look at the thing looming over the moth's
+(yes it is a moth) body. Do you count four legs a side? Yup, a spider was
+ingesting its prey in this one, and seeing it in real life was eerie. Although
+I can't bring out all the life or death in this photo, I hope you get the
+message.  &lt;/p&gt;
+&lt;p&gt;I know you'll enjoy these photos, no need to hope.  &lt;/p&gt;
+&lt;p&gt;Comment, criticize and praise as you wish.&lt;/p&gt;</summary><category term="Photography"></category></entry><entry><title>Photography: Volume 1</title><link href="http://arnavdhamija.com/blog/photography.html" rel="alternate"></link><updated>2011-10-19T19:40:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2011-10-19:blog/photography.html</id><summary type="html">&lt;p&gt;Hi guys, its been a long time since I've updated this. Got a few photos with
+my awesome Canon SX1-IS cam. (click to enlarge)  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5067.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;A pity, because I always found that a rather attractive flower. But a great
+photo opportunity as well!  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5074.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;Why thee vile insect, must consume min winsome flower? (old English, just for
+the heck of it)  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5134.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;I love this photo. Super macro, so the spider was almost touching the lens of
+the cam. Came out really well though.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5115.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;Not much to say, but like the colours of this.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5306.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;Timing is the essence of photography. Looks good as well.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5342.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;One of my favorite bugs; the millipede. The revolting insect was dangling
+from a twig when I captured it (sounds like pokemon there).  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5366.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;Could have put a bit more emphasis on the bird, but the flowers gave the
+picture a nice setting,  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5407.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;A pretty good shot to get it in that pose. Over-exposed (+2) I think, but
+that puts the bird in the spotlight.  &lt;/p&gt;
+&lt;p&gt;Hope you like the photos. Review and comment.&lt;/p&gt;</summary><category term="Photography"></category></entry></feed>

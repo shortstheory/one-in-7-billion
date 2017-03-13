@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>A Singularity</title><link href="http://arnavdhamija.com/" rel="alternate"></link><link href="http://arnavdhamija.com/feeds/tag_misc.atom.xml" rel="self"></link><id>http://arnavdhamija.com/</id><updated>2017-02-05T23:50:00+05:30</updated><entry><title>Blog Migration Complete!</title><link href="http://arnavdhamija.com/blog/blog-migration.html" rel="alternate"></link><updated>2017-02-05T23:50:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-02-05:blog/blog-migration.html</id><summary type="html">&lt;p&gt;Now I finally have my very own domain name! The &lt;a href="http://arnavdhamija.blogspot.in/"&gt;old Blogger site&lt;/a&gt; is still available if anyone wants to see it but for all future intents and purposes, this will be the place where new blog posts will be put up. While I &lt;em&gt;could&lt;/em&gt; configure all traffic to the Blogger site to redirect to this one, the old site has grown on me so much over the years that I feel that it would be a shame to hide it that way.&lt;/p&gt;
+&lt;p&gt;I had to migrate from Blogger because it is more than evident that Blogger has been getting less love from Google than it deserves. Take for instance, the Blogger web-based post editor - a shining example of an undeveloped relic of Google's products. Posts never autosaved or had any manual version control and a few misplaced keypresses could cause you to lose all your writing progress. Inserting images is a chore and putting up more complicated parts of text such as code blocks and sub-headings is even worse.&lt;/p&gt;
+&lt;p&gt;Of course as with most things in software development, there are workarounds for everything. The work-around which I had used for the last few blog posts was to write directly in Markdown and then convert it to HTML with pandoc to copy paste in the Blogger editor. Even so, this is clearly sub-optimal and I was spending more time wrestling with the Blogger editor to make my pages look good than I was spending writing actual content. The Blogger theme which I was using appealled to me as 13 year old (heck, it still appeals to me), but it was growing long in the tooth and only had basic support for responsive design and mobile devices. With all these things in mind, I started looking for a new home for my blog somewhere in the middle of last December on a break from college.&lt;/p&gt;
+&lt;p&gt;I first looked at &lt;a href="http://wordpress.com/"&gt;WordPress&lt;/a&gt;. At first, it seemed like my search for a new blogging platform would stop here. Open-sourced, a great browser editor, a cohesive Android app, direct editing in Markdown, local installation for testing, and support for plugins made WordPress everything Blogger wasn't. I loved the number of themes and customisation WordPress provided. But the love was short lived, and it ended when I started researching hosting options for WordPress. Most solutions required me to rent a web-server on a monthly basis and I had no idea what tier of server to get as my blog had only recently seen a huge surge in pageviews. Not to mention, the cost of maintaining a website with such a setup was by no means cheap. This is when I started asking to my geeky friends about how they maintained their own personal websites.&lt;/p&gt;
+&lt;p&gt;The talks were very helpful, it made me realise that a dynamic blogging solution such as WordPress was overkill for a humble blog of less than 30 published posts like this one. Having a static site made so much more sense. I could write directly in Markdown, in the text editor of &lt;em&gt;my&lt;/em&gt; choice. Not to mention, it made the workflow of writing a blog post just like I wrote code, &lt;code&gt;make&lt;/code&gt;, &lt;code&gt;git commit&lt;/code&gt;, and &lt;code&gt;git push&lt;/code&gt; straight to GitHub Pages. GitHub Pages, by the way, offers completely &lt;em&gt;free&lt;/em&gt; hosting for static sites. This means that the only thing I would need to pay for would be the custom domain name, a nominal ₹700 ($10) a year, an amount half of what I would be paying for a month of paid hosting. Plus, it would let me get my hands dirty with a bit of web development, something which I had pushed back for a long time.&lt;/p&gt;
+&lt;p&gt;I decided to start this - what I knew was going to be painful task at about 11pm on a night I just knew I wouldn't be able to sleep.&lt;/p&gt;
+&lt;p&gt;The first step was to convert all my Blogger posts to Markdown. There were some tools online but all of them messed up the conversion pretty badly. After some more digging, I ended up using Aaron Swartz's &lt;a href="https://github.com/aaronsw/html2text"&gt;html2text&lt;/a&gt; Python library which did a better job than other solutions in generating some useful Markdown. I still needed to edit every generated Markdown file by hand to make it something I would be happy with using on my site. I then had to export all the images I had on my Blogger site. This lead to a few more laborious hours of saving each image on the site by hand (Right Click -&amp;gt; View as Image -&amp;gt; Save As). It did cross my mind to automate everything with a script, but it was going to take more time to automate everything and check if the automation was working than it was to do the grunt work of pulling the images. With all the resources safely on my laptop and backed on my Dropbox, I took the next step of looking at static site generators to convert my lovingly handmade Markdown files to HTML.&lt;/p&gt;
+&lt;p&gt;GitHub Pages seemed to heavily advocate &lt;a href="http://jekyllrb.com/"&gt;Jekyll&lt;/a&gt; so I went with it first. With some tinkering to get the Ruby dependencies installed and posts adapted for Jekyll with the Front Matter content, I managed to get a pretty presentable blog running on localhost:4000/ at 5am on that day. With a quick push to my &lt;a href="http://shortstheory.github.com/"&gt;github.io&lt;/a&gt; site, I decided to call it a night and slept off a sleep-deprived session of hacking.&lt;/p&gt;
+&lt;p&gt;The next few days I played with some more Jekyll themes and found that there were many things I didn't like about it. For one thing, it was written in Ruby which I have no experience with. Themes didn't look easy to work with and there was no native support for tags (there is a workaround for this, but due to my lack of Ruby-fu, it all looked terribly arcane to me). I then put the blog migration on the back burner for a while to work on projects at my college's Automation &amp;amp; Robotics Club.&lt;/p&gt;
+&lt;p&gt;A few weeks later I decided to look at the blog with the fresh perspective which comes with taking a break. Again, I poked around to look for alternatives to Jekyll. There was one such alternative which ticked all my boxes - a static site generator called &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;. As WordPress looked inherently superior to Blogger, Pelican looked inherently superior to Jekyll for what I wanted to do with it. For example, it had built-in support for tags, had a theming engine, supported Markdown &lt;em&gt;and&lt;/em&gt; reStructuredText, and had several easy to install plugins. Above all, Pelican is written in Python which made it so much easier for me to mess around with it. There were some more modifications to make to the Markdown files (particularly with the post metadata), but it was so trivial that it didn't pain one bit to modify all the files. Not too long after I settled on Pelican, I found a theme which made my blog look exactly how I wanted it to look. The &lt;a href="https://github.com/PurePelicanTheme"&gt;Pure Single&lt;/a&gt; theme also has nifty support for custom sidebar images, which I used on some select &lt;a href="http://arnavdhamija.com/blog/t2-years-and-counting-iit-jee.html"&gt;blog&lt;/a&gt; &lt;a href="http://arnavdhamija.com/blog/gsoc-report-wrapping-up-gsoc-2016.html"&gt;posts&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There was some initial trouble with setting a blog subfolder in the site and getting images to work on some auto-generated sites (such as the Tags and Categories pages). It later turned out that it was some problem with localhost/ not finding the paths correctly to the images and the site was totally fine when published to the GitHub Pages site. After only three days of using Pelican, I had something which I was willing to show off. The next step was much more straightforward for a change - registering a domain name. I looked into a few options such as GoDaddy and Hover, but Namecheap had a lot more positive reviews than GoDaddy and was the cheapest of the lot. The site configuration to serve pages from GitHub's servers was not more than a 10 minute procedure, and I finally had the site you are reading this article on right now.&lt;/p&gt;
+&lt;p&gt;There will be a lot more changes coming up on this blog, some of them aesthetic and some functional. I'm also probably going to change the name of this blog sometime soon, to something which is more reflective of my current tastes and sensibilities.&lt;/p&gt;</summary><category term="Misc"></category><category term="Programming"></category></entry><entry><title>Nil Sine Pokemon</title><link href="http://arnavdhamija.com/blog/pokemon-yes-pokemon.html" rel="alternate"></link><updated>2012-04-30T17:05:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2012-04-30:blog/pokemon-yes-pokemon.html</id><summary type="html">&lt;p&gt;I confess that I haven't been able to tend to this blog as much as I would've
+liked. It's not about time (or the lack of it), it's just laziness. Well, a
+lot of stuff has happened this month (and a lot of pics have been taken),
+which I simply can't do justice to by putting it in words.  &lt;/p&gt;
+&lt;p&gt;I suppose, I've found a new love as well, some people are going to hate
+this...  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/Pokemon-PNG-Pic.png" /&gt;&lt;/p&gt;
+&lt;p&gt;...well actually it's not a new love, this dates back to 2004, so I'll
+narrate my history with this incredible video-game.  &lt;/p&gt;
+&lt;p&gt;Back in 2004 when I was only 6 years-old, I was everything one could describe
+as a Pokemon fan. I used to watch the anime a lot, watched all the released
+movies, and even had Pokemon drawing and colouring books. In 2005, I was
+introduced to the world of Pokemon video-games, which I never knew existed. I
+remember how popular Pokemon used to be in my apartment complex, it was as if
+a GameBoy Advance and a Pokemon cartridge was like a piece of clothing, which
+you could not &lt;em&gt;not&lt;/em&gt; have when going outside. The rage was infectious, and I
+soon caught on. I got my first Pokemon game as a birthday gift - Pokemon
+Sapphire.  &lt;/p&gt;
+&lt;p&gt;So, with great exuberance, I got my first Gym badge, saved my game and went to
+bed. The next day when I woke up, and loaded the game, I was greeted with this
+message:  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/deleted-file.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;Serious disappointment. I tried saving again, but got the same message. I
+thought my Pokemaster career had come to a standstill, which it actually had.
+So, for the next few months, all I could do was gaze in envy at my friends'
+games which actually saved. Why only for a few months? Because, in February
+2006, I got an original FireRed. With the same anxiousness, I tried saving,
+and obviously (but to my surprise), it actually worked! Joy. What followed was
+me getting an original Emerald as well, so I knew my career was well on its
+way. It was a lot of fun, when we were allowed to bring our GameBoys to
+school, and see whose Level 100 Mewtwo was better. I must clocked at least a
+total of 600 hours on both games, but in the middle of 2007, I was hit by a
+GameBoy ban, which didn't end till summer 2008. By then, I totally lost
+interest, and the GameBoy took its place as being a convenient paperweight and
+dust collector. Never touched it again for three years.  &lt;/p&gt;
+&lt;p&gt;Then, in 2011, some of my friends came over with their GameBoys to ask me some
+Pokemon questions and how to get to Navel Rock without a GameShark. Of course,
+I had lost most of my expertise on the subject, and we never got to Navel
+Rock. But then, it brought back to me the fond memories of playing Pokemon,
+and thinking "Hey, this is fun!". The very next day, I downloaded an emulator
+and Emerald ROM, just to relive those moments.  &lt;/p&gt;
+&lt;p&gt;It was brilliant, playing Pokemon on that queer low-resolution and basic
+pseudo-2.5D models. I couldn't care less about the life-like graphics in other
+games. This was for me. I frantically hunted for my FireRed and Emerald
+cartridges, but both of them were lost. Lost forever. It was a heart-breaking
+moment.  &lt;/p&gt;
+&lt;p&gt;Soon after, I began trawling sites like Bulbapedia and Serebii, to catch up on
+what I missed.  &lt;/p&gt;
+&lt;p&gt;It was an awful lot. But, looking closer, I saw a very sharp competitive edge
+to the game. I was amazed, and soon after, I swallowed the concept of EVs,
+IVs, and natures.  &lt;/p&gt;
+&lt;p&gt;I downloaded Pokemon Platinum and DS emulator for fun. I never thought I would
+actually play it. I couldn't have been more wrong. I played the whole game and
+beat the Battle Frontier with all my newly-gained knowledge.  &lt;/p&gt;
+&lt;p&gt;But soon, I realised, there's no way of playing with a real person like this.
+So, I (nervously) asked my parents for a DS + Pokemon Black (I would've never
+asked, if I hadn't got scholarship). But that was easily the best things I
+could ever buy. A Cosmo Black 3DS and Pokemon Black. All I could've ever
+wanted. I've played around 70 Wi-Fi battles, and won like 30 of them. I turned
+to sites like &lt;a href="http://smogon.com/"&gt;Smogon&lt;/a&gt;. It was incredible, a whole
+community of smart, competitive Pokemon players. It was just the place for me.
+A few months ago, I became a member, and my Pokemon journey continues to
+advance.  &lt;/p&gt;
+&lt;p&gt;That's my story. Hope you guys liked it. No Poke-Haters please!  &lt;/p&gt;</summary><category term="Pokemon"></category><category term="Life"></category><category term="Misc"></category></entry><entry><title>After the exams...</title><link href="http://arnavdhamija.com/blog/after-exams.html" rel="alternate"></link><updated>2011-09-20T19:39:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2011-09-20:blog/after-exams.html</id><summary type="html">&lt;p&gt;Well, today concluded a week's long affair of exertion. To be honest, it
+really wasn't a lot of work this time. Can't say that these exams really ended
+on a high note with every student's perennial fear - Hindi.  &lt;/p&gt;
+&lt;p&gt;Photography's awesome! Expect pictures in my upcoming posts.  &lt;/p&gt;</summary><category term="Misc"></category></entry><entry><title>Before the exams...</title><link href="http://arnavdhamija.com/blog/before-exams.html" rel="alternate"></link><updated>2011-09-09T20:45:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2011-09-09:blog/before-exams.html</id><summary type="html">&lt;p&gt;I really haven't been doing justice to this blog for quite some time. It's
+probably out of laziness that I couldn't bring myself to update it either.
+With the advent of Pokemon Platinum on the emulator, factor the time I want to
+spend on this to zero.  &lt;/p&gt;
+&lt;p&gt;That can change now. Queer time to restart, few days prior to the exams.&lt;/p&gt;</summary><category term="Misc"></category></entry><entry><title>My First Post on My First Blog</title><link href="http://arnavdhamija.com/blog/my-first-blog.html" rel="alternate"></link><updated>2011-05-09T10:58:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2011-05-09:blog/my-first-blog.html</id><summary type="html">&lt;p&gt;Blogging. Well, something I've wanted to do earnestly for some time.  &lt;/p&gt;
+&lt;p&gt;And just as well, this is and will be my very first post.  &lt;/p&gt;
+&lt;p&gt;&lt;em&gt;(May 8. The day of the 2011 National NTSE round. MAT lifted my hopes but SAT
+equally crushed them. Time will tell the efforts.)&lt;/em&gt;&lt;/p&gt;</summary><category term="FirstPost"></category><category term="Misc"></category></entry></feed>

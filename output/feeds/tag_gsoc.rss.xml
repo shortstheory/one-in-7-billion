@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>A Singularity</title><link>http://arnavdhamija.com/</link><description></description><atom:link href="http://arnavdhamija.com/feeds/tag_gsoc.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 30 Aug 2016 01:45:00 +0530</lastBuildDate><item><title>GSoC Report - Wrapping up GSoC 2016</title><link>http://arnavdhamija.com/blog/gsoc-report-wrapping-up-gsoc-2016.html</link><description>&lt;p&gt;That’s it. After a &lt;a href="https://github.com/KDE/kio-
+stash/graphs/contributors"&gt;combined total&lt;/a&gt; of 217 git commits, 6,202 lines of code added, and
+4,167 lines of code deleted, GSoC 2016 is finally over.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/Screenshot_20160830_014801.png" /&gt;&lt;/p&gt;
+&lt;p&gt;These twelve weeks of programming have been a very enriching experience for me
+and making this project has taught me a lot about production quality software
+development. Little did I know that a &lt;a href="https://github.com/shortstheory/filetray-very-early-alpha-idea-
+thingy"&gt;small
+project&lt;/a&gt; I had put together in a 6 hour session of messing around with Qt would
+lead to something as big as this!  &lt;/p&gt;
+&lt;p&gt;There have been many memorable moments throughout my coding period for the
+GSoC - such as the first time I got an ioslave to
+&lt;a href="http://arnavdhamija.com/blog/gsoc-update-1-beginning.html"&gt;install&lt;/a&gt; correctly, to writing its “Hello World”
+&lt;a href="http://arnavdhamija.com/blog/gsoc-update-writing-kio-slave-101.html"&gt;equivalent&lt;/a&gt;, and getting a basic implementation of the project up and
+running by doing a series of dirty hacks with Dolphin’s code. There were also
+times when I was so frustrated with debugging for this project, that I wanted
+to do nothing but smash my laptop’s progressively failing display panel with
+the largest hammer I could find. The great mentorship from my GSoC mentor and
+the premise of the GSoC program itself kept me going. This also taught me an
+important lesson with regards to software development - no one starting out
+gets it right on their first try. It feels like after a long run of not quite
+getting the results I wanted, the GSoC is the thing which worked out for me as
+everything just fell into place.  &lt;/p&gt;
+&lt;p&gt;There’s a technical digression here, which you can feel free to skip through
+if you don’t want to get into the details of the project.  &lt;/p&gt;
+&lt;p&gt;Following up from the &lt;a href="http://arnavdhamija.com/blog/gsoc-update-tinkering-with-kio.html"&gt;previous&lt;/a&gt; blog post, with the core features of the
+application complete, I had moved on to unit testing my project. For this
+project, unit testing involved writing test cases for each and every component
+of the application to find and fix any bugs. Despite the innocuous name, unit
+testing this project was a much bigger challenge than I expected. As for one
+thing, the ioslave in my project is merely a controller in the MVC system of
+the virtual Stash File System, the Dolphin file manager, and the KIO Slave
+itself. Besides, most of the ioslave’s functions have a void return type, so
+feeding the slave’s functions’ arguments to get an output for checking was not
+an option either.  &lt;/p&gt;
+&lt;p&gt;This led me to use an approach, which my mentor aptly called “black box
+testing”.  &lt;/p&gt;
+&lt;p&gt;In this approach, one writes unit tests testing for a specific action and then
+checking for whether the effects of the said action are as expected. In this
+case, the ioslave was tested by giving it a test file and then apply some of
+the ioslave’s functions such as copy, rename, delete, and stat. From there,
+through a bunch of QVERIFY calls is to check whether the ioslave has completed
+the operation successfully. Needless to say, this approach is far more
+convoluted to write unit tests for as it required checking each and every test
+file for its properties in every test case. Fortunately, the
+&lt;a href="http://doc.qt.io/qt-4.8/qtestlib-manual.html#qtestlib"&gt;QTestLib&lt;/a&gt; API is
+pretty well documented so it wasn’t difficult to get started with writing unit
+tests. I also had a template of what a good test suite should look like thanks
+to David Faure’s excellent work on implementing automated unit testing for the
+Trash ioslave. With these two tools in hand, I started off with writing unit
+tests shortly before the second year of college started.  &lt;/p&gt;
+&lt;p&gt;As expected, writing black box unit tests was a PITA in its own right. The
+first time I ran my unit test I came up with a dismal score of 6 unit tests
+passed out of the 17 I had written. This lead me to go back and check whether
+my unit tests were testing correctly at all. It turned out that I had made so
+many mistakes with writing the unit tests that an entire rewrite of the test
+suite wasn’t unwarranted.  &lt;/p&gt;
+&lt;p&gt;With a rewrite of the test cases completed, I ran the test suite again. The
+results were a bit better - 13 out of the 17 test cases passed, but 4 failed
+test cases - enough reason for the project to be unshippable. Looking into the
+issue a bit deeper, I found out that all the D-Bus calls to my ioslave for
+copy and move operations were not working correctly! Given that I had spent so
+much time on making sure the ioslave was robust enough, this was a mixed
+surprise. Finally, after a week of rewriting and to an extent, refactoring the
+rename and copy functions of the ioslave, I got the best terminal output I
+ever wanted from this project.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/Screenshot_20160829_184812.png" /&gt;&lt;/p&gt;
+&lt;p&gt;Definitely the highest point of the GSoC for me. From there on out, it was a
+matter of putting the code on the slow burner for cleaning up any leftover
+debug statements and for writing documentation for other obscure sections.
+With a net total of nearly 2000 lines of code, it far surpasses any other
+project I’ve done in terms of size and quality of code written.  &lt;/p&gt;
+&lt;p&gt;At some points in the project, I felt that the stipend was far too generous,
+for many people working on KDE &lt;em&gt;voluntarily&lt;/em&gt; produce projects much larger
+thann mine. In the end, I feel the best way to repay the generosity is to
+continue with open source development - just as the GSoC intended. Prior to
+the GSoC, open source was simply an interesting concept to me, but
+contributing a couple of thousands of lines of code to an open source codebase
+has made me realise just how powerful open source is. There were no
+restrictions on when I had to work (usually my productivity was at its peak at
+outlandish late night hours), on the machine I used for coding (a trusty
+IdeaPad, replaced with a much nicer ThinkPad), or on the place where I felt
+most comfortable coding from (a toss up between my much used study table or
+the living room). In many ways, working from home was probably the &lt;em&gt;best&lt;/em&gt;
+environment I could ask for when it came to working on this project. Hacking
+on an open source project gave me a sense of gratification solving a problem
+in competitive programming never could have.  &lt;/p&gt;
+&lt;p&gt;The Google Summer of Code may be over, but my journey with open source
+development has just begun. Here’s to even bigger and better projects in the
+future!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Tue, 30 Aug 2016 01:45:00 +0530</pubDate><guid>tag:arnavdhamija.com,2016-08-30:blog/gsoc-report-wrapping-up-gsoc-2016.html</guid><category>GSoC</category><category>KDE</category></item><item><title>GSoC Update: Tinkering with KIO</title><link>http://arnavdhamija.com/blog/gsoc-update-tinkering-with-kio.html</link><description>&lt;p&gt;I'm a lot closer to finishing the project now. Thanks to some great support
+from my GSoC mentor, my project has turned out better than what I had written
+about in my proposal! Working together, we've made a lot of changes to the
+project.  &lt;/p&gt;
+&lt;p&gt;For starters, we've changed the name of the ioslave from "File Tray" to
+"staging" to "stash". I wasn't a big fan of the name change, but I see the
+utility in shaving off a couple of characters in the name of what I hope will
+be a widely used feature.  &lt;/p&gt;
+&lt;p&gt;Secondly, the ioslave is now completely independent from Dolphin, or any KIO
+application for that matter. This means it works &lt;em&gt;exactly&lt;/em&gt; the same way across
+the entire suite of KIO apps. Given that at one point we were planning to make
+the ioslave fully functional only with Dolphin, this is a major plus point for
+the project.  &lt;/p&gt;
+&lt;p&gt;Next, the backend for storing stashed files and folders has undergone a
+complete overhaul. The first iteration of the project stored files and folders
+by saving the URLs of stashed items in a QList in a custom "stash" daemon
+running on top of kded5. Although this was a neat little solution which worked
+well for most intents and purposes, it had some disadvantages. For one, you
+couldn't delete and move files around on the ioslave without affecting the
+source because they were all linked to their original directories. Moreover,
+with the way 'mkdir' works in KIO, this solution would never work without each
+application being specially configured to use the ioslave which would entail a
+lot of groundwork laying out QDBus calls to the stash daemon. With these
+problems looming large, somewhere around the midterm evaluation week, I got a
+message from my mentor about ramping up the project using a "StashFileSystem",
+a virtual file system in Qt that he had written just for this project.  &lt;/p&gt;
+&lt;p&gt;The virtual file system is a clever way to approach this - as it solved both
+of the problems with the previous approach right off the bat - mkdir could be
+mapped to virtual directory and now making volatile edits to folders is
+possible without touching the source directory. It did have its drawbacks too - as it needed to stage every file in the source directory, it would require a
+lot more memory than the previous approach. Plus, it would still be at the
+whims of kded5 if a contained process went bad and crashed the daemon.  &lt;/p&gt;
+&lt;p&gt;Nevertheless, the benefits in this case far outweighed the potential cons and
+I got to implementing it in my ioslave and stash daemon. Using this virtual
+file system also meant remapping all the SlaveBase functions to corresponding
+calls to the stash daemon which was a complete rewrite of my code. For
+instance, my GitHub log for the week of implementing the virtual file system
+showed a sombre 449++/419--. This isn't to say it wasn't productive though -
+to my surprise the virtual file system actually worked better than I hoped it
+would! Memory utilisation is low at a nominal ~300 bytes per stashed file and
+the performance in my manual testing has been looking pretty good.  &lt;/p&gt;
+&lt;p&gt;With the ioslave and other modules of the application largely completed, the
+current phase of the project involves integrating the feature neatly with
+Dolphin and for writing a couple of unit tests along the way. I'm looking
+forward to a good finish with this project.  &lt;/p&gt;
+&lt;p&gt;You can find the source for it here: &lt;a href="https://github.com/KDE/kio-stash"&gt;https://github.com/KDE/kio-stash&lt;/a&gt; (did I
+mention it's now hosted on a &lt;a href="https://quickgit.kde.org/?p=kio-
+stash.git"&gt;KDE repo&lt;/a&gt;? ;) )&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Thu, 21 Jul 2016 15:18:00 +0530</pubDate><guid>tag:arnavdhamija.com,2016-07-21:blog/gsoc-update-tinkering-with-kio.html</guid><category>GSoC</category><category>KDE</category></item><item><title>GSoC Update(?): Writing a KIO slave 101!</title><link>http://arnavdhamija.com/blog/gsoc-update-writing-kio-slave-101.html</link><description>&lt;p&gt;This &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;project&lt;/a&gt;
+has been going well. Though it was expectedly difficult in the beginning, I
+feel like I am on the other side of the learning curve now. I will probably
+make a proper update post sometime later this month. My repo for this project
+can be found here: &lt;a href="https://github.com/shortstheory/staging-kioslave"&gt;https://github.com/shortstheory/staging-kioslave&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For now, this is a small tutorial for writing KDE I/O slaves (KIO slaves)
+which can be used for a variety of KDE applications. KIO slaves are a great
+way for accessing files from different filesystems and protocols in a neat,
+uniform way across many KDE applications. Their versatility makes them
+integral to the KIO library. KIO slaves have changed in their structure the
+transition to KF5 and this tutorial highlights some of these differences from
+preceding iterations of it.&lt;/p&gt;
+&lt;h3&gt;Project Structure&lt;/h3&gt;
+&lt;p&gt;For the purpose of this tutorial, your project source directory needs to have
+the following files.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;kio_hello.h&lt;/li&gt;
+&lt;li&gt;kio_hello.cpp&lt;/li&gt;
+&lt;li&gt;hello.json&lt;/li&gt;
+&lt;li&gt;CMakeLists.txt&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you don't feel like creating these yourself, just clone it from here:
+&lt;a href="https://github.com/shortstheory/kioslave-tutorial"&gt;https://github.com/shortstheory/kioslave-tutorial&lt;/a&gt;&lt;/p&gt;
+&lt;h4&gt;hello.json&lt;/h4&gt;
+&lt;p&gt;The .json file replaces the .protocol files used in KIO slaves pre KF5. The
+.json file for the KIO slave specifies the properties the KIO slave will have
+such as the executable path to the KIO slave on installation. The .json file
+also includes properties of the slave such as being able to read from, write
+to, delete from, among many others. Fields in this .json file are specified
+from the &lt;a href="https://api.kde.org/frameworks/kio/html/classKProt
+ocolManager.html"&gt;KProtocolManager&lt;/a&gt; class. For creating a KIO slave capable of showing a
+directory in a file manager such as Dolphin, the listing property must be set
+to true. As an example, the .json file for the Hello KIO slave described in
+this tutorial looks like this:  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;{  
+    &amp;quot;KDE-KIO-Protocols&amp;quot; : {   
+        &amp;quot;hello&amp;quot;: {   
+            &amp;quot;Class&amp;quot;: &amp;quot;:local&amp;quot;,   
+            &amp;quot;X-DocPath&amp;quot;: &amp;quot;kioslave5/kio_hello.html&amp;quot;,   
+            &amp;quot;exec&amp;quot;: &amp;quot;kf5/kio/hello&amp;quot;,   
+            &amp;quot;input&amp;quot;: &amp;quot;none&amp;quot;,   
+            &amp;quot;output&amp;quot;: &amp;quot;filesystem&amp;quot;,   
+            &amp;quot;protocol&amp;quot;: &amp;quot;hello&amp;quot;,   
+            &amp;quot;reading&amp;quot;: true   
+        }   
+    }   
+}  
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;As for the CMakeLists.txt, you will need to link your KIO slave module with
+KF5::KIOCore. This can be seen in the project directory.  &lt;/p&gt;
+&lt;h4&gt;kio_hello.h&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#ifndef HELLO_H  &lt;/span&gt;
+&lt;span class="cp"&gt;#define HELLO_H  &lt;/span&gt;
+
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;kio/slavebase.h&amp;gt;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+
+&lt;span class="cm"&gt;/**  &lt;/span&gt;
+&lt;span class="cm"&gt;  This class implements a Hello World kioslave  &lt;/span&gt;
+&lt;span class="cm"&gt; */&lt;/span&gt;   
+&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="nl"&gt;Hello&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;QObject&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;KIO&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;SlaveBase&lt;/span&gt;  
+&lt;span class="p"&gt;{&lt;/span&gt;  
+    &lt;span class="n"&gt;Q_OBJECT&lt;/span&gt;   
+&lt;span class="nl"&gt;public&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  
+    &lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
+    &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QUrl&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;Q_DECL_OVERRIDE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
+&lt;span class="p"&gt;};&lt;/span&gt;  
+
+&lt;span class="cp"&gt;#endif  &lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The Hello KIO slave is derived from KIO::SlaveBase. The SlaveBase class has
+some basic functions already implemented for the KIO slave. This can be found
+in the &lt;a href="https://api.kde.org/frameworks/kio/html/classKIO_1_1Sla
+veBase.html"&gt;documentation&lt;/a&gt;. However, most of the functions of SlaveBase are virtual
+functions and have to be re-implemented for the KIO slave. In this case, we
+are re-implementing the get function to print a QString when it is called by
+kioclient5.  &lt;/p&gt;
+&lt;p&gt;In case you don't need special handling of the KIO slave's functions, you can
+derive your KIO slave class directly from &lt;a href="https://a
+pi.kde.org/frameworks/kio/html/classKIO_1_1ForwardingSlaveBase.html"&gt;KIO::ForwardingSlaveBase&lt;/a&gt;. Here,
+you would only need to re-implement the rewriteUrl function to get your KIO
+slave working.  &lt;/p&gt;
+&lt;h4&gt;kio_hello.cpp&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;hello.h&amp;quot;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;QDebug&amp;gt;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+
+&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="nl"&gt;KIOPluginForMetaData&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;QObject&lt;/span&gt;  
+&lt;span class="p"&gt;{&lt;/span&gt;  
+    &lt;span class="n"&gt;Q_OBJECT&lt;/span&gt;   
+    &lt;span class="n"&gt;Q_PLUGIN_METADATA&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IID&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;org.kde.kio.slave.hello&amp;quot;&lt;/span&gt; &lt;span class="kt"&gt;FILE&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;hello.json&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   
+&lt;span class="p"&gt;};&lt;/span&gt;  
+
+&lt;span class="k"&gt;extern&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C&amp;quot;&lt;/span&gt;  
+&lt;span class="p"&gt;{&lt;/span&gt;  
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;Q_DECL_EXPORT&lt;/span&gt; &lt;span class="n"&gt;kdemain&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;argc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   
+    &lt;span class="p"&gt;{&lt;/span&gt;   
+        &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Launching KIO slave.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argc&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;   
+            &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Usage: kio_hello protocol domain-socket1 domain-socket2&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
+            &lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
+        &lt;span class="p"&gt;}&lt;/span&gt;   
+        &lt;span class="n"&gt;Hello&lt;/span&gt; &lt;span class="n"&gt;slave&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;   
+        &lt;span class="n"&gt;slave&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dispatchLoop&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;   
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
+    &lt;span class="p"&gt;}&lt;/span&gt;   
+&lt;span class="p"&gt;}&lt;/span&gt;  
+
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QUrl&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="p"&gt;{&lt;/span&gt;  
+    &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Entering function.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
+    &lt;span class="n"&gt;mimeType&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/plain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
+    &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="nf"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello world!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
+    &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
+    &lt;span class="n"&gt;finished&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;   
+    &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Leaving function&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
+&lt;span class="p"&gt;}&lt;/span&gt;  
+
+&lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+    &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;SlaveBase&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;   
+
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;hello.moc&amp;quot;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The .moc file is, of course, auto-generated at compilation time.  &lt;/p&gt;
+&lt;p&gt;As mentioned earlier, the KIO Slave's .cpp file will also require a new
+KIOPluginForMetaData class to add the .json file. The following is used for
+the hello KIO slave and can be used as an example:  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="n"&gt;KIOPluginForMetaData&lt;/span&gt; : &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;QObject&lt;/span&gt;  
+{  
+    &lt;span class="s"&gt;Q_OBJECT   &lt;/span&gt;
+&lt;span class="s"&gt;    Q_&lt;/span&gt;&lt;span class="n"&gt;PLUGIN_METADATA&lt;/span&gt;(&lt;span class="n"&gt;IID&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;org.kde.kio.slave.hello&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;FILE&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;hello.json&amp;quot;&lt;/span&gt;)   
+};  
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;CMakeLists.txt&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;cmake_minimum_required&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;VERSION&lt;/span&gt; &lt;span class="s"&gt;3.5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;QT_MIN_VERSION&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;5.4.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KF5_MIN_VERSION&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;5.16.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+
+&lt;span class="nb"&gt;find_package&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;ECM&lt;/span&gt; &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;KF5_MIN_VERSION&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="s"&gt;REQUIRED&lt;/span&gt; &lt;span class="s"&gt;NO_MODULE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;  
+    &lt;span class="s"&gt;CMAKE_MODULE_PATH&lt;/span&gt;   
+        &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;CMAKE_MODULE_PATH&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;   
+        &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;ECM_MODULE_PATH&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;   
+        &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;ECM_KDE_MODULE_DIR&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;   
+&lt;span class="p"&gt;)&lt;/span&gt;  
+
+&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KDEInstallDirs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KDECMakeSettings&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KDECompilerSettings&lt;/span&gt; &lt;span class="s"&gt;NO_POLICY_SCOPE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;ECMSetupVersion&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;FeatureSummary&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;add_library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;MODULE&lt;/span&gt; &lt;span class="s"&gt;hello.cpp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;find_package&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KF5&lt;/span&gt; &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;KF5_MIN_VERSION&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="s"&gt;REQUIRED&lt;/span&gt; &lt;span class="s"&gt;KIO&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;target_link_libraries&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;KF5::KIOCore&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;set_target_properties&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;PROPERTIES&lt;/span&gt; &lt;span class="s"&gt;OUTPUT_NAME&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+
+&lt;span class="nb"&gt;install&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;TARGETS&lt;/span&gt; &lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;DESTINATION&lt;/span&gt; &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;KDE_INSTALL_PLUGINDIR&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="s"&gt;/kf5/kio&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Installation&lt;/h3&gt;
+&lt;p&gt;Simply run the following commands in the source folder:  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;mkdir build  
+cd build  
+cmake -DCMAKE_INSTALL_PREFIX=/usr -DKDE_INSTALL_USE_QT_SYS_PATHS=TRUE ..  
+make  
+sudo make install  
+kdeinit5  
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;As shown above, we have to run kdeinit5 again so the new KIO slave is
+discovered by KLauncher and can be loaded when we run a command through an
+application such as kioclient5.&lt;br /&gt;
+Testing  &lt;/p&gt;
+&lt;p&gt;Run:  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;kioclient5 &amp;#39;cat&amp;#39; &amp;#39;hello:/&amp;#39;  
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And the output should be:  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Hello_world
+&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Tue, 21 Jun 2016 23:35:00 +0530</pubDate><guid>tag:arnavdhamija.com,2016-06-21:blog/gsoc-update-writing-kio-slave-101.html</guid><category>GSoC</category><category>Programming</category><category>KDE</category></item><item><title>GSoC Update 1: The Beginning</title><link>http://arnavdhamija.com/blog/gsoc-update-1-beginning.html</link><description>&lt;p&gt;I have officially started my &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;GSoC
+project&lt;/a&gt; under
+the mentorship of &lt;a href="https://blog.baloneygeek.com/"&gt;Boudhayan Gupta &lt;/a&gt;and &lt;a href="http://blog.pinak.me/"&gt;Pinak
+Ahuja&lt;/a&gt;.  &lt;/p&gt;
+&lt;p&gt;The project idea's implementation has undergone some changes from what I
+proposed. While the essence of the project is the same, it will now no longer
+be dependent on Baloo and xattr. Instead, it will use a QList to hold a list
+of staged files with a plugin to kiod. My next milestone before the mid-term
+evaluation is to implement this in a KIO slave which will be compatible with
+the whole suite of KDE applications.  &lt;/p&gt;
+&lt;p&gt;For the last two weeks, I've been busy with going through hundreds of lines of
+source code to understand the concept of a KIO slave. The KIO API is a very
+neat feature of KDE - it provides a single, consistent way to access remote
+and local filesystems. This is further expanded to KIO slaves which are
+programs based on the KIO API which allow for a filesystem to be expressed in
+a particular way. For instance, there is a KIO slave for displaying xattr file
+&lt;a href="http://vhanda.in/blog/2014/07/tagging-your-files/"&gt;tags&lt;/a&gt; as a directory under
+which each file marked to a tag would be displayed. KIO slaves even expand to
+network protocols allowing for remote access using slaves such as http:/,
+ftp:/, smb:/ (for Windows samba shares), fish:/, sftp:/, nfs:/, and webdav:/.
+My project requires virtual folder constructed of URLs stored in a QList - an
+ideal fit for KIO slaves.  &lt;/p&gt;
+&lt;p&gt;However, hacking on KIO slaves was not exactly straightforward. Prior to my
+GSoC selection, I had no idea on how to edit CMakeLists.txt files and it was a
+task to learn to make one by hand. Initially, it felt like installing the
+dependencies for building KIO slaves would almost certainly lead to me
+destroying my KDE installation, and sure enough, I did manage to ruin my
+installation. Most annoying. Fortunately, I managed to recover my data and
+with a fresh install of Kubuntu 16.04 with all the required KDE packages, I
+got back to working on getting the technical equivalent of a Hello World to
+work with a KIO slave.  &lt;/p&gt;
+&lt;p&gt;This too, was more than a matter of just copying and pasting lines of code
+from the &lt;a href="https://techbase.kde.org/Development/Tutorials/KIO_Sla
+ves/Hello_World"&gt;KDE tutorial&lt;/a&gt;. KIO slaves had dropped the use of .protocol files in the KF5
+transition, instead opting for JSON files to store the properties of the KIO
+slave. Thankfully, I had the assistance of the legendary &lt;a href="https://behindkde.org/david-faure-2"&gt;David
+Faure&lt;/a&gt;. Under his guidance, I managed to
+port the KIO slave in the tutorial to a KF5 compatible KIO slave and after a
+full week of frustration of dealing with dependency hell, I saw the best Hello
+World I could ever hope for:  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/kioslave.png" /&gt;&lt;/p&gt;
+&lt;p&gt;Baby steps. The next step was to make the KIO slave capable of displaying the
+contents of a specified QUrl in a file manager. The documentation for
+KProtocolManager made it seem like a pretty straightforward task - apparently
+that all I needed to do was to add a "listing" entry in my JSON protocol file
+and I would have to re-implement the listDir method inherited from SlaveBase
+using a call to SlaveBase::listDir(&amp;amp;QUrl). Unbeknownst to me, the SlaveBase
+class actually didn't have any code for displaying a directory! The SlaveBase
+class was only for reimplementing its member functions in a derived class as I
+found out by going through the source code of the core of kio/core. Learning
+from my mistake here I switched to using a ForwardingSlaveBase class for my
+KIO slave which instantly solved my problems of displaying a directory.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/helloslave.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Fistpump&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;According to my timeline, the next steps in the project are  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Finishing off the KIO slave by the end of this month&lt;/li&gt;
+&lt;li&gt;Making GUI modifications in Dolphin to accommodate the staging area&lt;/li&gt;
+&lt;li&gt;Thinking of a better name for this feature?
+So far, it's been a great experience to get so much support from the KDE
+community. Here's to another two and a half months of KDE development!&lt;/li&gt;
+&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Mon, 30 May 2016 10:37:00 +0530</pubDate><guid>tag:arnavdhamija.com,2016-05-30:blog/gsoc-update-1-beginning.html</guid><category>GSoC</category><category>Programming</category><category>KDE</category></item><item><title>It has happened - GSoC 2016 Selection!</title><link>http://arnavdhamija.com/blog/it-has-happened.html</link><description>&lt;p&gt;Wow!  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/photo_2016-04-23_12-26-30.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;I have been selected for the Google Summer of Code!  &lt;/p&gt;
+&lt;p&gt;For the better part of the summer vacation, I will now be committing myself to
+write code for &lt;a href="https://www.kde.org/"&gt;KDE&lt;/a&gt; to implement my project idea of
+implementing a &lt;a href="https://goo.gl/BYOWdG"&gt;virtual folder in Dolphin&lt;/a&gt; to make it
+easier to select files.  &lt;/p&gt;
+&lt;p&gt;As a primer, the &lt;a href="http://g.co/gsoc"&gt;Google Summer of Code &lt;/a&gt;(GSoC) is an annual
+event organized by Google for drawing students to work on open source projects
+with a nice stipend, goodies, and fame. The GSoC is a term one would hear
+pretty frequently when talking about the technical prowess and coding culture
+of a college.  &lt;/p&gt;
+&lt;p&gt;This year, BITS Pilani - Hyderabad Campus had a record number of a total of
+&lt;strong&gt;7&lt;/strong&gt; selections! This is more than double of our previous record. This in
+some ways, might be the start of the technical culture wave this campus was
+looking for so long.  &lt;/p&gt;
+&lt;p&gt;The File Tray idea for the GSoC came at a difficult time, hardly a month after
+the entrance exams in 2015. It was at a time I was frustrated with everything
+I had done and I didn't have any energy to pursue anything at all having been
+completely drained out by the entrance exams prior to it. From there, the
+project sat on the list of "Things I Might Do In The Distant Future". The
+project idea was known only to a few close friends and my tiny programming
+diary.  &lt;/p&gt;
+&lt;p&gt;It was only till November 2015 when I stumbled across the GSoC. I began
+looking at open source file managers for which I could implement my project
+idea. I had been using Linux with various desktop environments for about 4
+years at that point, so I had a pretty decent idea of what to look for.
+Writing this feature for GNOME's Nautilus was the first thing I looked into as
+I had been using Nautilus for a while and I was a big fan of Nautilus's simple
+to use interface. But, the problem was that Nautilus was a C/GTK+ project and
+I had no desire to move on to using C after having C++ in my comfort zone for
+a very long time. Fortunately, Dolphin, one of the best file managers I had
+used since my days of using KDE, used C++/Qt, a toolset I am much better with.
+I felt my project idea was a natural fit for Dolphin's Split view mode. KDE
+also had an excellent record in the GSoC with a very good number of slots and
+a high percentage of successful projects. This began my tryst with Open Source
+development.  &lt;/p&gt;
+&lt;p&gt;From there on, I taught myself &lt;a href="http://www.qt.io/"&gt;Qt&lt;/a&gt; and during a Diwali
+vacation on campus, I managed to make a very rough &lt;a href="https://github.com/shortstheory/filetray-very-early-alpha-idea-
+thingy"&gt;prototype
+application&lt;/a&gt; of my project after coding for 6 hours straight from 11pm to 5am the
+next day. Following this, I subscribed to KDE's mailing lists and after
+lurking around for a while, I started asking for feedback on my GSoC idea.
+With surprisingly positive feedback from numerous KDE developers, I realized
+that there might just be a non-zero chance of getting selected.  &lt;/p&gt;
+&lt;p&gt;Things quickly began falling into place and I then moved on to the next step
+of hunting around for bugs I could fix and new features I could implement for
+Dolphin. The bug-fixing was as enjoyable as it was occasionally frustrating.
+Reading over 20000 lines of code certainly took its toll when I had no idea
+when how different parts of the application meshed together. In the end,
+thanks to the guidance of Dolphin maintainer, Emmanuel Pescosta, I managed to
+fix a couple of things for Dolphin and moved on to the next step of making a
+proposal for my GSoC application.  &lt;/p&gt;
+&lt;p&gt;Starting off with making a competent proposal was like launching off ground
+zero as there were very few people who had successfully completed the GSoC
+from our campus and most of these people had graduated well before this time.
+I started digging around for proposals accepted by KDE in previous GSoC's.
+What I couldn't get from all the proposals was some sound advice from seniors.
+In particular, &lt;a href="https://github.com/naveenjafer"&gt;Naveen Jafer bhaiya&lt;/a&gt; (who also
+went on to achieve a GSoC project of his own!) helped me with making my
+proposal as good as possible. In the end, after painstakingly checking every
+word in my proposal for what felt like the fiftieth time I submitted it on 25
+March, only to spend an anxious month waiting for the results which came out
+at 1230am IST on April 23. While it still hasn't sunk in yet (!), I am sure
+that this will make for an awesome summer vacation!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Sat, 23 Apr 2016 12:28:00 +0530</pubDate><guid>tag:arnavdhamija.com,2016-04-23:blog/it-has-happened.html</guid><category>GSoC</category><category>KDE</category></item><item><title>GSoC 2016 Project Survey, help me make Dolphin a better File Manager!</title><link>http://arnavdhamija.com/blog/gsoc-2016-project-survey-help-me-make.html</link><description>&lt;p&gt;Hey everyone!  &lt;/p&gt;
+&lt;p&gt;I am a first year computer science undergraduate from BITS Pilani, Hyderabad
+Campus. I am looking forward to working for KDE for the GSoC.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://developers.google.com/open-source/gsoc/resources/downloads/GSoC2016Logo.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;My project idea is based on solving a problem all file managers have had for
+years - the lack of an easy to use file selection tool. My project aims to
+simplify selecting files from multiple directory trees.  &lt;/p&gt;
+&lt;p&gt;I am running a survey to gauge community feedback on my idea and to finalize
+the user interface and features list.  &lt;/p&gt;
+&lt;p&gt;The link to my idea proposal can be found here: &lt;a href="https://goo.gl/1Nj4SY"&gt;https://goo.gl/1Nj4SY&lt;/a&gt;  &lt;/p&gt;
+&lt;p&gt;And the link to my survey can be found here: &lt;a href="https://goo.gl/forms/5JSZXNganX"&gt;https://goo.gl/forms/5JSZXNganX&lt;/a&gt;  &lt;/p&gt;
+&lt;p&gt;TIA for the feedback : )&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Mon, 15 Feb 2016 21:16:00 +0530</pubDate><guid>tag:arnavdhamija.com,2016-02-15:blog/gsoc-2016-project-survey-help-me-make.html</guid><category>GSoC</category><category>Programming</category><category>KDE</category></item></channel></rss>
