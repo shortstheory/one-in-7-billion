@@ -23,7 +23,7 @@ It took me forever to find this book. I used to be an avid fan of Alex Rider in 
 
 #### Bird by Bird - Anne Lamott
 
-In this book, Anne Lammot speaks about the joys and frustrations in the solitary world of a writer. From the outset, I loved this book. Lammot's writing style is hilarious and is loaded with dry wit and sarcasm. As with The Checklist Manifesto, the book follows on tangents with no central plot to speak of. On my first read of Bird by Bird, I couldn't help feeling that this book would read better as a blog than a novel. Though it of a much higher quality than a typical blog, the rant filled nature of the book would make it slide in perfectly for this format.
+In this book, Anne Lammot speaks about the joys and frustrations in the solitary world of a writer. From the outset, I loved this book. Lammot's writing style is hilarious and is loaded with dry wit and sarcasm. As with The Checklist Manifesto, the book follows on tangents with no central plot to speak of. On my first read of Bird by Bird, I couldn't help feeling that this book would read better as a blog than a novel. Though it of a much higher quality than a typical blog, the rant filled content would slide in perfectly for this format.
 
 Lammot also peppers the book with some *very* quotable passages. One of my favourites is the one about radio station KFKD, or K-Fucked:
 
