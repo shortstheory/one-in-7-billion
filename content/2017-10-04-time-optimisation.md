@@ -1,8 +1,8 @@
 title: Time Optimisation
 date: 2017-04-10 09:30
 author: Arnav Dhamija
-tags: Reading
-category: Article, Misc
+tags: Misc
+category: Article
 slug: time-optimisation
 status: draft
 
