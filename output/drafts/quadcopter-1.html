@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A Singularity, Arnav Dhamija's Weblog">
+
+        <link rel="alternate"  href="http://arnavdhamija.com/feeds/atom.xml" type="application/atom+xml" title="A Singularity Full Atom Feed"/>
+        <link rel="alternate" href="http://arnavdhamija.com/feeds/rss.xml" type="application/rss+xml" title="A Singularity Full RSS Feed"/>
+
+        <title>Time Optimisation // A Singularity // Arnav Dhamija's Weblog</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://arnavdhamija.com/theme/css/pure.css">
+    <link rel="stylesheet" href="http://arnavdhamija.com/theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+</head>
+
+<body>
+    <div class="pure-g-r" id="layout">
+        <div class="sidebar pure-u">
+            <div class="cover-img" style="background-image: url('/images/StarStaX_IMG_9937-IMG_9966_lighten.jpg')">
+                <div class="cover-body">
+                    <header class="header">
+                        <hgroup>
+                            <img class="avatar" src="/images/profile.jpg">
+                            <h1 class="brand-main"><a href="http://arnavdhamija.com">A Singularity</a></h1>
+                            <p class="tagline">Arnav Dhamija's Weblog</p>
+                                <p class="social">
+                                    <a href="https://github.com/shortstheory">
+                                        <i class="fa fa-github fa-3x"></i>
+                                    </a>
+                                    <a href="https://www.youtube.com/user/shortstheory">
+                                        <i class="fa fa-youtube fa-3x"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/arnavdhamija">
+                                        <i class="fa fa-instagram fa-3x"></i>
+                                    </a>
+                                </p>
+                        </hgroup>
+                    </header>
+                </div>
+            </div>
+        </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>Time Optimisation</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="http://arnavdhamija.com/blog/tag/electronics.html">Electronics</a>
+                                <a class="post-category" href="http://arnavdhamija.com/blog/tag/quadcopters.html">Quadcopters</a>
+                        </p>
+                </header>
+            </section>
+            <p>I've been gravitating more towards working on electronics projects. It's a nice change from pecking the keyboard all day and it has plenty of interesting challenges of its own. The biggest difference I found is that you just can't take your hardware working correctly for granted. Things break, crash, smoke, and burn all too easily if you're not careful with what you're doing.</p>
+<p>My plan is to take a quadcopter and give it <em>some</em> ability to navigate unsupervised. This approach is (aptly?) called Simultaneous Localisation and Mapping, or SLAM. SLAM is by no means a cheap affair, be it in terms of hardware or software complexity. Using SLAM outdoors normally requires some kind of 3D localiser (such as a depth camera or LIDAR), GPS, and a fairly beefy computer to map the environment.</p>
+<p>Of course, I'm setting my expectations low, and I will be more than happy if I can get something out of this which is 10% as good as flying a quadcopter by hand.</p>
+<p>It all begins with the hardware and I'm going with this parts list:</p>
+<ul>
+<li>4-axis 450mm Glass Fiber Frame</li>
+<li>1045 Propellors x4</li>
+<li>REES52 CC3D F1 Flight Computer</li>
+<li>REES52 1000KV A2212 30A Brushless Motor x4</li>
+<li>REES52 SimonK 30A Electronic Speed Controllers</li>
+<li>SunRobotics 2200mAh 3S 35C LiPo Battery</li>
+</ul>
+<p>The amount of components embedded in these parts is astounding. Each motor is driven by an ESC, which is essentially a full-fledged 8-bit SoC. The CC3D is an engineering marvel in it's own right - it comes with a 32-bit, 72MHz microcontroller, an MPU6000 for the IMU, and has expansion ports for GPS and Telemetry data. Even the battery is remarkable - it's capable of discharging 850W at peak performance.</p>
+<p>What I'm interested in, however, is controlling the CC3D in real-time using an Arduino. Typically, the CC3D is connected to a radio receiver which is linked to a transmitter remote which is controlled by hand. The reciever is interfaced to the CC3D by outputting a PWM to each of the 6 channels when the transmitter is operated. Each channel is usually dedicated to only one axis of movement. For example, there are dedicated channels for throttle control, yaw, roll, and pitch.</p>
+<p>The idea behind this is that one day, I will have a lightweight computer (anyone willing to donate an NUC?) on the quadcopter doing SLAM in real-time. The computer will send throttle, pitch, yaw, and roll commands to the Arduino. The Arduino in turn will feed the CC3D with control signals to execute the maneouver plan. It all may seem like a Rube Goldberg machine, but it's a lot easier than building my own flight computer to do the same.</p>
+<p>To kick things off, I had to find the PWM frequency the receiver uses for controlling the ESC. To do this, I connected a pin from the output channel of the receiver to an ad-hoc <a href="http://www.instructables.com/id/Arduino-Oscilloscope-poor-mans-Oscilloscope/">Arduino Leonardo oscilloscope</a>. Using the Processing library, we can get a 0-5V reading of the value on the A0 analog input of the Arduino.</p>
+<p><img alt="" src="http://arnavdhamija.com/images/quadcopter/Capture2.PNG" /></p>
+            <a href="#" class="go-top">Go Top</a>
+<footer class="footer">
+    <p>&copy; Arnav Dhamija &ndash;
+        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+    </div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker("UA-91464572-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+    </script>
+
+</body>
+</html>
