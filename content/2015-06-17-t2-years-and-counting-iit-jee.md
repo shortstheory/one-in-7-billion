@@ -148,7 +148,7 @@ turned out to be a better score than I thought it would be as the cutoffs had
 dropped by 10 marks from the previous year and that very few in my batch had
 scored higher. Much later on, it transpired that this JEE Mains score with my
 95+% in CBSE would give me a decent shot at getting CSc at NIT, Surathkal
-campus, Aerospace Engineering at IISt, and hell, even decent choices at IIIT-H
+campus, Aerospace Engineering at IISt, and hell, even decent choices (more so with the NTSE) at IIIT-H
 had it not been for my US citizenship.
 
 With this Mains result in hand, it led
