@@ -84,8 +84,8 @@ Long answer: The UNIX kernel was created in AT&amp;T and Bell labs in the 1970s.
 <p>Yes we can. In all new software and 64-bit operating systems, the <code>time_t</code> variable has been changed to 8-bytes. The problem is that all legacy software compiled with other older compilers may be incompatible for recompiling with a newer compiler for an 8-byte int value. The problem doesn't just stop there. Many embedded systems and microcontrollers (including the popular Arduino ATMega based platform) use 16-bit CPUs which simply cannot support an 8-byte integer in a 2-byte word length. Some hardware applications may use proprietary firmware which won't receive updates.</p>
 <p><strong>How can we fix the Y2038 problem?</strong></p>
 <p>There isn't any one-solution-fits-all approach for this since it affects several computer architectures, hardware, and software. While it might be easier to just upgrade all old computers with new 64-bit capable ones, there are still many areas where old 32-bit code is still prevalent. Furthermore, the cost of upgrading all the computer hardware is just too exorbitant to be covered.</p>
-<p>If we look at the lessons learned from the past, the Y2K bug was rectified because of the media hype pressuring businesses to update their software to accommodate 4-digit years. Although the Y2038 bug is much more critical and harder to understand than the Y2K bug, there is hope that the same pressure will bring change.
-But for now, only time will tell.</p>
+<p>If we look at the lessons learned from the past, the Y2K bug was rectified because of the media hype pressuring businesses to update their software to accommodate 4-digit years. Although the Y2038 bug is much more critical and harder to understand than the Y2K bug, there is hope that the same pressure will bring change.</p>
+<p>But for now, only time will tell.</p>
 <p><img alt="" src="https://imgs.xkcd.com/comics/2038.png" /></p>
 <p><em>Credits: <a href="https://xkcd.com/">xkcd</a></em></p>
             <a href="#" class="go-top">Go Top</a>
