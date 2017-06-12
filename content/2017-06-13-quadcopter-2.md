@@ -28,3 +28,5 @@ Anyway, the motors can be screwed directly into the booms of the quadcopter. The
 After this, mount the ESCs on to the booms with rubber bands, or better, zip-ties. The ESCs regulate the amount of power going to the motor and can get very hot as well. Mounting the ESCs under the booms will give it sufficient airflow to cool properly. You want to make sure that the three wires with female bullet connectors is facing the male bullet connectors of the motor. The other side with the male connector and the BEC goes to the power distribution board of the quadcopter.
 
 As with all electronics with large capactiors, ESCs can have spectacular explosions when things go wrong. Short circuits or using the wrong polarity on the power input side of the ESC can cause it to get damaged in the matter of seconds.
+
+On the other hand, things are a lot more flexible on the power output side of the ESC. *Apparently*, it is possible to connect the three output connectors in any order to the motor, but a good rule of thumb is to connect the middle wire of the ESC to the ground wire of the motor and to interchange the other two wires to reverse the chirality.
