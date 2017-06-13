@@ -89,7 +89,7 @@ Now for the good stuff, go ahead and mount the CC3D on the top frame of the quad
 
 After [binding](http://helihelp.rabbitsvc.com/BindingTheTransmitter.aspx) the transmitter to the receiver, plug it into the receiver port of the CC3D. If you use the FlySky CT6B transmitter/receiver, the receiver probably won't work when directly connected to the CC3D on USB power. If so, you can use an Arduino's 5V and GND to power the receiver for testing it. When flying the quadcopter on Li-Po power, the CC3D will be powered by the ESC BECs which will give it enough headroom to power the receiver.
 
-The receiver can be mounted pretty much anywhere as it is quite small. I mounted the receiver on my quadcopter on the boom.
+The receiver can be mounted pretty much anywhere as it is quite small. I mounted the receiver on my quadcopter's boom.
 
 The final step is to add the Li-Po battery to the frame. Some prefer to mount the battery to the base of the quadcopter, but I found mounting the battery right under the top frame (under the CC3D) from E-W was much better for the quadcopter's stability. My guess is that this keeps the vertical CoG of the copter closer to the level of application of force, reducing the torque when copter makes a maneuver.
 
