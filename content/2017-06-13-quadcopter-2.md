@@ -99,7 +99,7 @@ In case the motor spins the wrong way, just swap the red and yellow wires of the
 
 #### Cable Management
 
-This isn't really cable management, but I couldn't think of a better title for this section.
+This isn't really cable management, but I couldn't think of a better title for this section 😅
 
 Connect the ESCs' BECs to the CC3D. The order will have to be changed later when setting up the CC3D so don't worry about that for now. I looped the cables through the holes in the top of the frame so they weren't hanging off the side of the copter. The white wire should face upwards.
 
