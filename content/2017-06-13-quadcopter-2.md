@@ -41,15 +41,15 @@ Most of these parts can be picked straight off Amazon. REES52 has a good [bundle
 
 The first thing you would want to do is start off with the frame of the quadcopter. If you go for a DJI F450 frame (or one of its hundred clones), you will get a box with four arms (technically called booms) for mounting the motors and ESCs, a base which doubles as a power distribution board, and a board to hold the top of the copter together. It's pretty simple to set up and all you need is two Allen keys to screw everything together.
 
-I suggest labelling each boom with a number and the direction in which its motor is supposed to spin. The below diagram is a good starting point:
+I suggest labeling each boom with a number and the direction in which its motor is supposed to spin. The below diagram is a good starting point:
 
 ![]({filename}/images/quadcopter/lpconfig.png)
 
-Speaking about labelling, label *everything*. It only takes a few seconds and it can save many hours of frustration later on. Of note, is the handedness (is there a better term?) of the propeller. Left-handed propellers turn anticlockwise and right-handed propellers turn clockwise. Mounting a propeller the wrong way will cause the thrust it to produce thrust in the opposite direction.
+Speaking about labeling, label *everything*. It only takes a few seconds and it can save many hours of frustration later on. Of note, is the handedness (is there a better term?) of the propeller. Left-handed propellers turn anticlockwise and right-handed propellers turn clockwise. Mounting a propeller the wrong way will cause the thrust it to produce thrust in the opposite direction.
 
 ### Motors
 
-Once you've setup the frame, the next thing you should do is take a look at the motors. These motors are [brushless](https://en.wikipedia.org/wiki/Brushless_DC_electric_motor) [motors](http://electronics.howstuffworks.com/brushless-motor.htm) and they are very different from brushed motors. For starters they have three wires instead of the two on brushed motors. Another pecularity about these motors is that they are outrunner motors. This means that the case of the motor rotates with the propeller and not the motor shaft alone.
+Once you've setup the frame, the next thing you should do is take a look at the motors. These motors are [brushless](https://en.wikipedia.org/wiki/Brushless_DC_electric_motor) [motors](http://electronics.howstuffworks.com/brushless-motor.htm) and they are very different from brushed motors. For starters they have three wires instead of the two on brushed motors. Another peculiarity about these motors is that they are out-runner motors. This means that the case of the motor rotates with the propeller and not the motor shaft alone.
 
 ![]({filename}/images/quadcopter/brushless.jpg)
 
@@ -65,7 +65,7 @@ Mount the ESCs on to the booms with rubber bands, or better, zip-ties.
 
 The ESCs regulate the amount of power going to the motor depending on throttle input and can get very hot as well. Mounting the ESCs under the booms will give it sufficient airflow to cool down properly. You want to make sure that the three wires with female bullet connectors is facing the male bullet connectors of the motor. The other side with the male connector and the BEC goes to the power distribution board of the quadcopter.
 
-As with all electronics with large capactiors, ESCs can have spectacular explosions when things go wrong. Short circuits or using the wrong polarity on the power input side of the ESC can cause it to get damaged in the matter of seconds.
+As with all electronics with large capacitors, ESCs can have spectacular explosions when things go wrong. Short circuits or using the wrong polarity on the power input side of the ESC can cause it to get damaged in the matter of seconds.
 
 On the other hand, things are a lot more flexible on the power output side of the ESC. It is possible to connect the three output connectors in any order to the motor, but a good rule of thumb is to connect the middle wire of the ESC to the ground wire of the motor and to interchange the other two wires to reverse the direction of rotation.
 
@@ -91,15 +91,15 @@ After [binding](http://helihelp.rabbitsvc.com/BindingTheTransmitter.aspx) the tr
 
 The receiver can be mounted pretty much anywhere as it is quite small. I mounted the receiver on my quadcopter on the boom.
 
-The final step is to add the Li-Po battery to the frame. Some prefer to mount the battery to the base of the quadcopter, but I found mounting the battery right under the top frame (under the CC3D) from E-W was much better for the quadcopter's stability. My guess is that this keeps the vertical CoG of the copter closer to the level of application of force, reducing the torque when copter makes a maneouver.
+The final step is to add the Li-Po battery to the frame. Some prefer to mount the battery to the base of the quadcopter, but I found mounting the battery right under the top frame (under the CC3D) from E-W was much better for the quadcopter's stability. My guess is that this keeps the vertical CoG of the copter closer to the level of application of force, reducing the torque when copter makes a maneuver.
 
-Again, the place where you mount your battery is dependant on the size of the battery. Secure the battery with as many zip-ties as you want. There's no such thing as using too many zip-ties to secure components on quadcopters.
+Again, the place where you mount your battery is dependent on the size of the battery. Secure the battery with as many zip-ties as you want. There's no such thing as using too many zip-ties to secure components on quadcopters.
 
 ### Putting It Together
 
-#### ESC Callibration
+#### ESC Calibration
 
-Before you start configuring your CC3D, it's a good idea to make sure your sure your ESC and motors are working properly. For this, connect the ESC **directly** to the battery and the ESC's BEC straight into the 3<sup>rd</sup> channel of your receiver. Keep the transmitter switched on with zero throttle input. On connecting the battery, you will hear a callibration beep from the motor. Put the throttle to max power and hold till you hear another callibration beep. After bringing the throttle back to zero input, you should now be able to drive the motor by varying the throttle input.
+Before you start configuring your CC3D, it's a good idea to make sure your sure your ESC and motors are working properly. For this, connect the ESC **directly** to the battery and the ESC's BEC straight into the 3<sup>rd</sup> channel of your receiver. Keep the transmitter switched on with zero throttle input. On connecting the battery, you will hear a calibration beep from the motor. Put the throttle to max power and hold till you hear another calibration beep. After bringing the throttle back to zero input, you should now be able to drive the motor by varying the throttle input.
 
 In case the motor spins the wrong way, just swap the red and yellow wires of the motor.
 
@@ -115,7 +115,7 @@ The male connectors for the ESC can go right into the power distribution board.
 
 ## Software Configuration
 
-The CC3D is a nifty microcontroller. It can be flashed with different flight computer firmwares and can be extended with GPS and Telemetry capabilities. For now, we will work on a much more humble task - flashing it with a FC firmware.
+The CC3D is a nifty micro-controller. It can be flashed with different flight computer firmwares and can be extended with GPS and Telemetry capabilities. For now, we will work on a much more humble task - flashing it with a FC firmware.
 
 As the CC3D has been around for a while, it has a good amount of community support in terms of open-source FC firmwares. Two popular ones are [Cleanflight](http://cleanflight.com/) and [LibrePilot](http://librepilot.atlassian.net/) built out of the ashes of the now defunct OpenPilot.
 
