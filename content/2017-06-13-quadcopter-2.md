@@ -1,4 +1,4 @@
-title: Quadcopters - Some DIY
+title: Quadcopters - A Noob's Guide to Construction
 date: 2017-06-13 09:30
 author: Arnav Dhamija
 tags: Electronics, Quadcopters
@@ -25,10 +25,11 @@ For clarity, the components I have used in my build are:
 * REES52 CC3D F1 Flight Computer
 * REES52 1000KV A2212 30A Brushless Motor x4
 * REES52 SimonK 30A Electronic Speed Controllers x4
+* APM 4-axis Power Distribution Board Type-B1
 * SunRobotics 2200mAh 3S 35C LiPo Battery
 * FlySky FSCT6B Computer Transmitter
 
-Most of these parts can be picked straight off Amazon. REES52 has a good bundle for a pair of propellers, 1000 KV motor, and ESC which I would recommend buying to keep costs low.
+Most of these parts can be picked straight off Amazon. REES52 has a good [bundle](http://www.amazon.in/REES52-A2212-1000KV-Brushless-Propeller/dp/B01BJWLI6C/ref=sr_1_3?ie=UTF8&qid=1495506091&sr=8-3&keywords=1000kv+motor) for a pair of propellers, 1000 KV motor, and ESC which I would recommend buying to keep costs low.
 
 ### Frame
 
@@ -36,11 +37,11 @@ The first thing you would want to do is start off with the frame of the quadcopt
 
 ### Motors
 
-Once you've setup the frame, the next thing you should do is take a look at the motors. These motors are [brushless](https://en.wikipedia.org/wiki/Brushless_DC_electric_motor) [motors](http://electronics.howstuffworks.com/brushless-motor.htm) and they are very different from brush motors. For starters they have three leads. Another pecularity about these motors are that they are outrunner motors. This means that the case of the motor rotates with the propeller and not the motor shaft alone.
+Once you've setup the frame, the next thing you should do is take a look at the motors. These motors are [brushless](https://en.wikipedia.org/wiki/Brushless_DC_electric_motor) [motors](http://electronics.howstuffworks.com/brushless-motor.htm) and they are very different from brush motors. For starters they have three leads instead of the two on brush motors. Another pecularity about these motors is that they are outrunner motors. This means that the case of the motor rotates with the propeller and not the motor shaft alone.
 
 <insert motor image>
 
-These motors can generate a great deal of heat when running at full power. I would *not* recommend testing it at full power on the ground as there won't be any airflow to cool the motor down. This can permenantly damage your motor, and if you're unlucky, your ESC as well.
+Despite being a lot more power efficient than brush motors, these motors can generate a great deal of heat when running at full power. I would *not* recommend testing it at full power on the ground as there won't be any airflow to cool the motor down. This can permenantly damage your motor, and if you're unlucky, your ESC as well.
 
 Anyway, the motors can be screwed directly into the booms of the quadcopter. The direction of rotation is determined by the ESC, so we don't need to worry about that at the moment.
 
@@ -56,11 +57,11 @@ On the other hand, things are a lot more flexible on the power output side of th
 
 ### Power Distribution board
 
-The frame of your quadcopter probably will have a power distribution board of its own with solder points. However, I used a separate power distribution board with T-type connectors for the ESCs and the battery.
+The frame of your quadcopter probably will have a power distribution board of its own with solder points. However, I used a separate [power distribution board](http://www.amazon.in/APM-PX4-Power-Distribution-Board/dp/B010NK8V70/ref=sr_1_2?ie=UTF8&qid=1496164735&sr=8-2&keywords=power+distribution+board) with the B1-type connectors for the ESCs and the battery.
 
 This went right under the base of the quadcopter. It's a bit of tight fit to get all the ESC connecting wires under the base. Again, use zip-ties to secure it to the base.
 
-The ground clearance is quite low with the power distribution board attached. You can use a landing gear to increase this.
+The ground clearance is quite low with the power distribution board attached. You can buy a landing or make your own to increase this.
 
 ### Flight Computer and Battery
 
@@ -74,4 +75,18 @@ The final step is to add the Li-Po battery to the frame. Some prefer to mount th
 
 Again, the place where you mount your battery is dependant on the size of the battery. Secure the battery with as many zip-ties as you want. There's no such thing as using too many zip-ties to secure components on quadcopters.
 
+### Wiring
+
+#### ESC Callibration
+
+Before you start configuring your CC3D, it's a good idea to make sure your sure your ESC and motors are working properly. For this, connect the ESC **directly** to the battery and the ESC's BEC straight into the 3<sup>rd</sup> channel of your receiver. Keep the transmitter switched on with zero throttle input. On connecting the battery, you will hear a callibration beep from the motor. 
+
 ## Software Configuration
+
+The CC3D is a nifty microcontroller. It can be flashed with different flight computer firmwares and can be extended with GPS and Telemetry capabilities. For now, we will work on a much more humble task - flashing it with a FC firmware.
+
+As the CC3D has been around for a while, it has a good amount of community support in terms of open-source FC firmwares. Two popular ones are [Cleanflight](http://cleanflight.com/) and [LibrePilot](http://librepilot.atlassian.net/) built out of the ashes of the now defunct OpenPilot.
+
+Both firmwares come with cross-platform desktop apps for configuring the FC. Cleanflight uses a shiny Chrome web-app and LibrePilot has a traditional Qt desktop app. I liked Cleanflight at first, but [flashing it on the CC3D](http://dronehitech.com/en/flash-cleanflight-cc3d-arduino/) is a mess and I couldn't get it to work properly. On the other hand, LibrePilot is a joy to flash on the CC3D. The desktop app even auto-updates the CC3D's firmware if it is out of date. Therefore, being unable to flash Cleanflight, I setup the quadcopter in LibrePilot instead.
+
+LibrePilot has a pretty easy 'Vehicle Setup Wizard' which if followed correctly, will get your quadcopter to airworthy shape 95% of the time.
