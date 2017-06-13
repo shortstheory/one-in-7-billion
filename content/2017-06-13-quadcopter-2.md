@@ -99,7 +99,7 @@ Again, the place where you mount your battery is dependent on the size of the ba
 
 #### ESC Calibration
 
-Before you start configuring your CC3D, it's a good idea to make sure your sure your ESC and motors are working properly. For this, connect the ESC **directly** to the battery and the ESC's BEC straight into the 3<sup>rd</sup> channel of your receiver. Keep the transmitter switched on with zero throttle input. On connecting the battery, you will hear a calibration beep from the motor. Put the throttle to max power and hold till you hear another calibration beep. After bringing the throttle back to zero input, you should now be able to drive the motor by varying the throttle input.
+Before you start configuring your CC3D, it's a good idea to make sure your sure your ESC and motors are working properly. For this, connect the ESC **directly** to the battery and the ESC's BEC straight into the 3<sup>rd</sup> channel (the throttle channel    ) of your receiver. Keep the transmitter switched on with zero throttle input. On connecting the battery, you will hear a calibration beep from the motor. Put the throttle to max power and hold till you hear another calibration beep. After bringing the throttle back to zero input, you should now be able to drive the motor by varying the throttle input.
 
 In case the motor spins the wrong way, just swap the red and yellow wires of the motor.
 
@@ -117,7 +117,7 @@ The male connectors for the ESC can go right into the power distribution board.
 
 The CC3D is a nifty micro-controller. It can be flashed with different flight computer firmwares and can be extended with GPS and Telemetry capabilities. For now, we will work on a much more humble task - flashing it with a FC firmware.
 
-As the CC3D has been around for a while, it has a good amount of community support in terms of open-source FC firmwares. Two popular ones are [Cleanflight](http://cleanflight.com/) and [LibrePilot](http://librepilot.atlassian.net/) built out of the ashes of the now defunct OpenPilot.
+As the CC3D has been around for a while, it has a good amount of community support in terms of open-source FC firmwares. Two popular ones are [Cleanflight](http://cleanflight.com/) and [LibrePilot](http://librepilot.atlassian.net/), built out of the ashes of the now defunct OpenPilot.
 
 The firmware gives the CC3D brains to control copter and make decisions on the accelerometer and gyroscope readings. It has a sophisticated PID algorithm to do so.
 
