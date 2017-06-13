@@ -4,6 +4,7 @@ author: Arnav Dhamija
 tags: Electronics, Quadcopters
 category: Article
 slug: quadcopter-1
+sidebarimage: ../images/qcside.jpg
 
 I've been gravitating more towards working on electronics projects. It's a nice change from pecking the keyboard all day and it has plenty of interesting challenges of its own. The biggest difference I found is that you just can't take your hardware working correctly for granted. Things break and catch fire all too easily if you're not careful with what you're doing.
 
@@ -13,8 +14,8 @@ Of course, I'm setting my expectations low, and I will be very happy if I can ge
 
 It all begins with the hardware and I'm going with this parts list:
 
-* REES52 DJI F450 Frame
 * 1045 Propellers x4
+* REES52 DJI F450 Frame
 * REES52 CC3D F1 Flight Computer
 * REES52 1000KV A2212 30A Brushless Motor x4
 * REES52 SimonK 30A Electronic Speed Controllers
