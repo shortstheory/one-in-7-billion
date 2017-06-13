@@ -8,13 +8,17 @@ status: draft
 
 We have liftoff!
 
+![]({filename}/images/quadcopter/liftoff.jpg)
+*Cue trying to not get my fingers cut off when holding the quadcopter*
+
 The quadcopter has been built! I had some problems during the building process, so this is a guide which will hopefully make things easier for people to start off with making their own quadcopters.
 
-I suggest going through all these websites before purchasing a single part for your quadcopter. It's not an extensive list, so I'll keep updating it as I find more useful links:
+I suggest going through all these websites thoroughly before purchasing a single part for your quadcopter. It's not an extensive list, so I'll keep updating it as I find more useful links:
 
 * [OscarLiang](http://oscarliang.com/)
 * [Propwashed](www.propwashed.com/)
-
+* [WowElec](https://wowelec.wordpress.com/)
+* [DroneTrest](https://www.dronetrest.com/)
 
 ## Hardware Assembly
 
@@ -35,13 +39,19 @@ Most of these parts can be picked straight off Amazon. REES52 has a good [bundle
 
 The first thing you would want to do is start off with the frame of the quadcopter. If you go for a DJI F450 frame (or one of its hundred clones), you will get a box with four arms (technically called booms) for mounting the motors and ESCs, a base which doubles as a power distribution board, and a board to hold the top of the copter together. It's pretty simple to set up and all you need is two Allen keys to screw everything together.
 
+I suggest labelling each boom with a number and the direction in which its motor is supposed to spin. The below diagram is a good starting point:
+
+![]({filename}/images/quadcopter/lpconfig.png)
+
+Speaking about labelling, label *everything*. It only takes a few seconds and it can save many hours of frustration later on. Of note, is the handedness (is there a better term?) of the propeller. Left-handed propellers turn anticlockwise and right-handed propellers turn clockwise. Mounting a propeller the wrong way will cause the thrust it to produce thrust in the opposite direction.
+
 ### Motors
 
-Once you've setup the frame, the next thing you should do is take a look at the motors. These motors are [brushless](https://en.wikipedia.org/wiki/Brushless_DC_electric_motor) [motors](http://electronics.howstuffworks.com/brushless-motor.htm) and they are very different from brush motors. For starters they have three leads instead of the two on brush motors. Another pecularity about these motors is that they are outrunner motors. This means that the case of the motor rotates with the propeller and not the motor shaft alone.
+Once you've setup the frame, the next thing you should do is take a look at the motors. These motors are [brushless](https://en.wikipedia.org/wiki/Brushless_DC_electric_motor) [motors](http://electronics.howstuffworks.com/brushless-motor.htm) and they are very different from brushed motors. For starters they have three wires instead of the two on brushed motors. Another pecularity about these motors is that they are outrunner motors. This means that the case of the motor rotates with the propeller and not the motor shaft alone.
 
-<insert motor image>
+![]({filename}/images/quadcopter/brushless.jpg)
 
-Despite being a lot more power efficient than brush motors, these motors can generate a great deal of heat when running at full power. I would *not* recommend testing it at full power on the ground as there won't be any airflow to cool the motor down. This can permenantly damage your motor, and if you're unlucky, your ESC as well.
+Despite being a lot more power efficient than brushed motors, these motors can generate a great deal of heat when running at full power. I would *not* recommend testing it at full power on the ground as there won't be any airflow to cool the motor down. This can permenantly damage your motor, and if you're unlucky, your ESC as well.
 
 Anyway, the motors can be screwed directly into the booms of the quadcopter. The direction of rotation is determined by the ESC, so we don't need to worry about that at the moment.
 
@@ -53,7 +63,7 @@ As with all electronics with large capactiors, ESCs can have spectacular explosi
 
 On the other hand, things are a lot more flexible on the power output side of the ESC. *Apparently*, it is possible to connect the three output connectors in any order to the motor, but a good rule of thumb is to connect the middle wire of the ESC to the ground wire of the motor and to interchange the other two wires to reverse the direction of rotation.
 
-<insert ESC image>
+![]({filename}/images/quadcopter/escmount.jpg)
 
 ### Power Distribution board
 
@@ -61,7 +71,11 @@ The frame of your quadcopter probably will have a power distribution board of it
 
 This went right under the base of the quadcopter. It's a bit of tight fit to get all the ESC connecting wires under the base. Again, use zip-ties to secure it to the base.
 
-The ground clearance is quite low with the power distribution board attached. You can buy a landing or make your own to increase this.
+The ground clearance is quite low with the power distribution board attached. You can buy a landing gear or make your own to increase this.
+
+I made a DIY landing gear for my own quadcopter using a badminton shuttlecock tube. It absorbs shocks nicely and gives me just enough ground clearance to mount more components.
+
+![]({filename}/images/quadcopter/landingear.jpeg)
 
 ### Flight Computer and Battery
 
@@ -75,11 +89,23 @@ The final step is to add the Li-Po battery to the frame. Some prefer to mount th
 
 Again, the place where you mount your battery is dependant on the size of the battery. Secure the battery with as many zip-ties as you want. There's no such thing as using too many zip-ties to secure components on quadcopters.
 
-### Wiring
+### Putting It Together
 
 #### ESC Callibration
 
-Before you start configuring your CC3D, it's a good idea to make sure your sure your ESC and motors are working properly. For this, connect the ESC **directly** to the battery and the ESC's BEC straight into the 3<sup>rd</sup> channel of your receiver. Keep the transmitter switched on with zero throttle input. On connecting the battery, you will hear a callibration beep from the motor. 
+Before you start configuring your CC3D, it's a good idea to make sure your sure your ESC and motors are working properly. For this, connect the ESC **directly** to the battery and the ESC's BEC straight into the 3<sup>rd</sup> channel of your receiver. Keep the transmitter switched on with zero throttle input. On connecting the battery, you will hear a callibration beep from the motor. Put the throttle to max power and hold till you hear another callibration beep. After bringing the throttle back to zero input, you should now be able to drive the motor by varying the throttle input.
+
+In case the motor spins the wrong way, just swap the red and yellow wires of the motor.
+
+#### Cable Management
+
+This isn't really cable management, but I couldn't think of a better title for this section.
+
+Connect the ESCs' BECs to the CC3D. The order will have to be changed later when setting up the CC3D so don't worry about that for now. I looped the cables through the holes in the top of the frame so they weren't hanging off the side of the copter. The white wire should face upwards.
+
+The receiver is quite straightforward to setup. The first cable has three leads, one for signal and two for power. The rest of the cables have only one signal lead. Just connect this in the order to which it is connected on the the receiver port side of the leads.
+
+The male connectors for the ESC can go right into the power distribution board.
 
 ## Software Configuration
 
@@ -87,6 +113,14 @@ The CC3D is a nifty microcontroller. It can be flashed with different flight com
 
 As the CC3D has been around for a while, it has a good amount of community support in terms of open-source FC firmwares. Two popular ones are [Cleanflight](http://cleanflight.com/) and [LibrePilot](http://librepilot.atlassian.net/) built out of the ashes of the now defunct OpenPilot.
 
+The firmware gives the CC3D brains to control copter and make decisions on the accelerometer and gyroscope readings. It has a sophisticated PID algorithm to do so.
+
 Both firmwares come with cross-platform desktop apps for configuring the FC. Cleanflight uses a shiny Chrome web-app and LibrePilot has a traditional Qt desktop app. I liked Cleanflight at first, but [flashing it on the CC3D](http://dronehitech.com/en/flash-cleanflight-cc3d-arduino/) is a mess and I couldn't get it to work properly. On the other hand, LibrePilot is a joy to flash on the CC3D. The desktop app even auto-updates the CC3D's firmware if it is out of date. Therefore, being unable to flash Cleanflight, I setup the quadcopter in LibrePilot instead.
 
 LibrePilot has a pretty easy 'Vehicle Setup Wizard' which if followed correctly, will get your quadcopter to airworthy shape 95% of the time.
+
+## Fly!
+
+Or at least try to if you're a beginner :P If you're using LibrePilot, the default setting has stability assist which makes flying easier. For the more experienced (or gung ho) type of pilot, you can change the settings to use Rate/Acro mode to get full manual control of the aircraft.
+
+And that's it for this tutorial. I'll be writing more as I get more experienced with flying my quadcopters.
