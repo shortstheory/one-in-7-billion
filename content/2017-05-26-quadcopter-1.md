@@ -13,7 +13,7 @@ Of course, I'm setting my expectations low, and I will be very happy if I can ge
 
 It all begins with the hardware and I'm going with this parts list:
 
-* DJI F450 Frame
+* REES52 DJI F450 Frame
 * 1045 Propellers x4
 * REES52 CC3D F1 Flight Computer
 * REES52 1000KV A2212 30A Brushless Motor x4
