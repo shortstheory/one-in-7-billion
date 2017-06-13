@@ -59,7 +59,7 @@ Anyway, the motors can be screwed directly into the booms of the quadcopter. The
 
 ### ESCs
 
-The ESCs link the flight computer with the motors. The input to the ESC is PWM fed over the BEC connector. Each ESC have its own 8-bit SoC to send signals to the brushless motor to turn at the desired RPM.
+The ESCs link the flight computer with the motors. The input to the ESC is PWM fed over the BEC connector. Each ESC have its own 8-bit SoC to send signals to the brushless motor to turn at the desired RPM. In the FC settings, you can adjust the ESC update frequency, which is usually between 50Hz and 490Hz.
 
 Mount the ESCs on to the booms with rubber bands, or better, zip-ties.
 
