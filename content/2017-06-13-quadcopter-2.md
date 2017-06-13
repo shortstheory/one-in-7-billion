@@ -18,7 +18,7 @@ The quadcopter has been built! I had some problems during the building process, 
 I suggest going through all these websites thoroughly before purchasing a single part for your quadcopter. It's not an extensive list, so I'll keep updating it as I find more useful links:
 
 * [OscarLiang](http://oscarliang.com/)
-* [Propwashed](www.propwashed.com/)
+* [Propwashed](http://www.propwashed.com/)
 * [WowElec](https://wowelec.wordpress.com/)
 * [DroneTrest](https://www.dronetrest.com/)
 
