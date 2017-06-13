@@ -129,6 +129,6 @@ LibrePilot has a pretty easy 'Vehicle Setup Wizard' which if followed correctly,
 
 Or at least try to if you're a beginner :P If you're using LibrePilot, the default setting has stability assist which makes flying easier. For the more experienced (or gung ho) type of pilot, you can change the settings to use Rate/Acro mode to get full manual control of the aircraft.
 
-Another thing worth looking at is tuning the [PID values](https://oscarliang.com/understanding-pid-for-quadcopter-rc-flight/) of the FC for better performance. However, LibrePilot's default values are good enough so this isn't necessary. 
+Another thing worth looking at is tuning the [PID values](https://oscarliang.com/understanding-pid-for-quadcopter-rc-flight/) of the FC for better performance. However, LibrePilot's default values are good enough so this isn't necessary.
 
-And that's it for this tutorial. I'll be writing more as I get more experienced with flying my quadcopters.
+And that's it for this tutorial. I'll be writing more as I get more experienced with flying my quadcopter.
