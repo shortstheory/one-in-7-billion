@@ -71,7 +71,7 @@ On the other hand, things are a lot more flexible on the power output side of th
 
 ![]({filename}/images/quadcopter/escmount.jpg)
 
-### Power Distribution board
+### Power Distribution Board
 
 The frame of your quadcopter probably will have a power distribution board of its own with solder points. However, I used a separate [power distribution board](http://www.amazon.in/APM-PX4-Power-Distribution-Board/dp/B010NK8V70/ref=sr_1_2?ie=UTF8&qid=1496164735&sr=8-2&keywords=power+distribution+board) with the B1-type connectors for the ESCs and the battery.
 
