@@ -8,6 +8,7 @@ slug: quadcopter-2
 We have liftoff!
 
 ![]({filename}/images/quadcopter/liftoff.jpg)
+
 *Cue trying to not get my fingers cut off when holding the quadcopter*
 
 The quadcopter has been built! I had some problems during the building process, so this is a guide which will hopefully make things easier for people to start off with making their own quadcopters.
