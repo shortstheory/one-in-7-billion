@@ -61,11 +61,12 @@ Anyway, the motors can be screwed directly into the booms of the quadcopter. The
 
 The ESCs link the flight computer with the motors. The input to the ESC is PWM fed over the BEC connector. Each ESC have its own 8-bit SoC to send signals to the brushless motor to turn at the desired RPM. In the FC settings, you can adjust the ESC update frequency, which is usually between 50Hz and 490Hz.
 
-Mount the ESCs on to the booms with rubber bands, or better, zip-ties.
 
 The ESCs regulate the amount of power going to the motor depending on throttle input and can get very hot as well. Mounting the ESCs under the booms will give it sufficient airflow to cool down properly. You want to make sure that the three wires with female bullet connectors is facing the male bullet connectors of the motor. The other side with the male connector and the BEC goes to the power distribution board of the quadcopter.
 
-As with all electronics with large capacitors, ESCs can have spectacular explosions when things go wrong. Short circuits or using the wrong polarity on the power input side of the ESC can cause it to get damaged in the matter of seconds.
+Mount the ESCs on to the booms with rubber bands, or better, zip-ties.
+
+As with all electronics with large capacitors, ESCs can have spectacular explosions when things go wrong. Short circuits or using the wrong polarity on the power input side of the ESC can cause it to get damaged in a matter of seconds.
 
 On the other hand, things are a lot more flexible on the power output side of the ESC. It is possible to connect the three output connectors in any order to the motor, but a good rule of thumb is to connect the middle wire of the ESC to the ground wire of the motor and to interchange the other two wires to reverse the direction of rotation.
 
@@ -91,7 +92,7 @@ After [binding](http://helihelp.rabbitsvc.com/BindingTheTransmitter.aspx) the tr
 
 The receiver can be mounted pretty much anywhere as it is quite small. I mounted the receiver on my quadcopter's boom.
 
-The final step is to add the Li-Po battery to the frame. Some prefer to mount the battery to the base of the quadcopter, but I found mounting the battery right under the top frame (under the CC3D) from E-W was much better for the quadcopter's stability. My guess is that this keeps the vertical CoG of the copter closer to the level of application of force, reducing the torque when copter makes a maneuver.
+The final step is to add the Li-Po battery to the frame. Some prefer to mount the battery to the base of the quadcopter, but I found mounting the battery right under the top frame (under the CC3D) from E-W was much better for the quadcopter's stability. My guess is that this keeps the vertical CoG of the copter closer to the line of application of force, reducing the torque when copter makes a maneuver.
 
 Again, the place where you mount your battery is dependent on the size of the battery. Secure the battery with as many zip-ties as you want. There's no such thing as using too many zip-ties to secure components on quadcopters.
 
@@ -119,11 +120,11 @@ The CC3D is a nifty micro-controller. It can be flashed with different flight co
 
 As the CC3D has been around for a while, it has a good amount of community support in terms of open-source FC firmwares. Two popular ones are [Cleanflight](http://cleanflight.com/) and [LibrePilot](http://librepilot.atlassian.net/), built out of the ashes of the now defunct OpenPilot.
 
-The firmware gives the CC3D brains to control copter and make decisions on the accelerometer and gyroscope readings. It has a sophisticated PID algorithm to do so.
+The firmware gives the CC3D brains to control the aircraft and make decisions on the accelerometer and gyroscope readings. It has a sophisticated PID algorithm to do so.
 
-Both firmwares come with cross-platform desktop apps for configuring the FC. Cleanflight uses a shiny Chrome web-app and LibrePilot has a traditional Qt desktop app. I liked Cleanflight at first, but [flashing it on the CC3D](http://dronehitech.com/en/flash-cleanflight-cc3d-arduino/) is a mess and I couldn't get it to work properly. On the other hand, LibrePilot is a joy to flash on the CC3D. The desktop app even auto-updates the CC3D's firmware if it is out of date. Therefore, being unable to flash Cleanflight, I setup the quadcopter in LibrePilot instead.
+Both firmwares come with cross-platform desktop apps for configuring the FC. Cleanflight uses a shiny Chrome web-app and LibrePilot has a more traditional Qt desktop app. I liked Cleanflight at first, but [flashing it on the CC3D](http://dronehitech.com/en/flash-cleanflight-cc3d-arduino/) is a mess and I couldn't get it to work properly. On the other hand, LibrePilot is a joy to flash on the CC3D. The desktop app even auto-updates the CC3D's firmware if it is out of date. Therefore, being unable to flash Cleanflight, I setup the quadcopter in LibrePilot instead.
 
-LibrePilot has a pretty easy 'Vehicle Setup Wizard' which if followed correctly, will get your quadcopter to airworthy shape 95% of the time.
+LibrePilot has a pretty easy 'Vehicle Setup Wizard' which, if followed correctly, will get your quadcopter to airworthy shape 95% of the time.
 
 ## Fly!
 
