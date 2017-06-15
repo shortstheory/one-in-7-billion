@@ -25,6 +25,7 @@ TAG_FEED_ATOM = "feeds/tag_%s.atom.xml"
 TAG_FEED_RSS = "feeds/tag_%s.rss.xml"
 
 GOOGLE_ANALYTICS = "UA-91464572-1"
+DISQUS_SITENAME = "arnavdhamija"
 GITHUB_URL = "https://github.com/shortstheory"
 
 PATH = 'content'
