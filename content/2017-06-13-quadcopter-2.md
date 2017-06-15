@@ -92,7 +92,7 @@ After [binding](http://helihelp.rabbitsvc.com/BindingTheTransmitter.aspx) the tr
 
 The receiver can be mounted pretty much anywhere as it is quite small. I mounted the receiver on my quadcopter's boom.
 
-The final step is to add the Li-Po battery to the frame. Some prefer to mount the battery to the base of the quadcopter, but I found mounting the battery right under the top frame (under the CC3D) from E-W was much better for the quadcopter's stability. My guess is that this keeps the vertical CoG of the copter closer to the line of application of force, reducing the torque when copter makes a maneuver.
+The final step is to add the Li-Po battery to the frame. Some prefer to mount the battery to the base of the quadcopter, but I found mounting the battery right under the top frame (under the CC3D) from E-W was much better for the quadcopter's stability. My guess is that this keeps the vertical CoG of the aircraft closer to the line of application of force, reducing the torque when it makes a maneuver.
 
 Again, the place where you mount your battery is dependent on the size of the battery. Secure the battery with as many zip-ties as you want. There's no such thing as using too many zip-ties to secure components on quadcopters.
 
@@ -108,9 +108,9 @@ In case the motor spins the wrong way, just swap the red and yellow wires of the
 
 This isn't really cable management, but I couldn't think of a better title for this section 😅
 
-Connect the ESCs' BECs to the CC3D. The order will have to be changed later when setting up the CC3D so don't worry about that for now. I looped the cables through the holes in the top of the frame so they weren't hanging off the side of the copter. The white wire should face upwards.
+Connect the ESCs' BECs to the CC3D. The order will have to be changed later when setting up the CC3D so don't worry about that for now. I looped the cables through the holes in the top of the frame so they weren't hanging off the side of the quadcopter. The white wire should face upwards.
 
-The receiver is quite straightforward to setup. The first cable has three leads, one for signal and two for power. The rest of the cables have only one signal lead. Just connect this in the order to which it is connected on the the receiver port side of the leads.
+The receiver is quite straightforward to setup. The first cable has three leads, one for signal and two for power. This will go in the Channel 1 input of the receiver. The rest of the cables have only one signal lead. Just connect this in the order to which it is connected on the the receiver port side of the leads.
 
 The male connectors for the ESC can go right into the power distribution board.
 
