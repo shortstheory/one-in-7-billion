@@ -57,9 +57,9 @@ Despite being a lot more power efficient than brushed motors, these motors can g
 
 Anyway, the motors can be screwed directly into the booms of the quadcopter. The direction of rotation is determined by the ESC, so we don't need to worry about that at the moment.
 
-### ESCs
+### Electronic Speed Controllers (ESCs)
 
-The ESCs link the flight computer with the motors. The input to the ESC is PWM fed over the BEC connector. Each ESC have its own 8-bit SoC to send signals to the brushless motor to turn at the desired RPM. In the FC settings, you can adjust the ESC update frequency, which is usually between 50Hz and 490Hz.
+The ESCs link the flight computer (FC) with the motors. The input to the ESC is PWM fed over the BEC connector. Each ESC have its own 8-bit SoC to send signals to the brushless motor to turn at the desired RPM. In the FC settings, you can adjust the ESC update frequency, which is usually between 50Hz and 490Hz.
 
 
 The ESCs regulate the amount of power going to the motor depending on throttle input and can get very hot as well. Mounting the ESCs under the booms will give it sufficient airflow to cool down properly. You want to make sure that the three wires with female bullet connectors is facing the male bullet connectors of the motor. The other side with the male connector and the BEC goes to the power distribution board of the quadcopter.
@@ -116,7 +116,7 @@ The male connectors for the ESC can go right into the power distribution board.
 
 ## Software Configuration
 
-The CC3D is a nifty micro-controller. It can be flashed with different flight computer firmwares and can be extended with GPS and Telemetry capabilities. For now, we will work on a much more humble task - flashing it with a FC firmware.
+The CC3D is a nifty micro-controller. It can be flashed with different FC firmwares and can be extended with GPS and Telemetry capabilities. For now, we will work on a much more humble task - flashing it with a FC firmware.
 
 As the CC3D has been around for a while, it has a good amount of community support in terms of open-source FC firmwares. Two popular ones are [Cleanflight](http://cleanflight.com/) and [LibrePilot](http://librepilot.atlassian.net/), built out of the ashes of the now defunct OpenPilot.
 
