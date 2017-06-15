@@ -61,6 +61,7 @@ Anyway, the motors can be screwed directly into the booms of the quadcopter. The
 
 The ESCs link the flight computer (FC) with the motors. The input to the ESC is PWM fed over the BEC connector. Each ESC have its own 8-bit SoC to send signals to the brushless motor to turn at the desired RPM. In the FC settings, you can adjust the ESC update frequency, which is usually between 50Hz and 490Hz.
 
+A brief digression on the BEC - the thinner wires at the power input side of the ESC. Known as the Battery Eliminator Circuit, it steps down the voltage of the battery to a comfortable 5V for powering components such as the FC or any other devices you may want to connect to the aircraft. The FC only needs power from one BEC and it may even be harmful to connect more than one BEC to the FC. There are some suggestions [here](http://www.dronetrest.com/t/what-to-consider-when-buying-a-esc-for-your-multirotor/1305) on how to take care of this problem.
 
 The ESCs regulate the amount of power going to the motor depending on throttle input and can get very hot as well. Mounting the ESCs under the booms will give it sufficient airflow to cool down properly. You want to make sure that the three wires with female bullet connectors is facing the male bullet connectors of the motor. The other side with the male connector and the BEC goes to the power distribution board of the quadcopter.
 
