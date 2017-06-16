@@ -45,7 +45,7 @@ I suggest labeling each boom with a number and the direction in which its motor 
 
 ![]({filename}/images/quadcopter/lpconfig.png)
 
-Speaking about labeling, label *everything*. It only takes a few seconds and it can save many hours of frustration later on. Of note, is the handedness (is there a better term?) of the propeller. Left-handed propellers turn anticlockwise and right-handed propellers turn clockwise. Mounting a propeller the wrong way will cause the thrust it to produce thrust in the opposite direction.
+Speaking about labeling, label *everything*. It only takes a few seconds and it can save many hours of frustration later on. Of note, is the handedness (is there a better term?) of the propeller. Left-handed propellers turn anticlockwise and right-handed propellers turn clockwise. Mounting a propeller the wrong way will cause it to produce thrust in the opposite direction.
 
 ### Motors
 
