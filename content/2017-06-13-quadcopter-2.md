@@ -22,6 +22,16 @@ I suggest going through all these websites thoroughly before purchasing a single
 * [WowElec](https://wowelec.wordpress.com/)
 * [DroneTrest](https://www.dronetrest.com/)
 
+If you live in India, the following sites are good places for shopping for parts:
+
+* [Amazon.in](http://amazon.in/)
+* [QuadKopters.com](http://www.quadkopters.com/)
+* [Robu.in](http://robu.in/)
+* [RCBazaar.com](http://rcbazaar.com/)
+* [RCDhamaka.com](http://www.rcdhamaka.com/)
+
+RCBazaar and RCDhamaka have stores in Bangalore. Robu.in is based in Pune.
+
 ## Hardware Assembly
 
 For clarity, the components I have used in my build are:
