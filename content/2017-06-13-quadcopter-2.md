@@ -65,7 +65,9 @@ Once you've setup the frame, the next thing you should do is take a look at the 
 
 Despite being a lot more power efficient than brushed motors, these motors can generate a great deal of heat when running at full power. I would *not* recommend testing it at full power on the ground as there won't be any airflow to cool the motor down. This can permenantly damage your motor, and if you're unlucky, your ESC as well.
 
-Anyway, the motors can be screwed directly into the booms of the quadcopter. The direction of rotation is determined by the ESC, so we don't need to worry about that at the moment.
+Anyway, the motors can be screwed directly into the booms of the quadcopter. Most motors come with a few accessories - an adapter for the base to mount it on to differently keyed frames and a propeller shaft with a nose tip. Don't worry if the propeller shaft seems to wobble or come loose. It's designed to only be fully secured when the propellers are mounted on the motor.
+
+The direction of rotation is determined by the ESC, so we don't need to worry about that at the moment.
 
 ### Electronic Speed Controllers (ESCs)
 
@@ -135,7 +137,9 @@ The firmware gives the CC3D brains to control the aircraft and make decisions on
 
 Both firmwares come with cross-platform desktop apps for configuring the FC. Cleanflight uses a shiny Chrome web-app and LibrePilot has a more traditional Qt desktop app. I liked Cleanflight at first, but [flashing it on the CC3D](http://dronehitech.com/en/flash-cleanflight-cc3d-arduino/) is a mess and I couldn't get it to work properly. On the other hand, LibrePilot is a joy to flash on the CC3D. The desktop app even auto-updates the CC3D's firmware if it is out of date. Therefore, being unable to flash Cleanflight, I setup the quadcopter in LibrePilot instead.
 
-LibrePilot has a pretty easy 'Vehicle Setup Wizard' which, if followed correctly, will get your quadcopter to airworthy shape 95% of the time.
+LibrePilot has a pretty easy 'Vehicle Setup Wizard' which, if followed correctly, will get your quadcopter to airworthy shape 95% of the time. You would want to keep the props off during the whole procedure, especially during ESC calibration.
+
+Following this, you can mount the propellers by selecting the right adapter from the adapter kit each prop comes with it. Stick it in to the reverse side of the propeller and mount the propeller such that the side with the pitch and diameter printed on it is facing upwards. You can then mount the nose tip which comes with the motor with a thin screwdriver or Allen key. All the thrust of the quadcopter is generated from the propellers, so you'll want to make sure that this is quite tight. This *should* make the propeller shaft impossible to pull upwards, and if it isn't, you would want to return the motor before you have a catastrophic accident. The last thing you want is a propeller disloding itself from your quadcopter midflight.
 
 ## Fly!
 
