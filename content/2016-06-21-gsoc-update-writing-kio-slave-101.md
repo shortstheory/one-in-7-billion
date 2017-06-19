@@ -10,7 +10,7 @@ This [project](https://summerofcode.withgoogle.com/projects/#5979393230897152)
 has been going well. Though it was expectedly difficult in the beginning, I
 feel like I am on the other side of the learning curve now. I will probably
 make a proper update post sometime later this month. My repo for this project
-can be found here: <https://github.com/shortstheory/staging-kioslave>
+can be found here: [https://github.com/shortstheory/kio-stash](https://github.com/KDE/kio-stash)
 
 For now, this is a small tutorial for writing KDE I/O slaves (KIO slaves)
 which can be used for a variety of KDE applications. KIO slaves are a great

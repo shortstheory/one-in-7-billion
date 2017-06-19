@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>A Singularity</title><link>http://arnavdhamija.com/</link><description></description><atom:link href="http://arnavdhamija.com/feeds/tag_gsoc.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 30 Aug 2016 01:45:00 +0530</lastBuildDate><item><title>GSoC Report - Wrapping up GSoC 2016</title><link>http://arnavdhamija.com/blog/gsoc-report-wrapping-up-gsoc-2016.html</link><description>&lt;p&gt;That’s it. After a &lt;a href="https://github.com/KDE/kio-
-stash/graphs/contributors"&gt;combined total&lt;/a&gt; of 217 git commits, 6,202 lines of code added, and
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>A Singularity</title><link>http://arnavdhamija.com/</link><description></description><atom:link href="http://arnavdhamija.com/feeds/tag_gsoc.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 30 Aug 2016 01:45:00 +0530</lastBuildDate><item><title>GSoC Report - Wrapping up GSoC 2016</title><link>http://arnavdhamija.com/blog/gsoc-report-wrapping-up-gsoc-2016.html</link><description>&lt;p&gt;That’s it. After a &lt;a href="https://github.com/KDE/kio-stash/graphs/contributors"&gt;combined total&lt;/a&gt; of 217 git commits, 6,202 lines of code added, and
 4,167 lines of code deleted, GSoC 2016 is finally over.  &lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/Screenshot_20160830_014801.png" /&gt;&lt;/p&gt;
 &lt;p&gt;These twelve weeks of programming have been a very enriching experience for me
@@ -139,7 +138,7 @@ stash.git"&gt;KDE repo&lt;/a&gt;? ;) )&lt;/p&gt;</description><dc:creator xmlns:
 has been going well. Though it was expectedly difficult in the beginning, I
 feel like I am on the other side of the learning curve now. I will probably
 make a proper update post sometime later this month. My repo for this project
-can be found here: &lt;a href="https://github.com/shortstheory/staging-kioslave"&gt;https://github.com/shortstheory/staging-kioslave&lt;/a&gt;&lt;/p&gt;
+can be found here: &lt;a href="https://github.com/KDE/kio-stash"&gt;https://github.com/shortstheory/kio-stash&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;For now, this is a small tutorial for writing KDE I/O slaves (KIO slaves)
 which can be used for a variety of KDE applications. KIO slaves are a great
 way for accessing files from different filesystems and protocols in a neat,

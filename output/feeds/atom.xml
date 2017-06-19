@@ -225,8 +225,7 @@ investing so much time in studying or doing projects has made me cut down my
 participation in other clubs and I've quit nearly all the non-technical clubs
 I joined last year. There's more than that too - I feel it's much harder to be
 fully immersed in anything anymore.  &lt;/p&gt;
-&lt;p&gt;Maybe it's just something else which requires more soul searching.&lt;/p&gt;</summary><category term="College"></category><category term="Life"></category><category term="KDE"></category></entry><entry><title>GSoC Report - Wrapping up GSoC 2016</title><link href="http://arnavdhamija.com/blog/gsoc-report-wrapping-up-gsoc-2016.html" rel="alternate"></link><updated>2016-08-30T01:45:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-08-30:blog/gsoc-report-wrapping-up-gsoc-2016.html</id><summary type="html">&lt;p&gt;That’s it. After a &lt;a href="https://github.com/KDE/kio-
-stash/graphs/contributors"&gt;combined total&lt;/a&gt; of 217 git commits, 6,202 lines of code added, and
+&lt;p&gt;Maybe it's just something else which requires more soul searching.&lt;/p&gt;</summary><category term="College"></category><category term="Life"></category><category term="KDE"></category></entry><entry><title>GSoC Report - Wrapping up GSoC 2016</title><link href="http://arnavdhamija.com/blog/gsoc-report-wrapping-up-gsoc-2016.html" rel="alternate"></link><updated>2016-08-30T01:45:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-08-30:blog/gsoc-report-wrapping-up-gsoc-2016.html</id><summary type="html">&lt;p&gt;That’s it. After a &lt;a href="https://github.com/KDE/kio-stash/graphs/contributors"&gt;combined total&lt;/a&gt; of 217 git commits, 6,202 lines of code added, and
 4,167 lines of code deleted, GSoC 2016 is finally over.  &lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/Screenshot_20160830_014801.png" /&gt;&lt;/p&gt;
 &lt;p&gt;These twelve weeks of programming have been a very enriching experience for me
@@ -365,7 +364,7 @@ stash.git"&gt;KDE repo&lt;/a&gt;? ;) )&lt;/p&gt;</summary><category term="GSoC">
 has been going well. Though it was expectedly difficult in the beginning, I
 feel like I am on the other side of the learning curve now. I will probably
 make a proper update post sometime later this month. My repo for this project
-can be found here: &lt;a href="https://github.com/shortstheory/staging-kioslave"&gt;https://github.com/shortstheory/staging-kioslave&lt;/a&gt;&lt;/p&gt;
+can be found here: &lt;a href="https://github.com/KDE/kio-stash"&gt;https://github.com/shortstheory/kio-stash&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;For now, this is a small tutorial for writing KDE I/O slaves (KIO slaves)
 which can be used for a variety of KDE applications. KIO slaves are a great
 way for accessing files from different filesystems and protocols in a neat,

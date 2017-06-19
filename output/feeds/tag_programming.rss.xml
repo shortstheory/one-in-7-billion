@@ -14,7 +14,7 @@
 has been going well. Though it was expectedly difficult in the beginning, I
 feel like I am on the other side of the learning curve now. I will probably
 make a proper update post sometime later this month. My repo for this project
-can be found here: &lt;a href="https://github.com/shortstheory/staging-kioslave"&gt;https://github.com/shortstheory/staging-kioslave&lt;/a&gt;&lt;/p&gt;
+can be found here: &lt;a href="https://github.com/KDE/kio-stash"&gt;https://github.com/shortstheory/kio-stash&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;For now, this is a small tutorial for writing KDE I/O slaves (KIO slaves)
 which can be used for a variety of KDE applications. KIO slaves are a great
 way for accessing files from different filesystems and protocols in a neat,
