@@ -80,7 +80,7 @@
 <p>The Stash File System runs in the KDE Daemon (kded5) container process. An object of the SFS is created on startup when the daemon is initialized. The daemon responds to calls from the ioslave communicated over the session bus and creates and removes nodes in the SFS.</p>
 <h2>Installation</h2>
 <p>Make sure you have KF5 backports with all the <a href="https://community.kde.org/Guidelines_and_HOWTOs/Build_from_source/Install_the_dependencies">KDE dependency libraries</a> installed before you build!</p>
-<p>Clone master to your favorite folder and run:</p>
+<p>Download the tarball to your favorite folder, extract, and run:</p>
 <div class="highlight"><pre>mkdir build
 cd build
 cmake -DCMAKE_INSTALL_PREFIX=/usr -DKDE_INSTALL_USE_QT_SYS_PATHS=TRUE ..
@@ -90,10 +90,10 @@ kdeinit5
 </pre></div>
 
 
-<p>Adaptor classes for D-Bus were generated using:</p>
-<div class="highlight"><pre>qdbuscpp2xml -a stashnotifier.h -o ../../dbus/org.kde.kio.StashNotifier.xml
-qdbusxml2cpp -c StashNotifierAdaptor -a stash_adaptor.h:stash_adaptor.cpp ../../dbus/org.kde.kio.StashNotifier.xml
-</pre></div>
+<h2>Result</h2>
+<p>Open Dolphin and set the path as <code>stash:/</code>. This directory is completely 'virtual' and anything added to it will not consume any extra disk space. All basic file operations such as copy, paste, and move should work.</p>
+<p>Folders can be created, curated, and renamed on this virtual folder itself. However, as this is a virtual directory, files cannot be created on it.</p>
+<p>Copying from remote locations such as <code>mtp:/</code> may not work however. Please report any bugs for the same on <a href="http://bugs.kde.org/">http://bugs.kde.org/</a>.</p>
             <a href="#" class="go-top">Go Top</a>
     <div class="comments">
         <div id="disqus_thread"></div>

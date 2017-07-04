@@ -43,7 +43,7 @@ The Stash File System runs in the KDE Daemon (kded5) container process. An objec
 
 Make sure you have KF5 backports with all the [KDE dependency libraries](https://community.kde.org/Guidelines_and_HOWTOs/Build_from_source/Install_the_dependencies) installed before you build!
 
-Clone master to your favorite folder and run:
+Download the tarball to your favorite folder, extract, and run:
 
 ```
 mkdir build
@@ -54,9 +54,10 @@ sudo make install
 kdeinit5
 ```
 
-Adaptor classes for D-Bus were generated using:
+## Result
 
-```
-qdbuscpp2xml -a stashnotifier.h -o ../../dbus/org.kde.kio.StashNotifier.xml
-qdbusxml2cpp -c StashNotifierAdaptor -a stash_adaptor.h:stash_adaptor.cpp ../../dbus/org.kde.kio.StashNotifier.xml
-```
+Open Dolphin and set the path as ```stash:/```. This directory is completely 'virtual' and anything added to it will not consume any extra disk space. All basic file operations such as copy, paste, and move should work.
+
+Folders can be created, curated, and renamed on this virtual folder itself. However, as this is a virtual directory, files cannot be created on it.
+
+Copying from remote locations such as ```mtp:/``` may not work however. Please report any bugs for the same on [http://bugs.kde.org/](http://bugs.kde.org/).
