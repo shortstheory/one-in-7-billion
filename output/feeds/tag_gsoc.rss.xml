@@ -1,5 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>A Singularity</title><link>http://arnavdhamija.com/</link><description></description><atom:link href="http://arnavdhamija.com/feeds/tag_gsoc.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 30 Aug 2016 01:45:00 +0530</lastBuildDate><item><title>GSoC Report - Wrapping up GSoC 2016</title><link>http://arnavdhamija.com/blog/gsoc-report-wrapping-up-gsoc-2016.html</link><description>&lt;p&gt;That’s it. After a &lt;a href="https://github.com/KDE/kio-stash/graphs/contributors"&gt;combined total&lt;/a&gt; of 217 git commits, 6,202 lines of code added, and
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>A Singularity</title><link>http://arnavdhamija.com/</link><description></description><atom:link href="http://arnavdhamija.com/feeds/tag_gsoc.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 04 Jul 2017 11:30:00 +0530</lastBuildDate><item><title>KIO Stash - Shipped!</title><link>http://arnavdhamija.com/blog/kio-stash-release.html</link><description>&lt;p&gt;It's been almost a year since I finished my GSoC project for implementing discontinuous file selections as a KIOSlave.&lt;/p&gt;
+&lt;p&gt;The ioslave is now officially shipped in the KDE ExtraGear Utils software package and it can be downloaded from here: &lt;a href="https://download.kde.org/stable/kio-stash/kio-stash-1.0.tar.xz.mirrorlist"&gt;https://download.kde.org/stable/kio-stash/kio-stash-1.0.tar.xz.mirrorlist&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Selecting multiple files in any file manager for copying and pasting has never been a pleasant experience, especially if the files are in a non-continuous order. Often, when selecting files using Ctrl+A or the selection tool, we find that we need to select only a subset of the required files we have selected. This leads to the unwieldy operation of removing files from our selection. Of course, the common workaround is to create a new folder and to put all the items in this folder prior to copying, but this is a very inefficient and very slow process if large files need to be copied. Moreover Ctrl+Click requires fine motor skills to not lose the entire selection of files.&lt;/p&gt;
+&lt;p&gt;This is an original project with a novel solution to this problem. My solution is to add a virtual folder in all KIO applications, where the links to files and folders can be temporarily saved for a session. The files and folders are "staged" on this virtual folder. Files can be added to this by using all the regular file management operations such as Move, Copy and Paste, or by drag and drop. Hence, complex file operations such as moving files across many devices can be made easy by staging the operation before performing it.&lt;/p&gt;
+&lt;h2&gt;Project Overview&lt;/h2&gt;
+&lt;p&gt;This project consists of the following modules. As there is no existing implementation in KIO for managing virtual directories, all the following modules were written completely from scratch.&lt;/p&gt;
+&lt;h3&gt;KIO Slave&lt;/h3&gt;
+&lt;p&gt;The KIO slave is the backbone of the project. This KIO slave is responsible for interfacing with the GUI of a KDE application and provides the methods for various operations such as copying, deleting, and renaming files. All operations on the KIO slave are applied on a virtual stash filesystem (explained below). These operations are applied through inter process communication using the Qt's D-Bus API.&lt;/p&gt;
+&lt;p&gt;The advantage of the KIO slave is that it provides a consistent experience throughout the entire KDE suite of applications. Hence, this feature would work with all KIO compatible applications.&lt;/p&gt;
+&lt;h3&gt;Stash File System&lt;/h3&gt;
+&lt;p&gt;The Stash File System (SFS) is used for virtually staging all the files and directories added to the ioslave. When a file is copied to the SFS, a new File Node is created to it under the folder to which it is copied. On copying a folder, a new Directory Node is created on the SFS with all the files and directories under it copied recursively as dictated by KIO. The SFS is a very important feature of the project as it allows the user to create folders and move items on the stash ioslave without touching the physical file system at all. Once a selection is curated on the ioslave, it can be seamlessly copied to the physical filesystem.&lt;/p&gt;
+&lt;p&gt;The SFS is implemented using a QHash pair of the URL as a key, containing the location of the file on the SFS and the value containing a StashNodeData object which contains all the properties (such as file name, source, children files for directories) of a given node in SFS.&lt;/p&gt;
+&lt;p&gt;Memory use of the SFS is nominal on a per file basis - each file staged on the SFS requires roughly 300 bytes of memory.&lt;/p&gt;
+&lt;h3&gt;Stash Daemon&lt;/h3&gt;
+&lt;p&gt;The Stash File System runs in the KDE Daemon (kded5) container process. An object of the SFS is created on startup when the daemon is initialized. The daemon responds to calls from the ioslave communicated over the session bus and creates and removes nodes in the SFS.&lt;/p&gt;
+&lt;h2&gt;Installation&lt;/h2&gt;
+&lt;p&gt;Make sure you have KF5 backports with all the &lt;a href="https://community.kde.org/Guidelines_and_HOWTOs/Build_from_source/Install_the_dependencies"&gt;KDE dependency libraries&lt;/a&gt; installed before you build!&lt;/p&gt;
+&lt;p&gt;Download the tarball to your favorite folder, extract, and run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/usr -DKDE_INSTALL_USE_QT_SYS_PATHS=TRUE ..
+make
+sudo make install
+kdeinit5
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Result&lt;/h2&gt;
+&lt;p&gt;Open Dolphin and set the path as &lt;code&gt;stash:/&lt;/code&gt;. This directory is completely 'virtual' and anything added to it will not consume any extra disk space. All basic file operations such as copy, paste, and move should work.&lt;/p&gt;
+&lt;p&gt;Folders can be created, curated, and renamed on this virtual folder itself. However, as this is a virtual directory, files cannot be created on it.&lt;/p&gt;
+&lt;p&gt;Copying from remote locations such as &lt;code&gt;mtp:/&lt;/code&gt; may not work however. Please report any bugs for the same on &lt;a href="http://bugs.kde.org/"&gt;http://bugs.kde.org/&lt;/a&gt;.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Tue, 04 Jul 2017 11:30:00 +0530</pubDate><guid>tag:arnavdhamija.com,2017-07-04:blog/kio-stash-release.html</guid><category>GSoC</category><category>KDE</category></item><item><title>GSoC Report - Wrapping up GSoC 2016</title><link>http://arnavdhamija.com/blog/gsoc-report-wrapping-up-gsoc-2016.html</link><description>&lt;p&gt;That’s it. After a &lt;a href="https://github.com/KDE/kio-stash/graphs/contributors"&gt;combined total&lt;/a&gt; of 217 git commits, 6,202 lines of code added, and
 4,167 lines of code deleted, GSoC 2016 is finally over.  &lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/Screenshot_20160830_014801.png" /&gt;&lt;/p&gt;
 &lt;p&gt;These twelve weeks of programming have been a very enriching experience for me

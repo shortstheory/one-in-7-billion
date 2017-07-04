@@ -1,11 +1,10 @@
 title: KIO Stash - Shipped!
-date: 2017-07-04 16:00
+date: 2017-07-04 11:30
 author: Arnav Dhamija
 tags: GSoC, KDE
 category: Article
 slug: kio-stash-release
 sidebarimage: ../images/code.png
-status: draft
 
 It's been almost a year since I finished my GSoC project for implementing discontinuous file selections as a KIOSlave.
 
