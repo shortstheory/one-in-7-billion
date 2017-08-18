@@ -26,6 +26,8 @@ TAG_FEED_RSS = "feeds/tag_%s.rss.xml"
 
 GOOGLE_ANALYTICS = "UA-91464572-1"
 DISQUS_SITENAME = "arnavdhamija"
+DISQUS_PUBLIC_KEY = "gdd4lFggU04G6SXD6gaqbeN1Kzsid3ZTXsn4b023V0mC1EPxIWeWNRMbpTp92Nqe"
+DISQUS_PRIVATE_KEY = "3MnB3GHMR1q4q83MLN86sW1YJmY4ozyMIaULmKPyAVYUMH9etNzeBvtvvEVZBldv"
 GITHUB_URL = "https://github.com/shortstheory"
 
 PATH = 'content'
