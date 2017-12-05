@@ -62,9 +62,11 @@ In more than a year of owning it, I haven't once drained the battery. I've gotte
 
 ## Keyboard
 
-Really good! I used to think that the AccuType keyboard on my Lenovo G580 was unbeatable for years, but that changed as soon as I laid my hands on the ThinkPad 13's keyboard. The keys are perfectly spaced, have amazingly deep travel, and have great texture. I really like the layout too - PgUp/PgDn + Ctrl makes it very easy to switch tabs and Fn and Right Ctrl can be swapped in the BIOS.
+Really good! For years, I used to think that the AccuType keyboard on my Lenovo G580 was unbeatable, but that changed as soon as I laid my hands on the ThinkPad 13's keyboard. The keys are perfectly spaced, have amazingly deep travel, and have great texture. I really like the layout too - PgUp/PgDn + Ctrl makes it very easy to switch tabs and Fn and Right Ctrl can be swapped in the BIOS.
 
 It turns out that the keyboard on the 13 is *exactly* the same as the one on the T460s. I learned this by ruining the stock keyboard when doing my weekly round of sterilising all my electronic devices. AliExpress didn't have the silver 13 keyboard but the 13's FRU manual showed that the T460s keyboard (albeit black instead of silver) could be directly dropped in. After a month of waiting to get it shipped from China, it was a simple 10 minute job to replace the keyboard. Props to Lenovo for reusing FRUs and keeping the 13 so serviceable.
+
+I'm pretty happy with the touchpad as well. It's large enough and has a very satisfying physical click to it. Gestures work well and it's supported out of the box on Linux. The TrackPoint and click buttons have become indispensable for coding. I haven't compared it to other ThinkPad's when it comes to the TrackPoint.
 
 ## Performance
 
