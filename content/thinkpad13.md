@@ -1,4 +1,4 @@
-title: ThinkPad 13 after 18+ months
+title: ThinkPad 13: Thoughts after 18+ months
 date: 2015-06-17 10:29
 author: Arnav Dhamija
 tags: Tech
@@ -20,13 +20,13 @@ I got the silver version of the ThinkPad 13. Die-hard ThinkPad fans might find a
 
 Since I was saving a fair bit of money by not buying the T460s, I maxed out the CPU with the i5-6300U though I don't ever see myself using vPro.
 
-Since the ThinkPad 13 Gen. 2 and Gen. 1 share the same build, most of the parts of this review regarding build quality apply for the Gen. 2 as well. The Gen. 2 does have a bump in some features - such as supporting NVMe SSDs.
+The ThinkPad 13 Gen. 2 and Gen. 1 share the same build, so most of the parts of this review regarding build quality apply for the Gen. 2 as well.
 
 ## Build Quality
 
 *Pretty* decent. At 1.4kg it's not the smallest or lightest 13.3" laptop available, but it's small enough to not matter. Given the number of I/O ports onboard, it's a very acceptable compromise.
 
-It isn't made from the fancy composites of the X1 Carbon or the magnesium alloy of the T/X/P series ThinkPads. Yet the plastic frame of the laptop is really good quality and can easily stand on its own. Compared to other ThinkPads I've tried, it feels considerably better built than the E470 and the X1 Yoga and is on par, if not better than the T440p. The P50 is more solid, though it must be kept in mind that the P50 is a much thicker laptop than the 13. The 13's build quality is on another level compared to the Lenovo IdeaPad G580 I had been using before this. Even after a year of heavy use, creaking on twisting the frame is non-existent and nothing feels like it's on the verge of falling apart like it did with the IdeaPad.
+You can immediately tell it isn't made from the fancy composites of the X1 Carbon or the magnesium alloy of the T/X/P series ThinkPads. Yet the plastic frame of the laptop is good quality and can easily stand out on its own. Compared to other ThinkPads I've tried, it feels considerably better built than the E470 and the X1 Yoga and is on par, if not better than the T440p. The P50 is more solid, though it must be kept in mind that the P50 is a much thicker laptop than the 13. The 13's build quality is on another level compared to the Lenovo IdeaPad G580 I had been using before this. Even after a year of heavy use, creaking on twisting the frame is non-existent and nothing feels like it's on the verge of falling apart like it did with the IdeaPad.
 
 The hinges are nice and tight and the lid gives a satisfying thump on closing. Speaking of which, the aluminium lid is solid and protects the display nicely. However, it does give the laptop a heterogeneous look and feel with the rest of the frame being made of plastic.
 
@@ -56,18 +56,21 @@ The display on my laptop is the LG 1080p IPS display with a matte coating. Even 
 
 ## Battery Life
 
-The ThinkPad 13 is powered by a 42 Wh battery. It has degraded slightly from when I got the laptop - initially the battery was able to hold 46 Wh of charge but now it usually holds 40-41.5 Wh when full. My frequent use case with the laptop is several Firefox tabs open with some IDE's like VS Code, Atom, or Android Studio on KDE Neon. The laptop is *very* energy efficient and power draw rarely climbs above 6W at 30% brightness after enabling TLP on KDE Neon. My old laptop used to *idle* at 17W and when people claim that Intel has gimped their CPUs since the IvyBridge era, I think they're disregarding the huge leaps in power efficiency.
+The ThinkPad 13 is powered by a 42 Wh battery. It has degraded slightly from when I got the laptop - initially the battery was able to hold 46 Wh of charge but now it usually holds 40-41.5 Wh when full. My frequent use case with the laptop is several Firefox tabs open with some IDE's like VS Code, Atom, or Android Studio on KDE Neon. The laptop is *very* energy efficient and power draw rarely climbs above 6W at 30% brightness after enabling TLP on KDE Neon. My old laptop used to **idle** at 17W and when people claim that Intel has gimped their CPUs since the IvyBridge era, I think they're disregarding the huge leaps in power efficiency.
 
 In more than a year of owning it, I haven't once drained the battery. I've gotten through 9-5 days at a summer internship solely off battery power. I can't speak of how good or bad battery life is on Windows 10 as I've never used it for anything other than gaming, which brings me to my next section.
 
 ## Keyboard
 
-Really good! For years, I used to think that the AccuType keyboard on my Lenovo G580 was unbeatable, but that changed as soon as I laid my hands on the ThinkPad 13's keyboard. The keys are perfectly spaced, have amazingly deep travel, and have great texture. I really like the layout too - PgUp/PgDn + Ctrl makes it very easy to switch tabs and Fn and Right Ctrl can be swapped in the BIOS.
+Really good! For years, I used to think that the AccuType keyboard on my Lenovo G580 was unbeatable, but that changed as soon as I laid my hands on the ThinkPad 13's keyboard. The keys are perfectly spaced, have amazingly deep travel, and have great texture. I really like the layout too - PgUp/PgDn + Ctrl makes it very easy to switch tabs and Fn and the left Ctrl can be swapped in the BIOS.
 
 It turns out that the keyboard on the 13 is *exactly* the same as the one on the T460s. I learned this by ruining the stock keyboard when doing my weekly round of sterilising all my electronic devices. AliExpress didn't have the silver 13 keyboard but the 13's FRU manual showed that the T460s keyboard (albeit black instead of silver) could be directly dropped in. After a month of waiting to get it shipped from China, it was a simple 10 minute job to replace the keyboard. Props to Lenovo for reusing FRUs and keeping the 13 so serviceable.
 
-I'm pretty happy with the touchpad as well. It's large enough and has a very satisfying physical click to it. Gestures work well and it's supported out of the box on Linux. The TrackPoint and click buttons have become indispensable for coding. I haven't compared it to other ThinkPad's when it comes to the TrackPoint.
+I'm pretty happy with the touchpad as well. It's large enough and has a very satisfying physical click to it. Gestures work well and it's supported out of the box on Linux. The TrackPoint and click buttons have become indispensable for coding. However, I'm dissappointed about how fast the TrackPoint's coating wears off as it becomes really difficult to use the TrackPoint once this happens. ThinkPad's really should ship with replacment some caps.
+
+## Linux Support
+
+
 
 ## Performance
 
-## Linux Support
