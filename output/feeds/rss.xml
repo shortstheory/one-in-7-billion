@@ -1,5 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>A Singularity</title><link>http://arnavdhamija.com/</link><description></description><atom:link href="http://arnavdhamija.com/feeds/rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 17 Aug 2017 20:00:00 +0530</lastBuildDate><item><title>Akademy 2017</title><link>http://arnavdhamija.com/blog/akademy-2017.html</link><description>&lt;p&gt;Last month, I attended KDE's annual conference, &lt;a href="https://akademy.kde.org/"&gt;Akademy 2017&lt;/a&gt;. This year, it was held in Almeria, a small Andalusian city on the south-east coast of Spain.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>A Singularity</title><link>http://arnavdhamija.com/</link><description></description><atom:link href="http://arnavdhamija.com/feeds/rss.xml" rel="self"></atom:link><lastBuildDate>Sun, 10 Dec 2017 10:29:00 +0530</lastBuildDate><item><title>ThinkPad 13: Thoughts after 18+ months</title><link>http://arnavdhamija.com/blog/thinkpad-13-review.html</link><description>&lt;p&gt;It's been over a year since I switched laptops and I want to share my thoughts on my current one - the Lenovo ThinkPad 13 Gen 1. Before getting this laptop, I had been using a Lenovo IdeaPad G580 which I had gotten back in 2013. While that laptop suited my needs at the time, 15.6", 2.5 hrs battery life, and a weight of 2.8kg just wasn't cutting it for college. I decided to go for a smaller laptop with good battery life to replace it. I was pretty satisfied with the performance of the IdeaPad so anything as good or better than its i5-3230M was good enough for me.&lt;/p&gt;
+&lt;p&gt;The first laptop which I looked at was the Asus UX305UA which ticked most of my boxes. Still some reviews had stated that its build quality was questionable so I decided to hold out for a better laptop. I later stumbled upon the Lenovo ThinkPad T460(s) which looked perfect for my needs but was just a touch out of my budget. While I was contemplating this, news began to surface about a 13.3" ThinkPad releasing soon, later to be known as the ThinkPad 13. I later ruled out the T460 because of it being outclassed in almost all respects by the similarly priced T460s.&lt;/p&gt;
+&lt;p&gt;It wasn't an easy decision between the T460s and the 13. The T460s was definitely a more charming laptop but there were just too many drawbacks for me to take it as a serious contender. I found several negative reviews regarding the battery life and the 1080p display lottery. The ThinkPad 13 wasn't without issues of its own, but there wasn't a single review that hadn't sung praises about its keyboard, battery life, and overall value proposition. Plus it came with a USB Type-C port, dual upgradeable RAM slots, and was at least $200 cheaper than a comparitively specced T460s.&lt;/p&gt;
+&lt;p&gt;I got the silver version of the ThinkPad 13. Die-hard ThinkPad fans may condemn a non-black ThinkPad, but I think it looks great. Plus, at the time, the silver version came with the free 1080p IPS display upgrade. It also has a better choice of materials with an aluminium lid in place of the ABS plastic lid found on the black version of the ThinkPad 13. I got it configured with the following specs:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Intel Core i5-6300U Processor (3MB Cache, up to 3.00GHz)&lt;/li&gt;
+&lt;li&gt;Windows 10 Home 64 English&lt;/li&gt;
+&lt;li&gt;8GB DDR4-2133 SODIMM&lt;/li&gt;
+&lt;li&gt;Intel HD Graphics 520&lt;/li&gt;
+&lt;li&gt;KYB SR ENG&lt;/li&gt;
+&lt;li&gt;3cell 42Wh&lt;/li&gt;
+&lt;li&gt;UltraNav (TrackPoint and ClickPad) without Fingerprint Reader&lt;/li&gt;
+&lt;li&gt;Software TPM Enabled&lt;/li&gt;
+&lt;li&gt;720p HD Camera&lt;/li&gt;
+&lt;li&gt;256 GB Solid State Drive, SATA3 OPAL2.0 - Capable&lt;/li&gt;
+&lt;li&gt;45W AC Adapter - US(2pin)&lt;/li&gt;
+&lt;li&gt;Intel Dual Band Wireless-AC(2x2) 8260, Bluetooth Version 4.1 vPro&lt;/li&gt;
+&lt;li&gt;13.3" FHD (1920 x 1080) IPS Anti-Glare, 220 nits&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Since I was saving a fair bit of money by not buying the T460s, I maxed out the CPU with the i5-6300U though I don't ever see myself using vPro. The other upgrades were the RAM and SSD to 8GB and 256GB respectively.&lt;/p&gt;
+&lt;p&gt;The ThinkPad 13 Gen. 2 and Gen. 1 share the same build, so most of the parts of this review regarding build quality apply for the Gen. 2 as well.&lt;/p&gt;
+&lt;h2&gt;Build Quality&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Pretty&lt;/em&gt; decent. At 1.4kg it's not the smallest or lightest 13.3" laptop available, but it's small enough to not matter. Given the number of I/O ports onboard, it's a very acceptable compromise.&lt;/p&gt;
+&lt;p&gt;You can immediately tell it isn't made from the fancy composites of the X1 Carbon or the magnesium alloy of the T/X/P series ThinkPads. Yet the plastic frame of the laptop is good quality and can easily stand out on its own. Compared to other ThinkPads I've tried, it feels considerably better built than the E470 and the X1 Yoga and is on par, if not better than the T440p. The P50 is more solid, though it must be kept in mind that the P50 is a much thicker laptop than the 13. The 13's build quality is on another level compared to the Lenovo IdeaPad G580 I had been using before this. Even after a year of heavy use, creaking on twisting the frame is non-existent and nothing feels like it's on the verge of falling apart like it did with the IdeaPad.&lt;/p&gt;
+&lt;p&gt;The hinges are nice and tight and the lid gives a satisfying thump on closing. Speaking of which, the aluminium lid is solid and protects the display nicely. However, it does give the laptop a heterogeneous look and feel with the rest of the frame being made of plastic.&lt;/p&gt;
+&lt;p&gt;One aside here, the 13 does have unique touches not found on higher end models. For example, the "i's" in the ThinkPad in both the lid and the palm-rest glow and ThinkPad logo has a really nice brushed finish to it on the lid.&lt;/p&gt;
+&lt;p&gt;Opening the laptop for servicing and upgrading is not a good experience. The bottom base is held by 10 captive screws and is incredibly fiddly to pry open. I ended up scratching off some of the paint of the bottom cover in the two times I tried opening the base. That said, upgradability is much better than what you can find on comparable ultrabooks. Both DDR4 RAM slots, the M.2 SATA SSD (no NVMe on Gen. 1 unfortunately), the Wi-Fi card, and battery can be easily replaced.&lt;/p&gt;
+&lt;p&gt;The touchpad has its share of mechanical issues too. It is a clickpad design, similar to that found on MacBooks. Sometimes dust and debris would find its way in the gap between the base of the laptop and the touchpad causing the right button to physically stop clicking. It's a simple problem to fix and all it needs is a swap with a piece of thick paper to clean the underside of the touchpad. Nevertheless, I expected a more robust design when it comes to this. At least this problem isn't exclusive to the 13, it seems to happen to the T450s as well.&lt;/p&gt;
+&lt;p&gt;Lastly, the plastic construction does have some drawbacks when it comes to scratches. Part of the lid is plastic and is much more scratched up than the aluminium part of it. After a year, the base unit also had some paint rubbing off from the edges. I would suggest buying a carrying sleeve to avoid this from happening. The silver palmrests also have taken a slightly darker shade to the rest of the laptop.&lt;/p&gt;
+&lt;p&gt;Fortunately, all the damage is only cosmetic and the laptop has held up pretty well after being jostled around campus for more than a year.&lt;/p&gt;
+&lt;h2&gt;I/O&lt;/h2&gt;
+&lt;p&gt;Connectivity is a strong point for the ThinkPad 13. It's impressive to see how many ports there are on a laptop of this size! You get 3 USB-A ports running at USB 3.0 speeds, a full size HDMI port, an SD card reader in which the card goes all the way in, a headphone jack, &lt;em&gt;and&lt;/em&gt; a USB-C port supporting charging and 2160p/60fps video out. There's also Lenovo's propietary OneLink+ docking solution though I haven't tried this out yet.&lt;/p&gt;
+&lt;p&gt;On the subject of the USB-C port, a minor nitpick is that it's USB 3.1 Gen1 and doesn't support Thunderbolt. I still much prefer it to the option of having a full size ethernet port as on the T460s. The USB-C port is so much more flexible.&lt;/p&gt;
+&lt;p&gt;I also discovered that all the USB ports support fast (faster?) charging. My phone charges as fast from the laptop's USB port as it does from a 5V/1.5A charger.&lt;/p&gt;
+&lt;p&gt;Wireless connectivity is serviced by the Intel 8260 Wi-Fi card, the same one used on all the top-spec 2016 ThinkPads. Speed and connection quality is good and it supports 802.11ac.&lt;/p&gt;
+&lt;h2&gt;Display&lt;/h2&gt;
+&lt;p&gt;You can't really go wrong with a 1080p IPS display on  a 13.3" laptop.&lt;/p&gt;
+&lt;p&gt;The display on my laptop is the LG 1080p IPS display with a matte coating. Even for an IPS display, the viewing angles are excellent. 13.3" and 1080p is a sweet spot for sharpness and UIs scale fine in both KDE Neon and Windows 10. Thanks to the matte coating, the screen brightness is perfectly sufficient 90% of the time when I use it. I've hardly run into any instances where I felt the need to crank the screen brightness any higher.&lt;/p&gt;
+&lt;p&gt;Colour space coverage is reportedly below average for an IPS screen and it really shows when put side by side with a MacBook Pro or a Dell Inspiron 7460. That said, for coding and web-browsing it's hard to ask for more.&lt;/p&gt;
+&lt;h2&gt;Battery Life&lt;/h2&gt;
+&lt;p&gt;The ThinkPad 13 is powered by a 42 Wh battery. It has degraded slightly from when I got the laptop - initially the battery was able to hold 46 Wh of charge but now it usually holds 40-41.5 Wh when full. My frequent use case with the laptop is several Firefox tabs open with some IDE's like VS Code, Atom, or Android Studio on KDE Neon. The laptop is &lt;em&gt;very&lt;/em&gt; energy efficient and power draw rarely climbs above 6.5W at 30% brightness after enabling TLP on KDE Neon. My old laptop used to &lt;strong&gt;idle&lt;/strong&gt; at 17W and when people claim that Intel has gimped their CPUs since the IvyBridge era, I think they're disregarding the huge leaps in power efficiency.&lt;/p&gt;
+&lt;p&gt;In more than a year of owning it, I haven't once drained the battery and I've even gotten through 9-5 days at a summer internship solely off battery power. I can't speak of how good or bad battery life is on Windows 10 as I've never used it for anything other than gaming, which brings me to my next section.&lt;/p&gt;
+&lt;h2&gt;Performance&lt;/h2&gt;
+&lt;p&gt;Subjectively it's quite snappy. A lot of the performance improvements compared to the laptop I owned before this can be chalked up to the SSD. The one used in the ThinkPad 13 I got was the LiteOn L8H-256V2G and it gives about 540MB/sec in sequential reads and 300MB/sec in sequential writes. It's common knowledge how much faster SSDs are than HDDs, but I hadn't expected it the difference in swapping performance to be as enormous as it is. I can hardly tell when Linux starts filling up the swap space on the SSD as the degradation in performance is minimal. I might upgrade to 16 GB RAM somewhere down the road.&lt;/p&gt;
+&lt;p&gt;The i5-6300U is sufficient for my needs and thermals in the ThinkPad 13 are good enough that the laptop doesn't need to throttle even under prolonged loads. The processor cools passively most of the time and the fan only kicks in under load. Even so, I'm hard pressed to hear the fan below 4000RPM. The CPU is able to overclock to 2.9 GHz on both cores but I've rarely seen it climb over 2.8 GHz. I'm not sure if this is due to the 15W TDP of the SoC or the laptop's conservative policy when it comes to cooling as core temperatures never climb over 75C on Prime95.&lt;/p&gt;
+&lt;p&gt;As far as programming goes, it's not struggled with anything I've thrown at it - from buidling large C++ codebases to running instances of IntelliJ and Android Studio (with the x86 Android emulator) together. The CPU is definitely faster than the i5-3230M in my old laptop.&lt;/p&gt;
+&lt;p&gt;Plus, for the first time, gaming isn't a terrible experience on integrated graphics if your expectations are low enough. I can get 30fps in Skyrim Legendary Edition at 720p and Medium graphics presets with 2X AA. DiRT3 and Mirror's Edge gave about 60fps at 720p with low settings. Sonic Mania works perfectly at 1080p 60fps (that's not really saying it much as it would be embarrasing for a modern laptop to not be able to run a retro 2D platformer smoothly). On the other hand, it struggled with returning a framerate greater than 30fps on Sonic Generations. Bear in mind that all this is with single channel 8GB RAM. Performance &lt;em&gt;could&lt;/em&gt; be better with dual channel RAM.&lt;/p&gt;
+&lt;p&gt;Load times in all games are much lesser than they would be on a console like the PS4 thanks to the SSD.&lt;/p&gt;
+&lt;p&gt;Overall, as long as you don't mind running old games at 720p with some sacrifice in visual quality, the integrated Intel HD 520 should be adequate. At least it's good at smooth 4K video playback.&lt;/p&gt;
+&lt;h2&gt;Keyboard&lt;/h2&gt;
+&lt;p&gt;Really good! For years, I used to think that the AccuType keyboard on my Lenovo G580 was unbeatable, but that changed as soon as I laid my hands on the ThinkPad 13's keyboard. The keys are perfectly spaced, have amazingly deep travel, and have great texture. I really like the layout too - PgUp/PgDn + Ctrl makes it very easy to switch tabs and Fn and the left Ctrl can be swapped in the BIOS. I don't miss the lack of keyboard backlighting but I would really appreciate something like a ThinkLight found in older ThinkPad's.&lt;/p&gt;
+&lt;p&gt;It turns out that the keyboard on the 13 is &lt;em&gt;exactly&lt;/em&gt; the same as the one on the T460s. I learned this by ruining the stock keyboard when doing my weekly round of sterilising all my electronic devices. AliExpress didn't have the silver 13 keyboard but the 13's FRU manual showed that the T460s keyboard (albeit black instead of silver) could be directly dropped in. After a month of waiting to get it shipped from China, it was a simple 10 minute job to replace the keyboard. Props to Lenovo for reusing FRUs and keeping the 13 so serviceable.&lt;/p&gt;
+&lt;p&gt;I'm pretty happy with the touchpad as well. It has a smooth surface and has a very satisfying physical click to it. Gestures work well and it's supported out of the box on Linux. The TrackPoint and click buttons have become indispensable for coding. However, I'm dissappointed about how fast the TrackPoint's coating wears off as it becomes really difficult to use the shallow TrackPoint once this happens. ThinkPad's really should ship with some replacment caps.&lt;/p&gt;
+&lt;h2&gt;Linux Support&lt;/h2&gt;
+&lt;p&gt;I've been using an Ubuntu derivative distro on my laptop ever since I got it. In the first few months, I used Kubuntu 16.04 and then later on I switched to KDE Neon (which, incidentally, is based on Ubuntu 16.04). Linux support is remarkable and everything "just works" right out of the box. Older versions of the 4.x Linux kernel had some issues with the touchpad "desyncing" every 15 minutes, but this has by and large been fixed over the last few months. Thanks to the excellent Mesa drivers, 3D performance of the Intel HD 520 is very stable and actually works better than my friend's NVidia Quadro GPU did with Nouveau drivers (not in terms of frame rate, but stability). Trackpoint works well and all the function keys work perfectly. Also, as mentioned earlier, battery life under Linux is great. I'm curious to see if the OneLink+ works and if the USB-C can output video on Linux.&lt;/p&gt;
+&lt;p&gt;In my opinion, there's nothing you're missing by running Linux on the 13 instead of Windows when it comes to hardware support.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Sun, 10 Dec 2017 10:29:00 +0530</pubDate><guid>tag:arnavdhamija.com,2017-12-10:blog/thinkpad-13-review.html</guid><category>Tech</category><category>Misc</category></item><item><title>Akademy 2017</title><link>http://arnavdhamija.com/blog/akademy-2017.html</link><description>&lt;p&gt;Last month, I attended KDE's annual conference, &lt;a href="https://akademy.kde.org/"&gt;Akademy 2017&lt;/a&gt;. This year, it was held in Almeria, a small Andalusian city on the south-east coast of Spain.&lt;/p&gt;
 &lt;p&gt;The name of the conference is no misspelling, it's part of KDE's age old tradition of naming everything to do with KDE with a 'k'.&lt;/p&gt;
 &lt;p&gt;It was a collection of amazing, life-changing experiences. It was my first solo trip abroad and it taught me so much about travel, KDE, and getting around a city with only a handful of broken phrases in the local language.&lt;/p&gt;
 &lt;h2&gt;Travel&lt;/h2&gt;
@@ -41,11 +96,11 @@
 &lt;p&gt;Still having a bit of energy left after the conference, I was ready to explore this Andalusian city. One thing which worked out nicely on this trip is the late sunset in Spain around this time of the year. It is as bright as day even at around 9pm and the light only starts waning at around 930pm. This gave Rahul and me plenty of time to head to the beach, which was about a 20 minute walk from the hostel.&lt;/p&gt;
 &lt;p&gt;Here, it struck me how much I loved the way of life here.&lt;/p&gt;
 &lt;p&gt;Unlike Madrid, Almeria is not a known as a tourist destination so most of the people living there were locals. In a span of about half an hour I watched how an evening unfolds in this city. As the sun started dipping below the horizon, families with kids, college couples, and high-school friends trickled from the beach to the boardwalk for dinner. A typical evening looked delightfully simple and laid-back in this peaceful city.&lt;/p&gt;
-&lt;p&gt;The boardwalk had plenty of variety on offer - from seafood to Italian cuisine. One place caught my eye, a small cafe with Doner Kebab called 'Taj Mahal'. After a couple of days of eating nothing but bland sandwiches, Rahul and I were game for anything with a hint of spice of it. As I had done in Madrid, I tried ordering Doner Kebab using a mixture of broken Spanish and improvised sign language, only to receive a reply from the owner in Hindi! It turned out that the owner of the restaurant was Pakistani and had migrated to Spain seven years ago. Rahul made a point to ask for more chilli - and the Doner kebabs we got were not lacking in spice. I had more chilli in one kebab than I would normally would have had in a week. At least it was a change from Spanish food, which I wasn't all that fond of.&lt;/p&gt;
+&lt;p&gt;The boardwalk had plenty of variety on offer - from seafood to Italian cuisine. One place caught my eye, a small cafe with Doner Kebab called 'Taj Mahal'. After a couple of days of eating nothing but bland sandwiches, Rahul and I were game for anything with a hint of spice of it. As I had done in Madrid, I tried ordering Doner Kebab using a mixture of broken Spanish and improvised sign language, only to receive a reply from the owner in Hindi! It turned out that the owner of the restaurant was Pakistani and had migrated to Spain seven years ago. Rahul made a point to ask for more chilli - and the Doner kebabs we got were not lacking in spice. I had more chilli in that one kebab than I normally would have had in a week. At least it was a change from Spanish food, which I wasn't all that fond of.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170722_210643404.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;View from the boardwalk&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170723_212852615.jpg" /&gt;  &lt;/p&gt;
-&lt;p&gt;The next day was similar to the first, only a lot more fun. I spent a lot amount of time interacting with the people from KDE India. I also got to know my GSoC mentor, Boudhayan Gupta (@BaloneyGeek). The talks for this day were as good as the ones yesterday and I got to learn about Neon Docker images, the story behind KDE's Slimbook laptop, and things to look forward to in C++17/20.&lt;/p&gt;
+&lt;p&gt;The next day was similar to the first, only a lot more fun. I spent a lot amount of time interacting with the people from KDE India. I also got to know my GSoC mentor, &lt;a href="https://blog.baloneygeek.com/"&gt;Boudhayan Gupta&lt;/a&gt; (@BaloneyGeek). The talks for this day were as good as the ones yesterday and I got to learn about Neon Docker images, the story behind KDE's Slimbook laptop, and things to look forward to in C++17/20.&lt;/p&gt;
 &lt;p&gt;The talks were wrapped up with the Akademy Awards 2017.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170723_171825707.jpg" /&gt;           &lt;/p&gt;
 &lt;p&gt;&lt;em&gt;David Faure and Kevin Ottens&lt;/em&gt;&lt;/p&gt;
@@ -74,7 +129,7 @@
 &lt;h2&gt;Day Trip&lt;/h2&gt;
 &lt;p&gt;The 26&lt;sup&gt;th&lt;/sup&gt; was the final day of the conference. Unlike the other days, the conference was only for half a day with the rest of the day kept aside for a day trip. I cannot comment on how the conference went on this day as I had to rush back to the hostel to retrieve my passport, which was necessary to attend the day trip.&lt;/p&gt;
 &lt;p&gt;Right around 2 in the afternoon we boarded the bus for the day trip. Our first stop was the Plataforma Solar de Almería, a solar energy research plant in Almeria. It houses some large heliostats for focussing sunlight at a point on a tower. This can be used for heating water and producing electricity.&lt;/p&gt;
-&lt;p&gt;There was another facility used for testing the tolerance of spacecraft heat shields by subjecting them to temperatures in excess of 2000C.&lt;/p&gt;
+&lt;p&gt;There was another facility used for testing the tolerance of spacecraft heat shields by subjecting them to temperatures in excess of 2000C by focussing sunlight.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170726_152443372.jpg" /&gt;           &lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Heliostats focus at the top of the tower&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;The next stop was at the San José village. Though not too far from Almeria, the village is frequented by tourists much more than Almeria is and has a very different vibe. The village is known for its beaches, pristine clear waters, and white buildings. I was told that the village was used in the shooting of some films such as The Good, The Bad, and The Ugly.&lt;/p&gt;
@@ -106,38 +161,7 @@
 &lt;p&gt;The next leg was a direct flight to Bangalore, on another Etihad A330. Compared to all the travel I had done in the last two days, the four hour flight almost felt too short. I managed to finish 'Your Lie in April' on this leg.&lt;/p&gt;
 &lt;p&gt;It was a mix of emotions to land in Bangalore - I was glad to have reached home, but bitter that I had to return to college in only two days.&lt;/p&gt;
 &lt;p&gt;Akademy 2017 was an amazing trip and I am very grateful to KDE for letting me present at Akademy and for giving me the means of reaching there. I hope I can make more trips like these in the future!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Thu, 17 Aug 2017 20:00:00 +0530</pubDate><guid>tag:arnavdhamija.com,2017-08-17:blog/akademy-2017.html</guid><category>KDE</category><category>Life</category><category>Travel</category></item><item><title>On College Students</title><link>http://arnavdhamija.com/blog/on-college-students.html</link><description>&lt;p&gt;As a school kid, I was always fascinated by meeting college students from top tier colleges. There was something surreal in the way they talked and they confidently stood with T-shirts proudly proclaiming the name of their alma mater. I used to have the impression that no matter what came in the future, there was a certain justification of their abilities and intelligence. Perhaps society had conditioned me to think as such. Maybe their apparent confidence was a just a projection of how I thought it would feel to be in a top tier college.&lt;/p&gt;
-&lt;p&gt;It struck me just recently that everyone in my college is of the same surreal breed I used to look upto. But now, the magic is lost on me. It's no longer the case that simply being admitted to a Tier-1 college would give one opportunities otherwise impossible. At the same time, the name of the college on your degree matters little if you haven't done enough legwork in college to justify being called an "Engineer".&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Thu, 20 Jul 2017 20:30:00 +0530</pubDate><guid>tag:arnavdhamija.com,2017-07-20:blog/on-college-students.html</guid><category>Life</category><category>College</category></item><item><title>KIO Stash - Shipped!</title><link>http://arnavdhamija.com/blog/kio-stash-release.html</link><description>&lt;p&gt;It's been almost a year since I finished my GSoC project for implementing discontinuous file selections as a KIOSlave.&lt;/p&gt;
-&lt;p&gt;The ioslave is now officially shipped in the KDE ExtraGear Utils software package and it can be downloaded from here: &lt;a href="https://download.kde.org/stable/kio-stash/kio-stash-1.0.tar.xz.mirrorlist"&gt;https://download.kde.org/stable/kio-stash/kio-stash-1.0.tar.xz.mirrorlist&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;Selecting multiple files in any file manager for copying and pasting has never been a pleasant experience, especially if the files are in a non-continuous order. Often, when selecting files using Ctrl+A or the selection tool, we find that we need to select only a subset of the required files we have selected. This leads to the unwieldy operation of removing files from our selection. Of course, the common workaround is to create a new folder and to put all the items in this folder prior to copying, but this is a very inefficient and very slow process if large files need to be copied. Moreover Ctrl+Click requires fine motor skills to not lose the entire selection of files.&lt;/p&gt;
-&lt;p&gt;This is an original project with a novel solution to this problem. My solution is to add a virtual folder in all KIO applications, where the links to files and folders can be temporarily saved for a session. The files and folders are "staged" on this virtual folder. Files can be added to this by using all the regular file management operations such as Move, Copy and Paste, or by drag and drop. Hence, complex file operations such as moving files across many devices can be made easy by staging the operation before performing it.&lt;/p&gt;
-&lt;h2&gt;Project Overview&lt;/h2&gt;
-&lt;p&gt;This project consists of the following modules. As there is no existing implementation in KIO for managing virtual directories, all the following modules were written completely from scratch.&lt;/p&gt;
-&lt;h3&gt;KIO Slave&lt;/h3&gt;
-&lt;p&gt;The KIO slave is the backbone of the project. This KIO slave is responsible for interfacing with the GUI of a KDE application and provides the methods for various operations such as copying, deleting, and renaming files. All operations on the KIO slave are applied on a virtual stash filesystem (explained below). These operations are applied through inter process communication using the Qt's D-Bus API.&lt;/p&gt;
-&lt;p&gt;The advantage of the KIO slave is that it provides a consistent experience throughout the entire KDE suite of applications. Hence, this feature would work with all KIO compatible applications.&lt;/p&gt;
-&lt;h3&gt;Stash File System&lt;/h3&gt;
-&lt;p&gt;The Stash File System (SFS) is used for virtually staging all the files and directories added to the ioslave. When a file is copied to the SFS, a new File Node is created to it under the folder to which it is copied. On copying a folder, a new Directory Node is created on the SFS with all the files and directories under it copied recursively as dictated by KIO. The SFS is a very important feature of the project as it allows the user to create folders and move items on the stash ioslave without touching the physical file system at all. Once a selection is curated on the ioslave, it can be seamlessly copied to the physical filesystem.&lt;/p&gt;
-&lt;p&gt;The SFS is implemented using a QHash pair of the URL as a key, containing the location of the file on the SFS and the value containing a StashNodeData object which contains all the properties (such as file name, source, children files for directories) of a given node in SFS.&lt;/p&gt;
-&lt;p&gt;Memory use of the SFS is nominal on a per file basis - each file staged on the SFS requires roughly 300 bytes of memory.&lt;/p&gt;
-&lt;h3&gt;Stash Daemon&lt;/h3&gt;
-&lt;p&gt;The Stash File System runs in the KDE Daemon (kded5) container process. An object of the SFS is created on startup when the daemon is initialized. The daemon responds to calls from the ioslave communicated over the session bus and creates and removes nodes in the SFS.&lt;/p&gt;
-&lt;h2&gt;Installation&lt;/h2&gt;
-&lt;p&gt;Make sure you have KF5 backports with all the &lt;a href="https://community.kde.org/Guidelines_and_HOWTOs/Build_from_source/Install_the_dependencies"&gt;KDE dependency libraries&lt;/a&gt; installed before you build!&lt;/p&gt;
-&lt;p&gt;Download the tarball to your favorite folder, extract, and run:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;mkdir build
-cd build
-cmake -DCMAKE_INSTALL_PREFIX=/usr -DKDE_INSTALL_USE_QT_SYS_PATHS=TRUE ..
-make
-sudo make install
-kdeinit5
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h2&gt;Result&lt;/h2&gt;
-&lt;p&gt;Open Dolphin and set the path as &lt;code&gt;stash:/&lt;/code&gt;. This directory is completely 'virtual' and anything added to it will not consume any extra disk space. All basic file operations such as copy, paste, and move should work.&lt;/p&gt;
-&lt;p&gt;Folders can be created, curated, and renamed on this virtual folder itself. However, as this is a virtual directory, files cannot be created on it.&lt;/p&gt;
-&lt;p&gt;Copying from remote locations such as &lt;code&gt;mtp:/&lt;/code&gt; may not work however. Please report any bugs for the same on &lt;a href="http://bugs.kde.org/"&gt;http://bugs.kde.org/&lt;/a&gt;.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Tue, 04 Jul 2017 11:30:00 +0530</pubDate><guid>tag:arnavdhamija.com,2017-07-04:blog/kio-stash-release.html</guid><category>GSoC</category><category>KDE</category></item><item><title>Quadcopters - A Hitchhiker's Guide to the Sky</title><link>http://arnavdhamija.com/blog/quadcopter-2.html</link><description>&lt;p&gt;We have liftoff!&lt;/p&gt;
+&lt;p&gt;It struck me just recently that everyone in my college is of the same surreal breed I used to look upto. But now, the magic is lost on me. It's no longer the case that simply being admitted to a Tier-1 college would give one opportunities otherwise impossible. At the same time, the name of the college on your degree matters little if you haven't done enough legwork in college to justify being called an "Engineer".&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Thu, 20 Jul 2017 20:30:00 +0530</pubDate><guid>tag:arnavdhamija.com,2017-07-20:blog/on-college-students.html</guid><category>Life</category><category>College</category></item><item><title>Quadcopters - A Hitchhiker's Guide to the Sky</title><link>http://arnavdhamija.com/blog/quadcopter-2.html</link><description>&lt;p&gt;We have liftoff!&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/quadcopter/liftoff.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Cue me trying to not get my fingers cut off&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;The quadcopter has been built! I had some problems during the building process, so this is a guide which will hopefully make things easier for people to start off with making their own quadcopters.&lt;/p&gt;
@@ -377,7 +401,7 @@ lead to something as big as this!  &lt;/p&gt;
 &lt;p&gt;There have been many memorable moments throughout my coding period for the
 GSoC - such as the first time I got an ioslave to
 &lt;a href="http://arnavdhamija.com/blog/gsoc-update-1-beginning.html"&gt;install&lt;/a&gt; correctly, to writing its “Hello World”
-&lt;a href="http://arnavdhamija.com/blog/gsoc-update-writing-kio-slave-101.html"&gt;equivalent&lt;/a&gt;, and getting a basic implementation of the project up and
+&lt;a href="{filename}/2016-06-21-gsoc-update-writing-kio-slave-101.md"&gt;equivalent&lt;/a&gt;, and getting a basic implementation of the project up and
 running by doing a series of dirty hacks with Dolphin’s code. There were also
 times when I was so frustrated with debugging for this project, that I wanted
 to do nothing but smash my laptop’s progressively failing display panel with
@@ -500,195 +524,7 @@ Dolphin and for writing a couple of unit tests along the way. I'm looking
 forward to a good finish with this project.  &lt;/p&gt;
 &lt;p&gt;You can find the source for it here: &lt;a href="https://github.com/KDE/kio-stash"&gt;https://github.com/KDE/kio-stash&lt;/a&gt; (did I
 mention it's now hosted on a &lt;a href="https://quickgit.kde.org/?p=kio-
-stash.git"&gt;KDE repo&lt;/a&gt;? ;) )&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Thu, 21 Jul 2016 15:18:00 +0530</pubDate><guid>tag:arnavdhamija.com,2016-07-21:blog/gsoc-update-tinkering-with-kio.html</guid><category>GSoC</category><category>KDE</category></item><item><title>GSoC Update(?): Writing a KIO slave 101!</title><link>http://arnavdhamija.com/blog/gsoc-update-writing-kio-slave-101.html</link><description>&lt;p&gt;This &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;project&lt;/a&gt;
-has been going well. Though it was expectedly difficult in the beginning, I
-feel like I am on the other side of the learning curve now. I will probably
-make a proper update post sometime later this month. My repo for this project
-can be found here: &lt;a href="https://github.com/KDE/kio-stash"&gt;https://github.com/shortstheory/kio-stash&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;For now, this is a small tutorial for writing KDE I/O slaves (KIO slaves)
-which can be used for a variety of KDE applications. KIO slaves are a great
-way for accessing files from different filesystems and protocols in a neat,
-uniform way across many KDE applications. Their versatility makes them
-integral to the KIO library. KIO slaves have changed in their structure the
-transition to KF5 and this tutorial highlights some of these differences from
-preceding iterations of it.&lt;/p&gt;
-&lt;h3&gt;Project Structure&lt;/h3&gt;
-&lt;p&gt;For the purpose of this tutorial, your project source directory needs to have
-the following files.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;kio_hello.h&lt;/li&gt;
-&lt;li&gt;kio_hello.cpp&lt;/li&gt;
-&lt;li&gt;hello.json&lt;/li&gt;
-&lt;li&gt;CMakeLists.txt&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;If you don't feel like creating these yourself, just clone it from here:
-&lt;a href="https://github.com/shortstheory/kioslave-tutorial"&gt;https://github.com/shortstheory/kioslave-tutorial&lt;/a&gt;&lt;/p&gt;
-&lt;h4&gt;hello.json&lt;/h4&gt;
-&lt;p&gt;The .json file replaces the .protocol files used in KIO slaves pre KF5. The
-.json file for the KIO slave specifies the properties the KIO slave will have
-such as the executable path to the KIO slave on installation. The .json file
-also includes properties of the slave such as being able to read from, write
-to, delete from, among many others. Fields in this .json file are specified
-from the &lt;a href="https://api.kde.org/frameworks/kio/html/classKProt
-ocolManager.html"&gt;KProtocolManager&lt;/a&gt; class. For creating a KIO slave capable of showing a
-directory in a file manager such as Dolphin, the listing property must be set
-to true. As an example, the .json file for the Hello KIO slave described in
-this tutorial looks like this:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;{  
-    &amp;quot;KDE-KIO-Protocols&amp;quot; : {   
-        &amp;quot;hello&amp;quot;: {   
-            &amp;quot;Class&amp;quot;: &amp;quot;:local&amp;quot;,   
-            &amp;quot;X-DocPath&amp;quot;: &amp;quot;kioslave5/kio_hello.html&amp;quot;,   
-            &amp;quot;exec&amp;quot;: &amp;quot;kf5/kio/hello&amp;quot;,   
-            &amp;quot;input&amp;quot;: &amp;quot;none&amp;quot;,   
-            &amp;quot;output&amp;quot;: &amp;quot;filesystem&amp;quot;,   
-            &amp;quot;protocol&amp;quot;: &amp;quot;hello&amp;quot;,   
-            &amp;quot;reading&amp;quot;: true   
-        }   
-    }   
-}  
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;As for the CMakeLists.txt, you will need to link your KIO slave module with
-KF5::KIOCore. This can be seen in the project directory.  &lt;/p&gt;
-&lt;h4&gt;kio_hello.h&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#ifndef HELLO_H  &lt;/span&gt;
-&lt;span class="cp"&gt;#define HELLO_H  &lt;/span&gt;
-
-&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;kio/slavebase.h&amp;gt;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
-
-&lt;span class="cm"&gt;/**  &lt;/span&gt;
-&lt;span class="cm"&gt;  This class implements a Hello World kioslave  &lt;/span&gt;
-&lt;span class="cm"&gt; */&lt;/span&gt;   
-&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="nl"&gt;Hello&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;QObject&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;KIO&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;SlaveBase&lt;/span&gt;  
-&lt;span class="p"&gt;{&lt;/span&gt;  
-    &lt;span class="n"&gt;Q_OBJECT&lt;/span&gt;   
-&lt;span class="nl"&gt;public&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  
-    &lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
-    &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QUrl&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;Q_DECL_OVERRIDE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
-&lt;span class="p"&gt;};&lt;/span&gt;  
-
-&lt;span class="cp"&gt;#endif  &lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;The Hello KIO slave is derived from KIO::SlaveBase. The SlaveBase class has
-some basic functions already implemented for the KIO slave. This can be found
-in the &lt;a href="https://api.kde.org/frameworks/kio/html/classKIO_1_1Sla
-veBase.html"&gt;documentation&lt;/a&gt;. However, most of the functions of SlaveBase are virtual
-functions and have to be re-implemented for the KIO slave. In this case, we
-are re-implementing the get function to print a QString when it is called by
-kioclient5.  &lt;/p&gt;
-&lt;p&gt;In case you don't need special handling of the KIO slave's functions, you can
-derive your KIO slave class directly from &lt;a href="https://a
-pi.kde.org/frameworks/kio/html/classKIO_1_1ForwardingSlaveBase.html"&gt;KIO::ForwardingSlaveBase&lt;/a&gt;. Here,
-you would only need to re-implement the rewriteUrl function to get your KIO
-slave working.  &lt;/p&gt;
-&lt;h4&gt;kio_hello.cpp&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;hello.h&amp;quot;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
-&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;QDebug&amp;gt;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
-
-&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="nl"&gt;KIOPluginForMetaData&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;QObject&lt;/span&gt;  
-&lt;span class="p"&gt;{&lt;/span&gt;  
-    &lt;span class="n"&gt;Q_OBJECT&lt;/span&gt;   
-    &lt;span class="n"&gt;Q_PLUGIN_METADATA&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IID&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;org.kde.kio.slave.hello&amp;quot;&lt;/span&gt; &lt;span class="kt"&gt;FILE&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;hello.json&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   
-&lt;span class="p"&gt;};&lt;/span&gt;  
-
-&lt;span class="k"&gt;extern&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C&amp;quot;&lt;/span&gt;  
-&lt;span class="p"&gt;{&lt;/span&gt;  
-    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;Q_DECL_EXPORT&lt;/span&gt; &lt;span class="n"&gt;kdemain&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;argc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   
-    &lt;span class="p"&gt;{&lt;/span&gt;   
-        &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Launching KIO slave.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argc&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;   
-            &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Usage: kio_hello protocol domain-socket1 domain-socket2&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
-            &lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
-        &lt;span class="p"&gt;}&lt;/span&gt;   
-        &lt;span class="n"&gt;Hello&lt;/span&gt; &lt;span class="n"&gt;slave&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;   
-        &lt;span class="n"&gt;slave&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dispatchLoop&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;   
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
-    &lt;span class="p"&gt;}&lt;/span&gt;   
-&lt;span class="p"&gt;}&lt;/span&gt;  
-
-&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QUrl&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="p"&gt;{&lt;/span&gt;  
-    &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Entering function.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
-    &lt;span class="n"&gt;mimeType&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/plain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
-    &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="nf"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello world!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
-    &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
-    &lt;span class="n"&gt;finished&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;   
-    &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Leaving function&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
-&lt;span class="p"&gt;}&lt;/span&gt;  
-
-&lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-    &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;SlaveBase&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;   
-
-&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;hello.moc&amp;quot;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;The .moc file is, of course, auto-generated at compilation time.  &lt;/p&gt;
-&lt;p&gt;As mentioned earlier, the KIO Slave's .cpp file will also require a new
-KIOPluginForMetaData class to add the .json file. The following is used for
-the hello KIO slave and can be used as an example:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="n"&gt;KIOPluginForMetaData&lt;/span&gt; : &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;QObject&lt;/span&gt;  
-{  
-    &lt;span class="s"&gt;Q_OBJECT   &lt;/span&gt;
-&lt;span class="s"&gt;    Q_&lt;/span&gt;&lt;span class="n"&gt;PLUGIN_METADATA&lt;/span&gt;(&lt;span class="n"&gt;IID&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;org.kde.kio.slave.hello&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;FILE&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;hello.json&amp;quot;&lt;/span&gt;)   
-};  
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h4&gt;CMakeLists.txt&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;cmake_minimum_required&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;VERSION&lt;/span&gt; &lt;span class="s"&gt;3.5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;QT_MIN_VERSION&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;5.4.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KF5_MIN_VERSION&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;5.16.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-
-&lt;span class="nb"&gt;find_package&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;ECM&lt;/span&gt; &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;KF5_MIN_VERSION&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="s"&gt;REQUIRED&lt;/span&gt; &lt;span class="s"&gt;NO_MODULE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;  
-    &lt;span class="s"&gt;CMAKE_MODULE_PATH&lt;/span&gt;   
-        &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;CMAKE_MODULE_PATH&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;   
-        &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;ECM_MODULE_PATH&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;   
-        &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;ECM_KDE_MODULE_DIR&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;   
-&lt;span class="p"&gt;)&lt;/span&gt;  
-
-&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KDEInstallDirs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KDECMakeSettings&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KDECompilerSettings&lt;/span&gt; &lt;span class="s"&gt;NO_POLICY_SCOPE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;ECMSetupVersion&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;FeatureSummary&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;add_library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;MODULE&lt;/span&gt; &lt;span class="s"&gt;hello.cpp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;find_package&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KF5&lt;/span&gt; &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;KF5_MIN_VERSION&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="s"&gt;REQUIRED&lt;/span&gt; &lt;span class="s"&gt;KIO&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;target_link_libraries&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;KF5::KIOCore&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;set_target_properties&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;PROPERTIES&lt;/span&gt; &lt;span class="s"&gt;OUTPUT_NAME&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-
-&lt;span class="nb"&gt;install&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;TARGETS&lt;/span&gt; &lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;DESTINATION&lt;/span&gt; &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;KDE_INSTALL_PLUGINDIR&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="s"&gt;/kf5/kio&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h3&gt;Installation&lt;/h3&gt;
-&lt;p&gt;Simply run the following commands in the source folder:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;mkdir build  
-cd build  
-cmake -DCMAKE_INSTALL_PREFIX=/usr -DKDE_INSTALL_USE_QT_SYS_PATHS=TRUE ..  
-make  
-sudo make install  
-kdeinit5  
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;As shown above, we have to run kdeinit5 again so the new KIO slave is
-discovered by KLauncher and can be loaded when we run a command through an
-application such as kioclient5.&lt;br /&gt;
-Testing  &lt;/p&gt;
-&lt;p&gt;Run:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;kioclient5 &amp;#39;cat&amp;#39; &amp;#39;hello:/&amp;#39;  
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;And the output should be:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Hello_world
-&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Tue, 21 Jun 2016 23:35:00 +0530</pubDate><guid>tag:arnavdhamija.com,2016-06-21:blog/gsoc-update-writing-kio-slave-101.html</guid><category>GSoC</category><category>Programming</category><category>KDE</category></item><item><title>GSoC Update 1: The Beginning</title><link>http://arnavdhamija.com/blog/gsoc-update-1-beginning.html</link><description>&lt;p&gt;I have officially started my &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;GSoC
+stash.git"&gt;KDE repo&lt;/a&gt;? ;) )&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Thu, 21 Jul 2016 15:18:00 +0530</pubDate><guid>tag:arnavdhamija.com,2016-07-21:blog/gsoc-update-tinkering-with-kio.html</guid><category>GSoC</category><category>KDE</category></item><item><title>GSoC Update 1: The Beginning</title><link>http://arnavdhamija.com/blog/gsoc-update-1-beginning.html</link><description>&lt;p&gt;I have officially started my &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;GSoC
 project&lt;/a&gt; under
 the mentorship of &lt;a href="https://blog.baloneygeek.com/"&gt;Boudhayan Gupta &lt;/a&gt;and &lt;a href="http://blog.pinak.me/"&gt;Pinak
 Ahuja&lt;/a&gt;.  &lt;/p&gt;
