@@ -1,9 +1,9 @@
 title: ThinkPad 13: Thoughts after 18+ months
-date: 2015-06-17 10:29
+date: 2017-12-10 10:29
 author: Arnav Dhamija
-tags: Tech
+tags: Tech, Misc
 category: Article
-slug: thinkpad-13
+slug: thinkpad-13-review
 
 It's been over a year since I switched laptops and I want to share my thoughts on my current one - the Lenovo ThinkPad 13 Gen 1. Before getting this laptop, I had been using a Lenovo IdeaPad G580 which I had gotten back in 2013. While that laptop suited my needs at the time, 15.6", 2.5 hrs battery life, and a weight of 2.8kg just wasn't cutting it for college. I decided to go for a smaller laptop with good battery life to replace it. I was pretty satisfied with the performance of the IdeaPad so anything as good or better than its i5-3230M was good enough for me.
 
