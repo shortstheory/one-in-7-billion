@@ -10,7 +10,195 @@
 &lt;p&gt;The next few days I played with some more Jekyll themes and found that there were many things I didn't like about it. For one thing, it was written in Ruby which I have no experience with. Themes didn't look easy to work with and there was no native support for tags (there is a workaround for this, but due to my lack of Ruby-fu, it all looked terribly arcane to me). I then put the blog migration on the back burner for a while to work on projects at my college's Automation &amp;amp; Robotics Club.&lt;/p&gt;
 &lt;p&gt;A few weeks later, I took a look at the blog project with some new perspective. I started by poking around for alternatives to Jekyll. There was one such alternative which ticked all my boxes - a static site generator called &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;. As WordPress looked inherently superior to Blogger, Pelican looked inherently superior to Jekyll for what I wanted to do with it. For example, it had built-in support for tags, had a theming engine, supported Markdown &lt;em&gt;and&lt;/em&gt; reStructuredText, and had several easy to install plugins. Above all, Pelican is written in Python which made it so much easier for me to mess around with it. There were some more modifications to make to the Markdown files (particularly with the post metadata), but it was so trivial that it didn't pain one bit to modify all the files. Not too long after I settled on Pelican, I found a theme which made my blog look exactly how I wanted it to look. The &lt;a href="https://github.com/PurePelicanTheme"&gt;Pure Single&lt;/a&gt; theme also has nifty support for custom sidebar images, which I used on some select &lt;a href="http://arnavdhamija.com/blog/t2-years-and-counting-iit-jee.html"&gt;blog&lt;/a&gt; &lt;a href="http://arnavdhamija.com/blog/gsoc-report-wrapping-up-gsoc-2016.html"&gt;posts&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There was some initial trouble with setting a blog subfolder in the site and getting images to work on some auto-generated sites (such as the Tags and Categories pages). It later turned out that it was some problem with localhost/ not finding the paths correctly to the images and the site was totally fine when published to the GitHub Pages site. After only three days of using Pelican, I had something which I was willing to show off. The next step was much more straightforward for a change - registering a domain name. I looked into a few options such as GoDaddy, Hover, and Namecheap. Namecheap had positive reviews (unlike GoDaddy) and was the cheapest of the lot. The site configuration to serve pages from GitHub's servers was not more than a 10 minute procedure, and I finally had the site you are reading this article on right now.&lt;/p&gt;
-&lt;p&gt;There will be a lot more changes coming up on this blog, some of them aesthetic and some functional. I'm also probably going to change the name of this blog sometime soon, to something which is more reflective of my current sensibilities.&lt;/p&gt;</summary><category term="Misc"></category><category term="Programming"></category></entry><entry><title>GSoC Update 1: The Beginning</title><link href="http://arnavdhamija.com/blog/gsoc-update-1-beginning.html" rel="alternate"></link><updated>2016-05-30T10:37:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-05-30:blog/gsoc-update-1-beginning.html</id><summary type="html">&lt;p&gt;I have officially started my &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;GSoC
+&lt;p&gt;There will be a lot more changes coming up on this blog, some of them aesthetic and some functional. I'm also probably going to change the name of this blog sometime soon, to something which is more reflective of my current sensibilities.&lt;/p&gt;</summary><category term="Misc"></category><category term="Programming"></category></entry><entry><title>GSoC Update(?): Writing a KIO slave 101!</title><link href="http://arnavdhamija.com/blog/gsoc-update-writing-kio-slave-101.html" rel="alternate"></link><updated>2016-06-21T23:35:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-06-21:blog/gsoc-update-writing-kio-slave-101.html</id><summary type="html">&lt;p&gt;This &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;project&lt;/a&gt;
+has been going well. Though it was expectedly difficult in the beginning, I
+feel like I am on the other side of the learning curve now. I will probably
+make a proper update post sometime later this month. My repo for this project
+can be found here: &lt;a href="https://github.com/KDE/kio-stash"&gt;https://github.com/shortstheory/kio-stash&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For now, this is a small tutorial for writing KDE I/O slaves (KIO slaves)
+which can be used for a variety of KDE applications. KIO slaves are a great
+way for accessing files from different filesystems and protocols in a neat,
+uniform way across many KDE applications. Their versatility makes them
+integral to the KIO library. KIO slaves have changed in their structure the
+transition to KF5 and this tutorial highlights some of these differences from
+preceding iterations of it.&lt;/p&gt;
+&lt;h3&gt;Project Structure&lt;/h3&gt;
+&lt;p&gt;For the purpose of this tutorial, your project source directory needs to have
+the following files.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;kio_hello.h&lt;/li&gt;
+&lt;li&gt;kio_hello.cpp&lt;/li&gt;
+&lt;li&gt;hello.json&lt;/li&gt;
+&lt;li&gt;CMakeLists.txt&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you don't feel like creating these yourself, just clone it from here:
+&lt;a href="https://github.com/shortstheory/kioslave-tutorial"&gt;https://github.com/shortstheory/kioslave-tutorial&lt;/a&gt;&lt;/p&gt;
+&lt;h4&gt;hello.json&lt;/h4&gt;
+&lt;p&gt;The .json file replaces the .protocol files used in KIO slaves pre KF5. The
+.json file for the KIO slave specifies the properties the KIO slave will have
+such as the executable path to the KIO slave on installation. The .json file
+also includes properties of the slave such as being able to read from, write
+to, delete from, among many others. Fields in this .json file are specified
+from the &lt;a href="https://api.kde.org/frameworks/kio/html/classKProt
+ocolManager.html"&gt;KProtocolManager&lt;/a&gt; class. For creating a KIO slave capable of showing a
+directory in a file manager such as Dolphin, the listing property must be set
+to true. As an example, the .json file for the Hello KIO slave described in
+this tutorial looks like this:  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;{  
+    &amp;quot;KDE-KIO-Protocols&amp;quot; : {   
+        &amp;quot;hello&amp;quot;: {   
+            &amp;quot;Class&amp;quot;: &amp;quot;:local&amp;quot;,   
+            &amp;quot;X-DocPath&amp;quot;: &amp;quot;kioslave5/kio_hello.html&amp;quot;,   
+            &amp;quot;exec&amp;quot;: &amp;quot;kf5/kio/hello&amp;quot;,   
+            &amp;quot;input&amp;quot;: &amp;quot;none&amp;quot;,   
+            &amp;quot;output&amp;quot;: &amp;quot;filesystem&amp;quot;,   
+            &amp;quot;protocol&amp;quot;: &amp;quot;hello&amp;quot;,   
+            &amp;quot;reading&amp;quot;: true   
+        }   
+    }   
+}  
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;As for the CMakeLists.txt, you will need to link your KIO slave module with
+KF5::KIOCore. This can be seen in the project directory.  &lt;/p&gt;
+&lt;h4&gt;kio_hello.h&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#ifndef HELLO_H  &lt;/span&gt;
+&lt;span class="cp"&gt;#define HELLO_H  &lt;/span&gt;
+
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;kio/slavebase.h&amp;gt;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+
+&lt;span class="cm"&gt;/**  &lt;/span&gt;
+&lt;span class="cm"&gt;  This class implements a Hello World kioslave  &lt;/span&gt;
+&lt;span class="cm"&gt; */&lt;/span&gt;   
+&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="nl"&gt;Hello&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;QObject&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;KIO&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;SlaveBase&lt;/span&gt;  
+&lt;span class="p"&gt;{&lt;/span&gt;  
+    &lt;span class="n"&gt;Q_OBJECT&lt;/span&gt;   
+&lt;span class="nl"&gt;public&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  
+    &lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
+    &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QUrl&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;Q_DECL_OVERRIDE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
+&lt;span class="p"&gt;};&lt;/span&gt;  
+
+&lt;span class="cp"&gt;#endif  &lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The Hello KIO slave is derived from KIO::SlaveBase. The SlaveBase class has
+some basic functions already implemented for the KIO slave. This can be found
+in the &lt;a href="https://api.kde.org/frameworks/kio/html/classKIO_1_1Sla
+veBase.html"&gt;documentation&lt;/a&gt;. However, most of the functions of SlaveBase are virtual
+functions and have to be re-implemented for the KIO slave. In this case, we
+are re-implementing the get function to print a QString when it is called by
+kioclient5.  &lt;/p&gt;
+&lt;p&gt;In case you don't need special handling of the KIO slave's functions, you can
+derive your KIO slave class directly from &lt;a href="https://a
+pi.kde.org/frameworks/kio/html/classKIO_1_1ForwardingSlaveBase.html"&gt;KIO::ForwardingSlaveBase&lt;/a&gt;. Here,
+you would only need to re-implement the rewriteUrl function to get your KIO
+slave working.  &lt;/p&gt;
+&lt;h4&gt;kio_hello.cpp&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;hello.h&amp;quot;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;QDebug&amp;gt;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+
+&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="nl"&gt;KIOPluginForMetaData&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;QObject&lt;/span&gt;  
+&lt;span class="p"&gt;{&lt;/span&gt;  
+    &lt;span class="n"&gt;Q_OBJECT&lt;/span&gt;   
+    &lt;span class="n"&gt;Q_PLUGIN_METADATA&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IID&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;org.kde.kio.slave.hello&amp;quot;&lt;/span&gt; &lt;span class="kt"&gt;FILE&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;hello.json&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   
+&lt;span class="p"&gt;};&lt;/span&gt;  
+
+&lt;span class="k"&gt;extern&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C&amp;quot;&lt;/span&gt;  
+&lt;span class="p"&gt;{&lt;/span&gt;  
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;Q_DECL_EXPORT&lt;/span&gt; &lt;span class="n"&gt;kdemain&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;argc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   
+    &lt;span class="p"&gt;{&lt;/span&gt;   
+        &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Launching KIO slave.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argc&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;   
+            &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Usage: kio_hello protocol domain-socket1 domain-socket2&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
+            &lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
+        &lt;span class="p"&gt;}&lt;/span&gt;   
+        &lt;span class="n"&gt;Hello&lt;/span&gt; &lt;span class="n"&gt;slave&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;   
+        &lt;span class="n"&gt;slave&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dispatchLoop&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;   
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
+    &lt;span class="p"&gt;}&lt;/span&gt;   
+&lt;span class="p"&gt;}&lt;/span&gt;  
+
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QUrl&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="p"&gt;{&lt;/span&gt;  
+    &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Entering function.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
+    &lt;span class="n"&gt;mimeType&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/plain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
+    &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="nf"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello world!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
+    &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
+    &lt;span class="n"&gt;finished&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;   
+    &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Leaving function&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
+&lt;span class="p"&gt;}&lt;/span&gt;  
+
+&lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+    &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;SlaveBase&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;   
+
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;hello.moc&amp;quot;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The .moc file is, of course, auto-generated at compilation time.  &lt;/p&gt;
+&lt;p&gt;As mentioned earlier, the KIO Slave's .cpp file will also require a new
+KIOPluginForMetaData class to add the .json file. The following is used for
+the hello KIO slave and can be used as an example:  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="n"&gt;KIOPluginForMetaData&lt;/span&gt; : &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;QObject&lt;/span&gt;  
+{  
+    &lt;span class="s"&gt;Q_OBJECT   &lt;/span&gt;
+&lt;span class="s"&gt;    Q_&lt;/span&gt;&lt;span class="n"&gt;PLUGIN_METADATA&lt;/span&gt;(&lt;span class="n"&gt;IID&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;org.kde.kio.slave.hello&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;FILE&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;hello.json&amp;quot;&lt;/span&gt;)   
+};  
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;CMakeLists.txt&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;cmake_minimum_required&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;VERSION&lt;/span&gt; &lt;span class="s"&gt;3.5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;QT_MIN_VERSION&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;5.4.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KF5_MIN_VERSION&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;5.16.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+
+&lt;span class="nb"&gt;find_package&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;ECM&lt;/span&gt; &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;KF5_MIN_VERSION&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="s"&gt;REQUIRED&lt;/span&gt; &lt;span class="s"&gt;NO_MODULE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;  
+    &lt;span class="s"&gt;CMAKE_MODULE_PATH&lt;/span&gt;   
+        &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;CMAKE_MODULE_PATH&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;   
+        &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;ECM_MODULE_PATH&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;   
+        &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;ECM_KDE_MODULE_DIR&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;   
+&lt;span class="p"&gt;)&lt;/span&gt;  
+
+&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KDEInstallDirs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KDECMakeSettings&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KDECompilerSettings&lt;/span&gt; &lt;span class="s"&gt;NO_POLICY_SCOPE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;ECMSetupVersion&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;FeatureSummary&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;add_library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;MODULE&lt;/span&gt; &lt;span class="s"&gt;hello.cpp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;find_package&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KF5&lt;/span&gt; &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;KF5_MIN_VERSION&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="s"&gt;REQUIRED&lt;/span&gt; &lt;span class="s"&gt;KIO&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;target_link_libraries&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;KF5::KIOCore&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="nb"&gt;set_target_properties&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;PROPERTIES&lt;/span&gt; &lt;span class="s"&gt;OUTPUT_NAME&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+
+&lt;span class="nb"&gt;install&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;TARGETS&lt;/span&gt; &lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;DESTINATION&lt;/span&gt; &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;KDE_INSTALL_PLUGINDIR&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="s"&gt;/kf5/kio&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Installation&lt;/h3&gt;
+&lt;p&gt;Simply run the following commands in the source folder:  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;mkdir build  
+cd build  
+cmake -DCMAKE_INSTALL_PREFIX=/usr -DKDE_INSTALL_USE_QT_SYS_PATHS=TRUE ..  
+make  
+sudo make install  
+kdeinit5  
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;As shown above, we have to run kdeinit5 again so the new KIO slave is
+discovered by KLauncher and can be loaded when we run a command through an
+application such as kioclient5.&lt;br /&gt;
+Testing  &lt;/p&gt;
+&lt;p&gt;Run:  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;kioclient5 &amp;#39;cat&amp;#39; &amp;#39;hello:/&amp;#39;  
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And the output should be:  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Hello_world
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="GSoC"></category><category term="Programming"></category><category term="KDE"></category></entry><entry><title>GSoC Update 1: The Beginning</title><link href="http://arnavdhamija.com/blog/gsoc-update-1-beginning.html" rel="alternate"></link><updated>2016-05-30T10:37:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-05-30:blog/gsoc-update-1-beginning.html</id><summary type="html">&lt;p&gt;I have officially started my &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;GSoC
 project&lt;/a&gt; under
 the mentorship of &lt;a href="https://blog.baloneygeek.com/"&gt;Boudhayan Gupta &lt;/a&gt;and &lt;a href="http://blog.pinak.me/"&gt;Pinak
 Ahuja&lt;/a&gt;.  &lt;/p&gt;
