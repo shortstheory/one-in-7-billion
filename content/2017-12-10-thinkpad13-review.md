@@ -31,7 +31,7 @@ I configured my laptop with the following specs for $720 (₹46500):
 
 Since I was saving a fair bit of money by not buying the T460s, I maxed out the CPU with the i5-6300U though I don't ever see myself using vPro. The other upgrades were the RAM and SSD to 8GB and 256GB respectively.
 
-The ThinkPad 13 Gen 2 and Gen 1 share the same chassis, so most of the parts of this review regarding build quality apply for the Gen 2 as well.
+The ThinkPad 13 Gen 2 and Gen 1 share the same chassis, so most of the parts of this review regarding build quality, I/O, and keyboard apply for the Gen 2 as well.
 
 ## Build Quality
 
@@ -73,7 +73,7 @@ Colour space coverage is reportedly below average for an IPS screen and it reall
 
 The ThinkPad 13 is powered by a 42 Wh battery. It has degraded slightly from when I got the laptop - initially the battery was able to hold 46 Wh of charge but now it usually holds 40-41.5 Wh when full. I usually run several Firefox tabs open with some IDE's like VS Code, Atom, or Android Studio on KDE Neon. The laptop is *very* energy efficient and power draw rarely climbs above 6.5W at 30% brightness after enabling TLP. My old laptop used to **idle** at 17W and when people claim that Intel has gimped their CPUs since the IvyBridge era, I think they're disregarding the huge leaps in power efficiency.
 
-In more than a year of owning it, I haven't once drained the battery. I've even gotten through 9-5 days at a summer internship solely off battery power. I can't speak of how good or bad battery life is on Windows 10 as I've never used it for anything other than gaming, which brings me to my next section.
+In more than a year of owning it, I haven't once drained the battery. I've even gotten through 9-5 days at a summer internship solely off battery power. I typically get around 6-8 hours of battery life depending on the usage. I can't speak of how good or bad battery life is on Windows 10 as I've never used it for anything other than gaming, which brings me to my next section.
 
 ## Performance
 
@@ -105,4 +105,4 @@ In my opinion, there's nothing you're missing by running Linux on the 13 instead
 
 ## Conclusion
 
-The ThinkPad 13 is a nice laptop, but it's not for everyone. It fits my workflow perfectly with the good keyboard, display, and build quality. However, not everyone needs as many I/O ports as the 13 has and would probably be better served by the numerous ultrabooks with better displays and bigger batteries. On the other hand, some might jump for a higher-end ThinkPad model like the T460s/T470s with better build quality and connectivity options. That said, the ThinkPad 13 does a lot of things right and fills a niche in the market for small laptops with good keyboards and numerous ports. A lot of compromises made in the ThinkPad 13 are reasonable and if you can live with these compromises, it should definitely be considered for your next laptop.
+The ThinkPad 13 is a nice laptop, but it's not for everyone. It fits my workflow perfectly with the good keyboard, display, and build quality. However, not everyone needs as many I/O ports as the 13 has and they would probably be better served by the numerous ultrabooks with better displays and bigger batteries. On the other hand, some might jump for a higher-end ThinkPad model like the T460s/T470s with better build quality and connectivity options. That said, the ThinkPad 13 does a lot of things right and fills a niche in the market for small laptops with good keyboards and several ports. A lot of compromises made in the ThinkPad 13 are reasonable and if you can live with these compromises, it definitely is worthy of consideration for your next laptop.
