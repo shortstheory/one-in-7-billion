@@ -5,11 +5,11 @@ tags: Tech, Misc
 category: Article
 slug: thinkpad-13-review
 
-It's been over a year since I switched laptops and I want to share my thoughts on my current one - the Lenovo ThinkPad 13 Gen 1. Before getting this laptop, I had been using a Lenovo IdeaPad G580 which I had gotten back in 2013. While that laptop suited my needs at the time, the unwieldy 15.6" display, sub-standard 2 hrs battery life, and a hefty weight of 2.8kg just wasn't cutting it for college. I decided to go for a smaller laptop with good battery life to replace it. I was pretty satisfied with the performance of the IdeaPad so anything as good or better than its i5-3230M was enough for me.
+It's been over a year since I switched laptops and I want to share my thoughts on my current one - the Lenovo ThinkPad 13 Gen 1. Before getting this laptop, I had been using a Lenovo IdeaPad G580 which I had gotten back in 2013. While that laptop suited my needs at the time, the unwieldy 15.6" display, sub-standard 2 hrs battery life, and weight of 2.8kg just wasn't cutting it for college. I decided to go for a smaller laptop with good battery life to replace it. I was pretty satisfied with the performance of the IdeaPad so anything as good or better than its i5-3230M was enough for me.
 
 The first laptop which I looked at was the Asus UX305LA which ticked most of my boxes. However, some reviews had stated that its build quality was questionable so I decided to hold out for a better laptop. I later stumbled upon the Lenovo ThinkPad T460(s) which looked perfect for my needs but was just a touch out of my budget. While I was considering this, news began to surface about a 13.3" ThinkPad releasing soon, later to be known as the ThinkPad 13.
 
-It wasn't an easy decision between the T460s and the 13. The T460s was definitely a more charming laptop but there were just too many drawbacks for it to be a serious contender. I found several negative reviews regarding the battery life and the 1080p display lottery. The ThinkPad 13 wasn't without issues of its own, but there wasn't a single review that hadn't sung praises about its keyboard, battery life, and overall value proposition. Plus it came with a USB Type-C port, dual upgradeable RAM slots, and was at least $200 cheaper than a comparitively specced T460s.
+It wasn't an easy decision between the T460s and the 13. The T460s was definitely a more charming laptop but there were just too many drawbacks for it to be a serious contender. I found several negative reviews regarding the battery life and the 1080p display lottery. The ThinkPad 13 wasn't without issues of its own, but there wasn't a single review that hadn't sung praises about its keyboard, battery life, and overall value proposition. Plus it came with a USB Type-C port, dual upgradeable RAM slots, and was at least $200 cheaper than a comparatively specced T460s.
 
 I got the silver version of the ThinkPad 13. Die-hard ThinkPad fans may condemn a non-black ThinkPad, but I think it looks great. Plus, the silver version came with the free 1080p IPS display upgrade. It also has a better choice of materials with an aluminium lid in place of the ABS plastic lid found on the black version of the ThinkPad 13.
 
@@ -53,9 +53,9 @@ Fortunately, all the damage is only cosmetic and the laptop has held up pretty w
 
 ## I/O
 
-Connectivity is a strong point for the ThinkPad 13. It's impressive to see how many ports there are on a laptop of this size! You get 3 USB-A ports running at USB 3.0 speeds, a full size HDMI port, an SD card reader in which the card goes all the way in, a headphone jack, *and* a USB-C port supporting charging and 2160p/60fps video out. There's also Lenovo's propietary OneLink+ docking solution though I haven't tried this out yet.
+Connectivity is a strong point for the ThinkPad 13. It's impressive to see how many ports there are on a laptop of this size! You get 3 USB-A ports running at USB 3.0 speeds, a full size HDMI port, an SD card reader in which the card goes all the way in, a headphone jack, *and* a USB-C port supporting charging and 2160p/60fps video out. There's also Lenovo's proprietary OneLink+ docking solution though I haven't tried this out yet.
 
-On the subject of the USB-C port, a minor nitpick is that it's USB 3.1 Gen1 and doesn't support Thunderbolt. I still much prefer it to the option of having a full size ethernet port as on the T460s. The USB-C port is so much more flexible.
+On the subject of the USB-C port, a minor nitpick is that it's USB 3.1 Gen1 and doesn't support Thunderbolt. I still much prefer it to the option of having a full size Ethernet port as on the T460s. The USB-C port is so much more flexible.
 
 I also discovered that all the USB ports support fast (faster?) charging. My phone charges as fast from the laptop's USB port as it does from a 5V/1.5A charger.
 
@@ -81,7 +81,7 @@ Subjectively, it's quite snappy. A lot of the performance improvements compared 
 
 The i5-6300U is sufficient for my needs and thermals in the ThinkPad 13 are good enough that the laptop doesn't need to throttle even under prolonged loads. The processor cools passively most of the time and the fan only kicks in under load. Even so, I'm hard pressed to hear the fan below 4000RPM. The CPU is able to overclock to 2.9 GHz on both cores but I've rarely seen it climb over 2.8 GHz. I'm not sure if this is due to the 15W TDP of the SoC or the laptop's conservative policy when it comes to cooling as core temperatures never climb over 75C on Prime95.
 
-As far as programming goes, it's not struggled with anything I've thrown at it - from buidling large C++ codebases to running instances of IntelliJ and Android Studio (with the x86 Android emulator) together. The CPU is definitely faster than the i5-3230M in my old laptop.
+As far as programming goes, it's not struggled with anything I've thrown at it - from building large C++ codebases to running instances of IntelliJ and Android Studio (with the x86 Android emulator) together. The CPU is definitely faster than the i5-3230M in my old laptop.
 
 Plus, for the first time, gaming isn't a terrible experience on integrated graphics if your expectations are low enough. I can get 30fps in Skyrim Legendary Edition at 720p and Medium graphics presets with 2X AA. DiRT3 and Mirror's Edge gave about 60fps at 720p with low settings. Sonic Mania works perfectly at 1080p 60fps. On the other hand, it struggled with returning a framerate greater than 30fps on Sonic Generations. Bear in mind that all this is with single channel 8GB RAM. Performance *could* be better with dual channel RAM.
 
@@ -95,7 +95,7 @@ Really good! For years, I used to think that the AccuType keyboard on my Lenovo 
 
 It turns out that the keyboard on the 13 is *exactly* the same as the one on the T460s. I learned this by ruining the stock keyboard when doing my weekly round of sterilising all my electronic devices. AliExpress didn't have the silver 13 keyboard but the 13's FRU manual showed that the T460s keyboard (albeit black instead of silver) could be directly dropped in. After a month of waiting to get it shipped from China, it was a simple 10 minute job to replace the keyboard. Props to Lenovo for reusing FRUs and keeping the 13 so serviceable.
 
-I'm pretty happy with the touchpad as well. It has a smooth surface and has a very satisfying physical click to it. Gestures work well and it's supported out of the box on Linux. The TrackPoint and click buttons have become indispensable for coding. However, I'm dissappointed about how fast the TrackPoint's coating wears off as it becomes really difficult to use the shallow TrackPoint once this happens. ThinkPads really should ship with some replacment caps.
+I'm pretty happy with the touchpad as well. It has a smooth surface and has a very satisfying physical click to it. Gestures work well and it's supported out of the box on Linux. The TrackPoint and click buttons have become indispensable for coding. However, I'm disappointed about how fast the TrackPoint's coating wears off as it becomes really difficult to use the shallow TrackPoint once this happens. ThinkPads really should ship with some replacement caps.
 
 ## Linux Support
 
