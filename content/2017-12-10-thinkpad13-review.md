@@ -13,7 +13,7 @@ It wasn't an easy decision between the T460s and the 13. The T460s was definitel
 
 I got the silver version of the ThinkPad 13. Die-hard ThinkPad fans may condemn a non-black ThinkPad, but I think it looks great. Plus, the silver version came with the free 1080p IPS display upgrade. It also has a better choice of materials with an aluminium lid in place of the ABS plastic lid found on the black version of the ThinkPad 13.
 
-I configured my laptop with the following specs for $730:
+I configured my laptop with the following specs for $720 (₹46500):
 
 * Intel Core i5-6300U Processor (3MB Cache, up to 3.00GHz)
 * Windows 10 Home 64 English
@@ -45,7 +45,7 @@ One aside here, the 13 does have unique touches not found on higher end models. 
 
 Opening the laptop for servicing and upgrading is not a good experience. The bottom base is held by 10 captive screws and is incredibly fiddly to pry open. I ended up scratching off some of the paint of the bottom cover in the two times I tried opening the base. That said, upgradability is much better than what you can find on comparable ultrabooks. Both DDR4 RAM slots, the M.2 SATA SSD (no NVMe on the Gen 1 unfortunately), the Wi-Fi card, and battery can be easily replaced.
 
-The touchpad has its share of mechanical issues too. It is a clickpad design, similar to that found on MacBooks. Sometimes dust and debris would find its way in the gap between the base of the laptop and the touchpad causing the right button to physically stop clicking. It's a simple problem to fix and all it needs is a swab with a piece of thick paper under the touchpad. Nevertheless, I expected a more robust design. At least this problem isn't exclusive to the 13, it seems to happen to the T450s as well.
+The touchpad has its share of mechanical issues too. It is a clickpad design, similar to that found on MacBooks. Sometimes dust and debris would find its way in the gap between the base of the laptop and the touchpad causing the right button to physically stop clicking. It's a simple problem to fix and all it needs is a swab with a piece of thick paper under the touchpad. Nevertheless, I expected a more robust design. At least this problem isn't exclusive to the 13 as it seems to happen to the T450s as well.
 
 Lastly, the plastic construction does have some drawbacks when it comes to scratches. Part of the lid is plastic and is much more scratched up than the aluminium part of it. After a year, the base unit also had some paint rubbing off from the edges. I would suggest buying a carrying sleeve to avoid this from happening. The silver palmrests also have taken a slightly darker shade to the rest of the laptop.
 
