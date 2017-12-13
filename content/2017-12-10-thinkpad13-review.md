@@ -41,13 +41,13 @@ You can immediately tell it isn't made from the fancy composites of the X1 Carbo
 
 The hinges are nice and tight and the lid gives a satisfying thump on closing. Speaking of which, the aluminium lid is solid and protects the display nicely. However, it does give the laptop a heterogeneous look and feel with the rest of the frame being made of plastic.
 
-One aside here, the 13 does have unique touches not found on higher end models. For example, the "i's" in the ThinkPad in both the lid and the palm-rest glow and ThinkPad logo has a really nice brushed finish to it on the lid.
+One aside here, the 13 does have unique touches not found on higher end models. For example, the "i's" in the ThinkPad logo in both the lid and the palm-rest glow and the ThinkPad logo has a really nice brushed finish to it on the lid.
 
 Opening the laptop for servicing and upgrading is not a good experience. The bottom base is held by 10 captive screws and is incredibly fiddly to pry open. I ended up scratching off some of the paint of the bottom cover in the two times I tried opening the base. That said, upgradability is much better than what you can find on comparable ultrabooks. Both DDR4 RAM slots, the M.2 SATA SSD (no NVMe on the Gen 1 unfortunately), the Wi-Fi card, and battery can be easily replaced.
 
 The touchpad has its share of mechanical issues too. It is a clickpad design, similar to that found on MacBooks. Sometimes dust and debris would find its way in the gap between the base of the laptop and the touchpad causing the right button to physically stop clicking. It's a simple problem to fix and all it needs is a swab with a piece of thick paper under the touchpad. Nevertheless, I expected a more robust design. At least this problem isn't exclusive to the 13 as it seems to happen to the T450s as well.
 
-Lastly, the plastic construction does have some drawbacks when it comes to scratches. Part of the lid is plastic and is much more scratched up than the aluminium part of it. After a year, the base unit also had some paint rubbing off from the edges. I would suggest buying a carrying sleeve to avoid this from happening. The silver palmrests also have taken a slightly darker shade to the rest of the laptop.
+Lastly, the plastic construction does have some drawbacks when it comes to scratches. A small section of the lid joining it to the hinges is plastic and is much more scratched up than the aluminium part of it. After a year, the base unit also had some paint rubbing off from the edges. I would suggest buying a carrying sleeve to avoid this from happening. The silver palmrests also have taken a slightly darker shade to the rest of the laptop.
 
 Fortunately, all the damage is only cosmetic and the laptop has held up pretty well after being jostled around campus for more than a year.
 
@@ -65,7 +65,7 @@ Wireless connectivity is serviced by the Intel 8260 Wi-Fi card, the same one use
 
 You can't really go wrong with a 1080p IPS display on  a 13.3" laptop.
 
-The display on my laptop is the LG 1080p IPS display with a matte coating. Even for an IPS display, the viewing angles are excellent. 13.3" and 1080p is a sweet spot for sharpness and UIs scale fine in both KDE Neon and Windows 10. Thanks to the matte coating, the screen brightness is perfectly sufficient 90% of the time when I use it. I've hardly run into any instances where I felt the need to crank the screen brightness any higher.
+The LG 1080p IPS display on ThinkPad 13 comes with a matte coating. Even for an IPS display, the viewing angles are excellent. 13.3" and 1080p is a sweet spot for sharpness and UIs scale fine in both KDE Neon and Windows 10. Thanks to the matte coating, the screen brightness is perfectly sufficient 90% of the time when I use it. I've hardly run into any instances where I felt the need to crank the screen brightness any higher.
 
 Colour space coverage is reportedly below average for an IPS screen and it really shows when put side by side with a MacBook Pro or a Dell Inspiron 7460. That said, for coding and web-browsing, it's hard to ask for more.
 
@@ -85,7 +85,7 @@ As far as programming goes, it's not struggled with anything I've thrown at it -
 
 Plus, for the first time, gaming isn't a terrible experience on integrated graphics if your expectations are low enough. I can get 30fps in Skyrim Legendary Edition at 720p and Medium graphics presets with 2X AA. DiRT3 and Mirror's Edge gave about 60fps at 720p with low settings. Sonic Mania works perfectly at 1080p 60fps. On the other hand, it struggled with returning a framerate greater than 30fps on Sonic Generations. Bear in mind that all this is with single channel 8GB RAM. Performance *could* be better with dual channel RAM.
 
-Load times in all games are much lesser than they would be on a console like the PS4 thanks to the SSD.
+Load times in all games are much lesser than they would be on a gaming console such as the PS4 thanks to the SSD.
 
 Overall, as long as you don't mind running old games at 720p with some sacrifice in visual quality, the integrated Intel HD 520 should be adequate. At least it's good at smooth 4K video playback.
 
@@ -95,7 +95,7 @@ Really good! For years, I used to think that the AccuType keyboard on my Lenovo 
 
 It turns out that the keyboard on the 13 is *exactly* the same as the one on the T460s. I learned this by ruining the stock keyboard when doing my weekly round of sterilising all my electronic devices. AliExpress didn't have the silver 13 keyboard but the 13's FRU manual showed that the T460s keyboard (albeit black instead of silver) could be directly dropped in. After a month of waiting to get it shipped from China, it was a simple 10 minute job to replace the keyboard. Props to Lenovo for reusing FRUs and keeping the 13 so serviceable.
 
-I'm pretty happy with the touchpad as well. It has a smooth surface and has a very satisfying physical click to it. Gestures work well and it's supported out of the box on Linux. The TrackPoint and click buttons have become indispensable for coding. However, I'm disappointed about how fast the TrackPoint's coating wears off as it becomes really difficult to use the shallow TrackPoint once this happens. ThinkPads really should ship with some replacement caps.
+I'm pretty happy with the touchpad as well. It has a smooth surface and has a very satisfying physical click to it. Gestures work well and it's supported out of the box on Linux. The TrackPoint and click buttons have become indispensable for programming. However, I'm disappointed about how fast the TrackPoint's coating wears off as it becomes really difficult to use the shallow TrackPoint once this happens. ThinkPads really should ship with some replacement caps.
 
 ## Linux Support
 
