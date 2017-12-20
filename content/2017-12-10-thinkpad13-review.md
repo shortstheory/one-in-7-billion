@@ -29,6 +29,8 @@ I configured my laptop with the following specs for $720 (₹46500):
 * Intel Dual Band Wireless-AC(2x2) 8260, Bluetooth Version 4.1 vPro
 * 13.3" FHD (1920 x 1080) IPS Anti-Glare, 220 nits
 
+I don't think the Windows 10 version is available in India presently. I believe a watered down Chromebook version is available on Amazon.
+
 Since I was saving a fair bit of money by not buying the T460s, I maxed out the CPU with the i5-6300U though I don't ever see myself using vPro. The other upgrades were the RAM and SSD to 8GB and 256GB respectively.
 
 The ThinkPad 13 Gen 2 and Gen 1 share the same chassis, so most of the parts of this review regarding build quality, I/O, and keyboard apply for the Gen 2 as well.
