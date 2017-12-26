@@ -13,7 +13,9 @@ Though contrived for comical purposes, this episode holds something very profoun
 
 Jerry also makes a brilliant off-hand remark to George in this episode, *"If every instinct you have is wrong...then the opposite would have to be right!"*.
 
-.. youtube:: cKUvKE3bQlY
+<div class="youtube youtube-16x9">
+<iframe src="https://www.youtube.com/embed/cKUvKE3bQlY" allowfullscreen seamless frameBorder="0"></iframe>
+</div>
 
 Perhaps it's a primal urge to follow your instincts, after all, your instincts are a product of your past experiences which have kept you alive till now. On the other hand, I feel a lot of it also has to do with getting into the comfort zone of being able to challenge your own perceptions. When you've been doing something wrong unconciously, it becomes much harder to accept the fact that you were doing it wrong later on. Your brain accustoms itself to behaving in a certain way to a stimulus and left unchecked, this becomes a part of your personality. This is why I think shifting out of self-harmful behaviour is so hard.
 
