@@ -58,7 +58,7 @@ COVER_IMG_URL = '/images/StarStaX_IMG_9937-IMG_9966_lighten.jpg'
 PROFILE_IMG_URL = '/images/profile.jpg'
 
 PLUGIN_PATHS = ['pelican-plugins']
-PLUGINS = ['disqus_static', 'photos']
+PLUGINS = ['disqus_static', 'photos', 'pelican_youtube']
 
 PHOTO_LIBRARY = "content/images"
 PHOTO_ARTICLE = (760, 506, 80)
