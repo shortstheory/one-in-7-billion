@@ -27,4 +27,3 @@ There is a poignant quote I've saved from Anne Lammot's Bird by Bird about not l
 
 Maybe the best way out lies in our mistakes, or rather, the opposite of them.
 
-![]({filename}/images/george.jpg)
