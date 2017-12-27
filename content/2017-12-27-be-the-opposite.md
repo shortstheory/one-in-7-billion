@@ -11,13 +11,13 @@ But that's not what I'm going to write about in this blog post. "The Opposite" h
 
 Though contrived for comical purposes, this episode holds something very profound under its veil of light-hearted comedy. The series goes to show that even when it's painfully obvious that you're clearly doing something wrong, it can be impossible to get out of the self-induced loop of listening to your instincts. 
 
-Jerry also makes a brilliant off-hand remark to George in this episode, *"If every instinct you have is wrong...then the opposite would have to be right!"*.
+Jerry also drives this home with an understatedly profound remark in this episode, *"If every instinct you have is wrong...then the opposite would have to be right!"*.
 
 <div class="youtube youtube-16x9">
 <iframe src="https://www.youtube.com/embed/cKUvKE3bQlY" allowfullscreen seamless frameBorder="0"></iframe>
 </div>
 
-Perhaps it's a primal urge to follow your instincts, after all, your instincts are a product of your past experiences which have kept you alive till now. On the other hand, I feel a lot of it also has to do with getting into the comfort zone of being able to challenge your own perceptions. When you've been doing something wrong unconciously, it becomes much harder to accept the fact that you were doing it wrong later on. Your brain accustoms itself to behaving in a certain way to a stimulus and left unchecked, this becomes a part of your personality. This is why I think shifting out of self-harmful behaviour is so hard.
+Perhaps it's a primal urge to follow your instincts, after all, your instincts are a product of your past experiences which have kept you alive till now. On the other hand, I feel a lot of it also has to do with getting into the comfort zone of being able to challenge your own perceptions. When you've been doing something wrong unconsciously, it becomes much harder to accept the fact that you were doing it wrong later on. Your brain accustoms itself to behaving in a certain way to a stimulus and left unchecked, this becomes a part of your personality. This is why I think shifting out of self-harmful behavior is so hard.
 
 I've been a victim of falling to the trap of my own instincts ever since I joined college. Through much time spent brooding and many moments of soul-searching through my daily diary entries, I was exactly aware of what I was unhappy with in life and what I had to do to fix it. Most of my problems could be traced down to a lack of self-esteem, but I was more than willing to wallow in pity than do anything about it. It was only a few months ago I decided to improve things by increasing physical activity and social exposure. There were many times I had a familiar nagging of doubt, but this too subsided as soon as I saw things *can* actually get better by not listening to yourself.
 
