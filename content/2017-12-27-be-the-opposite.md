@@ -1,4 +1,4 @@
-title: Be "The Opposite"
+title: Be The Opposite
 date: 2017-12-28 10:29
 author: Arnav Dhamija
 tags: Life, Misc
