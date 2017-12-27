@@ -5,7 +5,7 @@ tags: Life, Misc
 category: Article
 slug: be-the-opposite
 
-"The Opposite" (S05E21) was a watershed episode for Seinfeld. Not only did the series' direction change hands from Tom Cherones to Andy Ackerman after it, but the plots also became more focussed on the personality flaws in the characters rather than the bizarre situations they got themselves into. "The Opposite" was probably the only episode in which these two tropes combined, making for something quite unlike any other Seinfeld episode. 
+"The Opposite" (S05E21) was a watershed episode for Seinfeld. Not only did the series' direction change hands from Tom Cherones to Andy Ackerman after it, but the plots also became more focussed on the personality flaws in the characters rather than the bizarre situations they got themselves into. "The Opposite" was probably the only episode in which these two tropes converged, making for something quite unlike any other Seinfeld episode. 
 
 But that's not what I'm going to write about in this blog post. "The Opposite" has personal meaning for other reasons. As a short summary of the A-plot of this episode - George, a stout, balding, middle-aged man with no prospects with either a career or with the opposite sex, decides to act contrary to every instinct he's ever had. In a span of less than a day after doing so, he ends up with a new partner, a job with the New York Yankees, and finally gets the means to move out from his much beleaguered parents' house.
 
