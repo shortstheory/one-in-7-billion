@@ -4,6 +4,7 @@ author: Arnav Dhamija
 tags: Ardupilot, GSoC, Programming
 category: Article
 slug: ardupilot-gsoc-intro
+sidebarimage: ../images/qcside.jpg
 
 ![]({filename}/images/ardupilot_logo.jpg)
 
