@@ -34,5 +34,5 @@ Enter [RTCP](https://tools.ietf.org/html/rfc3550). This is the official sibling 
 I'll be sharing my experiences with the H.264 video encoders and hardware in my next post.
 
 **Other links**
-* My GSoC Proposal for [Ardupilot](https://docs.google.com/document/d/17iZgdBqVHGa-ny3XQ73sAKmYxeUcWsS3eeeKzBS8F4s/edit?usp=sharing)
-* Previous [GSoC Posts](http://arnavdhamija.com/blog/tag/gsoc.html)
+1) My GSoC Proposal for [Ardupilot](https://docs.google.com/document/d/17iZgdBqVHGa-ny3XQ73sAKmYxeUcWsS3eeeKzBS8F4s/edit?usp=sharing)
+2) Previous [GSoC Posts](http://arnavdhamija.com/blog/tag/gsoc.html)
