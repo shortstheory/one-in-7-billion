@@ -79,9 +79,9 @@
 <p>Youtube's powerful servers have no trouble encoding a video several times, but this approach is far too processing intensive to be carried out on a rather anemic Raspberry Pi. Furthermore, DASH relies on QoS (short for Quality of Service which includes parameters like bitrate, jitter, packet loss, etc) reports using TCP ACK messages. This causes more issues as we need to stream the video down using RTP over UDP instead of TCP. The main draw of UDP for livestreaming is that performs  better than TCP does on low bandwidth connections due to its smaller overhead. Unlike TCP which places guarantees on message delivery through ACKs, UDP is purely best effort and has no concept of ACKs at the transport layer. This means we would need some kind of ACK mechanism at the application layer to measure the QoS.</p>
 <p>Enter <a href="https://tools.ietf.org/html/rfc3550">RTCP</a>. This is the official sibling protocol to RTP which among other things, reports packet loss, cumulative sequence number received, and jitter. In other words - it's everything but the kitchen sink for QoS reports for multimedia over UDP! What's more, GStreamer natively integrates RTCP report handling. This is the approach I'll be using for getting estimated bandwidth reports from each receiver.</p>
 <p>I'll be sharing my experiences with the H.264 video encoders and hardware in my next post.</p>
-<p><strong>Other links</strong>
-1) My GSoC Proposal for <a href="https://docs.google.com/document/d/17iZgdBqVHGa-ny3XQ73sAKmYxeUcWsS3eeeKzBS8F4s/edit?usp=sharing">Ardupilot</a>
-2) Previous <a href="http://arnavdhamija.com/blog/tag/gsoc.html">GSoC Posts</a></p>
+<p><strong>Other links</strong></p>
+<p>1) My GSoC Proposal for <a href="https://docs.google.com/document/d/17iZgdBqVHGa-ny3XQ73sAKmYxeUcWsS3eeeKzBS8F4s/edit?usp=sharing">Ardupilot</a></p>
+<p>2) Previous <a href="http://arnavdhamija.com/blog/tag/gsoc.html">GSoC Posts</a></p>
             <a href="#" class="go-top">Go Top</a>
     <div class="comments">
         <div id="disqus_thread"></div>
