@@ -6,6 +6,8 @@ category: Article
 slug: ardupilot-gsoc-update
 sidebarimage: ../images/qcside.jpg
 
+![]({filename}/images/qcopter-stock.jpg)
+
 Much time has passed and much code has been written since my last update. Adaptive Streaming (a better name TBD) for Ardupilot is nearly complete and brings a whole slew of features useful for streaming video from cameras on robots to laptops, phones, and tablets:
 
 * Automatic quality selection based on bandwidth and packet loss estimates
