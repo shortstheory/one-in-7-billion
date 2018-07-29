@@ -88,11 +88,14 @@
 <p>Compression algorithms are used in all kinds of media, such as JPEG for still images and MP3 for audio. H.264 is one of several compression algorithms available for video. H.264 takes advantage of the fact that a lot of the information in video between frames is redundant. so instead of saving 30 frames for 1 second of 30fps video, it saves one entire frame (known as the Key Frame or I-Frame) of video and computes and stores only the differences in frames with respect to the keyframe for the subsequent 29 frames. H.264 also applies some logic to <em>predict</em> future frames to further reduce the file size. </p>
 <p>This is by no means close to a complete explanation of how H.264 works, for further reading I suggest checking out Sid Bala's <a href="https://sidbala.com/h-264-is-magic/">explanation</a> on the topic.</p>
 <p>The legendary Tom Scott also has a fun <a href="https://www.youtube.com/watch?v=r6Rp-uo6HmI">video explaining how H.264 is adversely affected by snow and confetti</a>!</p>
-<p>.. youtube:: r6Rp-uo6HmI</p>
+<div class="youtube youtube-16x9">
+<iframe src="https://www.youtube.com/embed/r6Rp-uo6HmI" allowfullscreen seamless frameBorder="0"></iframe>
+</div>
+
 <p>The frequency of capturing keyframes can be set by changing the encoder parameters. In the context of live video streaming over unstable links such as WiFi, this is very important as packet loss can cause keyframes to be dropped. Dropped keyframes severely impact the quality of the video until a new keyframe is received. This is because all the frames transmitted after the keyframe only store the differences with respect to the keyframe and do not actually store a full picture on their own.</p>
 <p>Increasing the keyframe interval means we send a large, full frame less frequently, but also means we would suffer from terrible video quality for an extended period of time on losing a keyframe. On the other hand, shorter keyframe intervals can lead to a wastage of bandwidth.</p>
 <p>I found that a keyframe interval of every 10 frames worked much better than the default interval of 60 frames without impacting bandwidth usage too significantly.</p>
-<p>Lastly, H.264 video encoding is a very computationally expensive algorithm. Software-based implementations of H.264 such as <code>x264enc</code> are well supported with several configurable parameters but have prohibitively high CPU requirements, making it all but impossible to livestream H.264 encoded video from low power embedded systems. Fortunately, the Raspberry Pi's Broadcom BCM2837 SoC has a dedicated H.264 hardware encoder pipeline for the Raspberry Pi camera which drastically reduces the CPU load in high definition H.264 encoding. Some webcams such as the Logitech C920 and higher have onboard H.264 hardware encoding thanks to special ASIC's dedicated for this purpose. </p>
+<p>Lastly, H.264 video encoding is a very computationally expensive algorithm. Software-based implementations of H.264 such as <code>x264enc</code> are well supported with several configurable parameters but have prohibitively high CPU requirements, making it all but impossible to livestream H.264 encoded video from low power embedded systems. Fortunately, the Raspberry Pi's Broadcom BCM2837 SoC has a dedicated H.264 hardware encoder pipeline for the Raspberry Pi camera which drastically reduces the CPU load in high definition H.264 encoding. Some webcams such as the Logitech C920 and higher have onboard H.264 hardware encoding thanks to special ASIC's dedicated for this purpose.</p>
 <p>Adaptive Streaming probes for the type of encoding supported by the webcam and whether it has the IOCTL's required for changing the encoding parameters on-the-fly.</p>
 <p>H.264 has been superseded by the more efficient H.265 encoding algorithm, but the CPU requirements for H.265 are even higher and it doesn't enjoy the same hardware support as H.264 does for the time being.</p>
 <h2>GUI</h2>
@@ -103,8 +106,8 @@
 <p><code>gst-launch-1.0 playbin uri=&lt;RTSP Mount Point&gt; latency=100</code></p>
 <p>In the scope of the GSoC timeline, I'm looking to wind down the project by working on documentation, testing, and reducing the cruft from the codebase. I'm looking forward to integrating this with companion repository soon!</p>
 <p>Links to the code:</p>
-<p>https://github.com/shortstheory/adaptive-streaming</p>
-<p>https://github.com/shortstheory/APWeb</p>
+<p><a href="https://github.com/shortstheory/adaptive-streaming">https://github.com/shortstheory/adaptive-streaming</a></p>
+<p><a href="https://github.com/shortstheory/APWeb">https://github.com/shortstheory/APWeb</a></p>
             <a href="#" class="go-top">Go Top</a>
     <div class="comments">
         <div id="disqus_thread"></div>

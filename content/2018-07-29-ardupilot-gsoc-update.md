@@ -47,7 +47,9 @@ This is by no means close to a complete explanation of how H.264 works, for furt
 
 The legendary Tom Scott also has a fun [video explaining how H.264 is adversely affected by snow and confetti](https://www.youtube.com/watch?v=r6Rp-uo6HmI)!
 
-.. youtube:: r6Rp-uo6HmI
+<div class="youtube youtube-16x9">
+<iframe src="https://www.youtube.com/embed/r6Rp-uo6HmI" allowfullscreen seamless frameBorder="0"></iframe>
+</div>
 
 The frequency of capturing keyframes can be set by changing the encoder parameters. In the context of live video streaming over unstable links such as WiFi, this is very important as packet loss can cause keyframes to be dropped. Dropped keyframes severely impact the quality of the video until a new keyframe is received. This is because all the frames transmitted after the keyframe only store the differences with respect to the keyframe and do not actually store a full picture on their own.
 
@@ -55,7 +57,7 @@ Increasing the keyframe interval means we send a large, full frame less frequent
 
 I found that a keyframe interval of every 10 frames worked much better than the default interval of 60 frames without impacting bandwidth usage too significantly.
 
-Lastly, H.264 video encoding is a very computationally expensive algorithm. Software-based implementations of H.264 such as ```x264enc``` are well supported with several configurable parameters but have prohibitively high CPU requirements, making it all but impossible to livestream H.264 encoded video from low power embedded systems. Fortunately, the Raspberry Pi's Broadcom BCM2837 SoC has a dedicated H.264 hardware encoder pipeline for the Raspberry Pi camera which drastically reduces the CPU load in high definition H.264 encoding. Some webcams such as the Logitech C920 and higher have onboard H.264 hardware encoding thanks to special ASIC's dedicated for this purpose. 
+Lastly, H.264 video encoding is a very computationally expensive algorithm. Software-based implementations of H.264 such as ```x264enc``` are well supported with several configurable parameters but have prohibitively high CPU requirements, making it all but impossible to livestream H.264 encoded video from low power embedded systems. Fortunately, the Raspberry Pi's Broadcom BCM2837 SoC has a dedicated H.264 hardware encoder pipeline for the Raspberry Pi camera which drastically reduces the CPU load in high definition H.264 encoding. Some webcams such as the Logitech C920 and higher have onboard H.264 hardware encoding thanks to special ASIC's dedicated for this purpose.
 
 Adaptive Streaming probes for the type of encoding supported by the webcam and whether it has the IOCTL's required for changing the encoding parameters on-the-fly.
 
@@ -77,6 +79,6 @@ In the scope of the GSoC timeline, I'm looking to wind down the project by worki
 
 Links to the code:
 
-https://github.com/shortstheory/adaptive-streaming
+[https://github.com/shortstheory/adaptive-streaming](https://github.com/shortstheory/adaptive-streaming)
 
-https://github.com/shortstheory/APWeb
+[https://github.com/shortstheory/APWeb](https://github.com/shortstheory/APWeb)
