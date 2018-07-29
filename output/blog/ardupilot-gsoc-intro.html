@@ -63,10 +63,10 @@
                         </p>
                 </header>
             </section>
-            <p><img alt="" src="http://arnavdhamija.com/images/ardupilot_logo.jpg" /></p>
+            <p><img alt="" src="http://arnavdhamija.com/images/ardupilot_logo.jpg"></p>
 <p>I'm really excited to say that I'll be working with <a href="ardupilot.org">Ardupilot</a> for the better part of the next two months! Although this is the second time I'm making a foray into Open Source Development, the project at hand this time is quite different from what I had worked on in my first GSoC project.</p>
 <p>Ardupilot is an open-source autopilot software for several types of semi-autonomous robotic vehicles including multicopters, fixed-wing aircraft, and even marine vehicles such as boats and submarines. As the name suggests, Ardupilot was formerly based on the Arduino platform with the APM2.x flight controllers which boasted an ATMega2560 processor. Since then, Ardupilot has moved on to officially supporting much more advanced boards with significantly better processors and more robust hardware stacks. That said, these flight controllers contain application specific embedded hardware which is unsuitable for performing intensive tasks such as real-time object detection or video processing.</p>
-<p><img alt="" src="http://arnavdhamija.com/images/apsync-configurator.png" /></p>
+<p><img alt="" src="http://arnavdhamija.com/images/apsync-configurator.png"></p>
 <p><em>CC Setup with a Flight Computer</em></p>
 <p><a href="http://ardupilot.org/dev/docs/apsync-intro.html">APSync</a> is a recent Ardupilot project which aims to ameliorate the limited processing capability of the flight controllers by augmenting them with so-called companion computers (CCs). As of writing, APSync officially supports the Raspberry Pi 3B(+) and the NVidia Jetson line of embedded systems. One of the more popular use cases for APSync is to enable out-of-the-box live video streaming from a vehicle to a laptop. This works by using the CC's onboard WiFi chip as a WiFi hotspot to stream the video using GStreamer. However, the current implementation has some shortcomings which are:</p>
 <ul>

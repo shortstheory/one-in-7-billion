@@ -1,8 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>A Singularity</title><link href="http://arnavdhamija.com/" rel="alternate"></link><link href="http://arnavdhamija.com/feeds/tag_programming.atom.xml" rel="self"></link><id>http://arnavdhamija.com/</id><updated>2018-06-05T18:30:00+05:30</updated><entry><title>GSoC 2018 - New Beginnings</title><link href="http://arnavdhamija.com/blog/ardupilot-gsoc-intro.html" rel="alternate"></link><updated>2018-06-05T18:30:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2018-06-05:blog/ardupilot-gsoc-intro.html</id><summary type="html">&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/ardupilot_logo.jpg" /&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>A Singularity - Programming</title><link href="http://arnavdhamija.com/" rel="alternate"></link><link href="http://arnavdhamija.com/feeds/tag_programming.atom.xml" rel="self"></link><id>http://arnavdhamija.com/</id><updated>2018-07-22T22:30:00+05:30</updated><entry><title>GSoC 2018 - Batteries Included!</title><link href="http://arnavdhamija.com/blog/ardupilot-gsoc-update.html" rel="alternate"></link><published>2018-07-22T22:30:00+05:30</published><updated>2018-07-22T22:30:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2018-07-22:/blog/ardupilot-gsoc-update.html</id><summary type="html">&lt;p&gt;Much time has passed and much code has been written since my last update. Adaptive Streaming (a better name TBD) for Ardupilot is nearly complete and brings a whole slew of features useful for streaming video from cameras on robots to laptops, phones, and tablets:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Automatic quality selection based on …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;Much time has passed and much code has been written since my last update. Adaptive Streaming (a better name TBD) for Ardupilot is nearly complete and brings a whole slew of features useful for streaming video from cameras on robots to laptops, phones, and tablets:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Automatic quality selection based on bandwidth and packet loss estimates&lt;/li&gt;
+&lt;li&gt;Options to record the live-streamed video feed to the companion computer (experimental!)&lt;/li&gt;
+&lt;li&gt;Fine tuned control over resolution and framerates&lt;/li&gt;
+&lt;li&gt;Multiple camera support over RTSP&lt;/li&gt;
+&lt;li&gt;Hardware-accelerated H.264 encoding for supported cameras and GPUs&lt;/li&gt;
+&lt;li&gt;Camera settings configurable through the APWeb GUI&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Phew!&lt;/p&gt;
+&lt;p&gt;The configuration required to get everything working is minimal once the required dependencies have been installed. This is in no small part possible thanks to the GStreamer API which took care of several low level complexities of live streaming video over the air.&lt;/p&gt;
+&lt;p&gt;Streaming video from aerial robots is probably the most difficult use case of Adaptive Streaming as the WiFi link is very flaky at these high speeds and distances. I've optimised the project around my testing with video streaming from quadcopters so the benefits are passed on to streaming from other robots as well.&lt;/p&gt;
+&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;I've used a simplification of TCP's &lt;a href="https://en.wikipedia.org/wiki/TCP_congestion_control"&gt;congestion control&lt;/a&gt; algorithm for Adaptive Streaming. I had looked at other interesting approaches including estimating receiver &lt;a href="https://www.researchgate.net/publication/280738389_An_Analysis_of_TCP-Tolerant_Real-Time_Multimedia_Distribution_in_Heterogeneous_Networks?_sg=pcxT2q90osdkY06gupLQqwssRN0DZrsL3zP2oyqKVIjTML5RhEIWWX5S3-N4KbDRVqHbTc3i2VNzBBpVuQ72t9iSWyT10_8i6w"&gt;buffer occupancy&lt;/a&gt;, but using this approach didn't yield significantly better results. TCP's congestion control algorithm avoids packet loss by mandating ACKs for each successfully delivered packet and steadily increasing sender bandwidth till it reaches a dynamically threshold.&lt;/p&gt;
+&lt;p&gt;A crucial difference for Adaptive Streaming is that 1) we stream over UDP for lower overhead (so no automatic TCP ACKs here!) 2) H.264 live video streaming is fairly loss tolerant so it's okay to lose some packets instead of re-transmitting them. &lt;/p&gt;
+&lt;p&gt;Video packets are streamed over dedicated RTP packets and Quality of Service (QoS) reports are sent over RTCP packets. These QoS reports give us all sorts of useful information, but we're mostly interested in seeing the number of packets loss between RTCP transmissions.&lt;/p&gt;
+&lt;p&gt;On receiving a RTCP packet indicating any packet loss, we immediately shift to a Congested State (better name pending) which significantly reduces the rate at which video streaming bandwidth is increased on receiving a lossless RTCP packet. The encoding H.264 encoding bitrate is limited to no higher than 1000kbps in this state. &lt;/p&gt;
+&lt;p&gt;Once we've received five lossless RTCP packets, we shift to a Steady State which can encode upto 6000kbps. In this state we also increase the encoding bitrate at a faster rate than we do in the Congested State. A nifty part of dynamically changing H.264 bitrates is that we can also seamlessly switch the streamed resolution according to the available bandwidth, just like YouTube does with DASH!&lt;/p&gt;
+&lt;p&gt;This algorithm is fairly simple and wasn't too difficult to implement once I had figured out all the GStreamer plumbing for extracting packets from buffers. With more testing, I would like to add long-term bitrate adaptations for the bitrate selection algorithm.&lt;/p&gt;
+&lt;h2&gt;H.264 Encoding&lt;/h2&gt;
+&lt;p&gt;This is where we get into the complicated and wonderful world of video compression algorithms.&lt;/p&gt;
+&lt;p&gt;Compression algorithms are used in all kinds of media, such as JPEG for still images and MP3 for audio. H.264 is one of several compression algorithms available for video. H.264 takes advantage of the fact that a lot of the information in video between frames is redundant. so instead of saving 30 frames for 1 second of 30fps video, it saves one entire frame (known as the Key Frame or I-Frame) of video and computes and stores only the differences in frames with respect to the keyframe for the subsequent 29 frames. H.264 also applies some logic to &lt;em&gt;predict&lt;/em&gt; future frames to further reduce the file size. &lt;/p&gt;
+&lt;p&gt;This is by no means close to a complete explanation of how H.264 works, for further reading I suggest checking out Sid Bala's &lt;a href="https://sidbala.com/h-264-is-magic/"&gt;explanation&lt;/a&gt; on the topic.&lt;/p&gt;
+&lt;p&gt;The legendary Tom Scott also has a fun &lt;a href="https://www.youtube.com/watch?v=r6Rp-uo6HmI"&gt;video explaining how H.264 is adversely affected by snow and confetti&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;https://www.youtube.com/watch?v=r6Rp-uo6HmI&lt;/p&gt;
+&lt;p&gt;The frequency of capturing keyframes can be set by changing the encoder parameters. In the context of live video streaming over unstable links such as WiFi, this is very important as packet loss can cause keyframes to be dropped. Dropped keyframes severely impact the quality of the video until a new keyframe is received. This is because all the frames transmitted after the keyframe only store the differences with respect to the keyframe and do not actually store a full picture on their own.&lt;/p&gt;
+&lt;p&gt;Increasing the keyframe interval means we send a large, full frame less frequently, but also means we would suffer from terrible video quality for an extended period of time on losing a keyframe. On the other hand, shorter keyframe intervals can lead to a wastage of bandwidth.&lt;/p&gt;
+&lt;p&gt;I found that a keyframe interval of every 10 frames worked much better than the default interval of 60 frames without impacting bandwidth usage too significantly.&lt;/p&gt;
+&lt;p&gt;Lastly, H.264 video encoding is a very computationally expensive algorithm. Software-based implementations of H.264 such as &lt;code&gt;x264enc&lt;/code&gt; are well supported with several configurable parameters but have prohibitively high CPU requirements, making it all but impossible to livestream H.264 encoded video from low power embedded systems. Fortunately, the Raspberry Pi's Broadcom BCM2837 SoC has a dedicated H.264 hardware encoder pipeline for the Raspberry Pi camera which drastically reduces the CPU load in high definition H.264 encoding. Some webcams such as the Logitech C920 and higher have onboard H.264 hardware encoding thanks to special ASIC's dedicated for this purpose. &lt;/p&gt;
+&lt;p&gt;Adaptive Streaming probes for the type of encoding supported by the webcam and whether it has the IOCTL's required for changing the encoding parameters on-the-fly.&lt;/p&gt;
+&lt;p&gt;H.264 has been superseded by the more efficient H.265 encoding algorithm, but the CPU requirements for H.265 are even higher and it doesn't enjoy the same hardware support as H.264 does for the time being.&lt;/p&gt;
+&lt;h2&gt;GUI&lt;/h2&gt;
+&lt;p&gt;The project is soon-to-be integrated with the APWeb project for configuring companion computers. Adaptive Streaming works by creating an RTSP Streaming server running as a daemon process. The APWeb process connects to this daemon service over a local socket to populate the list of cameras, RTSP mount points, and available resolutions of each camera.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/apweb-screenshot.png"&gt;&lt;/p&gt;
+&lt;p&gt;The GUI is open for improvement and I would love feedback on how to make it easier to use!&lt;/p&gt;
+&lt;p&gt;Once the RTSP mount points are generated, one can livestream the video feed by entering in the RTSP URL of the camera into VLC. This works on all devices supporting VLC. However, VLC does add two seconds of latency to the livestream for reducing the jitter. I wasn't able to find a way to configure this in VLC, so an alternative way to get a lower latency stream is by using the following &lt;code&gt;gst-launch&lt;/code&gt; command in a terminal:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gst-launch-1.0 playbin uri=&amp;lt;RTSP Mount Point&amp;gt; latency=100&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;In the scope of the GSoC timeline, I'm looking to wind down the project by working on documentation, testing, and reducing the cruft from the codebase. I'm looking forward to integrating this with companion repository soon!&lt;/p&gt;
+&lt;p&gt;Links to the code:&lt;/p&gt;
+&lt;p&gt;https://github.com/shortstheory/adaptive-streaming
+https://github.com/shortstheory/APWeb&lt;/p&gt;</content><category term="Ardupilot"></category><category term="GSoC"></category><category term="Programming"></category></entry><entry><title>GSoC 2018 - New Beginnings</title><link href="http://arnavdhamija.com/blog/ardupilot-gsoc-intro.html" rel="alternate"></link><published>2018-06-05T18:30:00+05:30</published><updated>2018-06-05T18:30:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2018-06-05:/blog/ardupilot-gsoc-intro.html</id><summary type="html">&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/ardupilot_logo.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;I'm really excited to say that I'll be working with &lt;a href="ardupilot.org"&gt;Ardupilot&lt;/a&gt; for the better part of the next two months! Although this is the second time I'm making a foray into Open Source Development, the project at hand this time is quite different from what I had worked on in …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/ardupilot_logo.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;I'm really excited to say that I'll be working with &lt;a href="ardupilot.org"&gt;Ardupilot&lt;/a&gt; for the better part of the next two months! Although this is the second time I'm making a foray into Open Source Development, the project at hand this time is quite different from what I had worked on in my first GSoC project.&lt;/p&gt;
 &lt;p&gt;Ardupilot is an open-source autopilot software for several types of semi-autonomous robotic vehicles including multicopters, fixed-wing aircraft, and even marine vehicles such as boats and submarines. As the name suggests, Ardupilot was formerly based on the Arduino platform with the APM2.x flight controllers which boasted an ATMega2560 processor. Since then, Ardupilot has moved on to officially supporting much more advanced boards with significantly better processors and more robust hardware stacks. That said, these flight controllers contain application specific embedded hardware which is unsuitable for performing intensive tasks such as real-time object detection or video processing.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/apsync-configurator.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/apsync-configurator.png"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;CC Setup with a Flight Computer&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://ardupilot.org/dev/docs/apsync-intro.html"&gt;APSync&lt;/a&gt; is a recent Ardupilot project which aims to ameliorate the limited processing capability of the flight controllers by augmenting them with so-called companion computers (CCs). As of writing, APSync officially supports the Raspberry Pi 3B(+) and the NVidia Jetson line of embedded systems. One of the more popular use cases for APSync is to enable out-of-the-box live video streaming from a vehicle to a laptop. This works by using the CC's onboard WiFi chip as a WiFi hotspot to stream the video using GStreamer. However, the current implementation has some shortcomings which are:&lt;/p&gt;
 &lt;ul&gt;
@@ -17,7 +60,7 @@
 &lt;p&gt;I'll be sharing my experiences with the H.264 video encoders and hardware in my next post.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Other links&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;1) My GSoC Proposal for &lt;a href="https://docs.google.com/document/d/17iZgdBqVHGa-ny3XQ73sAKmYxeUcWsS3eeeKzBS8F4s/edit?usp=sharing"&gt;Ardupilot&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;2) Previous &lt;a href="http://arnavdhamija.com/blog/tag/gsoc.html"&gt;GSoC Posts&lt;/a&gt;&lt;/p&gt;</summary><category term="Ardupilot"></category><category term="GSoC"></category><category term="Programming"></category></entry><entry><title>Blog Migration Complete!</title><link href="http://arnavdhamija.com/blog/blog-migration.html" rel="alternate"></link><updated>2017-02-05T23:50:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-02-05:blog/blog-migration.html</id><summary type="html">&lt;p&gt;Now I finally have my very own domain name! The &lt;a href="http://arnavdhamija.blogspot.in/"&gt;old Blogger site&lt;/a&gt; is still available if anyone wants to see it but for all future intents and purposes, this will be the place where new blog posts will be put up. While I &lt;em&gt;could&lt;/em&gt; configure all traffic to the Blogger site to redirect to this one, the old site has grown on me so much over the years that I feel that it would be a shame to hide it that way.&lt;/p&gt;
+&lt;p&gt;2) Previous &lt;a href="http://arnavdhamija.com/blog/tag/gsoc.html"&gt;GSoC Posts&lt;/a&gt;&lt;/p&gt;</content><category term="Ardupilot"></category><category term="GSoC"></category><category term="Programming"></category></entry><entry><title>Blog Migration Complete!</title><link href="http://arnavdhamija.com/blog/blog-migration.html" rel="alternate"></link><published>2017-02-05T23:50:00+05:30</published><updated>2017-02-05T23:50:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-02-05:/blog/blog-migration.html</id><summary type="html">&lt;p&gt;Now I finally have my very own domain name! The &lt;a href="http://arnavdhamija.blogspot.in/"&gt;old Blogger site&lt;/a&gt; is still available if anyone wants to see it but for all future intents and purposes, this will be the place where new blog posts will be put up. While I &lt;em&gt;could&lt;/em&gt; configure all traffic to the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Now I finally have my very own domain name! The &lt;a href="http://arnavdhamija.blogspot.in/"&gt;old Blogger site&lt;/a&gt; is still available if anyone wants to see it but for all future intents and purposes, this will be the place where new blog posts will be put up. While I &lt;em&gt;could&lt;/em&gt; configure all traffic to the Blogger site to redirect to this one, the old site has grown on me so much over the years that I feel that it would be a shame to hide it that way.&lt;/p&gt;
 &lt;p&gt;I had to migrate from Blogger because it is more than evident that Blogger has been getting less love from Google than it deserves. Take for instance, the Blogger web-based post editor - a shining example of an undeveloped relic of Google's products. Posts never autosaved or had any manual version control and a few misplaced keypresses could cause you to lose all your writing progress. Inserting images is a chore and putting up more complicated parts of text such as code blocks and sub-headings is even worse.&lt;/p&gt;
 &lt;p&gt;Of course as with most things in software development, there are workarounds for everything. The work-around which I had used for the last few blog posts was to write directly in Markdown and then convert it to HTML with pandoc to copy paste in the Blogger editor. Even so, this is clearly sub-optimal and I was spending more time wrestling with the Blogger editor to make my pages look good than I was spending writing actual content. The Blogger theme which I was using appealled to me as 13 year old (heck, it still appeals to me), but it was growing long in the tooth and only had basic support for responsive design and mobile devices. With all these things in mind, I started looking for a new home for my blog somewhere in the middle of last December on a break from college.&lt;/p&gt;
 &lt;p&gt;I first looked at &lt;a href="http://wordpress.com/"&gt;WordPress&lt;/a&gt;. At first, it seemed like my search for a new blogging platform would stop here. Open-sourced, a great browser editor, a cohesive Android app, direct editing in Markdown, local installation for testing, and support for plugins made WordPress everything Blogger wasn't. I loved the number of themes and customisation WordPress provided. But the love was short lived, and it ended when I started researching hosting options for WordPress. Most solutions required me to rent a web-server on a monthly basis and I had no idea what tier of server to get as my blog had only recently seen a huge surge in pageviews. Not to mention, the cost of maintaining a website with such a setup was by no means cheap. This is when I started asking to my geeky friends about how they maintained their own personal websites.&lt;/p&gt;
@@ -28,195 +71,13 @@
 &lt;p&gt;The next few days I played with some more Jekyll themes and found that there were many things I didn't like about it. For one thing, it was written in Ruby which I have no experience with. Themes didn't look easy to work with and there was no native support for tags (there is a workaround for this, but due to my lack of Ruby-fu, it all looked terribly arcane to me). I then put the blog migration on the back burner for a while to work on projects at my college's Automation &amp;amp; Robotics Club.&lt;/p&gt;
 &lt;p&gt;A few weeks later, I took a look at the blog project with some new perspective. I started by poking around for alternatives to Jekyll. There was one such alternative which ticked all my boxes - a static site generator called &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;. As WordPress looked inherently superior to Blogger, Pelican looked inherently superior to Jekyll for what I wanted to do with it. For example, it had built-in support for tags, had a theming engine, supported Markdown &lt;em&gt;and&lt;/em&gt; reStructuredText, and had several easy to install plugins. Above all, Pelican is written in Python which made it so much easier for me to mess around with it. There were some more modifications to make to the Markdown files (particularly with the post metadata), but it was so trivial that it didn't pain one bit to modify all the files. Not too long after I settled on Pelican, I found a theme which made my blog look exactly how I wanted it to look. The &lt;a href="https://github.com/PurePelicanTheme"&gt;Pure Single&lt;/a&gt; theme also has nifty support for custom sidebar images, which I used on some select &lt;a href="http://arnavdhamija.com/blog/t2-years-and-counting-iit-jee.html"&gt;blog&lt;/a&gt; &lt;a href="http://arnavdhamija.com/blog/gsoc-report-wrapping-up-gsoc-2016.html"&gt;posts&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There was some initial trouble with setting a blog subfolder in the site and getting images to work on some auto-generated sites (such as the Tags and Categories pages). It later turned out that it was some problem with localhost/ not finding the paths correctly to the images and the site was totally fine when published to the GitHub Pages site. After only three days of using Pelican, I had something which I was willing to show off. The next step was much more straightforward for a change - registering a domain name. I looked into a few options such as GoDaddy, Hover, and Namecheap. Namecheap had positive reviews (unlike GoDaddy) and was the cheapest of the lot. The site configuration to serve pages from GitHub's servers was not more than a 10 minute procedure, and I finally had the site you are reading this article on right now.&lt;/p&gt;
-&lt;p&gt;There will be a lot more changes coming up on this blog, some of them aesthetic and some functional. I'm also probably going to change the name of this blog sometime soon, to something which is more reflective of my current sensibilities.&lt;/p&gt;</summary><category term="Misc"></category><category term="Programming"></category></entry><entry><title>GSoC Update(?): Writing a KIO slave 101!</title><link href="http://arnavdhamija.com/blog/gsoc-update-writing-kio-slave-101.html" rel="alternate"></link><updated>2016-06-21T23:35:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-06-21:blog/gsoc-update-writing-kio-slave-101.html</id><summary type="html">&lt;p&gt;This &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;project&lt;/a&gt;
-has been going well. Though it was expectedly difficult in the beginning, I
-feel like I am on the other side of the learning curve now. I will probably
-make a proper update post sometime later this month. My repo for this project
-can be found here: &lt;a href="https://github.com/KDE/kio-stash"&gt;https://github.com/shortstheory/kio-stash&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;For now, this is a small tutorial for writing KDE I/O slaves (KIO slaves)
-which can be used for a variety of KDE applications. KIO slaves are a great
-way for accessing files from different filesystems and protocols in a neat,
-uniform way across many KDE applications. Their versatility makes them
-integral to the KIO library. KIO slaves have changed in their structure the
-transition to KF5 and this tutorial highlights some of these differences from
-preceding iterations of it.&lt;/p&gt;
-&lt;h3&gt;Project Structure&lt;/h3&gt;
-&lt;p&gt;For the purpose of this tutorial, your project source directory needs to have
-the following files.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;kio_hello.h&lt;/li&gt;
-&lt;li&gt;kio_hello.cpp&lt;/li&gt;
-&lt;li&gt;hello.json&lt;/li&gt;
-&lt;li&gt;CMakeLists.txt&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;If you don't feel like creating these yourself, just clone it from here:
-&lt;a href="https://github.com/shortstheory/kioslave-tutorial"&gt;https://github.com/shortstheory/kioslave-tutorial&lt;/a&gt;&lt;/p&gt;
-&lt;h4&gt;hello.json&lt;/h4&gt;
-&lt;p&gt;The .json file replaces the .protocol files used in KIO slaves pre KF5. The
-.json file for the KIO slave specifies the properties the KIO slave will have
-such as the executable path to the KIO slave on installation. The .json file
-also includes properties of the slave such as being able to read from, write
-to, delete from, among many others. Fields in this .json file are specified
-from the &lt;a href="https://api.kde.org/frameworks/kio/html/classKProt
-ocolManager.html"&gt;KProtocolManager&lt;/a&gt; class. For creating a KIO slave capable of showing a
-directory in a file manager such as Dolphin, the listing property must be set
-to true. As an example, the .json file for the Hello KIO slave described in
-this tutorial looks like this:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;{  
-    &amp;quot;KDE-KIO-Protocols&amp;quot; : {   
-        &amp;quot;hello&amp;quot;: {   
-            &amp;quot;Class&amp;quot;: &amp;quot;:local&amp;quot;,   
-            &amp;quot;X-DocPath&amp;quot;: &amp;quot;kioslave5/kio_hello.html&amp;quot;,   
-            &amp;quot;exec&amp;quot;: &amp;quot;kf5/kio/hello&amp;quot;,   
-            &amp;quot;input&amp;quot;: &amp;quot;none&amp;quot;,   
-            &amp;quot;output&amp;quot;: &amp;quot;filesystem&amp;quot;,   
-            &amp;quot;protocol&amp;quot;: &amp;quot;hello&amp;quot;,   
-            &amp;quot;reading&amp;quot;: true   
-        }   
-    }   
-}  
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;As for the CMakeLists.txt, you will need to link your KIO slave module with
-KF5::KIOCore. This can be seen in the project directory.  &lt;/p&gt;
-&lt;h4&gt;kio_hello.h&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#ifndef HELLO_H  &lt;/span&gt;
-&lt;span class="cp"&gt;#define HELLO_H  &lt;/span&gt;
-
-&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;kio/slavebase.h&amp;gt;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
-
-&lt;span class="cm"&gt;/**  &lt;/span&gt;
-&lt;span class="cm"&gt;  This class implements a Hello World kioslave  &lt;/span&gt;
-&lt;span class="cm"&gt; */&lt;/span&gt;   
-&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="nl"&gt;Hello&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;QObject&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;KIO&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;SlaveBase&lt;/span&gt;  
-&lt;span class="p"&gt;{&lt;/span&gt;  
-    &lt;span class="n"&gt;Q_OBJECT&lt;/span&gt;   
-&lt;span class="nl"&gt;public&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  
-    &lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
-    &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QUrl&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;Q_DECL_OVERRIDE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
-&lt;span class="p"&gt;};&lt;/span&gt;  
-
-&lt;span class="cp"&gt;#endif  &lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;The Hello KIO slave is derived from KIO::SlaveBase. The SlaveBase class has
-some basic functions already implemented for the KIO slave. This can be found
-in the &lt;a href="https://api.kde.org/frameworks/kio/html/classKIO_1_1Sla
-veBase.html"&gt;documentation&lt;/a&gt;. However, most of the functions of SlaveBase are virtual
-functions and have to be re-implemented for the KIO slave. In this case, we
-are re-implementing the get function to print a QString when it is called by
-kioclient5.  &lt;/p&gt;
-&lt;p&gt;In case you don't need special handling of the KIO slave's functions, you can
-derive your KIO slave class directly from &lt;a href="https://a
-pi.kde.org/frameworks/kio/html/classKIO_1_1ForwardingSlaveBase.html"&gt;KIO::ForwardingSlaveBase&lt;/a&gt;. Here,
-you would only need to re-implement the rewriteUrl function to get your KIO
-slave working.  &lt;/p&gt;
-&lt;h4&gt;kio_hello.cpp&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;hello.h&amp;quot;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
-&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;QDebug&amp;gt;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
-
-&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="nl"&gt;KIOPluginForMetaData&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;QObject&lt;/span&gt;  
-&lt;span class="p"&gt;{&lt;/span&gt;  
-    &lt;span class="n"&gt;Q_OBJECT&lt;/span&gt;   
-    &lt;span class="n"&gt;Q_PLUGIN_METADATA&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IID&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;org.kde.kio.slave.hello&amp;quot;&lt;/span&gt; &lt;span class="kt"&gt;FILE&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;hello.json&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   
-&lt;span class="p"&gt;};&lt;/span&gt;  
-
-&lt;span class="k"&gt;extern&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C&amp;quot;&lt;/span&gt;  
-&lt;span class="p"&gt;{&lt;/span&gt;  
-    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;Q_DECL_EXPORT&lt;/span&gt; &lt;span class="n"&gt;kdemain&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;argc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   
-    &lt;span class="p"&gt;{&lt;/span&gt;   
-        &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Launching KIO slave.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argc&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;   
-            &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Usage: kio_hello protocol domain-socket1 domain-socket2&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
-            &lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
-        &lt;span class="p"&gt;}&lt;/span&gt;   
-        &lt;span class="n"&gt;Hello&lt;/span&gt; &lt;span class="n"&gt;slave&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;   
-        &lt;span class="n"&gt;slave&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dispatchLoop&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;   
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
-    &lt;span class="p"&gt;}&lt;/span&gt;   
-&lt;span class="p"&gt;}&lt;/span&gt;  
-
-&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QUrl&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="p"&gt;{&lt;/span&gt;  
-    &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Entering function.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
-    &lt;span class="n"&gt;mimeType&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/plain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
-    &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="nf"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello world!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
-    &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
-    &lt;span class="n"&gt;finished&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;   
-    &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Leaving function&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
-&lt;span class="p"&gt;}&lt;/span&gt;  
-
-&lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-    &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;SlaveBase&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;   
-
-&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;hello.moc&amp;quot;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;The .moc file is, of course, auto-generated at compilation time.  &lt;/p&gt;
-&lt;p&gt;As mentioned earlier, the KIO Slave's .cpp file will also require a new
-KIOPluginForMetaData class to add the .json file. The following is used for
-the hello KIO slave and can be used as an example:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="n"&gt;KIOPluginForMetaData&lt;/span&gt; : &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;QObject&lt;/span&gt;  
-{  
-    &lt;span class="s"&gt;Q_OBJECT   &lt;/span&gt;
-&lt;span class="s"&gt;    Q_&lt;/span&gt;&lt;span class="n"&gt;PLUGIN_METADATA&lt;/span&gt;(&lt;span class="n"&gt;IID&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;org.kde.kio.slave.hello&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;FILE&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;hello.json&amp;quot;&lt;/span&gt;)   
-};  
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h4&gt;CMakeLists.txt&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;cmake_minimum_required&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;VERSION&lt;/span&gt; &lt;span class="s"&gt;3.5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;QT_MIN_VERSION&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;5.4.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KF5_MIN_VERSION&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;5.16.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-
-&lt;span class="nb"&gt;find_package&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;ECM&lt;/span&gt; &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;KF5_MIN_VERSION&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="s"&gt;REQUIRED&lt;/span&gt; &lt;span class="s"&gt;NO_MODULE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;  
-    &lt;span class="s"&gt;CMAKE_MODULE_PATH&lt;/span&gt;   
-        &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;CMAKE_MODULE_PATH&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;   
-        &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;ECM_MODULE_PATH&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;   
-        &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;ECM_KDE_MODULE_DIR&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;   
-&lt;span class="p"&gt;)&lt;/span&gt;  
-
-&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KDEInstallDirs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KDECMakeSettings&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KDECompilerSettings&lt;/span&gt; &lt;span class="s"&gt;NO_POLICY_SCOPE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;ECMSetupVersion&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;FeatureSummary&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;add_library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;MODULE&lt;/span&gt; &lt;span class="s"&gt;hello.cpp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;find_package&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KF5&lt;/span&gt; &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;KF5_MIN_VERSION&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="s"&gt;REQUIRED&lt;/span&gt; &lt;span class="s"&gt;KIO&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;target_link_libraries&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;KF5::KIOCore&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;set_target_properties&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;PROPERTIES&lt;/span&gt; &lt;span class="s"&gt;OUTPUT_NAME&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-
-&lt;span class="nb"&gt;install&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;TARGETS&lt;/span&gt; &lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;DESTINATION&lt;/span&gt; &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;KDE_INSTALL_PLUGINDIR&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="s"&gt;/kf5/kio&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h3&gt;Installation&lt;/h3&gt;
-&lt;p&gt;Simply run the following commands in the source folder:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;mkdir build  
-cd build  
-cmake -DCMAKE_INSTALL_PREFIX=/usr -DKDE_INSTALL_USE_QT_SYS_PATHS=TRUE ..  
-make  
-sudo make install  
-kdeinit5  
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;As shown above, we have to run kdeinit5 again so the new KIO slave is
-discovered by KLauncher and can be loaded when we run a command through an
-application such as kioclient5.&lt;br /&gt;
-Testing  &lt;/p&gt;
-&lt;p&gt;Run:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;kioclient5 &amp;#39;cat&amp;#39; &amp;#39;hello:/&amp;#39;  
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;And the output should be:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Hello_world
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="GSoC"></category><category term="Programming"></category><category term="KDE"></category></entry><entry><title>GSoC Update 1: The Beginning</title><link href="http://arnavdhamija.com/blog/gsoc-update-1-beginning.html" rel="alternate"></link><updated>2016-05-30T10:37:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-05-30:blog/gsoc-update-1-beginning.html</id><summary type="html">&lt;p&gt;I have officially started my &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;GSoC
+&lt;p&gt;There will be a lot more changes coming up on this blog, some of them aesthetic and some functional. I'm also probably going to change the name of this blog sometime soon, to something which is more reflective of my current sensibilities.&lt;/p&gt;</content><category term="Misc"></category><category term="Programming"></category></entry><entry><title>GSoC Update 1: The Beginning</title><link href="http://arnavdhamija.com/blog/gsoc-update-1-beginning.html" rel="alternate"></link><published>2016-05-30T10:37:00+05:30</published><updated>2016-05-30T10:37:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-05-30:/blog/gsoc-update-1-beginning.html</id><summary type="html">&lt;p&gt;I have officially started my &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;GSoC
+project&lt;/a&gt; under
+the mentorship of &lt;a href="https://blog.baloneygeek.com/"&gt;Boudhayan Gupta &lt;/a&gt;and &lt;a href="http://blog.pinak.me/"&gt;Pinak
+Ahuja&lt;/a&gt;.  &lt;/p&gt;
+&lt;p&gt;The project idea's implementation has undergone some changes from what I
+proposed. While the essence of the project is the same, it will now no longer
+be dependent on Baloo and xattr. Instead, it …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I have officially started my &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;GSoC
 project&lt;/a&gt; under
 the mentorship of &lt;a href="https://blog.baloneygeek.com/"&gt;Boudhayan Gupta &lt;/a&gt;and &lt;a href="http://blog.pinak.me/"&gt;Pinak
 Ahuja&lt;/a&gt;.  &lt;/p&gt;
@@ -256,7 +117,7 @@ Faure&lt;/a&gt;. Under his guidance, I managed to
 port the KIO slave in the tutorial to a KF5 compatible KIO slave and after a
 full week of frustration of dealing with dependency hell, I saw the best Hello
 World I could ever hope for:  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/kioslave.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/kioslave.png"&gt;&lt;/p&gt;
 &lt;p&gt;Baby steps. The next step was to make the KIO slave capable of displaying the
 contents of a specified QUrl in a file manager. The documentation for
 KProtocolManager made it seem like a pretty straightforward task - apparently
@@ -268,7 +129,7 @@ class was only for reimplementing its member functions in a derived class as I
 found out by going through the source code of the core of kio/core. Learning
 from my mistake here I switched to using a ForwardingSlaveBase class for my
 KIO slave which instantly solved my problems of displaying a directory.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/helloslave.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/helloslave.png"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Fistpump&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;According to my timeline, the next steps in the project are  &lt;/p&gt;
 &lt;ol&gt;
@@ -277,10 +138,15 @@ KIO slave which instantly solved my problems of displaying a directory.  &lt;/p&
 &lt;li&gt;Thinking of a better name for this feature?
 So far, it's been a great experience to get so much support from the KDE
 community. Here's to another two and a half months of KDE development!&lt;/li&gt;
-&lt;/ol&gt;</summary><category term="GSoC"></category><category term="Programming"></category><category term="KDE"></category></entry><entry><title>GSoC 2016 Project Survey, help me make Dolphin a better File Manager!</title><link href="http://arnavdhamija.com/blog/gsoc-2016-project-survey-help-me-make.html" rel="alternate"></link><updated>2016-02-15T21:16:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-02-15:blog/gsoc-2016-project-survey-help-me-make.html</id><summary type="html">&lt;p&gt;Hey everyone!  &lt;/p&gt;
+&lt;/ol&gt;</content><category term="GSoC"></category><category term="Programming"></category><category term="KDE"></category></entry><entry><title>GSoC 2016 Project Survey, help me make Dolphin a better File Manager!</title><link href="http://arnavdhamija.com/blog/gsoc-2016-project-survey-help-me-make.html" rel="alternate"></link><published>2016-02-15T21:16:00+05:30</published><updated>2016-02-15T21:16:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-02-15:/blog/gsoc-2016-project-survey-help-me-make.html</id><summary type="html">&lt;p&gt;Hey everyone!  &lt;/p&gt;
 &lt;p&gt;I am a first year computer science undergraduate from BITS Pilani, Hyderabad
 Campus. I am looking forward to working for KDE for the GSoC.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://developers.google.com/open-source/gsoc/resources/downloads/GSoC2016Logo.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://developers.google.com/open-source/gsoc/resources/downloads/GSoC2016Logo.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;My project idea is based on solving a problem all file managers have had for
+years - the lack of an easy to use file …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Hey everyone!  &lt;/p&gt;
+&lt;p&gt;I am a first year computer science undergraduate from BITS Pilani, Hyderabad
+Campus. I am looking forward to working for KDE for the GSoC.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://developers.google.com/open-source/gsoc/resources/downloads/GSoC2016Logo.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;My project idea is based on solving a problem all file managers have had for
 years - the lack of an easy to use file selection tool. My project aims to
 simplify selecting files from multiple directory trees.  &lt;/p&gt;
@@ -288,4 +154,4 @@ simplify selecting files from multiple directory trees.  &lt;/p&gt;
 the user interface and features list.  &lt;/p&gt;
 &lt;p&gt;The link to my idea proposal can be found here: &lt;a href="https://goo.gl/1Nj4SY"&gt;https://goo.gl/1Nj4SY&lt;/a&gt;  &lt;/p&gt;
 &lt;p&gt;And the link to my survey can be found here: &lt;a href="https://goo.gl/forms/5JSZXNganX"&gt;https://goo.gl/forms/5JSZXNganX&lt;/a&gt;  &lt;/p&gt;
-&lt;p&gt;TIA for the feedback : )&lt;/p&gt;</summary><category term="GSoC"></category><category term="Programming"></category><category term="KDE"></category></entry></feed>
+&lt;p&gt;TIA for the feedback : )&lt;/p&gt;</content><category term="GSoC"></category><category term="Programming"></category><category term="KDE"></category></entry></feed>

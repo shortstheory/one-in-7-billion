@@ -1,8 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>A Singularity</title><link href="http://arnavdhamija.com/" rel="alternate"></link><link href="http://arnavdhamija.com/feeds/atom.xml" rel="self"></link><id>http://arnavdhamija.com/</id><updated>2018-06-05T18:30:00+05:30</updated><entry><title>GSoC 2018 - New Beginnings</title><link href="http://arnavdhamija.com/blog/ardupilot-gsoc-intro.html" rel="alternate"></link><updated>2018-06-05T18:30:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2018-06-05:blog/ardupilot-gsoc-intro.html</id><summary type="html">&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/ardupilot_logo.jpg" /&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>A Singularity</title><link href="http://arnavdhamija.com/" rel="alternate"></link><link href="http://arnavdhamija.com/feeds/atom.xml" rel="self"></link><id>http://arnavdhamija.com/</id><updated>2018-07-22T22:30:00+05:30</updated><entry><title>GSoC 2018 - Batteries Included!</title><link href="http://arnavdhamija.com/blog/ardupilot-gsoc-update.html" rel="alternate"></link><published>2018-07-22T22:30:00+05:30</published><updated>2018-07-22T22:30:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2018-07-22:/blog/ardupilot-gsoc-update.html</id><summary type="html">&lt;p&gt;Much time has passed and much code has been written since my last update. Adaptive Streaming (a better name TBD) for Ardupilot is nearly complete and brings a whole slew of features useful for streaming video from cameras on robots to laptops, phones, and tablets:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Automatic quality selection based on …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;Much time has passed and much code has been written since my last update. Adaptive Streaming (a better name TBD) for Ardupilot is nearly complete and brings a whole slew of features useful for streaming video from cameras on robots to laptops, phones, and tablets:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Automatic quality selection based on bandwidth and packet loss estimates&lt;/li&gt;
+&lt;li&gt;Options to record the live-streamed video feed to the companion computer (experimental!)&lt;/li&gt;
+&lt;li&gt;Fine tuned control over resolution and framerates&lt;/li&gt;
+&lt;li&gt;Multiple camera support over RTSP&lt;/li&gt;
+&lt;li&gt;Hardware-accelerated H.264 encoding for supported cameras and GPUs&lt;/li&gt;
+&lt;li&gt;Camera settings configurable through the APWeb GUI&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Phew!&lt;/p&gt;
+&lt;p&gt;The configuration required to get everything working is minimal once the required dependencies have been installed. This is in no small part possible thanks to the GStreamer API which took care of several low level complexities of live streaming video over the air.&lt;/p&gt;
+&lt;p&gt;Streaming video from aerial robots is probably the most difficult use case of Adaptive Streaming as the WiFi link is very flaky at these high speeds and distances. I've optimised the project around my testing with video streaming from quadcopters so the benefits are passed on to streaming from other robots as well.&lt;/p&gt;
+&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;I've used a simplification of TCP's &lt;a href="https://en.wikipedia.org/wiki/TCP_congestion_control"&gt;congestion control&lt;/a&gt; algorithm for Adaptive Streaming. I had looked at other interesting approaches including estimating receiver &lt;a href="https://www.researchgate.net/publication/280738389_An_Analysis_of_TCP-Tolerant_Real-Time_Multimedia_Distribution_in_Heterogeneous_Networks?_sg=pcxT2q90osdkY06gupLQqwssRN0DZrsL3zP2oyqKVIjTML5RhEIWWX5S3-N4KbDRVqHbTc3i2VNzBBpVuQ72t9iSWyT10_8i6w"&gt;buffer occupancy&lt;/a&gt;, but using this approach didn't yield significantly better results. TCP's congestion control algorithm avoids packet loss by mandating ACKs for each successfully delivered packet and steadily increasing sender bandwidth till it reaches a dynamically threshold.&lt;/p&gt;
+&lt;p&gt;A crucial difference for Adaptive Streaming is that 1) we stream over UDP for lower overhead (so no automatic TCP ACKs here!) 2) H.264 live video streaming is fairly loss tolerant so it's okay to lose some packets instead of re-transmitting them. &lt;/p&gt;
+&lt;p&gt;Video packets are streamed over dedicated RTP packets and Quality of Service (QoS) reports are sent over RTCP packets. These QoS reports give us all sorts of useful information, but we're mostly interested in seeing the number of packets loss between RTCP transmissions.&lt;/p&gt;
+&lt;p&gt;On receiving a RTCP packet indicating any packet loss, we immediately shift to a Congested State (better name pending) which significantly reduces the rate at which video streaming bandwidth is increased on receiving a lossless RTCP packet. The encoding H.264 encoding bitrate is limited to no higher than 1000kbps in this state. &lt;/p&gt;
+&lt;p&gt;Once we've received five lossless RTCP packets, we shift to a Steady State which can encode upto 6000kbps. In this state we also increase the encoding bitrate at a faster rate than we do in the Congested State. A nifty part of dynamically changing H.264 bitrates is that we can also seamlessly switch the streamed resolution according to the available bandwidth, just like YouTube does with DASH!&lt;/p&gt;
+&lt;p&gt;This algorithm is fairly simple and wasn't too difficult to implement once I had figured out all the GStreamer plumbing for extracting packets from buffers. With more testing, I would like to add long-term bitrate adaptations for the bitrate selection algorithm.&lt;/p&gt;
+&lt;h2&gt;H.264 Encoding&lt;/h2&gt;
+&lt;p&gt;This is where we get into the complicated and wonderful world of video compression algorithms.&lt;/p&gt;
+&lt;p&gt;Compression algorithms are used in all kinds of media, such as JPEG for still images and MP3 for audio. H.264 is one of several compression algorithms available for video. H.264 takes advantage of the fact that a lot of the information in video between frames is redundant. so instead of saving 30 frames for 1 second of 30fps video, it saves one entire frame (known as the Key Frame or I-Frame) of video and computes and stores only the differences in frames with respect to the keyframe for the subsequent 29 frames. H.264 also applies some logic to &lt;em&gt;predict&lt;/em&gt; future frames to further reduce the file size. &lt;/p&gt;
+&lt;p&gt;This is by no means close to a complete explanation of how H.264 works, for further reading I suggest checking out Sid Bala's &lt;a href="https://sidbala.com/h-264-is-magic/"&gt;explanation&lt;/a&gt; on the topic.&lt;/p&gt;
+&lt;p&gt;The legendary Tom Scott also has a fun &lt;a href="https://www.youtube.com/watch?v=r6Rp-uo6HmI"&gt;video explaining how H.264 is adversely affected by snow and confetti&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;https://www.youtube.com/watch?v=r6Rp-uo6HmI&lt;/p&gt;
+&lt;p&gt;The frequency of capturing keyframes can be set by changing the encoder parameters. In the context of live video streaming over unstable links such as WiFi, this is very important as packet loss can cause keyframes to be dropped. Dropped keyframes severely impact the quality of the video until a new keyframe is received. This is because all the frames transmitted after the keyframe only store the differences with respect to the keyframe and do not actually store a full picture on their own.&lt;/p&gt;
+&lt;p&gt;Increasing the keyframe interval means we send a large, full frame less frequently, but also means we would suffer from terrible video quality for an extended period of time on losing a keyframe. On the other hand, shorter keyframe intervals can lead to a wastage of bandwidth.&lt;/p&gt;
+&lt;p&gt;I found that a keyframe interval of every 10 frames worked much better than the default interval of 60 frames without impacting bandwidth usage too significantly.&lt;/p&gt;
+&lt;p&gt;Lastly, H.264 video encoding is a very computationally expensive algorithm. Software-based implementations of H.264 such as &lt;code&gt;x264enc&lt;/code&gt; are well supported with several configurable parameters but have prohibitively high CPU requirements, making it all but impossible to livestream H.264 encoded video from low power embedded systems. Fortunately, the Raspberry Pi's Broadcom BCM2837 SoC has a dedicated H.264 hardware encoder pipeline for the Raspberry Pi camera which drastically reduces the CPU load in high definition H.264 encoding. Some webcams such as the Logitech C920 and higher have onboard H.264 hardware encoding thanks to special ASIC's dedicated for this purpose. &lt;/p&gt;
+&lt;p&gt;Adaptive Streaming probes for the type of encoding supported by the webcam and whether it has the IOCTL's required for changing the encoding parameters on-the-fly.&lt;/p&gt;
+&lt;p&gt;H.264 has been superseded by the more efficient H.265 encoding algorithm, but the CPU requirements for H.265 are even higher and it doesn't enjoy the same hardware support as H.264 does for the time being.&lt;/p&gt;
+&lt;h2&gt;GUI&lt;/h2&gt;
+&lt;p&gt;The project is soon-to-be integrated with the APWeb project for configuring companion computers. Adaptive Streaming works by creating an RTSP Streaming server running as a daemon process. The APWeb process connects to this daemon service over a local socket to populate the list of cameras, RTSP mount points, and available resolutions of each camera.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/apweb-screenshot.png"&gt;&lt;/p&gt;
+&lt;p&gt;The GUI is open for improvement and I would love feedback on how to make it easier to use!&lt;/p&gt;
+&lt;p&gt;Once the RTSP mount points are generated, one can livestream the video feed by entering in the RTSP URL of the camera into VLC. This works on all devices supporting VLC. However, VLC does add two seconds of latency to the livestream for reducing the jitter. I wasn't able to find a way to configure this in VLC, so an alternative way to get a lower latency stream is by using the following &lt;code&gt;gst-launch&lt;/code&gt; command in a terminal:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gst-launch-1.0 playbin uri=&amp;lt;RTSP Mount Point&amp;gt; latency=100&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;In the scope of the GSoC timeline, I'm looking to wind down the project by working on documentation, testing, and reducing the cruft from the codebase. I'm looking forward to integrating this with companion repository soon!&lt;/p&gt;
+&lt;p&gt;Links to the code:&lt;/p&gt;
+&lt;p&gt;https://github.com/shortstheory/adaptive-streaming
+https://github.com/shortstheory/APWeb&lt;/p&gt;</content><category term="Ardupilot"></category><category term="GSoC"></category><category term="Programming"></category></entry><entry><title>GSoC 2018 - New Beginnings</title><link href="http://arnavdhamija.com/blog/ardupilot-gsoc-intro.html" rel="alternate"></link><published>2018-06-05T18:30:00+05:30</published><updated>2018-06-05T18:30:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2018-06-05:/blog/ardupilot-gsoc-intro.html</id><summary type="html">&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/ardupilot_logo.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;I'm really excited to say that I'll be working with &lt;a href="ardupilot.org"&gt;Ardupilot&lt;/a&gt; for the better part of the next two months! Although this is the second time I'm making a foray into Open Source Development, the project at hand this time is quite different from what I had worked on in …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/ardupilot_logo.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;I'm really excited to say that I'll be working with &lt;a href="ardupilot.org"&gt;Ardupilot&lt;/a&gt; for the better part of the next two months! Although this is the second time I'm making a foray into Open Source Development, the project at hand this time is quite different from what I had worked on in my first GSoC project.&lt;/p&gt;
 &lt;p&gt;Ardupilot is an open-source autopilot software for several types of semi-autonomous robotic vehicles including multicopters, fixed-wing aircraft, and even marine vehicles such as boats and submarines. As the name suggests, Ardupilot was formerly based on the Arduino platform with the APM2.x flight controllers which boasted an ATMega2560 processor. Since then, Ardupilot has moved on to officially supporting much more advanced boards with significantly better processors and more robust hardware stacks. That said, these flight controllers contain application specific embedded hardware which is unsuitable for performing intensive tasks such as real-time object detection or video processing.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/apsync-configurator.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/apsync-configurator.png"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;CC Setup with a Flight Computer&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://ardupilot.org/dev/docs/apsync-intro.html"&gt;APSync&lt;/a&gt; is a recent Ardupilot project which aims to ameliorate the limited processing capability of the flight controllers by augmenting them with so-called companion computers (CCs). As of writing, APSync officially supports the Raspberry Pi 3B(+) and the NVidia Jetson line of embedded systems. One of the more popular use cases for APSync is to enable out-of-the-box live video streaming from a vehicle to a laptop. This works by using the CC's onboard WiFi chip as a WiFi hotspot to stream the video using GStreamer. However, the current implementation has some shortcomings which are:&lt;/p&gt;
 &lt;ul&gt;
@@ -17,7 +60,7 @@
 &lt;p&gt;I'll be sharing my experiences with the H.264 video encoders and hardware in my next post.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Other links&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;1) My GSoC Proposal for &lt;a href="https://docs.google.com/document/d/17iZgdBqVHGa-ny3XQ73sAKmYxeUcWsS3eeeKzBS8F4s/edit?usp=sharing"&gt;Ardupilot&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;2) Previous &lt;a href="http://arnavdhamija.com/blog/tag/gsoc.html"&gt;GSoC Posts&lt;/a&gt;&lt;/p&gt;</summary><category term="Ardupilot"></category><category term="GSoC"></category><category term="Programming"></category></entry><entry><title>Be The Opposite</title><link href="http://arnavdhamija.com/blog/be-the-opposite.html" rel="alternate"></link><updated>2017-12-28T10:29:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-12-28:blog/be-the-opposite.html</id><summary type="html">&lt;p&gt;"The Opposite" (S05E21) was a watershed episode for Seinfeld. Not only did the series' direction change hands from Tom Cherones to Andy Ackerman after it, but the plots also became more focussed on the personality flaws in the characters rather than the bizarre situations they got themselves into. "The Opposite" was probably the only episode in which these two tropes converged, making for something quite unlike any other Seinfeld episode. &lt;/p&gt;
+&lt;p&gt;2) Previous &lt;a href="http://arnavdhamija.com/blog/tag/gsoc.html"&gt;GSoC Posts&lt;/a&gt;&lt;/p&gt;</content><category term="Ardupilot"></category><category term="GSoC"></category><category term="Programming"></category></entry><entry><title>Be The Opposite</title><link href="http://arnavdhamija.com/blog/be-the-opposite.html" rel="alternate"></link><published>2017-12-28T10:29:00+05:30</published><updated>2017-12-28T10:29:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-12-28:/blog/be-the-opposite.html</id><summary type="html">&lt;p&gt;"The Opposite" (S05E21) was a watershed episode for Seinfeld. Not only did the series' direction change hands from Tom Cherones to Andy Ackerman after it, but the plots also became more focussed on the personality flaws in the characters rather than the bizarre situations they got themselves into. "The Opposite …&lt;/p&gt;</summary><content type="html">&lt;p&gt;"The Opposite" (S05E21) was a watershed episode for Seinfeld. Not only did the series' direction change hands from Tom Cherones to Andy Ackerman after it, but the plots also became more focussed on the personality flaws in the characters rather than the bizarre situations they got themselves into. "The Opposite" was probably the only episode in which these two tropes converged, making for something quite unlike any other Seinfeld episode. &lt;/p&gt;
 &lt;p&gt;But that's not what I'm going to write about in this blog post. "The Opposite" has personal meaning for other reasons. As a short summary of the A-plot of this episode - George, a stout, balding, middle-aged man with no prospects with either a career or with the opposite sex, decides to act contrary to every instinct he's ever had. In a span of less than a day after doing so, he ends up with a new partner, a job with the New York Yankees, and finally gets the means to move out from his much beleaguered parents' house.&lt;/p&gt;
 &lt;p&gt;Though contrived for comical purposes, this episode holds something very profound under its veil of light-hearted comedy. The series goes to show that even when it's painfully obvious that you're clearly doing something wrong, it can be impossible to get out of the self-induced loop of listening to your instincts. &lt;/p&gt;
 &lt;p&gt;Jerry also drives this home with an understatedly profound remark in this episode, &lt;em&gt;"If every instinct you have is wrong...then the opposite would have to be right!"&lt;/em&gt;.&lt;/p&gt;
@@ -31,7 +74,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;"If you are not careful, station KFKD will play in your head twenty-four hours a day, nonstop, in stereo. Out of the right speaker in your inner ear will come the endless stream of self-aggrandizement, the recitation of one’s specialness, of how much more open and gifted and brilliant and knowing and misunderstood and humble one is. Out of the left speaker will be the rap songs of self-loathing, the lists of all the things one doesn’t do well, of all the mistakes one has made today and over an entire lifetime, the doubt, the assertion that everything that one touches turns to shit, that one doesn’t do relationships well, that one is in every way a fraud, incapable of selfless love, that one has no talent or insight, and on and on and on. You might as well have heavy-metal music piped in through headphones while you’re trying to get your work done."&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Maybe the best way out lies in our mistakes, or rather, the opposite of them.&lt;/p&gt;</summary><category term="Life"></category><category term="Misc"></category></entry><entry><title>ThinkPad 13: Thoughts after 18+ months</title><link href="http://arnavdhamija.com/blog/thinkpad-13-review.html" rel="alternate"></link><updated>2017-12-10T10:29:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-12-10:blog/thinkpad-13-review.html</id><summary type="html">&lt;p&gt;It's been over a year since I switched laptops and I want to share my thoughts on my current one - the &lt;a href="https://www3.lenovo.com/us/en/laptops/thinkpad/thinkpad-13-series/ThinkPad-13-Windows-2nd-Gen/p/22TP2TX133E"&gt;Lenovo ThinkPad 13&lt;/a&gt; Gen 1. Before getting this laptop, I had been using a Lenovo IdeaPad G580 which I had gotten back in 2013. While that laptop suited my needs at the time, the unwieldy 15.6" display, sub-standard 2 hrs battery life, and weight of 2.8kg just wasn't cutting it for college. I decided to go for a smaller laptop with good battery life to replace it. I was pretty satisfied with the performance of the IdeaPad so anything as good or better than its i5-3230M was enough for me.&lt;/p&gt;
+&lt;p&gt;Maybe the best way out lies in our mistakes, or rather, the opposite of them.&lt;/p&gt;</content><category term="Life"></category><category term="Misc"></category></entry><entry><title>ThinkPad 13: Thoughts after 18+ months</title><link href="http://arnavdhamija.com/blog/thinkpad-13-review.html" rel="alternate"></link><published>2017-12-10T10:29:00+05:30</published><updated>2017-12-10T10:29:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-12-10:/blog/thinkpad-13-review.html</id><summary type="html">&lt;p&gt;It's been over a year since I switched laptops and I want to share my thoughts on my current one - the &lt;a href="https://www3.lenovo.com/us/en/laptops/thinkpad/thinkpad-13-series/ThinkPad-13-Windows-2nd-Gen/p/22TP2TX133E"&gt;Lenovo ThinkPad 13&lt;/a&gt; Gen 1. Before getting this laptop, I had been using a Lenovo IdeaPad G580 which I had gotten back in 2013. While that laptop suited my …&lt;/p&gt;</summary><content type="html">&lt;p&gt;It's been over a year since I switched laptops and I want to share my thoughts on my current one - the &lt;a href="https://www3.lenovo.com/us/en/laptops/thinkpad/thinkpad-13-series/ThinkPad-13-Windows-2nd-Gen/p/22TP2TX133E"&gt;Lenovo ThinkPad 13&lt;/a&gt; Gen 1. Before getting this laptop, I had been using a Lenovo IdeaPad G580 which I had gotten back in 2013. While that laptop suited my needs at the time, the unwieldy 15.6" display, sub-standard 2 hrs battery life, and weight of 2.8kg just wasn't cutting it for college. I decided to go for a smaller laptop with good battery life to replace it. I was pretty satisfied with the performance of the IdeaPad so anything as good or better than its i5-3230M was enough for me.&lt;/p&gt;
 &lt;p&gt;The first laptop which I looked at was the Asus UX305UA which ticked most of my boxes. However, some reviews had stated that its build quality was questionable so I decided to hold out for a better laptop. I later stumbled upon the Lenovo ThinkPad T460(s) which looked perfect for my needs but was just a touch out of my budget. While I was considering this, news began to surface about a 13.3" ThinkPad releasing soon, later to be known as the ThinkPad 13.&lt;/p&gt;
 &lt;p&gt;It wasn't an easy decision between the T460s and the 13. The T460s was definitely a more charming laptop but there were just too many drawbacks for it to be a serious contender. I found several negative reviews regarding the battery life and the 1080p display lottery. The ThinkPad 13 wasn't without issues of its own, but there wasn't a single review that hadn't sung praises about its keyboard, battery life, and overall value proposition. Plus it came with a USB Type-C port, dual upgradeable RAM slots, and was at least $200 cheaper than a comparatively specced T460s.&lt;/p&gt;
 &lt;p&gt;I got the silver version of the ThinkPad 13. Die-hard ThinkPad fans may condemn a non-black ThinkPad, but I think it looks great. Plus, the silver version came with the free 1080p IPS display upgrade. It also has a better choice of materials with an aluminium lid in place of the ABS plastic lid found on the black version of the ThinkPad 13.&lt;/p&gt;
@@ -90,7 +133,8 @@
 &lt;p&gt;I've been using an Ubuntu derivative distro on my laptop ever since I got it. In the first few months, I used Kubuntu 16.04 and then later on I switched to KDE Neon (which, incidentally, is based on Ubuntu 16.04). Linux support is remarkable and everything "just works" right out of the box. Older versions of the 4.x Linux kernel had some issues with the touchpad "desyncing" every 15 minutes, but this has by and large been fixed over the last few months. Thanks to the excellent Mesa drivers, 3D performance of the Intel HD 520 is very stable and actually works better than my friend's NVidia Quadro GPU did with Nouveau drivers (not in terms of frame rate, but stability). The Trackpoint works well and all the function keys work perfectly. Also, as mentioned earlier, battery life under Linux is great. I'm curious to see if the OneLink+ works and if the USB-C can output video on Linux.&lt;/p&gt;
 &lt;p&gt;In my opinion, there's nothing you're missing by running Linux on the 13 instead of Windows when it comes to hardware support.&lt;/p&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;The ThinkPad 13 is a nice laptop, but it's not for everyone. It fits my workflow perfectly with the good keyboard, display, and build quality. However, not everyone needs as many I/O ports as the 13 has and they would probably be better served by the numerous ultrabooks with better displays and bigger batteries. On the other hand, some might jump for a higher-end ThinkPad model like the T460s/T470s with better build quality and connectivity options. That said, the ThinkPad 13 does a lot of things right and fills a niche in the market for small laptops with good keyboards and several ports. A lot of compromises made in the ThinkPad 13 are reasonable and if you can live with these compromises, it definitely is worthy of consideration for your next laptop.&lt;/p&gt;</summary><category term="Tech"></category><category term="Misc"></category></entry><entry><title>Akademy 2017</title><link href="http://arnavdhamija.com/blog/akademy-2017.html" rel="alternate"></link><updated>2017-08-17T20:00:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-08-17:blog/akademy-2017.html</id><summary type="html">&lt;p&gt;Last month, I attended KDE's annual conference, &lt;a href="https://akademy.kde.org/"&gt;Akademy 2017&lt;/a&gt;. This year, it was held in Almeria, a small Andalusian city on the south-east coast of Spain.&lt;/p&gt;
+&lt;p&gt;The ThinkPad 13 is a nice laptop, but it's not for everyone. It fits my workflow perfectly with the good keyboard, display, and build quality. However, not everyone needs as many I/O ports as the 13 has and they would probably be better served by the numerous ultrabooks with better displays and bigger batteries. On the other hand, some might jump for a higher-end ThinkPad model like the T460s/T470s with better build quality and connectivity options. That said, the ThinkPad 13 does a lot of things right and fills a niche in the market for small laptops with good keyboards and several ports. A lot of compromises made in the ThinkPad 13 are reasonable and if you can live with these compromises, it definitely is worthy of consideration for your next laptop.&lt;/p&gt;</content><category term="Tech"></category><category term="Misc"></category></entry><entry><title>Akademy 2017</title><link href="http://arnavdhamija.com/blog/akademy-2017.html" rel="alternate"></link><published>2017-08-17T20:00:00+05:30</published><updated>2017-08-17T20:00:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-08-17:/blog/akademy-2017.html</id><summary type="html">&lt;p&gt;Last month, I attended KDE's annual conference, &lt;a href="https://akademy.kde.org/"&gt;Akademy 2017&lt;/a&gt;. This year, it was held in Almeria, a small Andalusian city on the south-east coast of Spain.&lt;/p&gt;
+&lt;p&gt;The name of the conference is no misspelling, it's part of KDE's age old tradition of naming everything to do with KDE with a …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Last month, I attended KDE's annual conference, &lt;a href="https://akademy.kde.org/"&gt;Akademy 2017&lt;/a&gt;. This year, it was held in Almeria, a small Andalusian city on the south-east coast of Spain.&lt;/p&gt;
 &lt;p&gt;The name of the conference is no misspelling, it's part of KDE's age old tradition of naming everything to do with KDE with a 'k'.&lt;/p&gt;
 &lt;p&gt;It was a collection of amazing, life-changing experiences. It was my first solo trip abroad and it taught me so much about travel, KDE, and getting around a city with only a handful of broken phrases in the local language.&lt;/p&gt;
 &lt;h2&gt;Travel&lt;/h2&gt;
@@ -103,23 +147,23 @@
 &lt;p&gt;The flight to Madrid was another Etihad operated flight, only this time on the A320's larger brethren - the A330-200. This plane was markedly older than the A320 I had been on the first leg of the trip. Fortunately, I got the port side window seat in a 2-5-2 configuration. The plane had a long take-off roll and took off a few minutes after 2am. Once we reached cruising altitude, I opened the window shade. The clear night sky was full of stars and I must have spent at least five minutes with my face glued to the window.&lt;/p&gt;
 &lt;p&gt;I tried to sleep, preparing myself for the long day ahead. Soon after waking up, the plane landed at Madrid Barajas Airport and taxied for nearly &lt;em&gt;half-an-hour&lt;/em&gt; to reach the terminal. After clearing immigration, I picked up my suitcase and waited for a bus which would take me to my next stop - the Madrid Atocha Railway Station. Located in the heart of city, the Atocha station is one of Madrid's largest train stations and connects it to the rest of Spain. My train to Almeria was later that day - at 3:15 in the afternoon.&lt;/p&gt;
 &lt;p&gt;On reaching Atocha, I got my first good look at Madrid.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170721_094946172.jpg" /&gt;     &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170721_094946172.jpg"&gt;     &lt;/p&gt;
 &lt;p&gt;&lt;em&gt;My facial expression was quite similar&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170721_114110394.jpg" /&gt;          &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170721_114110394.jpg"&gt;          &lt;/p&gt;
 &lt;p&gt;I was struck by how orderly everything was, starting with the traffic. Cars gave the right of way to pedestrians. People walked on zebra crossings and cyclists stuck to the defined cycling lanes. A trivial detail, but it was a world apart from Bangalore. Shining examples of Baroque and Gothic architecture were scattered among newer establishments.&lt;/p&gt;
 &lt;p&gt;Having a few hours to kill before I had to catch my train, I roamed around Buen Retiro Park, one of Spain's largest public parks. It was a beautiful day, bright and sunny with the warmth balanced out by a light breeze.&lt;/p&gt;
 &lt;p&gt;My heavy suitcase compelled me to walk slowly which let me take in as much as I could. Retiro Park is a popular stomping ground for joggers, skaters, and cyclists alike. Despite it being 11am on a weekday, I saw plenty of people jogging though the park. After this, I trudged through some quaint cobbled neighbourhoods with narrow roads and old apartment buildings dotted with small shops on the ground floor.&lt;/p&gt;
 &lt;p&gt;Maybe it was the sleep-deprivation or dehydration after a long flight, but everything felt so surreal! I had to pinch myself a few times - to believe that I had come thousands of miles from home and was actually travelling on my own in a foreign land.&lt;/p&gt;
 &lt;p&gt;I returned to Atocha and waited for my train. By this time, I came to realise that language was going to be a problem for this trip as very few people spoke English and my Spanish was limited to a few basic phrases - notably 'No hables Espanol' and 'Buenos Dias' :P Nevertheless, the kind folks at the station helped me find the train platform.&lt;/p&gt;
 &lt;p&gt;Trains in Spain are operated by state-owned train companies. In my case, I would be travelling on a Renfe train going till Almeria. The coaches are arranged in a 2-2 seating configuration, quite similar to those in airplanes, albeit with more legroom and charging ports. The speed of these trains is comparable to fast trains in India, with a top speed of about 160km/hr. The 700km journey was scheduled to take about 7 hours. There was plenty of scenery on the way with sloping mountain ranges and deserted valleys.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170721_210241975.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170721_210241975.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Big windows encouraged sightseeing&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;After seven hours, I reached the Almeria railway station at 10pm. According to Google Maps, the hostel which KDE had booked for all the attendees was only 800m away - well within walking distance. However, unbeknownst to me, I started walking in the opposite direction (my phone doesn't have a compass!). This kept increasing the Google Maps ETA and only when I was 2km off track I realised something was very wrong. Fortunately, I managed to get a taxi to take me to Residencia Civitas - a university hostel where all the Akademy attendees would be staying for the week.&lt;/p&gt;
 &lt;p&gt;After checking in to Civitas, I made my way to the double room. Judging from the baggage and the shoes in the corner, someone had moved in here before I did. About half an hour later, I found out who - &lt;a href="https://github.com/rahulyadav170923"&gt;Rahul Yadav&lt;/a&gt;, a fourth year student at DTU, Delhi. Exhausted after an eventful day of travel, I switched off the lights and went to sleep.&lt;/p&gt;
 &lt;h2&gt;The Conference&lt;/h2&gt;
 &lt;p&gt;The next day, I got to see other the Akademy attendees over breakfast at Civitas. In all, there were about 60-70 attendees, which I was told was slightly smaller than previous years.&lt;/p&gt;
 &lt;p&gt;The conference was held at University of Almería, located a few kilometres from the hostel. KDE had hired a public bus for transport to and from the hostel for all the days of the conference. The University was a stone's throw from the Andalusian coastline. After being seated in one of the larger lecture halls, Akademy 2017 was underway.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170722_135420112.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170722_135420112.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Konqi! And KDE Neon!&lt;/em&gt;    &lt;/p&gt;
 &lt;p&gt;The keynote talk was by Robert Kayne of Metabrainz, about the story of how MusicBrainz was formed out of the ashes of CDDB. The talk set the tone for the first day of Akademy.&lt;/p&gt;
 &lt;p&gt;The coffee break after the first two talks was much needed. I was grappling with sleep deprivation and jet lag from the last two days and needed all the caffeine and sugar I could get to keep myself going for the rest of the day. Over coffee, I caught up with some KDE developers I met at QtCon.&lt;/p&gt;
@@ -133,22 +177,22 @@
 &lt;p&gt;Here, it struck me how much I loved the way of life here.&lt;/p&gt;
 &lt;p&gt;Unlike Madrid, Almeria is not a known as a tourist destination so most of the people living there were locals. In a span of about half an hour I watched how an evening unfolds in this city. As the sun started dipping below the horizon, families with kids, college couples, and high-school friends trickled from the beach to the boardwalk for dinner. A typical evening looked delightfully simple and laid-back in this peaceful city.&lt;/p&gt;
 &lt;p&gt;The boardwalk had plenty of variety on offer - from seafood to Italian cuisine. One place caught my eye, a small cafe with Doner Kebab called 'Taj Mahal'. After a couple of days of eating nothing but bland sandwiches, Rahul and I were game for anything with a hint of spice of it. As I had done in Madrid, I tried ordering Doner Kebab using a mixture of broken Spanish and improvised sign language, only to receive a reply from the owner in Hindi! It turned out that the owner of the restaurant was Pakistani and had migrated to Spain seven years ago. Rahul made a point to ask for more chilli - and the Doner kebabs we got were not lacking in spice. I had more chilli in that one kebab than I normally would have had in a week. At least it was a change from Spanish food, which I wasn't all that fond of.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170722_210643404.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170722_210643404.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;View from the boardwalk&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170723_212852615.jpg" /&gt;  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170723_212852615.jpg"&gt;  &lt;/p&gt;
 &lt;p&gt;The next day was similar to the first, only a lot more fun. I spent a lot amount of time interacting with the people from KDE India. I also got to know my GSoC mentor, &lt;a href="https://blog.baloneygeek.com/"&gt;Boudhayan Gupta&lt;/a&gt; (@BaloneyGeek). The talks for this day were as good as the ones yesterday and I got to learn about Neon Docker images, the story behind KDE's Slimbook laptop, and things to look forward to in C++17/20.&lt;/p&gt;
 &lt;p&gt;The talks were wrapped up with the Akademy Awards 2017.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170723_171825707.jpg" /&gt;           &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170723_171825707.jpg"&gt;           &lt;/p&gt;
 &lt;p&gt;&lt;em&gt;David Faure and Kevin Ottens&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;There were still 3 hours of sunlight left after the conference and not being ones to waste it, we headed straight for the beach. Boudhayan and I made a treacherous excursion out to a rocky pier covered with moss and glistening with seawater. My well-worn sandels were the only thing keeping me from slipping onto a bunch of sharply angled stones jutting out from the waves. Against my better judgement, I managed to reach the end of the pier only to see a couple of crabs take interest in us. With the tide rising and the sun falling, we couldn't afford to stay much longer so we headed back to the beach just as we came. Not long after, I couldn't help myself and I headed into the water with enthusiasm I had only knew as a child. Probably more so for BaloneyGeek though, who headed in headfirst with his three-week-old Moto G5+ in his pocket (Spoiler: the phone was irrevocably damaged from half a minute of being immersed in saltwater). In the midst of this, we found a bunch of KDE folks hanging out on the beach with several boxes of pizza and bottles of beer. Free food!&lt;/p&gt;
 &lt;p&gt;Exhausted but exhilarated, we headed back to Civitas to end another very memorable day in Almeria.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170723_212706271.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170723_212706271.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Estacion Intermodal, a hub for public transport in Almeria&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;With the talks completed, Akademy 2017 moved on to its second leg, which consisted more of BoFs (&lt;a href="https://en.wikipedia.org/wiki/Birds_of_a_feather_(computing)"&gt;Birds of a Feather&lt;/a&gt;) and workshops.&lt;/p&gt;
 &lt;p&gt;The QML workshop organised by Anu was timely as my relationship with QML has been hot and cold. I would always go in circles with the QML Getting Started tutorials as there aren't as many examples of how to use QtQuick 2.x as there are with say, Qt Widgets. I understood how to integrate JavaScript with the QML GUI and I will probably get around to making a project with the toolkit when I get the time. Paul Brown held a BoF about writing good user documentation and deconstructed some more pretentious descriptions of software with suggestions on how to avoid falling into the same pitfalls. I sat on a few more BoFs after this, but most of the things went over my head as I wasn't contributing to the projects discussed there.&lt;/p&gt;
 &lt;p&gt;Feeling a bit weary of the beach, Rahul and I decided to explore the inner parts of the city instead. We planned to go to the Alcazaba of Almeria, a thousand-year-old fortress in the city. On the way, we found a small froyo shop and ordered a scoop with chocolate sauce and lemon sauce. Best couple of euros spent ever! I loved the tart flavour of the froyo and how it complemented the toppings with its texture.&lt;/p&gt;
 &lt;p&gt;This gastronomic digression aside, we scaled a part of the fort only to find it locked off with a massive iron door. I got the impression that the fort was rarely ever open to begin with. With darkness fast approaching, we found ourselves in a dodgy neighbourhood and we tried to get out as fast as we could without drawing too much attention to ourselves. This brought an end to my fourth night in Almeria.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170724_213148815_BURST001.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170724_213148815_BURST001.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;View from Alcazaba&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;The BoFs continued throughout the 25&lt;sup&gt;th&lt;/sup&gt;, the last full day of Akademy 2017. I participated in the GSoC BoF where KDE's plans for future GSoCs, SoKs, and GCIs were discussed (isn't that a lot of acronyms!). Finally, this was one topic where I could contribute to the discussion. If there was any takeaway from the discussion for GSoC aspirants, it is to start as early as you can!&lt;/p&gt;
 &lt;p&gt;I sat on some other BoFs as well, but most of the discussed topics were out of my scope. The Mycroft and VDG BoF did have some interesting exchange of ideas for future projects that I might consider working on if I get &lt;em&gt;free&lt;/em&gt; time in the future.&lt;/p&gt;
@@ -157,79 +201,52 @@
 &lt;p&gt;What was supposed to be a reference point ended up becoming the destination. There was still plenty of sunlight and the water wasn't too cold. I put one toe in the water, and then a foot.&lt;/p&gt;
 &lt;p&gt;And then, I &lt;em&gt;ran&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Running barefoot alone the coastline was one of the best memories I have of the trip. For once, I didn't think twice about what I was doing. It was pure liberation. I didn't feel the exertion or the pebbles pounding my feet.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170725_205642101.jpg" /&gt;           &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170725_205642101.jpg"&gt;           &lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Almeria's Beaches&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;The end of the coastline had a small fort and a dirt trail which I would've very much wanted to cycle on. After watching the sun sink into the sea, I ran till the other end of the boardwalk to find an Italian restaurant with &lt;strong&gt;vegetarian&lt;/strong&gt; spinach spaghetti. Served with a piece of freshly baked bread, dinner was delicious and capped off yet another amazing day in Almeria.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170725_222250909.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170725_222250909.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Dinner time!&lt;/em&gt;&lt;/p&gt;
 &lt;h2&gt;Day Trip&lt;/h2&gt;
 &lt;p&gt;The 26&lt;sup&gt;th&lt;/sup&gt; was the final day of the conference. Unlike the other days, the conference was only for half a day with the rest of the day kept aside for a day trip. I cannot comment on how the conference went on this day as I had to rush back to the hostel to retrieve my passport, which was necessary to attend the day trip.&lt;/p&gt;
 &lt;p&gt;Right around 2 in the afternoon we boarded the bus for the day trip. Our first stop was the Plataforma Solar de Almería, a solar energy research plant in Almeria. It houses some large heliostats for focussing sunlight at a point on a tower. This can be used for heating water and producing electricity.&lt;/p&gt;
 &lt;p&gt;There was another facility used for testing the tolerance of spacecraft heat shields by subjecting them to temperatures in excess of 2000C by focussing sunlight.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170726_152443372.jpg" /&gt;           &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170726_152443372.jpg"&gt;           &lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Heliostats focus at the top of the tower&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;The next stop was at the San José village. Though not too far from Almeria, the village is frequented by tourists much more than Almeria is and has a very different vibe. The village is known for its beaches, pristine clear waters, and white buildings. I was told that the village was used in the shooting of some films such as The Good, The Bad, and The Ugly.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170726_173502801.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170726_173502801.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Our final stop for the day was at the Rodalquilar Gold Mine. Lost to time, the mine had been shut down in 1966 due to the environmental hazards of using cyanide in the process to sediment gold. The mine wouldn't have looked out of place in a video-game or an action movie, and indeed, it was used in the filming of Indiana Jones and the Last Crusade. There was a short trek from the base of the mine to a trail which wrapped around a hill. After descending from the top we headed back to the hostel.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170726_190645909.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170726_190645909.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;This concluded my stay in Almeria.&lt;/p&gt;
 &lt;h2&gt;Madrid&lt;/h2&gt;
 &lt;p&gt;After checking out of the hostel early the next morning, I caught a train to Madrid. I had a day in the city before my flight to Bangalore the next day.&lt;/p&gt;
 &lt;p&gt;I reached Atocha at about 2 in the afternoon and checked in to a hotel. I spent the entire evening exploring Madrid on foot and an electric bicycle through the BiciMAD rental service.&lt;/p&gt;
 &lt;h3&gt;Photo Dump&lt;/h3&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_070806970.jpg" /&gt;
-&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_142622000.jpg" /&gt;
-&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_161202727.jpg" /&gt;
-&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_163629143.jpg" /&gt;
-&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_170914992.jpg" /&gt;
-&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_173745292.jpg" /&gt;
-&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_184840175.jpg" /&gt;
-&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_190420712.jpg" /&gt;
-&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_194115723.jpg" /&gt;
-&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_194935333.jpg" /&gt;
-&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_202014639.jpg" /&gt;
-&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_205415016.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_070806970.jpg"&gt;
+&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_142622000.jpg"&gt;
+&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_161202727.jpg"&gt;
+&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_163629143.jpg"&gt;
+&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_170914992.jpg"&gt;
+&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_173745292.jpg"&gt;
+&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_184840175.jpg"&gt;
+&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_190420712.jpg"&gt;
+&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_194115723.jpg"&gt;
+&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_194935333.jpg"&gt;
+&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_202014639.jpg"&gt;
+&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170727_205415016.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;The Return&lt;/h2&gt;
 &lt;p&gt;My flight back home was on the following morning, on the 28 July. The first leg of the return was yet again, on an Etihad aircraft bound for Abu Dhabi. This time it was an A330-300. It was an emotional 8 hour long flight - with the memories of Akademy still fresh in my mind. To top it off, I finished &lt;a href="https://en.wikipedia.org/wiki/EarthBound"&gt;EarthBound&lt;/a&gt; (excellent game!) during the flight.&lt;/p&gt;
 &lt;p&gt;Descent into Abu Dhabi started about half an hour before landing. This time though, I got to see the bizarre Terminal 1 dome of the Abu Dhabi airport. The Middle East has always been a mystical place for me. The prices of food and drink in the terminal were hard to stomach - 500mL of water was an outrageous 8 UAE Dirhams (₹140)! Thankfully it wasn't a very long layover, so I didn't have to spend too much.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170728_180441863.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/akademy2017/resized/IMG_20170728_180441863.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Note to self: may cause tripping if stared at for too long&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;The next leg was a direct flight to Bangalore, on another Etihad A330. Compared to all the travel I had done in the last two days, the four hour flight almost felt too short. I managed to finish 'Your Lie in April' on this leg.&lt;/p&gt;
 &lt;p&gt;I had mixed emotions on landing in Bangalore - I was glad to have reached home, but a bit sad that I had to return to college in only two days.&lt;/p&gt;
-&lt;p&gt;Akademy 2017 was an amazing trip and I am very grateful to KDE for letting me present at Akademy and for giving me the means of reaching there. I hope I can make more trips like these in the future!&lt;/p&gt;</summary><category term="KDE"></category><category term="Life"></category><category term="Travel"></category></entry><entry><title>On College Students</title><link href="http://arnavdhamija.com/blog/on-college-students.html" rel="alternate"></link><updated>2017-07-20T20:30:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-07-20:blog/on-college-students.html</id><summary type="html">&lt;p&gt;As a school kid, I was always fascinated by meeting college students from top tier colleges. There was something surreal in the way they talked and they confidently stood with T-shirts proudly proclaiming the name of their alma mater. I used to have the impression that no matter what came in the future, there was a certain justification of their abilities and intelligence. Perhaps society had conditioned me to think as such. Maybe their apparent confidence was a just a projection of how I thought it would feel to be in a top tier college.&lt;/p&gt;
-&lt;p&gt;It struck me just recently that everyone in my college is of the same surreal breed I used to look upto. But now, the magic is lost on me. It's no longer the case that simply being admitted to a Tier-1 college would give one opportunities otherwise impossible. At the same time, the name of the college on your degree matters little if you haven't done enough legwork in college to justify being called an "Engineer".&lt;/p&gt;</summary><category term="Life"></category><category term="College"></category></entry><entry><title>KIO Stash - Shipped!</title><link href="http://arnavdhamija.com/blog/kio-stash-release.html" rel="alternate"></link><updated>2017-07-04T11:30:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-07-04:blog/kio-stash-release.html</id><summary type="html">&lt;p&gt;It's been almost a year since I finished my GSoC project for implementing discontinuous file selections as a KIOSlave.&lt;/p&gt;
-&lt;p&gt;The ioslave is now officially shipped in the KDE ExtraGear Utils software package and it can be downloaded from here: &lt;a href="https://download.kde.org/stable/kio-stash/kio-stash-1.0.tar.xz.mirrorlist"&gt;https://download.kde.org/stable/kio-stash/kio-stash-1.0.tar.xz.mirrorlist&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;Selecting multiple files in any file manager for copying and pasting has never been a pleasant experience, especially if the files are in a non-continuous order. Often, when selecting files using Ctrl+A or the selection tool, we find that we need to select only a subset of the required files we have selected. This leads to the unwieldy operation of removing files from our selection. Of course, the common workaround is to create a new folder and to put all the items in this folder prior to copying, but this is a very inefficient and very slow process if large files need to be copied. Moreover Ctrl+Click requires fine motor skills to not lose the entire selection of files.&lt;/p&gt;
-&lt;p&gt;This is an original project with a novel solution to this problem. My solution is to add a virtual folder in all KIO applications, where the links to files and folders can be temporarily saved for a session. The files and folders are "staged" on this virtual folder. Files can be added to this by using all the regular file management operations such as Move, Copy and Paste, or by drag and drop. Hence, complex file operations such as moving files across many devices can be made easy by staging the operation before performing it.&lt;/p&gt;
-&lt;h2&gt;Project Overview&lt;/h2&gt;
-&lt;p&gt;This project consists of the following modules. As there is no existing implementation in KIO for managing virtual directories, all the following modules were written completely from scratch.&lt;/p&gt;
-&lt;h3&gt;KIO Slave&lt;/h3&gt;
-&lt;p&gt;The KIO slave is the backbone of the project. This KIO slave is responsible for interfacing with the GUI of a KDE application and provides the methods for various operations such as copying, deleting, and renaming files. All operations on the KIO slave are applied on a virtual stash filesystem (explained below). These operations are applied through inter process communication using the Qt's D-Bus API.&lt;/p&gt;
-&lt;p&gt;The advantage of the KIO slave is that it provides a consistent experience throughout the entire KDE suite of applications. Hence, this feature would work with all KIO compatible applications.&lt;/p&gt;
-&lt;h3&gt;Stash File System&lt;/h3&gt;
-&lt;p&gt;The Stash File System (SFS) is used for virtually staging all the files and directories added to the ioslave. When a file is copied to the SFS, a new File Node is created to it under the folder to which it is copied. On copying a folder, a new Directory Node is created on the SFS with all the files and directories under it copied recursively as dictated by KIO. The SFS is a very important feature of the project as it allows the user to create folders and move items on the stash ioslave without touching the physical file system at all. Once a selection is curated on the ioslave, it can be seamlessly copied to the physical filesystem.&lt;/p&gt;
-&lt;p&gt;The SFS is implemented using a QHash pair of the URL as a key, containing the location of the file on the SFS and the value containing a StashNodeData object which contains all the properties (such as file name, source, children files for directories) of a given node in SFS.&lt;/p&gt;
-&lt;p&gt;Memory use of the SFS is nominal on a per file basis - each file staged on the SFS requires roughly 300 bytes of memory.&lt;/p&gt;
-&lt;h3&gt;Stash Daemon&lt;/h3&gt;
-&lt;p&gt;The Stash File System runs in the KDE Daemon (kded5) container process. An object of the SFS is created on startup when the daemon is initialized. The daemon responds to calls from the ioslave communicated over the session bus and creates and removes nodes in the SFS.&lt;/p&gt;
-&lt;h2&gt;Installation&lt;/h2&gt;
-&lt;p&gt;Make sure you have KF5 backports with all the &lt;a href="https://community.kde.org/Guidelines_and_HOWTOs/Build_from_source/Install_the_dependencies"&gt;KDE dependency libraries&lt;/a&gt; installed before you build!&lt;/p&gt;
-&lt;p&gt;Download the tarball to your favorite folder, extract, and run:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;mkdir build
-cd build
-cmake -DCMAKE_INSTALL_PREFIX=/usr -DKDE_INSTALL_USE_QT_SYS_PATHS=TRUE ..
-make
-sudo make install
-kdeinit5
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h2&gt;Result&lt;/h2&gt;
-&lt;p&gt;Open Dolphin and set the path as &lt;code&gt;stash:/&lt;/code&gt;. This directory is completely 'virtual' and anything added to it will not consume any extra disk space. All basic file operations such as copy, paste, and move should work.&lt;/p&gt;
-&lt;p&gt;Folders can be created, curated, and renamed on this virtual folder itself. However, as this is a virtual directory, files cannot be created on it.&lt;/p&gt;
-&lt;p&gt;Copying from remote locations such as &lt;code&gt;mtp:/&lt;/code&gt; may not work however. Please report any bugs for the same on &lt;a href="http://bugs.kde.org/"&gt;http://bugs.kde.org/&lt;/a&gt;.&lt;/p&gt;</summary><category term="GSoC"></category><category term="KDE"></category></entry><entry><title>Quadcopters - A Hitchhiker's Guide to the Sky</title><link href="http://arnavdhamija.com/blog/quadcopter-2.html" rel="alternate"></link><updated>2017-06-13T09:30:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-06-13:blog/quadcopter-2.html</id><summary type="html">&lt;p&gt;We have liftoff!&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/quadcopter/liftoff.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;Akademy 2017 was an amazing trip and I am very grateful to KDE for letting me present at Akademy and for giving me the means of reaching there. I hope I can make more trips like these in the future!&lt;/p&gt;</content><category term="KDE"></category><category term="Life"></category><category term="Travel"></category></entry><entry><title>On College Students</title><link href="http://arnavdhamija.com/blog/on-college-students.html" rel="alternate"></link><published>2017-07-20T20:30:00+05:30</published><updated>2017-07-20T20:30:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-07-20:/blog/on-college-students.html</id><summary type="html">&lt;p&gt;As a school kid, I was always fascinated by meeting college students from top tier colleges. There was something surreal in the way they talked and they confidently stood with T-shirts proudly proclaiming the name of their alma mater. I used to have the impression that no matter what came …&lt;/p&gt;</summary><content type="html">&lt;p&gt;As a school kid, I was always fascinated by meeting college students from top tier colleges. There was something surreal in the way they talked and they confidently stood with T-shirts proudly proclaiming the name of their alma mater. I used to have the impression that no matter what came in the future, there was a certain justification of their abilities and intelligence. Perhaps society had conditioned me to think as such. Maybe their apparent confidence was a just a projection of how I thought it would feel to be in a top tier college.&lt;/p&gt;
+&lt;p&gt;It struck me just recently that everyone in my college is of the same surreal breed I used to look upto. But now, the magic is lost on me. It's no longer the case that simply being admitted to a Tier-1 college would give one opportunities otherwise impossible. At the same time, the name of the college on your degree matters little if you haven't done enough legwork in college to justify being called an "Engineer".&lt;/p&gt;</content><category term="Life"></category><category term="College"></category></entry><entry><title>Quadcopters - A Hitchhiker's Guide to the Sky</title><link href="http://arnavdhamija.com/blog/quadcopter-2.html" rel="alternate"></link><published>2017-06-13T09:30:00+05:30</published><updated>2017-06-13T09:30:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-06-13:/blog/quadcopter-2.html</id><summary type="html">&lt;p&gt;We have liftoff!&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/quadcopter/liftoff.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Cue me trying to not get my fingers cut off&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The quadcopter has been built! I had some problems during the building process, so this is a guide which will hopefully make things easier for people to start off with making their own quadcopters.&lt;/p&gt;
+&lt;p&gt;I suggest going …&lt;/p&gt;</summary><content type="html">&lt;p&gt;We have liftoff!&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/quadcopter/liftoff.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Cue me trying to not get my fingers cut off&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;The quadcopter has been built! I had some problems during the building process, so this is a guide which will hopefully make things easier for people to start off with making their own quadcopters.&lt;/p&gt;
 &lt;p&gt;I suggest going through all these websites thoroughly before purchasing a single part for your quadcopter. It's not an extensive list, so I'll keep updating it as I find more useful links:&lt;/p&gt;
@@ -264,11 +281,11 @@ kdeinit5
 &lt;h3&gt;Frame&lt;/h3&gt;
 &lt;p&gt;The first thing you would want to do is start off with the frame of the quadcopter. If you go for a DJI F450 frame (or one of its hundred clones), you will get a box with four arms (technically called booms) for mounting the motors and ESCs, a base which doubles as a power distribution board, and a board to hold the top of the copter together. It's pretty simple to set up and all you need is two Allen keys to screw everything together.&lt;/p&gt;
 &lt;p&gt;I suggest labeling each boom with a number and the direction in which its motor is supposed to spin. The below diagram is a good starting point:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/quadcopter/lpconfig.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/quadcopter/lpconfig.png"&gt;&lt;/p&gt;
 &lt;p&gt;Speaking about labeling, label &lt;em&gt;everything&lt;/em&gt;. It only takes a few seconds and it can save many hours of frustration later on. Of note, is the handedness (is there a better term?) of the propeller. Left-handed propellers turn anticlockwise and right-handed propellers turn clockwise. Mounting a propeller the wrong way will cause it to produce thrust in the opposite direction.&lt;/p&gt;
 &lt;h3&gt;Motors&lt;/h3&gt;
 &lt;p&gt;Once you've setup the frame, the next thing you should do is take a look at the motors. These motors are &lt;a href="https://en.wikipedia.org/wiki/Brushless_DC_electric_motor"&gt;brushless&lt;/a&gt; &lt;a href="http://electronics.howstuffworks.com/brushless-motor.htm"&gt;motors&lt;/a&gt; and they are very different from brushed motors. For starters they have three wires instead of the two on brushed motors. Another peculiarity about these motors is that they are out-runner motors. This means that the case of the motor rotates with the propeller and not the motor shaft alone.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/quadcopter/brushless.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/quadcopter/brushless.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Despite being a lot more power efficient than brushed motors, these motors can generate a great deal of heat when running at full power. I would &lt;em&gt;not&lt;/em&gt; recommend testing it at full power on the ground as there won't be any airflow to cool the motor down. This can permenantly damage your motor, and if you're unlucky, your ESC as well.&lt;/p&gt;
 &lt;p&gt;Anyway, the motors can be screwed directly into the booms of the quadcopter. Most motors come with a few accessories - an adapter for the base to mount it on to differently keyed frames and a propeller shaft with a nose tip. Don't worry if the propeller shaft seems to wobble or come loose. It's designed to only be fully secured when the propellers are mounted on the motor.&lt;/p&gt;
 &lt;p&gt;The direction of rotation is determined by the ESC, so we don't need to worry about that at the moment.&lt;/p&gt;
@@ -279,13 +296,13 @@ kdeinit5
 &lt;p&gt;Mount the ESCs on to the booms with rubber bands, or better, zip-ties.&lt;/p&gt;
 &lt;p&gt;As with all electronics with large capacitors, ESCs can have spectacular explosions when things go wrong. Short circuits or using the wrong polarity on the power input side of the ESC can cause it to get damaged in a matter of seconds.&lt;/p&gt;
 &lt;p&gt;On the other hand, things are a lot more flexible on the power output side of the ESC. It is possible to connect the three output connectors in any order to the motor, but a good rule of thumb is to connect the middle wire of the ESC to the ground wire of the motor and to interchange the other two wires to reverse the direction of rotation.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/quadcopter/escmount.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/quadcopter/escmount.jpg"&gt;&lt;/p&gt;
 &lt;h3&gt;Power Distribution Board&lt;/h3&gt;
 &lt;p&gt;The frame of your quadcopter probably will have a power distribution board of its own with solder points. However, I used a separate &lt;a href="http://www.amazon.in/APM-PX4-Power-Distribution-Board/dp/B010NK8V70/ref=sr_1_2?ie=UTF8&amp;amp;qid=1496164735&amp;amp;sr=8-2&amp;amp;keywords=power+distribution+board"&gt;power distribution board&lt;/a&gt; with the T-type connectors for the ESCs and the battery. It also has ports for the BECs and corresponding signal wires with a single 5V DC output.&lt;/p&gt;
 &lt;p&gt;This went right under the base of the quadcopter. It's a bit of tight fit to get all the ESC wires under the base. Again, use zip-ties to secure it to the base.&lt;/p&gt;
 &lt;p&gt;The ground clearance is quite low with the power distribution board attached. You can buy a landing gear or make your own to increase this.&lt;/p&gt;
 &lt;p&gt;I made a DIY landing gear for my own quadcopter using a badminton shuttlecock tube. It absorbs shocks nicely and gives me just enough ground clearance to mount more components.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/quadcopter/landingear.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/quadcopter/landingear.jpeg"&gt;&lt;/p&gt;
 &lt;h3&gt;Flight Computer and Battery&lt;/h3&gt;
 &lt;p&gt;Now for the good stuff, go ahead and mount the CC3D on the top frame of the quadcopter. Most CC3D's will come with some plastic adapters and a sticky sheet to stick the CC3D on the quadcopter frame. Take note of the arrow on the CC3D and make sure it is facing the direction in which you want your quadcopter to fly forward. Make sure you leave enough room for keeping the mini USB port and the servo header pins accessible!&lt;/p&gt;
 &lt;p&gt;After &lt;a href="http://helihelp.rabbitsvc.com/BindingTheTransmitter.aspx"&gt;binding&lt;/a&gt; the transmitter to the receiver, plug it into the receiver port of the CC3D. If you use the FlySky CT6B transmitter/receiver, the receiver probably won't work when directly connected to the CC3D on USB power. If so, you can use an Arduino's 5V and GND to power the receiver for testing it. When flying the quadcopter on Li-Po power, the CC3D will be powered by the ESC BECs which will give it enough headroom to power the receiver.&lt;/p&gt;
@@ -311,7 +328,8 @@ kdeinit5
 &lt;h2&gt;Fly!&lt;/h2&gt;
 &lt;p&gt;Or at least try to if you're a beginner :P If you're using LibrePilot, the default setting has stability assist which makes flying easier. For the more experienced (or gung ho) type of pilot, you can change the settings to use Rate/Acro mode to get full manual control of the aircraft.&lt;/p&gt;
 &lt;p&gt;Another thing worth looking at is tuning the &lt;a href="https://oscarliang.com/understanding-pid-for-quadcopter-rc-flight/"&gt;PID values&lt;/a&gt; of the FC for better performance. However, LibrePilot's default values are good enough so this isn't necessary.&lt;/p&gt;
-&lt;p&gt;And that's it for this tutorial. I'll be writing more as I get more experienced with flying my quadcopter.&lt;/p&gt;</summary><category term="Electronics"></category><category term="Quadcopters"></category></entry><entry><title>The Y2038 Glitch</title><link href="http://arnavdhamija.com/blog/y2038.html" rel="alternate"></link><updated>2017-06-09T15:30:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-06-09:blog/y2038.html</id><summary type="html">&lt;p&gt;&lt;em&gt;I had written this article a bit more than a year ago for a college magazine. This topic has been done to death in a Q/A format, so if you're looking for something new about Y2038, you probably won't find it here&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;And that's it for this tutorial. I'll be writing more as I get more experienced with flying my quadcopter.&lt;/p&gt;</content><category term="Electronics"></category><category term="Quadcopters"></category></entry><entry><title>The Y2038 Glitch</title><link href="http://arnavdhamija.com/blog/y2038.html" rel="alternate"></link><published>2017-06-09T15:30:00+05:30</published><updated>2017-06-09T15:30:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-06-09:/blog/y2038.html</id><summary type="html">&lt;p&gt;&lt;em&gt;I had written this article a bit more than a year ago for a college magazine. This topic has been done to death in a Q/A format, so if you're looking for something new about Y2038, you probably won't find it here&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Time has always been a finicky thing …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;I had written this article a bit more than a year ago for a college magazine. This topic has been done to death in a Q/A format, so if you're looking for something new about Y2038, you probably won't find it here&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Time has always been a finicky thing to deal with. Our perception of time without any stimulus is limited to less than an hour. We would be severely crippled without our abundance of electronic devices synchronized by internet atomic clocks. Unfortunately, these electronic devices on which we're so reliant on are heading towards a time based computer disaster on the same scale as the Y2K bug of this millennium - known as the Y2038 problem.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;How do computers measure time and what is the Y2038 bug?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;All UNIX derivative systems (including your iPhone or Android smartphone) measure time by counting the number of milliseconds that have elapsed from the 00:00 UTC, 1 January 1970. This day and time is known as the UNIX epoch. While this method of measuring time has served us well for a number of years, it faces a severe limitation - the &lt;code&gt;time_t&lt;/code&gt; int variable (an int variable is a part of a program used to hold integral values) in UNIX used to store the number of milliseconds from the epoch is only a 32-bit data type on older 32-bit computers. This means the &lt;code&gt;time_t&lt;/code&gt; variable can only store up to 2&lt;sup&gt;31&lt;/sup&gt; - 1 milliseconds before the counter overflows.&lt;/p&gt;
@@ -335,8 +353,8 @@ kdeinit5
 &lt;p&gt;There isn't any one-solution-fits-all approach for this since it affects several computer architectures, hardware, and software. While it might be easier to just upgrade all old computers with new 64-bit capable ones, there are still many areas where old 32-bit code is still prevalent. Furthermore, the cost of upgrading all the computer hardware is just too exorbitant to be covered.&lt;/p&gt;
 &lt;p&gt;If we look at the lessons learned from the past, the Y2K bug was rectified because of the media hype pressuring businesses to update their software to accommodate 4-digit years. Although the Y2038 bug is much more critical and harder to understand than the Y2K bug, there is hope that the same pressure will bring change.&lt;/p&gt;
 &lt;p&gt;But for now, only time will tell.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://imgs.xkcd.com/comics/2038.png" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Credits: &lt;a href="https://xkcd.com/"&gt;xkcd&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;</summary><category term="Tech"></category><category term="Misc"></category></entry><entry><title>Quadcopters - The Beginning!</title><link href="http://arnavdhamija.com/blog/quadcopter-1.html" rel="alternate"></link><updated>2017-05-26T09:30:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-05-26:blog/quadcopter-1.html</id><summary type="html">&lt;p&gt;I've been gravitating more towards working on electronics projects. It's a nice change from pecking the keyboard all day and it has plenty of interesting challenges of its own. The biggest difference I found is that you just can't take your hardware working correctly for granted. Things break and catch fire all too easily if you're not careful with what you're doing.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://imgs.xkcd.com/comics/2038.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Credits: &lt;a href="https://xkcd.com/"&gt;xkcd&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;</content><category term="Tech"></category><category term="Misc"></category></entry><entry><title>Quadcopters - The Beginning!</title><link href="http://arnavdhamija.com/blog/quadcopter-1.html" rel="alternate"></link><published>2017-05-26T09:30:00+05:30</published><updated>2017-05-26T09:30:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-05-26:/blog/quadcopter-1.html</id><summary type="html">&lt;p&gt;I've been gravitating more towards working on electronics projects. It's a nice change from pecking the keyboard all day and it has plenty of interesting challenges of its own. The biggest difference I found is that you just can't take your hardware working correctly for granted. Things break and catch …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I've been gravitating more towards working on electronics projects. It's a nice change from pecking the keyboard all day and it has plenty of interesting challenges of its own. The biggest difference I found is that you just can't take your hardware working correctly for granted. Things break and catch fire all too easily if you're not careful with what you're doing.&lt;/p&gt;
 &lt;p&gt;My plan is to make a quadcopter from scratch (a rather loose term) and give it &lt;em&gt;some&lt;/em&gt; ability to navigate unsupervised. This approach is (aptly?) called Simultaneous Localisation and Mapping, or SLAM. SLAM is by no means a cheap affair, be it in terms of hardware or software complexity. Using SLAM outdoors normally requires some kind of 3D localiser (such as a depth camera or LIDAR), GPS, and a fairly beefy computer to map the environment.&lt;/p&gt;
 &lt;p&gt;Of course, I'm setting my expectations low, and I will be very happy if I can get something out of this which is 10% as good as a human flying quadcopter by hand.&lt;/p&gt;
 &lt;p&gt;It all begins with the hardware and I'm going with this parts list:&lt;/p&gt;
@@ -353,13 +371,14 @@ kdeinit5
 &lt;p&gt;What I'm interested in, however, is controlling the CC3D in real-time using an Arduino. Typically, the CC3D is connected to a radio receiver which is wirelessly linked to a transmitter remote which is controlled by hand. The reciever is interfaced to the CC3D by outputting a PWM to each of the 6 channels when the transmitter is operated. Each channel is usually dedicated to only one axis of movement. For example, there are four dedicated channels for throttle control, yaw, roll, and pitch.&lt;/p&gt;
 &lt;p&gt;The idea behind this is that one day, I will have a lightweight computer (anyone willing to donate an NUC?) on the quadcopter doing SLAM in real-time. The computer will send throttle, pitch, yaw, and roll commands to the Arduino. The Arduino in turn will feed the CC3D with control signals to execute the maneouver plan. It all may seem like a Rube Goldberg machine, but it's a lot easier than building my own flight computer to do the same.&lt;/p&gt;
 &lt;p&gt;To kick things off, I had to find the PWM frequency the receiver uses for controlling the ESC. To do this, I connected a pin from the output channel of the receiver to an ad-hoc &lt;a href="http://www.instructables.com/id/Arduino-Oscilloscope-poor-mans-Oscilloscope/"&gt;Arduino Leonardo oscilloscope&lt;/a&gt;. Using the Processing library, we can get a 0-5V reading of the value on the A0 analog input of the Arduino.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/quadcopter/Capture2.PNG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/quadcopter/Capture2.PNG"&gt;&lt;/p&gt;
 &lt;p&gt;Not a bad start! The peaks are a pretty clear sign that it's a PWM with a low duty cycle. Using a ruler and some more code, I found that the peak to peak time is about 20ms, which works out to be a PWM frequency of 50Hz. This is in line with some websites speculating it works similarly to a servo control.&lt;/p&gt;
 &lt;p&gt;The length of time at the peak gives us the signal we need to send using the Arduino. Using some more analysis of the waveform, it looked like the signal were about 1-2ms long. A bit more research yielded that this is very similar to the waveform used for controlling servos. Fortunately, the Arduino has a Servo library meant just for this purpose. Using the writeMicroseconds() function, I got a pretty similar waveform:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/quadcopter/Capture7.PNG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/quadcopter/Capture7.PNG"&gt;&lt;/p&gt;
 &lt;p&gt;I would go as far to say that this is an even &lt;em&gt;cleaner&lt;/em&gt; signal than what the reciever outputs. I needed a 5V-&amp;gt;3.3V voltage divider for the output, so I used 3 identical resistors in series to do the job.&lt;/p&gt;
 &lt;p&gt;Next thing was to get the CC3D to accept the input. For this it requires &lt;strong&gt;manual&lt;/strong&gt; calibration of the transmitter. In Librepilot, the procedure is quite straightforward - you need to shift the sticks through their minimum, maximum, and neutral outputs to calibrate the CC3D for your transmitter. To do this, I mounted a push button on the Arduino which would cycle through 3 states each time it is pressed - 1100uS, 1500uS, and 1900uS. Not very elegant. Then again, if it's stupid but works, it ain't stupid.&lt;/p&gt;
-&lt;p&gt;I will be building the rest of the quadcopter once the parts arrive. You can find the code for the Arduino part here: &lt;a href="https://github.com/shortstheory/quadcopter-experiments/blob/master/tristate.ino"&gt;https://github.com/shortstheory/quadcopter-experiments/blob/master/tristate.ino&lt;/a&gt;&lt;/p&gt;</summary><category term="Electronics"></category><category term="Quadcopters"></category></entry><entry><title>Reading List</title><link href="http://arnavdhamija.com/blog/reading-list-1.html" rel="alternate"></link><updated>2017-03-12T23:50:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-03-12:blog/reading-list-1.html</id><summary type="html">&lt;p&gt;Recently, I've been trying to read more long form literature. It's been an interesting experience to wane myself off of social media and that experience certainly deserves a post of its own soon. Until then, here are some of my thoughts on the books I finished reading this year:&lt;/p&gt;
+&lt;p&gt;I will be building the rest of the quadcopter once the parts arrive. You can find the code for the Arduino part here: &lt;a href="https://github.com/shortstheory/quadcopter-experiments/blob/master/tristate.ino"&gt;https://github.com/shortstheory/quadcopter-experiments/blob/master/tristate.ino&lt;/a&gt;&lt;/p&gt;</content><category term="Electronics"></category><category term="Quadcopters"></category></entry><entry><title>Reading List</title><link href="http://arnavdhamija.com/blog/reading-list-1.html" rel="alternate"></link><published>2017-03-12T23:50:00+05:30</published><updated>2017-03-12T23:50:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-03-12:/blog/reading-list-1.html</id><summary type="html">&lt;p&gt;Recently, I've been trying to read more long form literature. It's been an interesting experience to wane myself off of social media and that experience certainly deserves a post of its own soon. Until then, here are some of my thoughts on the books I finished reading this year:&lt;/p&gt;
+&lt;h4&gt;The …&lt;/h4&gt;</summary><content type="html">&lt;p&gt;Recently, I've been trying to read more long form literature. It's been an interesting experience to wane myself off of social media and that experience certainly deserves a post of its own soon. Until then, here are some of my thoughts on the books I finished reading this year:&lt;/p&gt;
 &lt;h4&gt;The Checklist Manifesto - Atul Gawande&lt;/h4&gt;
 &lt;p&gt;The title gives away the premise of the book - which is about the art of managing and creating efficient checklists. This may not exactly sound like a jaw-clenching thriller, but Atul Gawande manages to keep the pages turning with interesting anecdotes about maintaining checklists. A surgeon by profession, Gawande lists instances about how his carefully curated surgery checklist saved lives in the operating theater. As an aviation geek, I enjoyed the story of how creating a pre-flight checklist for the Boeing 299 (now known as the Boeing B-17) saved Boeing from the brink of bankruptcy in the fiercely competitive aviation market of the 1940s. There are narratives about the flip side too. For example, verbose checklists with too many steps for the user to follow, may do more harm than having no checklist at all.&lt;/p&gt;
 &lt;p&gt;For the most part, the book reads as a collection of anecdotes of varying quality. Pointers on creating a good checklist is scattered too thin throughout the book to be useful. That said, my opinion of this book is probably not the best one to go by as I finished the book over a period of months which broke the continuity of the book.&lt;/p&gt;
@@ -369,7 +388,7 @@ kdeinit5
 &lt;p&gt;It took me forever to find this book. I used to be an avid fan of Alex Rider in school, but I lost track of the series in my dry spell of reading in 11th and 12th. Russian Roulette is something of a spin-off book, set somewhere in the middle of Stormbreaker in the Alex Rider timeline. The book is about all about Yassen, a key character in the Alex Rider series. Like most Anthony Horowitz books, it's not a particularly well-written book. Rather, it keeps one engaged with a fast (but somewhat predictable) plot. I liked some of the parts from Yassen's past in Russia, though the rest read like a rehash of Scorpia. Still, I finished this book much faster than I usually take to finish a book of its length.&lt;/p&gt;
 &lt;h4&gt;Bird by Bird - Anne Lamott&lt;/h4&gt;
 &lt;p&gt;In this book, Anne Lammot speaks about the joys and frustrations in the solitary world of a writer. From the outset, I loved this book. Lammot's writing style is hilarious and is loaded with dry wit and sarcasm. As with The Checklist Manifesto, the book follows on tangents with no central plot to speak of. On my first read of Bird by Bird, I couldn't help feeling that this book would read better as a blog than a novel. Though it of a much higher quality than a typical blog, the rant filled content would slide in perfectly for this format.&lt;/p&gt;
-&lt;p&gt;Lammot also peppers the book with some &lt;em&gt;very&lt;/em&gt; quotable passages. I won't spoil it here, but it's a must read for anyone into the publishing industry or writing business.&lt;/p&gt;</summary><category term="Reading"></category></entry><entry><title>Blog Migration Complete!</title><link href="http://arnavdhamija.com/blog/blog-migration.html" rel="alternate"></link><updated>2017-02-05T23:50:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-02-05:blog/blog-migration.html</id><summary type="html">&lt;p&gt;Now I finally have my very own domain name! The &lt;a href="http://arnavdhamija.blogspot.in/"&gt;old Blogger site&lt;/a&gt; is still available if anyone wants to see it but for all future intents and purposes, this will be the place where new blog posts will be put up. While I &lt;em&gt;could&lt;/em&gt; configure all traffic to the Blogger site to redirect to this one, the old site has grown on me so much over the years that I feel that it would be a shame to hide it that way.&lt;/p&gt;
+&lt;p&gt;Lammot also peppers the book with some &lt;em&gt;very&lt;/em&gt; quotable passages. I won't spoil it here, but it's a must read for anyone into the publishing industry or writing business.&lt;/p&gt;</content><category term="Reading"></category></entry><entry><title>Blog Migration Complete!</title><link href="http://arnavdhamija.com/blog/blog-migration.html" rel="alternate"></link><published>2017-02-05T23:50:00+05:30</published><updated>2017-02-05T23:50:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2017-02-05:/blog/blog-migration.html</id><summary type="html">&lt;p&gt;Now I finally have my very own domain name! The &lt;a href="http://arnavdhamija.blogspot.in/"&gt;old Blogger site&lt;/a&gt; is still available if anyone wants to see it but for all future intents and purposes, this will be the place where new blog posts will be put up. While I &lt;em&gt;could&lt;/em&gt; configure all traffic to the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Now I finally have my very own domain name! The &lt;a href="http://arnavdhamija.blogspot.in/"&gt;old Blogger site&lt;/a&gt; is still available if anyone wants to see it but for all future intents and purposes, this will be the place where new blog posts will be put up. While I &lt;em&gt;could&lt;/em&gt; configure all traffic to the Blogger site to redirect to this one, the old site has grown on me so much over the years that I feel that it would be a shame to hide it that way.&lt;/p&gt;
 &lt;p&gt;I had to migrate from Blogger because it is more than evident that Blogger has been getting less love from Google than it deserves. Take for instance, the Blogger web-based post editor - a shining example of an undeveloped relic of Google's products. Posts never autosaved or had any manual version control and a few misplaced keypresses could cause you to lose all your writing progress. Inserting images is a chore and putting up more complicated parts of text such as code blocks and sub-headings is even worse.&lt;/p&gt;
 &lt;p&gt;Of course as with most things in software development, there are workarounds for everything. The work-around which I had used for the last few blog posts was to write directly in Markdown and then convert it to HTML with pandoc to copy paste in the Blogger editor. Even so, this is clearly sub-optimal and I was spending more time wrestling with the Blogger editor to make my pages look good than I was spending writing actual content. The Blogger theme which I was using appealled to me as 13 year old (heck, it still appeals to me), but it was growing long in the tooth and only had basic support for responsive design and mobile devices. With all these things in mind, I started looking for a new home for my blog somewhere in the middle of last December on a break from college.&lt;/p&gt;
 &lt;p&gt;I first looked at &lt;a href="http://wordpress.com/"&gt;WordPress&lt;/a&gt;. At first, it seemed like my search for a new blogging platform would stop here. Open-sourced, a great browser editor, a cohesive Android app, direct editing in Markdown, local installation for testing, and support for plugins made WordPress everything Blogger wasn't. I loved the number of themes and customisation WordPress provided. But the love was short lived, and it ended when I started researching hosting options for WordPress. Most solutions required me to rent a web-server on a monthly basis and I had no idea what tier of server to get as my blog had only recently seen a huge surge in pageviews. Not to mention, the cost of maintaining a website with such a setup was by no means cheap. This is when I started asking to my geeky friends about how they maintained their own personal websites.&lt;/p&gt;
@@ -380,7 +399,10 @@ kdeinit5
 &lt;p&gt;The next few days I played with some more Jekyll themes and found that there were many things I didn't like about it. For one thing, it was written in Ruby which I have no experience with. Themes didn't look easy to work with and there was no native support for tags (there is a workaround for this, but due to my lack of Ruby-fu, it all looked terribly arcane to me). I then put the blog migration on the back burner for a while to work on projects at my college's Automation &amp;amp; Robotics Club.&lt;/p&gt;
 &lt;p&gt;A few weeks later, I took a look at the blog project with some new perspective. I started by poking around for alternatives to Jekyll. There was one such alternative which ticked all my boxes - a static site generator called &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;. As WordPress looked inherently superior to Blogger, Pelican looked inherently superior to Jekyll for what I wanted to do with it. For example, it had built-in support for tags, had a theming engine, supported Markdown &lt;em&gt;and&lt;/em&gt; reStructuredText, and had several easy to install plugins. Above all, Pelican is written in Python which made it so much easier for me to mess around with it. There were some more modifications to make to the Markdown files (particularly with the post metadata), but it was so trivial that it didn't pain one bit to modify all the files. Not too long after I settled on Pelican, I found a theme which made my blog look exactly how I wanted it to look. The &lt;a href="https://github.com/PurePelicanTheme"&gt;Pure Single&lt;/a&gt; theme also has nifty support for custom sidebar images, which I used on some select &lt;a href="http://arnavdhamija.com/blog/t2-years-and-counting-iit-jee.html"&gt;blog&lt;/a&gt; &lt;a href="http://arnavdhamija.com/blog/gsoc-report-wrapping-up-gsoc-2016.html"&gt;posts&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There was some initial trouble with setting a blog subfolder in the site and getting images to work on some auto-generated sites (such as the Tags and Categories pages). It later turned out that it was some problem with localhost/ not finding the paths correctly to the images and the site was totally fine when published to the GitHub Pages site. After only three days of using Pelican, I had something which I was willing to show off. The next step was much more straightforward for a change - registering a domain name. I looked into a few options such as GoDaddy, Hover, and Namecheap. Namecheap had positive reviews (unlike GoDaddy) and was the cheapest of the lot. The site configuration to serve pages from GitHub's servers was not more than a 10 minute procedure, and I finally had the site you are reading this article on right now.&lt;/p&gt;
-&lt;p&gt;There will be a lot more changes coming up on this blog, some of them aesthetic and some functional. I'm also probably going to change the name of this blog sometime soon, to something which is more reflective of my current sensibilities.&lt;/p&gt;</summary><category term="Misc"></category><category term="Programming"></category></entry><entry><title>What I've been upto</title><link href="http://arnavdhamija.com/blog/this-semester-has-gone-little-too-fast.html" rel="alternate"></link><updated>2016-12-19T11:09:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-12-19:blog/this-semester-has-gone-little-too-fast.html</id><summary type="html">&lt;p&gt;This semester has gone a &lt;em&gt;little&lt;/em&gt; too fast for my liking. Though there were
+&lt;p&gt;There will be a lot more changes coming up on this blog, some of them aesthetic and some functional. I'm also probably going to change the name of this blog sometime soon, to something which is more reflective of my current sensibilities.&lt;/p&gt;</content><category term="Misc"></category><category term="Programming"></category></entry><entry><title>What I've been upto</title><link href="http://arnavdhamija.com/blog/this-semester-has-gone-little-too-fast.html" rel="alternate"></link><published>2016-12-19T11:09:00+05:30</published><updated>2016-12-19T11:09:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-12-19:/blog/this-semester-has-gone-little-too-fast.html</id><summary type="html">&lt;p&gt;This semester has gone a &lt;em&gt;little&lt;/em&gt; too fast for my liking. Though there were
+plenty of good memories and takeaways from this semester, it has been by far
+my most stressful time in this college yet. Between taking on a number of
+technical projects and trying to rescue a sharply …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This semester has gone a &lt;em&gt;little&lt;/em&gt; too fast for my liking. Though there were
 plenty of good memories and takeaways from this semester, it has been by far
 my most stressful time in this college yet. Between taking on a number of
 technical projects and trying to rescue a sharply falling SG due to a poor T1,
@@ -453,9 +475,13 @@ investing so much time in studying or doing projects has made me cut down my
 participation in other clubs and I've quit nearly all the non-technical clubs
 I joined last year. There's more than that too - I feel it's much harder to be
 fully immersed in anything anymore.  &lt;/p&gt;
-&lt;p&gt;Maybe it's just something else which requires more soul searching.&lt;/p&gt;</summary><category term="College"></category><category term="Life"></category><category term="KDE"></category></entry><entry><title>GSoC Report - Wrapping up GSoC 2016</title><link href="http://arnavdhamija.com/blog/gsoc-report-wrapping-up-gsoc-2016.html" rel="alternate"></link><updated>2016-08-30T01:45:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-08-30:blog/gsoc-report-wrapping-up-gsoc-2016.html</id><summary type="html">&lt;p&gt;That’s it. After a &lt;a href="https://github.com/KDE/kio-stash/graphs/contributors"&gt;combined total&lt;/a&gt; of 217 git commits, 6,202 lines of code added, and
+&lt;p&gt;Maybe it's just something else which requires more soul searching.&lt;/p&gt;</content><category term="College"></category><category term="Life"></category><category term="KDE"></category></entry><entry><title>GSoC Report - Wrapping up GSoC 2016</title><link href="http://arnavdhamija.com/blog/gsoc-report-wrapping-up-gsoc-2016.html" rel="alternate"></link><published>2016-08-30T01:45:00+05:30</published><updated>2016-08-30T01:45:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-08-30:/blog/gsoc-report-wrapping-up-gsoc-2016.html</id><summary type="html">&lt;p&gt;That’s it. After a &lt;a href="https://github.com/KDE/kio-stash/graphs/contributors"&gt;combined total&lt;/a&gt; of 217 git commits, 6,202 lines of code added, and
 4,167 lines of code deleted, GSoC 2016 is finally over.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/Screenshot_20160830_014801.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/Screenshot_20160830_014801.png"&gt;&lt;/p&gt;
+&lt;p&gt;These twelve weeks of programming have been a very enriching experience for me
+and making this project has taught me a …&lt;/p&gt;</summary><content type="html">&lt;p&gt;That’s it. After a &lt;a href="https://github.com/KDE/kio-stash/graphs/contributors"&gt;combined total&lt;/a&gt; of 217 git commits, 6,202 lines of code added, and
+4,167 lines of code deleted, GSoC 2016 is finally over.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/Screenshot_20160830_014801.png"&gt;&lt;/p&gt;
 &lt;p&gt;These twelve weeks of programming have been a very enriching experience for me
 and making this project has taught me a lot about production quality software
 development. Little did I know that a &lt;a href="https://github.com/shortstheory/filetray-very-early-alpha-idea-
@@ -465,7 +491,7 @@ lead to something as big as this!  &lt;/p&gt;
 &lt;p&gt;There have been many memorable moments throughout my coding period for the
 GSoC - such as the first time I got an ioslave to
 &lt;a href="http://arnavdhamija.com/blog/gsoc-update-1-beginning.html"&gt;install&lt;/a&gt; correctly, to writing its “Hello World”
-&lt;a href="http://arnavdhamija.com/blog/gsoc-update-writing-kio-slave-101.html"&gt;equivalent&lt;/a&gt;, and getting a basic implementation of the project up and
+&lt;a href="{filename}/2016-06-21-gsoc-update-writing-kio-slave-101.md"&gt;equivalent&lt;/a&gt;, and getting a basic implementation of the project up and
 running by doing a series of dirty hacks with Dolphin’s code. There were also
 times when I was so frustrated with debugging for this project, that I wanted
 to do nothing but smash my laptop’s progressively failing display panel with
@@ -518,7 +544,7 @@ much time on making sure the ioslave was robust enough, this was a mixed
 surprise. Finally, after a week of rewriting and to an extent, refactoring the
 rename and copy functions of the ioslave, I got the best terminal output I
 ever wanted from this project.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/Screenshot_20160829_184812.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/Screenshot_20160829_184812.png"&gt;&lt;/p&gt;
 &lt;p&gt;Definitely the highest point of the GSoC for me. From there on out, it was a
 matter of putting the code on the slow burner for cleaning up any leftover
 debug statements and for writing documentation for other obscure sections.
@@ -541,7 +567,11 @@ on an open source project gave me a sense of gratification solving a problem
 in competitive programming never could have.  &lt;/p&gt;
 &lt;p&gt;The Google Summer of Code may be over, but my journey with open source
 development has just begun. Here’s to even bigger and better projects in the
-future!&lt;/p&gt;</summary><category term="GSoC"></category><category term="KDE"></category></entry><entry><title>GSoC Update: Tinkering with KIO</title><link href="http://arnavdhamija.com/blog/gsoc-update-tinkering-with-kio.html" rel="alternate"></link><updated>2016-07-21T15:18:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-07-21:blog/gsoc-update-tinkering-with-kio.html</id><summary type="html">&lt;p&gt;I'm a lot closer to finishing the project now. Thanks to some great support
+future!&lt;/p&gt;</content><category term="GSoC"></category><category term="KDE"></category></entry><entry><title>GSoC Update: Tinkering with KIO</title><link href="http://arnavdhamija.com/blog/gsoc-update-tinkering-with-kio.html" rel="alternate"></link><published>2016-07-21T15:18:00+05:30</published><updated>2016-07-21T15:18:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-07-21:/blog/gsoc-update-tinkering-with-kio.html</id><summary type="html">&lt;p&gt;I'm a lot closer to finishing the project now. Thanks to some great support
+from my GSoC mentor, my project has turned out better than what I had written
+about in my proposal! Working together, we've made a lot of changes to the
+project.  &lt;/p&gt;
+&lt;p&gt;For starters, we've changed the name …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I'm a lot closer to finishing the project now. Thanks to some great support
 from my GSoC mentor, my project has turned out better than what I had written
 about in my proposal! Working together, we've made a lot of changes to the
 project.  &lt;/p&gt;
@@ -588,195 +618,13 @@ Dolphin and for writing a couple of unit tests along the way. I'm looking
 forward to a good finish with this project.  &lt;/p&gt;
 &lt;p&gt;You can find the source for it here: &lt;a href="https://github.com/KDE/kio-stash"&gt;https://github.com/KDE/kio-stash&lt;/a&gt; (did I
 mention it's now hosted on a &lt;a href="https://quickgit.kde.org/?p=kio-
-stash.git"&gt;KDE repo&lt;/a&gt;? ;) )&lt;/p&gt;</summary><category term="GSoC"></category><category term="KDE"></category></entry><entry><title>GSoC Update(?): Writing a KIO slave 101!</title><link href="http://arnavdhamija.com/blog/gsoc-update-writing-kio-slave-101.html" rel="alternate"></link><updated>2016-06-21T23:35:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-06-21:blog/gsoc-update-writing-kio-slave-101.html</id><summary type="html">&lt;p&gt;This &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;project&lt;/a&gt;
-has been going well. Though it was expectedly difficult in the beginning, I
-feel like I am on the other side of the learning curve now. I will probably
-make a proper update post sometime later this month. My repo for this project
-can be found here: &lt;a href="https://github.com/KDE/kio-stash"&gt;https://github.com/shortstheory/kio-stash&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;For now, this is a small tutorial for writing KDE I/O slaves (KIO slaves)
-which can be used for a variety of KDE applications. KIO slaves are a great
-way for accessing files from different filesystems and protocols in a neat,
-uniform way across many KDE applications. Their versatility makes them
-integral to the KIO library. KIO slaves have changed in their structure the
-transition to KF5 and this tutorial highlights some of these differences from
-preceding iterations of it.&lt;/p&gt;
-&lt;h3&gt;Project Structure&lt;/h3&gt;
-&lt;p&gt;For the purpose of this tutorial, your project source directory needs to have
-the following files.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;kio_hello.h&lt;/li&gt;
-&lt;li&gt;kio_hello.cpp&lt;/li&gt;
-&lt;li&gt;hello.json&lt;/li&gt;
-&lt;li&gt;CMakeLists.txt&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;If you don't feel like creating these yourself, just clone it from here:
-&lt;a href="https://github.com/shortstheory/kioslave-tutorial"&gt;https://github.com/shortstheory/kioslave-tutorial&lt;/a&gt;&lt;/p&gt;
-&lt;h4&gt;hello.json&lt;/h4&gt;
-&lt;p&gt;The .json file replaces the .protocol files used in KIO slaves pre KF5. The
-.json file for the KIO slave specifies the properties the KIO slave will have
-such as the executable path to the KIO slave on installation. The .json file
-also includes properties of the slave such as being able to read from, write
-to, delete from, among many others. Fields in this .json file are specified
-from the &lt;a href="https://api.kde.org/frameworks/kio/html/classKProt
-ocolManager.html"&gt;KProtocolManager&lt;/a&gt; class. For creating a KIO slave capable of showing a
-directory in a file manager such as Dolphin, the listing property must be set
-to true. As an example, the .json file for the Hello KIO slave described in
-this tutorial looks like this:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;{  
-    &amp;quot;KDE-KIO-Protocols&amp;quot; : {   
-        &amp;quot;hello&amp;quot;: {   
-            &amp;quot;Class&amp;quot;: &amp;quot;:local&amp;quot;,   
-            &amp;quot;X-DocPath&amp;quot;: &amp;quot;kioslave5/kio_hello.html&amp;quot;,   
-            &amp;quot;exec&amp;quot;: &amp;quot;kf5/kio/hello&amp;quot;,   
-            &amp;quot;input&amp;quot;: &amp;quot;none&amp;quot;,   
-            &amp;quot;output&amp;quot;: &amp;quot;filesystem&amp;quot;,   
-            &amp;quot;protocol&amp;quot;: &amp;quot;hello&amp;quot;,   
-            &amp;quot;reading&amp;quot;: true   
-        }   
-    }   
-}  
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;As for the CMakeLists.txt, you will need to link your KIO slave module with
-KF5::KIOCore. This can be seen in the project directory.  &lt;/p&gt;
-&lt;h4&gt;kio_hello.h&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#ifndef HELLO_H  &lt;/span&gt;
-&lt;span class="cp"&gt;#define HELLO_H  &lt;/span&gt;
-
-&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;kio/slavebase.h&amp;gt;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
-
-&lt;span class="cm"&gt;/**  &lt;/span&gt;
-&lt;span class="cm"&gt;  This class implements a Hello World kioslave  &lt;/span&gt;
-&lt;span class="cm"&gt; */&lt;/span&gt;   
-&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="nl"&gt;Hello&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;QObject&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;KIO&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;SlaveBase&lt;/span&gt;  
-&lt;span class="p"&gt;{&lt;/span&gt;  
-    &lt;span class="n"&gt;Q_OBJECT&lt;/span&gt;   
-&lt;span class="nl"&gt;public&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  
-    &lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
-    &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QUrl&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;Q_DECL_OVERRIDE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
-&lt;span class="p"&gt;};&lt;/span&gt;  
-
-&lt;span class="cp"&gt;#endif  &lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;The Hello KIO slave is derived from KIO::SlaveBase. The SlaveBase class has
-some basic functions already implemented for the KIO slave. This can be found
-in the &lt;a href="https://api.kde.org/frameworks/kio/html/classKIO_1_1Sla
-veBase.html"&gt;documentation&lt;/a&gt;. However, most of the functions of SlaveBase are virtual
-functions and have to be re-implemented for the KIO slave. In this case, we
-are re-implementing the get function to print a QString when it is called by
-kioclient5.  &lt;/p&gt;
-&lt;p&gt;In case you don't need special handling of the KIO slave's functions, you can
-derive your KIO slave class directly from &lt;a href="https://a
-pi.kde.org/frameworks/kio/html/classKIO_1_1ForwardingSlaveBase.html"&gt;KIO::ForwardingSlaveBase&lt;/a&gt;. Here,
-you would only need to re-implement the rewriteUrl function to get your KIO
-slave working.  &lt;/p&gt;
-&lt;h4&gt;kio_hello.cpp&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;hello.h&amp;quot;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
-&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;QDebug&amp;gt;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
-
-&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="nl"&gt;KIOPluginForMetaData&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;QObject&lt;/span&gt;  
-&lt;span class="p"&gt;{&lt;/span&gt;  
-    &lt;span class="n"&gt;Q_OBJECT&lt;/span&gt;   
-    &lt;span class="n"&gt;Q_PLUGIN_METADATA&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IID&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;org.kde.kio.slave.hello&amp;quot;&lt;/span&gt; &lt;span class="kt"&gt;FILE&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;hello.json&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   
-&lt;span class="p"&gt;};&lt;/span&gt;  
-
-&lt;span class="k"&gt;extern&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C&amp;quot;&lt;/span&gt;  
-&lt;span class="p"&gt;{&lt;/span&gt;  
-    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;Q_DECL_EXPORT&lt;/span&gt; &lt;span class="n"&gt;kdemain&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;argc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   
-    &lt;span class="p"&gt;{&lt;/span&gt;   
-        &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Launching KIO slave.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argc&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;   
-            &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Usage: kio_hello protocol domain-socket1 domain-socket2&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
-            &lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
-        &lt;span class="p"&gt;}&lt;/span&gt;   
-        &lt;span class="n"&gt;Hello&lt;/span&gt; &lt;span class="n"&gt;slave&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;   
-        &lt;span class="n"&gt;slave&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dispatchLoop&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;   
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
-    &lt;span class="p"&gt;}&lt;/span&gt;   
-&lt;span class="p"&gt;}&lt;/span&gt;  
-
-&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QUrl&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="p"&gt;{&lt;/span&gt;  
-    &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Entering function.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
-    &lt;span class="n"&gt;mimeType&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/plain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
-    &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="nf"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello world!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
-    &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;   
-    &lt;span class="n"&gt;finished&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;   
-    &lt;span class="n"&gt;qDebug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Leaving function&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
-&lt;span class="p"&gt;}&lt;/span&gt;  
-
-&lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-    &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;SlaveBase&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;   
-
-&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;hello.moc&amp;quot;  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;The .moc file is, of course, auto-generated at compilation time.  &lt;/p&gt;
-&lt;p&gt;As mentioned earlier, the KIO Slave's .cpp file will also require a new
-KIOPluginForMetaData class to add the .json file. The following is used for
-the hello KIO slave and can be used as an example:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="n"&gt;KIOPluginForMetaData&lt;/span&gt; : &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;QObject&lt;/span&gt;  
-{  
-    &lt;span class="s"&gt;Q_OBJECT   &lt;/span&gt;
-&lt;span class="s"&gt;    Q_&lt;/span&gt;&lt;span class="n"&gt;PLUGIN_METADATA&lt;/span&gt;(&lt;span class="n"&gt;IID&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;org.kde.kio.slave.hello&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;FILE&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;hello.json&amp;quot;&lt;/span&gt;)   
-};  
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h4&gt;CMakeLists.txt&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;cmake_minimum_required&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;VERSION&lt;/span&gt; &lt;span class="s"&gt;3.5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;QT_MIN_VERSION&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;5.4.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KF5_MIN_VERSION&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;5.16.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-
-&lt;span class="nb"&gt;find_package&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;ECM&lt;/span&gt; &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;KF5_MIN_VERSION&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="s"&gt;REQUIRED&lt;/span&gt; &lt;span class="s"&gt;NO_MODULE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;  
-    &lt;span class="s"&gt;CMAKE_MODULE_PATH&lt;/span&gt;   
-        &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;CMAKE_MODULE_PATH&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;   
-        &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;ECM_MODULE_PATH&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;   
-        &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;ECM_KDE_MODULE_DIR&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;   
-&lt;span class="p"&gt;)&lt;/span&gt;  
-
-&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KDEInstallDirs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KDECMakeSettings&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KDECompilerSettings&lt;/span&gt; &lt;span class="s"&gt;NO_POLICY_SCOPE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;ECMSetupVersion&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;FeatureSummary&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;add_library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;MODULE&lt;/span&gt; &lt;span class="s"&gt;hello.cpp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;find_package&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;KF5&lt;/span&gt; &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;KF5_MIN_VERSION&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="s"&gt;REQUIRED&lt;/span&gt; &lt;span class="s"&gt;KIO&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;target_link_libraries&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;KF5::KIOCore&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;span class="nb"&gt;set_target_properties&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;PROPERTIES&lt;/span&gt; &lt;span class="s"&gt;OUTPUT_NAME&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-
-&lt;span class="nb"&gt;install&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;TARGETS&lt;/span&gt; &lt;span class="s"&gt;kio_hello&lt;/span&gt; &lt;span class="s"&gt;DESTINATION&lt;/span&gt; &lt;span class="o"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;KDE_INSTALL_PLUGINDIR&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="s"&gt;/kf5/kio&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;  
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h3&gt;Installation&lt;/h3&gt;
-&lt;p&gt;Simply run the following commands in the source folder:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;mkdir build  
-cd build  
-cmake -DCMAKE_INSTALL_PREFIX=/usr -DKDE_INSTALL_USE_QT_SYS_PATHS=TRUE ..  
-make  
-sudo make install  
-kdeinit5  
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;As shown above, we have to run kdeinit5 again so the new KIO slave is
-discovered by KLauncher and can be loaded when we run a command through an
-application such as kioclient5.&lt;br /&gt;
-Testing  &lt;/p&gt;
-&lt;p&gt;Run:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;kioclient5 &amp;#39;cat&amp;#39; &amp;#39;hello:/&amp;#39;  
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;And the output should be:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Hello_world
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="GSoC"></category><category term="Programming"></category><category term="KDE"></category></entry><entry><title>GSoC Update 1: The Beginning</title><link href="http://arnavdhamija.com/blog/gsoc-update-1-beginning.html" rel="alternate"></link><updated>2016-05-30T10:37:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-05-30:blog/gsoc-update-1-beginning.html</id><summary type="html">&lt;p&gt;I have officially started my &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;GSoC
+stash.git"&gt;KDE repo&lt;/a&gt;? ;) )&lt;/p&gt;</content><category term="GSoC"></category><category term="KDE"></category></entry><entry><title>GSoC Update 1: The Beginning</title><link href="http://arnavdhamija.com/blog/gsoc-update-1-beginning.html" rel="alternate"></link><published>2016-05-30T10:37:00+05:30</published><updated>2016-05-30T10:37:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-05-30:/blog/gsoc-update-1-beginning.html</id><summary type="html">&lt;p&gt;I have officially started my &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;GSoC
+project&lt;/a&gt; under
+the mentorship of &lt;a href="https://blog.baloneygeek.com/"&gt;Boudhayan Gupta &lt;/a&gt;and &lt;a href="http://blog.pinak.me/"&gt;Pinak
+Ahuja&lt;/a&gt;.  &lt;/p&gt;
+&lt;p&gt;The project idea's implementation has undergone some changes from what I
+proposed. While the essence of the project is the same, it will now no longer
+be dependent on Baloo and xattr. Instead, it …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I have officially started my &lt;a href="https://summerofcode.withgoogle.com/projects/#5979393230897152"&gt;GSoC
 project&lt;/a&gt; under
 the mentorship of &lt;a href="https://blog.baloneygeek.com/"&gt;Boudhayan Gupta &lt;/a&gt;and &lt;a href="http://blog.pinak.me/"&gt;Pinak
 Ahuja&lt;/a&gt;.  &lt;/p&gt;
@@ -816,7 +664,7 @@ Faure&lt;/a&gt;. Under his guidance, I managed to
 port the KIO slave in the tutorial to a KF5 compatible KIO slave and after a
 full week of frustration of dealing with dependency hell, I saw the best Hello
 World I could ever hope for:  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/kioslave.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/kioslave.png"&gt;&lt;/p&gt;
 &lt;p&gt;Baby steps. The next step was to make the KIO slave capable of displaying the
 contents of a specified QUrl in a file manager. The documentation for
 KProtocolManager made it seem like a pretty straightforward task - apparently
@@ -828,7 +676,7 @@ class was only for reimplementing its member functions in a derived class as I
 found out by going through the source code of the core of kio/core. Learning
 from my mistake here I switched to using a ForwardingSlaveBase class for my
 KIO slave which instantly solved my problems of displaying a directory.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/helloslave.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/helloslave.png"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Fistpump&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;According to my timeline, the next steps in the project are  &lt;/p&gt;
 &lt;ol&gt;
@@ -837,8 +685,15 @@ KIO slave which instantly solved my problems of displaying a directory.  &lt;/p&
 &lt;li&gt;Thinking of a better name for this feature?
 So far, it's been a great experience to get so much support from the KDE
 community. Here's to another two and a half months of KDE development!&lt;/li&gt;
-&lt;/ol&gt;</summary><category term="GSoC"></category><category term="Programming"></category><category term="KDE"></category></entry><entry><title>It has happened - GSoC 2016 Selection!</title><link href="http://arnavdhamija.com/blog/it-has-happened.html" rel="alternate"></link><updated>2016-04-23T12:28:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-04-23:blog/it-has-happened.html</id><summary type="html">&lt;p&gt;Wow!  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/photo_2016-04-23_12-26-30.jpg" /&gt;&lt;/p&gt;
+&lt;/ol&gt;</content><category term="GSoC"></category><category term="Programming"></category><category term="KDE"></category></entry><entry><title>It has happened - GSoC 2016 Selection!</title><link href="http://arnavdhamija.com/blog/it-has-happened.html" rel="alternate"></link><published>2016-04-23T12:28:00+05:30</published><updated>2016-04-23T12:28:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-04-23:/blog/it-has-happened.html</id><summary type="html">&lt;p&gt;Wow!  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/photo_2016-04-23_12-26-30.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;I have been selected for the Google Summer of Code!  &lt;/p&gt;
+&lt;p&gt;For the better part of the summer vacation, I will now be committing myself to
+write code for &lt;a href="https://www.kde.org/"&gt;KDE&lt;/a&gt; to implement my project idea of
+implementing a &lt;a href="https://goo.gl/BYOWdG"&gt;virtual folder in Dolphin&lt;/a&gt; to make it
+easier to select files.  &lt;/p&gt;
+&lt;p&gt;As …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Wow!  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/photo_2016-04-23_12-26-30.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;I have been selected for the Google Summer of Code!  &lt;/p&gt;
 &lt;p&gt;For the better part of the summer vacation, I will now be committing myself to
 write code for &lt;a href="https://www.kde.org/"&gt;KDE&lt;/a&gt; to implement my project idea of
@@ -901,7 +756,10 @@ proposal as good as possible. In the end, after painstakingly checking every
 word in my proposal for what felt like the fiftieth time I submitted it on 25
 March, only to spend an anxious month waiting for the results which came out
 at 1230am IST on April 23. While it still hasn't sunk in yet (!), I am sure
-that this will make for an awesome summer vacation!&lt;/p&gt;</summary><category term="GSoC"></category><category term="KDE"></category></entry><entry><title>What do I do now?</title><link href="http://arnavdhamija.com/blog/what-do-i-do-now.html" rel="alternate"></link><updated>2016-04-14T01:38:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-04-14:blog/what-do-i-do-now.html</id><summary type="html">&lt;p&gt;I spend a lot of time thinking since I've joined college.  &lt;/p&gt;
+that this will make for an awesome summer vacation!&lt;/p&gt;</content><category term="GSoC"></category><category term="KDE"></category></entry><entry><title>What do I do now?</title><link href="http://arnavdhamija.com/blog/what-do-i-do-now.html" rel="alternate"></link><published>2016-04-14T01:38:00+05:30</published><updated>2016-04-14T01:38:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-04-14:/blog/what-do-i-do-now.html</id><summary type="html">&lt;p&gt;I spend a lot of time thinking since I've joined college.  &lt;/p&gt;
+&lt;p&gt;I had postponed a lot of introspection during the two years I spent slogging
+away for the JEE. But now, with ample free time and practically no requirement
+to go to classes, I've finally got some time to look …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I spend a lot of time thinking since I've joined college.  &lt;/p&gt;
 &lt;p&gt;I had postponed a lot of introspection during the two years I spent slogging
 away for the JEE. But now, with ample free time and practically no requirement
 to go to classes, I've finally got some time to look back and see how things
@@ -961,10 +819,15 @@ first place.  &lt;/p&gt;
 but a &lt;a href="https://goo.gl/BYOWdG"&gt;GSoC project&lt;/a&gt; and a couple other projects I've
 planned in the pipeline, it's a pretty easy decision to make the choice of
 which one of these two things I would want to work on. For a CGPA for which I
-cannot care for anymore, it might be one of the worst decisions I can make.&lt;/p&gt;</summary><category term="Rants"></category><category term="College"></category><category term="Life"></category></entry><entry><title>GSoC 2016 Project Survey, help me make Dolphin a better File Manager!</title><link href="http://arnavdhamija.com/blog/gsoc-2016-project-survey-help-me-make.html" rel="alternate"></link><updated>2016-02-15T21:16:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-02-15:blog/gsoc-2016-project-survey-help-me-make.html</id><summary type="html">&lt;p&gt;Hey everyone!  &lt;/p&gt;
+cannot care for anymore, it might be one of the worst decisions I can make.&lt;/p&gt;</content><category term="Rants"></category><category term="College"></category><category term="Life"></category></entry><entry><title>GSoC 2016 Project Survey, help me make Dolphin a better File Manager!</title><link href="http://arnavdhamija.com/blog/gsoc-2016-project-survey-help-me-make.html" rel="alternate"></link><published>2016-02-15T21:16:00+05:30</published><updated>2016-02-15T21:16:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-02-15:/blog/gsoc-2016-project-survey-help-me-make.html</id><summary type="html">&lt;p&gt;Hey everyone!  &lt;/p&gt;
 &lt;p&gt;I am a first year computer science undergraduate from BITS Pilani, Hyderabad
 Campus. I am looking forward to working for KDE for the GSoC.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://developers.google.com/open-source/gsoc/resources/downloads/GSoC2016Logo.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://developers.google.com/open-source/gsoc/resources/downloads/GSoC2016Logo.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;My project idea is based on solving a problem all file managers have had for
+years - the lack of an easy to use file …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Hey everyone!  &lt;/p&gt;
+&lt;p&gt;I am a first year computer science undergraduate from BITS Pilani, Hyderabad
+Campus. I am looking forward to working for KDE for the GSoC.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://developers.google.com/open-source/gsoc/resources/downloads/GSoC2016Logo.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;My project idea is based on solving a problem all file managers have had for
 years - the lack of an easy to use file selection tool. My project aims to
 simplify selecting files from multiple directory trees.  &lt;/p&gt;
@@ -972,7 +835,10 @@ simplify selecting files from multiple directory trees.  &lt;/p&gt;
 the user interface and features list.  &lt;/p&gt;
 &lt;p&gt;The link to my idea proposal can be found here: &lt;a href="https://goo.gl/1Nj4SY"&gt;https://goo.gl/1Nj4SY&lt;/a&gt;  &lt;/p&gt;
 &lt;p&gt;And the link to my survey can be found here: &lt;a href="https://goo.gl/forms/5JSZXNganX"&gt;https://goo.gl/forms/5JSZXNganX&lt;/a&gt;  &lt;/p&gt;
-&lt;p&gt;TIA for the feedback : )&lt;/p&gt;</summary><category term="GSoC"></category><category term="Programming"></category><category term="KDE"></category></entry><entry><title>Composite Photography</title><link href="http://arnavdhamija.com/blog/composite-photography.html" rel="alternate"></link><updated>2016-01-31T22:03:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-01-31:blog/composite-photography.html</id><summary type="html">&lt;p&gt;Ever since I got my new Canon 700D, I've been looking more into photography as
+&lt;p&gt;TIA for the feedback : )&lt;/p&gt;</content><category term="GSoC"></category><category term="Programming"></category><category term="KDE"></category></entry><entry><title>Composite Photography</title><link href="http://arnavdhamija.com/blog/composite-photography.html" rel="alternate"></link><published>2016-01-31T22:03:00+05:30</published><updated>2016-01-31T22:03:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2016-01-31:/blog/composite-photography.html</id><summary type="html">&lt;p&gt;Ever since I got my new Canon 700D, I've been looking more into photography as
+an art than ever before. Thanks to internet photography guides, less light
+pollution in uni campus than urban Bangalore, and some more proficiency with
+editing software, I've been able to produce more interesting photos than …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Ever since I got my new Canon 700D, I've been looking more into photography as
 an art than ever before. Thanks to internet photography guides, less light
 pollution in uni campus than urban Bangalore, and some more proficiency with
 editing software, I've been able to produce more interesting photos than
@@ -990,8 +856,8 @@ part about it is the surprise element of the final image - I have no idea what
 the output is going to be till I've post-processed the images on my laptop
 computer. It's been very early days for me when it comes to composite
 photography, but here are a few photos I've felt are worth sharing:  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/StarStaX_IMG_9937-IMG_9966_lighten.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/StarStaX_IMG_0095-IMG_0009_gap_filling.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/StarStaX_IMG_9937-IMG_9966_lighten.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/StarStaX_IMG_0095-IMG_0009_gap_filling.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Star trails! I've always wanted to try my hand at astrophotography, but never
 could due to Bangalore light pollution and due to not having a camera with
 good noise reduction.  &lt;/p&gt;
@@ -1004,7 +870,7 @@ intervalometer settings. I can't stress on how important having a tripod is
 for this - the slightest shift between frames would've given us terrible
 discontinuity in the final image. The final images were composited using
 &lt;a href="http://www.markus-enzweiler.de/software/software.html"&gt;StarStaX.&lt;/a&gt;  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="{filename}/images/IMG_3689%2B-%2BIMG_3725%2Bresized.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="{filename}/images/IMG_3689%2B-%2BIMG_3725%2Bresized.png"&gt;&lt;/p&gt;
 &lt;p&gt;360 degree panorama image of BITS Pilani, Hyderabad Campus! Taken from the
 middle of the football field, it is a panorama of 33 images stitched using
 hugin for Linux. I set up the camera in a portrait orientation with the tripod
@@ -1015,7 +881,7 @@ couple of frames were shot using the wrong exposure settings, hugin managed to
 do a really good job in keeping the differences minimal though there still are
 a couple of splotches due to my ineptitude. The uncompressed, full size
 version is here: &lt;a href="https://goo.gl/iY5v14"&gt;https://goo.gl/iY5v14&lt;/a&gt;  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/mini-planet-footballfield.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/mini-planet-footballfield.png"&gt;&lt;/p&gt;
 &lt;p&gt;This little planet picture uses the same panorama as the previous image. It's
 a much simpler to post process this with a panorama than it appears. It was
 created by resizing the image to a square following a polar coordinate filter
@@ -1025,7 +891,10 @@ more spacey flavor.  &lt;/p&gt;
 &lt;p&gt;As closing remarks, I'm overall pretty satisfied with how easy it is to make
 simple composite pictures using software. I will probably get back into making
 more of this again, but probably after I work on &lt;a href="https://developers.google.com/open-source/gsoc/"&gt;another
-project&lt;/a&gt; ;)&lt;/p&gt;</summary><category term="Photography"></category></entry><entry><title>T+2 Years And Counting: My IIT-JEE preparation story</title><link href="http://arnavdhamija.com/blog/t2-years-and-counting-iit-jee.html" rel="alternate"></link><updated>2015-06-17T10:29:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2015-06-17:blog/t2-years-and-counting-iit-jee.html</id><summary type="html">&lt;p&gt;As the title indicates, it's been a while since I've written anything here. I
+project&lt;/a&gt; ;)&lt;/p&gt;</content><category term="Photography"></category></entry><entry><title>T+2 Years And Counting: My IIT-JEE preparation story</title><link href="http://arnavdhamija.com/blog/t2-years-and-counting-iit-jee.html" rel="alternate"></link><published>2015-06-17T10:29:00+05:30</published><updated>2015-06-17T10:29:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2015-06-17:/blog/t2-years-and-counting-iit-jee.html</id><summary type="html">&lt;p&gt;As the title indicates, it's been a while since I've written anything here. I
+don't know if anyone still reads this blog, but I sure appreciate if you do!  &lt;/p&gt;
+&lt;p&gt;So, I guess some explanation is due here - it's been a combination of my lack
+of cohesive thought and lack of …&lt;/p&gt;</summary><content type="html">&lt;p&gt;As the title indicates, it's been a while since I've written anything here. I
 don't know if anyone still reads this blog, but I sure appreciate if you do!  &lt;/p&gt;
 &lt;p&gt;So, I guess some explanation is due here - it's been a combination of my lack
 of cohesive thought and lack of motivation to publish anything. Part of the
@@ -1244,15 +1113,19 @@ BE or trying for a dual degree program at BITS Goa, taking physics and
 eventually CSc.  &lt;/p&gt;
 &lt;p&gt;Wow, that's easily been the longest single piece of writing I've ever done. I
 typed most of it on my phone on the plane, so apologies if it doesn't make too
-much sense. If you've made it all the way here, thanks for reading!&lt;/p&gt;</summary><category term="JEE"></category><category term="Life"></category></entry><entry><title>Midnight Photography!</title><link href="http://arnavdhamija.com/blog/midnight-photography.html" rel="alternate"></link><updated>2013-04-23T12:23:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2013-04-23:blog/midnight-photography.html</id><summary type="html">&lt;p&gt;Hey guys! I haven't been able to get too many scenic shots of late, so I've
+much sense. If you've made it all the way here, thanks for reading!&lt;/p&gt;</content><category term="JEE"></category><category term="Life"></category></entry><entry><title>Midnight Photography!</title><link href="http://arnavdhamija.com/blog/midnight-photography.html" rel="alternate"></link><published>2013-04-23T12:23:00+05:30</published><updated>2013-04-23T12:23:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2013-04-23:/blog/midnight-photography.html</id><summary type="html">&lt;p&gt;Hey guys! I haven't been able to get too many scenic shots of late, so I've
 invested some of my photography time in taking photos at night. Here are some
 of the shots that I've recently taken with my camera.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_0131.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_0131.JPG"&gt;&lt;/p&gt;
+&lt;p&gt;I really like employing this technique. You need to get …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Hey guys! I haven't been able to get too many scenic shots of late, so I've
+invested some of my photography time in taking photos at night. Here are some
+of the shots that I've recently taken with my camera.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_0131.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;I really like employing this technique. You need to get someone to hold a
 torch while the camera is mounted on a tripod. The shutter was open for 15
 seconds, ample time to draw the chosen letters. It works great for pseudo stop
 motion too!  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_0790.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_0790.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;Wow, I honestly admit that I didn't expect a shot like this! It was a simple
 matter to shoot it by mounting the camera and leaving the shutter open for a
 few seconds. The depth of field is stellar and I think the purple backdrop
@@ -1266,11 +1139,14 @@ under low light conditions and the digital noise at high ISOs is evident. But
 I'll leave that to you to judge. I tried my best in obtaining relatively clear
 images (which is a pretty difficult feat when the camera's digital focal
 length is 2240 mm!)  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2268.JPG" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_0357.JPG" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2303.JPG" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2306.JPG" /&gt;&lt;/p&gt;
-&lt;p&gt;I hope you enjoyed this edition. Please feel free to drop comments!&lt;/p&gt;</summary><category term="Photography"></category></entry><entry><title>Photography: Volume 4</title><link href="http://arnavdhamija.com/blog/photography-volume-4.html" rel="alternate"></link><updated>2012-10-25T15:11:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2012-10-25:blog/photography-volume-4.html</id><summary type="html">&lt;p&gt;Hi guys! Recently bought myself some free time to publish a brand new blog
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2268.JPG"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_0357.JPG"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2303.JPG"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2306.JPG"&gt;&lt;/p&gt;
+&lt;p&gt;I hope you enjoyed this edition. Please feel free to drop comments!&lt;/p&gt;</content><category term="Photography"></category></entry><entry><title>Photography: Volume 4</title><link href="http://arnavdhamija.com/blog/photography-volume-4.html" rel="alternate"></link><published>2012-10-25T15:11:00+05:30</published><updated>2012-10-25T15:11:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2012-10-25:/blog/photography-volume-4.html</id><summary type="html">&lt;p&gt;Hi guys! Recently bought myself some free time to publish a brand new blog
+post, centred on my photography work!&lt;/p&gt;
+&lt;p&gt;I guess I also owe all of my avid readers an apology: it's been a really long
+time since my last photography post, so I hope I can make it …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Hi guys! Recently bought myself some free time to publish a brand new blog
 post, centred on my photography work!&lt;/p&gt;
 &lt;p&gt;I guess I also owe all of my avid readers an apology: it's been a really long
 time since my last photography post, so I hope I can make it up to you in this
@@ -1281,58 +1157,61 @@ one!&lt;/p&gt;
 &lt;p&gt;&lt;a href="/photography"&gt;Volume 1&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;As usual, just click to enlarge!&lt;/p&gt;
 &lt;p&gt;Starting off:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_1013.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_1013.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;I'm really in need of an anthropologist here. I found this insect whilst
 walking down the road when a speck of orange caught my eye. Turns out that
 that speck of orange is one of the finest six-legged creatures I've ever seen.
 From a photography stand-point, I used a wide aperture, and a large zoom to
 capture this.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2608.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_2608.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;This is probably one of the most comical insect/bug pictures that I've ever
 taken. The DoF worked excellently over here; it only puts the subject in
 focus. The first thing that came to my mind after I shot this was "suicide".
 Definitely one of my favourite shots.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4283.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4283.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;Yay, another bug! I'm really scared of wasps, but that's the good thing about
 a superzoom camera: you can stand far away and still get a crisp shot. Pretty
 much the same ingredients were used to make this shot as the previous two.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4286.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4286.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;I should really call this post "Bugs and Insects Special Album!" or something.
 Poor jokes aside, I love the way the insect was climbing on the stigma/anthers
 (not too sure) of the flower. The background is sublimely blurred, but there's
 still enough detail to keep the background interesting. Top shot.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4301.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4301.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;This is one picture I really like, but sometimes I feel remorseful seeing it.
 Although the reptile is in excellent focus, the handle of the water tap to the
 right distracts attention from it. Just goes to show that you can't always
 expect perfect conditions for photography.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4564.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4564.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;No photography album is complete without a good flower. This is easily one of
 the prettiest flowers I've ever shot. Although I'm not too happy with the
 background, the foreground more than makes up for it.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4382.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4382.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;You're probably sick of seeing close-ups now, so I thought I'd throw in this
 picture that I took at sunset.  Everything worked in this photo, the orange
 clouds, the lovely Tyndall effect coming from the sun, and the coconut trees
 below.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4479.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4479.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;Another close-up! If I had to pass any comment about this, I would point out
 the robin's leisurely stride. It seems so relaxed, almost as if in a dream-
 like trance. Never mind my comments, post your own!&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4845.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4845.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;I really like this one. It's a very personified shot, the way the bird on the
 left is trying to say something, and the one on the right is taciturn and
 unwilling to respond. Their seating on the rocks is perfect and I also like
 the way they chose to pose right in front of the water-body.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4884.JPG" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4892.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4884.JPG"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_4892.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;I'm sorry if I've made you wince by showing you another insect picture (it has
 been enough of those!). Nevertheless, I'm really proud about taking these
 shots. They're both images of the same dragonfly from different angles. The
 first one has a nice background and excellent detail, while the second one
 exhibits a minimalistic appearance, with little to distract from the dragonfly
 itself.&lt;/p&gt;
-&lt;p&gt;That's all for now! Please criticize, praise, and comment!&lt;/p&gt;</summary><category term="Photography"></category></entry><entry><title>Photography Protips!</title><link href="http://arnavdhamija.com/blog/photography-protips.html" rel="alternate"></link><updated>2012-09-09T20:26:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2012-09-09:blog/photography-protips.html</id><summary type="html">&lt;p&gt;Gosh, does time fly. It's been months since my last blog post, owing quite a
+&lt;p&gt;That's all for now! Please criticize, praise, and comment!&lt;/p&gt;</content><category term="Photography"></category></entry><entry><title>Photography Protips!</title><link href="http://arnavdhamija.com/blog/photography-protips.html" rel="alternate"></link><published>2012-09-09T20:26:00+05:30</published><updated>2012-09-09T20:26:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2012-09-09:/blog/photography-protips.html</id><summary type="html">&lt;p&gt;Gosh, does time fly. It's been months since my last blog post, owing quite a
+bit to 10th grade and other activities. However, I'm back with a new, special
+post on what makes me tick behind the lens!  &lt;/p&gt;
+&lt;p&gt;Take this as my guide to hobbyist digital photography. I hope you …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Gosh, does time fly. It's been months since my last blog post, owing quite a
 bit to 10th grade and other activities. However, I'm back with a new, special
 post on what makes me tick behind the lens!  &lt;/p&gt;
 &lt;p&gt;Take this as my guide to hobbyist digital photography. I hope you enjoy it!  &lt;/p&gt;
@@ -1369,7 +1248,13 @@ taking photos for one hour and a little bit of reading.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;If you've been patient enough to read all this, I wish you the best of luck in
 diving into the wonderful world of digital photography!  &lt;/p&gt;
-&lt;p&gt;Comments are much appreciated Thanks for reading!  &lt;/p&gt;</summary><category term="Photography"></category></entry><entry><title>Photography: Volume 3</title><link href="http://arnavdhamija.com/blog/photography-volume-3.html" rel="alternate"></link><updated>2012-05-08T14:30:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2012-05-08:blog/photography-volume-3.html</id><summary type="html">&lt;p&gt;This is probably the shortest duration between two meaningful posts on this
+&lt;p&gt;Comments are much appreciated Thanks for reading!  &lt;/p&gt;</content><category term="Photography"></category></entry><entry><title>Photography: Volume 3</title><link href="http://arnavdhamija.com/blog/photography-volume-3.html" rel="alternate"></link><published>2012-05-08T14:30:00+05:30</published><updated>2012-05-08T14:30:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2012-05-08:/blog/photography-volume-3.html</id><summary type="html">&lt;p&gt;This is probably the shortest duration between two meaningful posts on this
+blog: just eight days! Today also represents the 1st anniversary of this blog,
+and hence, I present my new photography album.  &lt;/p&gt;
+&lt;p&gt;Most of you would have already seen &lt;a href="/photography-volume-2"&gt;Volume
+2&lt;/a&gt; and &lt;a href="/photography"&gt;Volume
+1&lt;/a&gt;, so you probably
+have an …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is probably the shortest duration between two meaningful posts on this
 blog: just eight days! Today also represents the 1st anniversary of this blog,
 and hence, I present my new photography album.  &lt;/p&gt;
 &lt;p&gt;Most of you would have already seen &lt;a href="/photography-volume-2"&gt;Volume
@@ -1383,12 +1268,12 @@ I like exercising full control over the camera, though the camera does a
 better job than me in choosing shutter speeds for apertures, so Av is the mode
 of choice.  &lt;/p&gt;
 &lt;p&gt;Technical chatter aside; the photos (click to enlarge):  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6748.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6748.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;Let's start off with this. A rare shot with two animals. I can't offer any
 opinion as to why the squirrel didn't run away from there or why the bird
 landed there in the first place, but using a wide aperture and high zoom did
 wonders here.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6770.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6770.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;Another squirrel? Well, actually it's the same one as in the previous picture.
 I'm at the risk of repeating photos over here, but this shot was way too good
 to pass up. The dark area which you see to the right of the image actually
@@ -1396,12 +1281,12 @@ gives this photo a subtle effect and the squirrel's pose is fantastic. Using a
 digital camera gave me a wide choice of focal lengths without much adjustment.
 This one is 929 mm equivalent on a 35 mm film. Used f-stop 5.7 here, because
 wider apertures are beyond the camera's potential at these focal lengths.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6799.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6799.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;Pretty nice shot here as well. It looks like a macro shot, but this one was
 shot from afar. The sunflower looks great here, and the tiny ladybug on the
 petals is the icing on the cake (or should I say flower?). The background was
 perfectly suited for this shot, and gives a nice empty space for this photo.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6817.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6817.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;I won't lie to you by saying that this picture was taken at a different
 location from the previous one. I like the bee's placement in the flower and
 the flower itself. The flies and the varieties of insects that adorn the
@@ -1409,50 +1294,53 @@ flower also look good over here. The background is one of my favourite parts
 of this photo, with details blurred to put emphasis on the main flower, but
 visible at the same time. It's a hard balance to maintain, but I'm glad that
 it worked over here.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6972.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6972.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;Nothing special about the photography techniques over here, but photographing
 another creature, and a reptile at that was too good to pass up.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7304.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7304.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;I suppose the colour over here is the main part of the photo. Clarity and
 contrast are also impressive. The flower itself looks exotic enough, though I
 have no idea what it is. Flowers are probably the best subjects in
 photography. They are quite beautiful, move very little and you can try a
 hundred different exposures to get the right shot.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7327.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7327.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;While I'll be mean to call this an ugly butterfly (I'm sure it's not a moth!),
 I think it looks magnificent over here. Although eye-pleasing colours are
 practically non-existent in this photo, you should look at the contrast of the
 ground to the insect. It looks pretty good, and the other insects around the
 butterfly provide a level of detail, without which, this photo would look much
 plainer.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="{filename}/images/IMG_7331.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="{filename}/images/IMG_7331.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;Probably one of the best shots I took on that day. The coconut as a subject
 may make you raise eyebrows, but it's totally unlike anything else I've shot.
 The focusing was perfect here, giving the photo a very small depth of field.
 Less can be more and this shot exemplifies it.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7583.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7583.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;You might've seen that I've only done close-up shots. This is one of the very
 few landscape shots I've taken. Excellent scenery and I really don't have much
 more to say about this.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7843.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_7843.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;The mynah had a nice stance and perching position for this. The background is
 suitably blurred over here and the foreground falls into focus nicely. The
 background is great for this and the bird's details are captured with some
 success.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_8064.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_8064.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;It might look odd to photograph only the head of a peacock without its
 resplendent body. But the head itself actually has fantastic detail. The blue
 colour stands out superbly and there is a generous amount of empty space in
 the photo which is essential for greater emphasis on the bird. An unorthodox,
 but great shot.  &lt;/p&gt;
 &lt;p&gt;That's it folks! (I have no idea why I quoted that)  &lt;/p&gt;
-&lt;p&gt;Comment, criticize, and praise at your own will.&lt;/p&gt;</summary><category term="Photography"></category></entry><entry><title>Nil Sine Pokemon</title><link href="http://arnavdhamija.com/blog/pokemon-yes-pokemon.html" rel="alternate"></link><updated>2012-04-30T17:05:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2012-04-30:blog/pokemon-yes-pokemon.html</id><summary type="html">&lt;p&gt;I confess that I haven't been able to tend to this blog as much as I would've
+&lt;p&gt;Comment, criticize, and praise at your own will.&lt;/p&gt;</content><category term="Photography"></category></entry><entry><title>Nil Sine Pokemon</title><link href="http://arnavdhamija.com/blog/pokemon-yes-pokemon.html" rel="alternate"></link><published>2012-04-30T17:05:00+05:30</published><updated>2012-04-30T17:05:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2012-04-30:/blog/pokemon-yes-pokemon.html</id><summary type="html">&lt;p&gt;I confess that I haven't been able to tend to this blog as much as I would've
+liked. It's not about time (or the lack of it), it's just laziness. Well, a
+lot of stuff has happened this month (and a lot of pics have been taken),
+which I simply …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I confess that I haven't been able to tend to this blog as much as I would've
 liked. It's not about time (or the lack of it), it's just laziness. Well, a
 lot of stuff has happened this month (and a lot of pics have been taken),
 which I simply can't do justice to by putting it in words.  &lt;/p&gt;
 &lt;p&gt;I suppose, I've found a new love as well, some people are going to hate
 this...  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/Pokemon-PNG-Pic.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/Pokemon-PNG-Pic.png"&gt;&lt;/p&gt;
 &lt;p&gt;...well actually it's not a new love, this dates back to 2004, so I'll
 narrate my history with this incredible video-game.  &lt;/p&gt;
 &lt;p&gt;Back in 2004 when I was only 6 years-old, I was everything one could describe
@@ -1467,7 +1355,7 @@ Sapphire.  &lt;/p&gt;
 &lt;p&gt;So, with great exuberance, I got my first Gym badge, saved my game and went to
 bed. The next day when I woke up, and loaded the game, I was greeted with this
 message:  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/deleted-file.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/deleted-file.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Serious disappointment. I tried saving again, but got the same message. I
 thought my Pokemaster career had come to a standstill, which it actually had.
 So, for the next few months, all I could do was gaze in envy at my friends'
@@ -1509,7 +1397,12 @@ to sites like &lt;a href="http://smogon.com/"&gt;Smogon&lt;/a&gt;. It was incred
 community of smart, competitive Pokemon players. It was just the place for me.
 A few months ago, I became a member, and my Pokemon journey continues to
 advance.  &lt;/p&gt;
-&lt;p&gt;That's my story. Hope you guys liked it. No Poke-Haters please!  &lt;/p&gt;</summary><category term="Pokemon"></category><category term="Life"></category><category term="Misc"></category></entry><entry><title>Photography: Volume 2</title><link href="http://arnavdhamija.com/blog/photography-volume-2.html" rel="alternate"></link><updated>2012-03-20T15:24:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2012-03-20:blog/photography-volume-2.html</id><summary type="html">&lt;p&gt;Pulling out my camera, adjusting the exposure, quietly waiting for the perfect
+&lt;p&gt;That's my story. Hope you guys liked it. No Poke-Haters please!  &lt;/p&gt;</content><category term="Pokemon"></category><category term="Life"></category><category term="Misc"></category></entry><entry><title>Photography: Volume 2</title><link href="http://arnavdhamija.com/blog/photography-volume-2.html" rel="alternate"></link><published>2012-03-20T15:24:00+05:30</published><updated>2012-03-20T15:24:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2012-03-20:/blog/photography-volume-2.html</id><summary type="html">&lt;p&gt;Pulling out my camera, adjusting the exposure, quietly waiting for the perfect
+shot, I present to you, my viewers, my new photography album. The old
+collection can be found
+&lt;a href="/photography"&gt;here.&lt;/a&gt;  &lt;/p&gt;
+&lt;p&gt;Note: not all my photos here are "new, new" photos. Some of them are
+exceptional shots I took before publishing …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Pulling out my camera, adjusting the exposure, quietly waiting for the perfect
 shot, I present to you, my viewers, my new photography album. The old
 collection can be found
 &lt;a href="/photography"&gt;here.&lt;/a&gt;  &lt;/p&gt;
@@ -1517,46 +1410,46 @@ collection can be found
 exceptional shots I took before publishing my last post, but I didn't want to
 post two pics of the same thing.  &lt;/p&gt;
 &lt;p&gt;Moving on....(click to enlarge)  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5317.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5317.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;A really neat pose of that squirrel. I didn't expect the sunlight and the
 ground to merge so well together.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5391.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5391.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;Looks like it's been pulled out of a rainforest. The truth is, i found these
 little birds in my backyard. I love the way the birds sit linearly, almost
 like a family picture.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5575.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5575.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;This was a bit of an experiment, with very impressive results. Shot it under
 low lighting with flash at a certain angle, so you can see all the layers of
 petals in the flower.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5696.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5696.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;Slimy snail; and although the picture doesn't exhibit too many photography
 techniques, it looks pretty decent.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5935.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5935.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;The grasshopper/mantis (I'm no entomologist) strikes an excellent pose for
 this photo. The raised forearms and the spread out legs give it a great
 stance.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6043.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6043.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;A really simple pic, but that's what makes it look detailed and elegant.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6066.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6066.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;Cute little birdie. That sounds really stupid. Anyway, I like the perching
 position of the bird, and the contrast of its black head to its yellow body
 (sorry if that sounds racist). Birds and insects seem to love posing for me.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6149.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6149.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;Wow, this picture was an absolute stunner for me. I heard the cat screeching
 in pain before I found it (probably "cat"fighting). The way its body is
 silhouetted and the light gleaming off the feline's eyes make it an amazing
 and thoughtful picture.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6164.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6164.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;Kind of a filler pic. The flower looks pretty, and I can't say much about
 this.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5639.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5639.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;Perfect pose + perfect clarity + cool insect = awesomeness. The macro worked
 exceptionally well here.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6177.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6177.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;An example of good timing, this picture was taken early in the morning. The
 bees seemed to be rising with me and the sharpness in front and the blurred
 out background, make it another sweet shot.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6199.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_6199.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;I don't have enough words to describe how much I love this one. At a first
 glance, you might not see much, but look at the thing looming over the moth's
 (yes it is a moth) body. Do you count four legs a side? Yup, a spider was
@@ -1564,7 +1457,11 @@ ingesting its prey in this one, and seeing it in real life was eerie. Although
 I can't bring out all the life or death in this photo, I hope you get the
 message.  &lt;/p&gt;
 &lt;p&gt;I know you'll enjoy these photos, no need to hope.  &lt;/p&gt;
-&lt;p&gt;Comment, criticize and praise as you wish.&lt;/p&gt;</summary><category term="Photography"></category></entry><entry><title>Rantings: Indian Education</title><link href="http://arnavdhamija.com/blog/rantings-indian-education.html" rel="alternate"></link><updated>2012-02-03T15:40:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2012-02-03:blog/rantings-indian-education.html</id><summary type="html">&lt;p&gt;The Indian education system has been one with many &lt;strike&gt;ups and&lt;/strike&gt;
+&lt;p&gt;Comment, criticize and praise as you wish.&lt;/p&gt;</content><category term="Photography"></category></entry><entry><title>Rantings: Indian Education</title><link href="http://arnavdhamija.com/blog/rantings-indian-education.html" rel="alternate"></link><published>2012-02-03T15:40:00+05:30</published><updated>2012-02-03T15:40:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2012-02-03:/blog/rantings-indian-education.html</id><summary type="html">&lt;p&gt;The Indian education system has been one with many &lt;strike&gt;ups and&lt;/strike&gt;
+downs. Viewing from not an expert's position, not from a parent's position,
+not from a teacher's position, but from a high school, bored student's
+perspective, this post is just a rant about our muddled education system.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;CCE&lt;/strong&gt;: This was …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The Indian education system has been one with many &lt;strike&gt;ups and&lt;/strike&gt;
 downs. Viewing from not an expert's position, not from a parent's position,
 not from a teacher's position, but from a high school, bored student's
 perspective, this post is just a rant about our muddled education system.&lt;/p&gt;
@@ -1611,7 +1508,10 @@ everyone educated, not everyone can get a job in this country, leaving lots of
 wasted talent.&lt;/p&gt;
 &lt;p&gt;On a more positive note, literacy rates have jumped by over 12% since 2001's
 census. Great news, but these shortcomings give one some food for thought.&lt;/p&gt;
-&lt;p&gt;Comment, criticise and praise at your own will.&lt;/p&gt;</summary><category term="Rants"></category></entry><entry><title>7 Billion</title><link href="http://arnavdhamija.com/blog/7-billion.html" rel="alternate"></link><updated>2011-10-31T19:36:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2011-10-31:blog/7-billion.html</id><summary type="html">&lt;p&gt;Today the world has reached a new milestone, which has compelled me to change
+&lt;p&gt;Comment, criticise and praise at your own will.&lt;/p&gt;</content><category term="Rants"></category></entry><entry><title>7 Billion</title><link href="http://arnavdhamija.com/blog/7-billion.html" rel="alternate"></link><published>2011-10-31T19:36:00+05:30</published><updated>2011-10-31T19:36:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2011-10-31:/blog/7-billion.html</id><summary type="html">&lt;p&gt;Today the world has reached a new milestone, which has compelled me to change
+the very name of this blog itself. Yes, we reached the population landmark of
+7,000,000,000 or seven billion according to a UN estimate. According to me
+population growth is &lt;em&gt;not&lt;/em&gt; a good trend …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Today the world has reached a new milestone, which has compelled me to change
 the very name of this blog itself. Yes, we reached the population landmark of
 7,000,000,000 or seven billion according to a UN estimate. According to me
 population growth is &lt;em&gt;not&lt;/em&gt; a good trend and achieving it has some serious
@@ -1627,31 +1527,42 @@ mean higher growth rates. It's not happened in this case due to successful
 campaigns from the Chinese - 400 million less births. However, even with the
 current growth rate, it will not be sustainable to have more people on this
 planet in a few decades.  &lt;/p&gt;
-&lt;p&gt;Food for thought. Comment and express your opinions.  &lt;/p&gt;</summary><category term="Rants"></category></entry><entry><title>Photography: Volume 1</title><link href="http://arnavdhamija.com/blog/photography.html" rel="alternate"></link><updated>2011-10-19T19:40:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2011-10-19:blog/photography.html</id><summary type="html">&lt;p&gt;Hi guys, its been a long time since I've updated this. Got a few photos with
+&lt;p&gt;Food for thought. Comment and express your opinions.  &lt;/p&gt;</content><category term="Rants"></category></entry><entry><title>Photography: Volume 1</title><link href="http://arnavdhamija.com/blog/photography.html" rel="alternate"></link><published>2011-10-19T19:40:00+05:30</published><updated>2011-10-19T19:40:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2011-10-19:/blog/photography.html</id><summary type="html">&lt;p&gt;Hi guys, its been a long time since I've updated this. Got a few photos with
 my awesome Canon SX1-IS cam. (click to enlarge)  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5067.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5067.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;A pity, because I always found that a rather attractive flower. But a great
 photo opportunity as well!  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5074.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5074.JPG"&gt;&lt;/p&gt;
+&lt;p&gt;Why thee vile insect, must consume min winsome …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Hi guys, its been a long time since I've updated this. Got a few photos with
+my awesome Canon SX1-IS cam. (click to enlarge)  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5067.JPG"&gt;&lt;/p&gt;
+&lt;p&gt;A pity, because I always found that a rather attractive flower. But a great
+photo opportunity as well!  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5074.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;Why thee vile insect, must consume min winsome flower? (old English, just for
 the heck of it)  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5134.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5134.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;I love this photo. Super macro, so the spider was almost touching the lens of
 the cam. Came out really well though.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5115.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5115.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;Not much to say, but like the colours of this.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5306.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5306.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;Timing is the essence of photography. Looks good as well.  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5342.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5342.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;One of my favorite bugs; the millipede. The revolting insect was dangling
 from a twig when I captured it (sounds like pokemon there).  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5366.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5366.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;Could have put a bit more emphasis on the bird, but the flowers gave the
 picture a nice setting,  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5407.JPG" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://arnavdhamija.com/images/IMG_5407.JPG"&gt;&lt;/p&gt;
 &lt;p&gt;A pretty good shot to get it in that pose. Over-exposed (+2) I think, but
 that puts the bird in the spotlight.  &lt;/p&gt;
-&lt;p&gt;Hope you like the photos. Review and comment.&lt;/p&gt;</summary><category term="Photography"></category></entry><entry><title>'The 1 = Everything' equation</title><link href="http://arnavdhamija.com/blog/1-everything-equation.html" rel="alternate"></link><updated>2011-09-21T13:57:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2011-09-21:blog/1-everything-equation.html</id><summary type="html">&lt;p&gt;What's your unlucky number?  &lt;/p&gt;
+&lt;p&gt;Hope you like the photos. Review and comment.&lt;/p&gt;</content><category term="Photography"></category></entry><entry><title>'The 1 = Everything' equation</title><link href="http://arnavdhamija.com/blog/1-everything-equation.html" rel="alternate"></link><published>2011-09-21T13:57:00+05:30</published><updated>2011-09-21T13:57:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2011-09-21:/blog/1-everything-equation.html</id><summary type="html">&lt;p&gt;What's your unlucky number?  &lt;/p&gt;
+&lt;p&gt;"13", say some people  &lt;/p&gt;
+&lt;p&gt;"Nooo, 4", say the others.  &lt;/p&gt;
+&lt;p&gt;My unlucky number's 1. Yup.  The closest whole number to zero really sucks for
+me. Cricket: Lost by 1 run. Badminton: 20-21 (no deuces). It's pretty much
+everywhere. More so from a competitive exam viewpoint: NSO, IMO …&lt;/p&gt;</summary><content type="html">&lt;p&gt;What's your unlucky number?  &lt;/p&gt;
 &lt;p&gt;"13", say some people  &lt;/p&gt;
 &lt;p&gt;"Nooo, 4", say the others.  &lt;/p&gt;
 &lt;p&gt;My unlucky number's 1. Yup.  The closest whole number to zero really sucks for
@@ -1672,14 +1583,24 @@ decided not to argue. It really hurt that I screwed up on that. Every morning
 for a few months I woke up with the same question, "What good am I in anything
 else, if I can't even make it to the top six in my school?".  &lt;/p&gt;
 &lt;p&gt;Scars don't fade easily, and this one didn't heal till a month ago.  &lt;/p&gt;
-&lt;p&gt;There you have it: 'The 1 = Everything' equation.&lt;/p&gt;</summary><category term="Rants"></category></entry><entry><title>After the exams...</title><link href="http://arnavdhamija.com/blog/after-exams.html" rel="alternate"></link><updated>2011-09-20T19:39:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2011-09-20:blog/after-exams.html</id><summary type="html">&lt;p&gt;Well, today concluded a week's long affair of exertion. To be honest, it
+&lt;p&gt;There you have it: 'The 1 = Everything' equation.&lt;/p&gt;</content><category term="Rants"></category></entry><entry><title>After the exams...</title><link href="http://arnavdhamija.com/blog/after-exams.html" rel="alternate"></link><published>2011-09-20T19:39:00+05:30</published><updated>2011-09-20T19:39:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2011-09-20:/blog/after-exams.html</id><summary type="html">&lt;p&gt;Well, today concluded a week's long affair of exertion. To be honest, it
 really wasn't a lot of work this time. Can't say that these exams really ended
 on a high note with every student's perennial fear - Hindi.  &lt;/p&gt;
-&lt;p&gt;Photography's awesome! Expect pictures in my upcoming posts.  &lt;/p&gt;</summary><category term="Misc"></category></entry><entry><title>Before the exams...</title><link href="http://arnavdhamija.com/blog/before-exams.html" rel="alternate"></link><updated>2011-09-09T20:45:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2011-09-09:blog/before-exams.html</id><summary type="html">&lt;p&gt;I really haven't been doing justice to this blog for quite some time. It's
+&lt;p&gt;Photography's awesome! Expect pictures in my upcoming posts.  &lt;/p&gt;</summary><content type="html">&lt;p&gt;Well, today concluded a week's long affair of exertion. To be honest, it
+really wasn't a lot of work this time. Can't say that these exams really ended
+on a high note with every student's perennial fear - Hindi.  &lt;/p&gt;
+&lt;p&gt;Photography's awesome! Expect pictures in my upcoming posts.  &lt;/p&gt;</content><category term="Misc"></category></entry><entry><title>Before the exams...</title><link href="http://arnavdhamija.com/blog/before-exams.html" rel="alternate"></link><published>2011-09-09T20:45:00+05:30</published><updated>2011-09-09T20:45:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2011-09-09:/blog/before-exams.html</id><summary type="html">&lt;p&gt;I really haven't been doing justice to this blog for quite some time. It's
 probably out of laziness that I couldn't bring myself to update it either.
 With the advent of Pokemon Platinum on the emulator, factor the time I want to
 spend on this to zero.  &lt;/p&gt;
-&lt;p&gt;That can change now. Queer time to restart, few days prior to the exams.&lt;/p&gt;</summary><category term="Misc"></category></entry><entry><title>My First Post on My First Blog</title><link href="http://arnavdhamija.com/blog/my-first-blog.html" rel="alternate"></link><updated>2011-05-09T10:58:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2011-05-09:blog/my-first-blog.html</id><summary type="html">&lt;p&gt;Blogging. Well, something I've wanted to do earnestly for some time.  &lt;/p&gt;
+&lt;p&gt;That can change …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I really haven't been doing justice to this blog for quite some time. It's
+probably out of laziness that I couldn't bring myself to update it either.
+With the advent of Pokemon Platinum on the emulator, factor the time I want to
+spend on this to zero.  &lt;/p&gt;
+&lt;p&gt;That can change now. Queer time to restart, few days prior to the exams.&lt;/p&gt;</content><category term="Misc"></category></entry><entry><title>My First Post on My First Blog</title><link href="http://arnavdhamija.com/blog/my-first-blog.html" rel="alternate"></link><published>2011-05-09T10:58:00+05:30</published><updated>2011-05-09T10:58:00+05:30</updated><author><name>Arnav Dhamija</name></author><id>tag:arnavdhamija.com,2011-05-09:/blog/my-first-blog.html</id><summary type="html">&lt;p&gt;Blogging. Well, something I've wanted to do earnestly for some time.  &lt;/p&gt;
 &lt;p&gt;And just as well, this is and will be my very first post.  &lt;/p&gt;
 &lt;p&gt;&lt;em&gt;(May 8. The day of the 2011 National NTSE round. MAT lifted my hopes but SAT
-equally crushed them. Time will tell the efforts.)&lt;/em&gt;&lt;/p&gt;</summary><category term="FirstPost"></category><category term="Misc"></category></entry></feed>
+equally crushed them. Time will tell the efforts.)&lt;/em&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;Blogging. Well, something I've wanted to do earnestly for some time.  &lt;/p&gt;
+&lt;p&gt;And just as well, this is and will be my very first post.  &lt;/p&gt;
+&lt;p&gt;&lt;em&gt;(May 8. The day of the 2011 National NTSE round. MAT lifted my hopes but SAT
+equally crushed them. Time will tell the efforts.)&lt;/em&gt;&lt;/p&gt;</content><category term="FirstPost"></category><category term="Misc"></category></entry></feed>

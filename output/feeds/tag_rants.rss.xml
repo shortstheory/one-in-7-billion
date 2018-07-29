@@ -1,146 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>A Singularity</title><link>http://arnavdhamija.com/</link><description></description><atom:link href="http://arnavdhamija.com/feeds/tag_rants.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 14 Apr 2016 01:38:00 +0530</lastBuildDate><item><title>What do I do now?</title><link>http://arnavdhamija.com/blog/what-do-i-do-now.html</link><description>&lt;p&gt;I spend a lot of time thinking since I've joined college.  &lt;/p&gt;
+<rss version="2.0"><channel><title>A Singularity - Rants</title><link>http://arnavdhamija.com/</link><description></description><lastBuildDate>Thu, 14 Apr 2016 01:38:00 +0530</lastBuildDate><item><title>What do I do now?</title><link>http://arnavdhamija.com/blog/what-do-i-do-now.html</link><description>&lt;p&gt;I spend a lot of time thinking since I've joined college.  &lt;/p&gt;
 &lt;p&gt;I had postponed a lot of introspection during the two years I spent slogging
 away for the JEE. But now, with ample free time and practically no requirement
-to go to classes, I've finally got some time to look back and see how things
-have turned out. College started off on the back foot, and while 1-1 had its
-charms, I wasn't exactly happy about how things had turned out at the time due
-to a bad time with the &lt;a href="http://arnavdhamija.com/blog/t2-years-and-counting-iit-jee.html#entrancexams"&gt;entrance exams&lt;/a&gt; for all the
-&lt;a href="http://arnavdhamija.com/blog/t2-years-and-counting-iit-jee.html#bitsat"&gt;wrong&lt;/a&gt; &lt;a href="http://arnavdhamija.com/blog/t2-years-and-counting-iit-jee.html#screwup0"&gt;reasons&lt;/a&gt;.  &lt;/p&gt;
-&lt;p&gt;But I digress, as time has passed, I have learned to live with my failure a
-little better every day, though it still sticks out like a sore thumb on an
-otherwise decent academic profile. Despite this, it has been an interesting
-exercise is to compare what I expected from college a year ago and reality.  &lt;/p&gt;
-&lt;p&gt;To be fair, BITS Pilani (this applies to all campuses, but in this case,
-Hyderabad Campus) has some of best internal systems among &lt;em&gt;all&lt;/em&gt; Indian
-colleges. Optional attendance, good grading system, decent infrastructure, and
-a lot of freedom is more than what can be asked for in a lot of other colleges.
-Despite some glaring flaws such as the lack of a solid technical culture, this
-college has punched above its weight for a new institution.  &lt;/p&gt;
-&lt;p&gt;But as an engineering utopia? I feel like we are way short of the mark &lt;a href="http://www.slate.com/articles/technology/technology/2013/02/aaron_swartz_he_wanted_to_save_the_world_why_couldn_t_he_save_himself.html"&gt;Aaron&lt;/a&gt; &lt;a href="https://www.youtube.com/watch?v=9vz06QO3UkQ&amp;amp;nohtml5=False"&gt;Swartz&lt;/a&gt; mentioned
-in his &lt;a href="http://www.aaronsw.com/weblog/visitingmit"&gt;blog&lt;/a&gt;:  &lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;"Perhaps it’s natural, when doing something so greedy and practical as a
-startup, to pine for the idealized world of academia. Its image as a place in
-an idyllic location filled with smart people has always been attractive; even
-more so with the sense that by being there one can get smarter simply through
-osmosis. People describe a place of continual geekiness, of throwing chemicals
-into the river and building robots in free time. A magical place for hackers
-to just enjoy themselves."&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;This aside, I am of the opinion that the version of me a year ago would have
-been sorely disappointed by the version of me today. I feel that I was &lt;em&gt;much&lt;/em&gt;
-more hardworking and efficient back at that time. The two years in JEE
-preparation were undoubtedly the worst years of my school life but now looking
-back, those dark days brought out the best in me in the briefest of
-moments. Had I not prepared for JEE at all, I would have had no idea just how driven and hard-working I could be
-for a goal that would always be just a touch out of view.  &lt;/p&gt;
-&lt;p&gt;Despite my frustrations with life during JEE preparation, the epiphanies I
-used to have on weekly basis with studying physics kept me going.
-It was a positive feedback loop with no goading required. On the other hand I
-can't remember the last time I actually enjoyed learning something in class in
-this college. I hope it isn't a sign of things to come when I start
-"engineering" coursework in my second year but as of now, I have pretty much lost all
-motivation to study.  The unbridled enthusiasm I used to have when studying
-for the entrance exams and the giddy thoughts of making batshit crazy projects in
-college has dwindled. In my first semester, it was a convenient excuse to
-blame this on burnout after pushing my limits for two years but I've come to
-realize that the reason is probably shallower than that. It's not just with
-academics though - wasting time &lt;em&gt;still&lt;/em&gt; feels painful but I have nothing I
-want to do to fill in the gaps. Is there a cause for this? Probably. Have I
-figured it out? Absolutely not.  &lt;/p&gt;
-&lt;p&gt;It feels like an artificial conflict of time between these misguided academic
-pursuits and to actually work on something worthwhile. I could put up with
-it in school with the thought that there would be enough free time to pursue
-this in college - and while there is - it begs the question why such
-artificial restraints on time in the form of exams are always looming in the
-first place.  &lt;/p&gt;
-&lt;p&gt;At this point of time, I don't know what to do. With compre in half a month
-but a &lt;a href="https://goo.gl/BYOWdG"&gt;GSoC project&lt;/a&gt; and a couple other projects I've
-planned in the pipeline, it's a pretty easy decision to make the choice of
-which one of these two things I would want to work on. For a CGPA for which I
-cannot care for anymore, it might be one of the worst decisions I can make.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Thu, 14 Apr 2016 01:38:00 +0530</pubDate><guid>tag:arnavdhamija.com,2016-04-14:blog/what-do-i-do-now.html</guid><category>Rants</category><category>College</category><category>Life</category></item><item><title>Rantings: Indian Education</title><link>http://arnavdhamija.com/blog/rantings-indian-education.html</link><description>&lt;p&gt;The Indian education system has been one with many &lt;strike&gt;ups and&lt;/strike&gt;
+to go to classes, I've finally got some time to look …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Thu, 14 Apr 2016 01:38:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2016-04-14:/blog/what-do-i-do-now.html</guid><category>Rants</category><category>College</category><category>Life</category></item><item><title>Rantings: Indian Education</title><link>http://arnavdhamija.com/blog/rantings-indian-education.html</link><description>&lt;p&gt;The Indian education system has been one with many &lt;strike&gt;ups and&lt;/strike&gt;
 downs. Viewing from not an expert's position, not from a parent's position,
 not from a teacher's position, but from a high school, bored student's
 perspective, this post is just a rant about our muddled education system.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;CCE&lt;/strong&gt;: This was supposed to be the next big thing to do away with exams.
-However, the government's magic wand failed to do much on these counts, and
-instead of doing away with exams, it succeeded to give us a cornucopia of
-projects and assignments, to keep us busy in our already syncopated free time.
-It probably could've done a lot more if they had revised their assessment,
-but.....&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Emphasis on exams&lt;/strong&gt;: What the education board has largely taught the
-majority of Indian students is that failure in exams is tantamount to failure
-in life. It screams to say that exams are the most important thing that could
-have happened since the Big Bang, and that failing could just as well result
-in the destruction of the universe itself. It would be an understatement to
-say that "10th graders in India suicide", because the existence threatening
-virus has got to almost all age groups. For the sake of lives, try to change
-these stereotypes, CBSE.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Lack of thinking problems&lt;/strong&gt;: OK, I know what my fellow students are thinking on
-these counts in math (no pun intended), but problems like these are reserved
-for "higher classes". It's like slowly walking on a long path and then being
-forced to run a marathon. Yeah, these problems can't be left out early for the
-benefit of the "average student". Sure, it is tough going early, but it will
-pay off in the end. The bar of the "average student" needs to be raised a
-notch higher on the metaphoric ladder.&lt;/p&gt;
-&lt;p&gt;If you want more evidence, just look at India's IMO (International
-Mathematics Olympiad) rating of 72nd out of 73 countries. An average South
-Korea's 3rd grader is astonishingly  just as good as an average Indian 8th
-grader at mathematical/mental ability.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Hindi&lt;/strong&gt;: As if the subject wasn't terrifying enough, some wise guy decided to
-give kids 15 chapters of boredom and then ask arbitrary questions in exams.
-With themes ranging from dirt, mud and random biographies, the Hindi syllabus
-clearly wasn't reviewed by a person brought up in a ubiquitous English
-community. If CBSE can reduce the bar so nonchalantly for sciences, why was
-this treatment skipped for Hindi?&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Uniformed board&lt;/strong&gt;: This probably saves a lot of confusion, but it means that it
-needs to cater to all types of society for what the board considers
-"relevant". Things like forestry and agriculture are hardly needed in urban
-areas, but then again, this is according to me, not them.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Policies&lt;/strong&gt;: Read plural of policy and not law enforcing officers. RTE plans to
-give education to everyone, which sounds like a nice idea, but in reality is
-far-fetched. With most 3rd graders failing to pass basic English reading tests
-(94% to be exact), something seems to be wrong. Even if they somehow do get
-everyone educated, not everyone can get a job in this country, leaving lots of
-wasted talent.&lt;/p&gt;
-&lt;p&gt;On a more positive note, literacy rates have jumped by over 12% since 2001's
-census. Great news, but these shortcomings give one some food for thought.&lt;/p&gt;
-&lt;p&gt;Comment, criticise and praise at your own will.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Fri, 03 Feb 2012 15:40:00 +0530</pubDate><guid>tag:arnavdhamija.com,2012-02-03:blog/rantings-indian-education.html</guid><category>Rants</category></item><item><title>7 Billion</title><link>http://arnavdhamija.com/blog/7-billion.html</link><description>&lt;p&gt;Today the world has reached a new milestone, which has compelled me to change
+&lt;p&gt;&lt;strong&gt;CCE&lt;/strong&gt;: This was …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Fri, 03 Feb 2012 15:40:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2012-02-03:/blog/rantings-indian-education.html</guid><category>Rants</category></item><item><title>7 Billion</title><link>http://arnavdhamija.com/blog/7-billion.html</link><description>&lt;p&gt;Today the world has reached a new milestone, which has compelled me to change
 the very name of this blog itself. Yes, we reached the population landmark of
 7,000,000,000 or seven billion according to a UN estimate. According to me
-population growth is &lt;em&gt;not&lt;/em&gt; a good trend and achieving it has some serious
-implications. The world is already ridden with poverty, AIDS and a host of
-problems with which the majority of the population can not keep up with. Sure,
-we have more people and man-force. But that doesn't help the fact that unlike
-population, resources do not reproduce by themselves. Providing for seven
-billion odd people is more than what the earth can give.  &lt;/p&gt;
-&lt;p&gt;Here's a breakdown of the world's population growth.  &lt;/p&gt;
-&lt;p&gt;This is positive information. The world has only added one billion people in
-13 years since the last milestone of six billion. More people would probably
-mean higher growth rates. It's not happened in this case due to successful
-campaigns from the Chinese - 400 million less births. However, even with the
-current growth rate, it will not be sustainable to have more people on this
-planet in a few decades.  &lt;/p&gt;
-&lt;p&gt;Food for thought. Comment and express your opinions.  &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Mon, 31 Oct 2011 19:36:00 +0530</pubDate><guid>tag:arnavdhamija.com,2011-10-31:blog/7-billion.html</guid><category>Rants</category></item><item><title>'The 1 = Everything' equation</title><link>http://arnavdhamija.com/blog/1-everything-equation.html</link><description>&lt;p&gt;What's your unlucky number?  &lt;/p&gt;
+population growth is &lt;em&gt;not&lt;/em&gt; a good trend …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Mon, 31 Oct 2011 19:36:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2011-10-31:/blog/7-billion.html</guid><category>Rants</category></item><item><title>'The 1 = Everything' equation</title><link>http://arnavdhamija.com/blog/1-everything-equation.html</link><description>&lt;p&gt;What's your unlucky number?  &lt;/p&gt;
 &lt;p&gt;"13", say some people  &lt;/p&gt;
 &lt;p&gt;"Nooo, 4", say the others.  &lt;/p&gt;
 &lt;p&gt;My unlucky number's 1. Yup.  The closest whole number to zero really sucks for
 me. Cricket: Lost by 1 run. Badminton: 20-21 (no deuces). It's pretty much
-everywhere. More so from a competitive exam viewpoint: NSO, IMO, IAIS, they've
-all gone up in smoke because of 1 mark. But that really doesn't compare to my
-worst defeat.  &lt;/p&gt;
-&lt;p&gt;Infosys CTY.  &lt;/p&gt;
-&lt;p&gt;I was pretty happy with myself till I got to know of the top six. I couldn't
-believe it, so I stormed into the co-coordinator's room.  &lt;/p&gt;
-&lt;p&gt;"How much did I get", I asked.  &lt;/p&gt;
-&lt;p&gt;After fumbling a bit, she said I got 18/20. I didn't know how that could
-disqualify me because everyone else got 18/20 as well.  &lt;/p&gt;
-&lt;p&gt;"I could've chosen you instead of anyone of the other six. But your mistake,
-well, I can't pardon that."  &lt;/p&gt;
-&lt;p&gt;I had messed up on the easiest question in that paper: "What's 25% of 25%?". I
-decided not to argue. It really hurt that I screwed up on that. Every morning
-for a few months I woke up with the same question, "What good am I in anything
-else, if I can't even make it to the top six in my school?".  &lt;/p&gt;
-&lt;p&gt;Scars don't fade easily, and this one didn't heal till a month ago.  &lt;/p&gt;
-&lt;p&gt;There you have it: 'The 1 = Everything' equation.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Wed, 21 Sep 2011 13:57:00 +0530</pubDate><guid>tag:arnavdhamija.com,2011-09-21:blog/1-everything-equation.html</guid><category>Rants</category></item></channel></rss>
+everywhere. More so from a competitive exam viewpoint: NSO, IMO …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arnav Dhamija</dc:creator><pubDate>Wed, 21 Sep 2011 13:57:00 +0530</pubDate><guid isPermaLink="false">tag:arnavdhamija.com,2011-09-21:/blog/1-everything-equation.html</guid><category>Rants</category></item></channel></rss>

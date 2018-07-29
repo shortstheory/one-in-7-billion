@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A Singularity, Arnav Dhamija's Weblog">
+
+        <link rel="alternate"  href="http://arnavdhamija.com/feeds/atom.xml" type="application/atom+xml" title="A Singularity Full Atom Feed"/>
+        <link rel="alternate" href="http://arnavdhamija.com/feeds/rss.xml" type="application/rss+xml" title="A Singularity Full RSS Feed"/>
+
+        <title>GSoC 2018 - Batteries Included! // A Singularity // Arnav Dhamija's Weblog</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://arnavdhamija.com/theme/css/pure.css">
+    <link rel="stylesheet" href="http://arnavdhamija.com/theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+</head>
+
+<body>
+    <div class="pure-g-r" id="layout">
+        <div class="sidebar pure-u">
+            <div class="cover-img" style="background-image: url('../images/qcside.jpg')">
+                <div class="cover-body">
+                    <header class="header">
+                        <hgroup>
+                            <img class="avatar" src="/images/profile.jpg">
+                            <h1 class="brand-main"><a href="http://arnavdhamija.com">A Singularity</a></h1>
+                            <p class="tagline">Arnav Dhamija's Weblog</p>
+                                <p class="social">
+                                    <a href="https://github.com/shortstheory">
+                                        <i class="fa fa-github fa-3x"></i>
+                                    </a>
+                                    <a href="https://www.youtube.com/user/shortstheory">
+                                        <i class="fa fa-youtube fa-3x"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/arnavdhamija">
+                                        <i class="fa fa-instagram fa-3x"></i>
+                                    </a>
+                                </p>
+                        </hgroup>
+                    </header>
+                </div>
+            </div>
+        </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>GSoC 2018 - Batteries Included!</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="http://arnavdhamija.com/blog/tag/ardupilot.html">Ardupilot</a>
+                                <a class="post-category" href="http://arnavdhamija.com/blog/tag/gsoc.html">GSoC</a>
+                                <a class="post-category" href="http://arnavdhamija.com/blog/tag/programming.html">Programming</a>
+                        </p>
+                </header>
+            </section>
+            <p>Much time has passed and much code has been written since my last update. Adaptive Streaming (a better name TBD) for Ardupilot is nearly complete and brings a whole slew of features useful for streaming video from cameras on robots to laptops, phones, and tablets:</p>
+<ul>
+<li>Automatic quality selection based on bandwidth and packet loss estimates</li>
+<li>Options to record the live-streamed video feed to the companion computer (experimental!)</li>
+<li>Fine tuned control over resolution and framerates</li>
+<li>Multiple camera support over RTSP</li>
+<li>Hardware-accelerated H.264 encoding for supported cameras and GPUs</li>
+<li>Camera settings configurable through the APWeb GUI</li>
+</ul>
+<p>Phew!</p>
+<p>The configuration required to get everything working is minimal once the required dependencies have been installed. This is in no small part possible thanks to the GStreamer API which took care of several low level complexities of live streaming video over the air.</p>
+<p>Streaming video from aerial robots is probably the most difficult use case of Adaptive Streaming as the WiFi link is very flaky at these high speeds and distances. I've optimised the project around my testing with video streaming from quadcopters so the benefits are passed on to streaming from other robots as well.</p>
+<h2>Algorithm</h2>
+<p>I've used a simplification of TCP's <a href="https://en.wikipedia.org/wiki/TCP_congestion_control">congestion control</a> algorithm for Adaptive Streaming. I had looked at other interesting approaches including estimating receiver <a href="https://www.researchgate.net/publication/280738389_An_Analysis_of_TCP-Tolerant_Real-Time_Multimedia_Distribution_in_Heterogeneous_Networks?_sg=pcxT2q90osdkY06gupLQqwssRN0DZrsL3zP2oyqKVIjTML5RhEIWWX5S3-N4KbDRVqHbTc3i2VNzBBpVuQ72t9iSWyT10_8i6w">buffer occupancy</a>, but using this approach didn't yield significantly better results. TCP's congestion control algorithm avoids packet loss by mandating ACKs for each successfully delivered packet and steadily increasing sender bandwidth till it reaches a dynamically threshold.</p>
+<p>A crucial difference for Adaptive Streaming is that 1) we stream over UDP for lower overhead (so no automatic TCP ACKs here!) 2) H.264 live video streaming is fairly loss tolerant so it's okay to lose some packets instead of re-transmitting them. </p>
+<p>Video packets are streamed over dedicated RTP packets and Quality of Service (QoS) reports are sent over RTCP packets. These QoS reports give us all sorts of useful information, but we're mostly interested in seeing the number of packets loss between RTCP transmissions.</p>
+<p>On receiving a RTCP packet indicating any packet loss, we immediately shift to a Congested State (better name pending) which significantly reduces the rate at which video streaming bandwidth is increased on receiving a lossless RTCP packet. The encoding H.264 encoding bitrate is limited to no higher than 1000kbps in this state. </p>
+<p>Once we've received five lossless RTCP packets, we shift to a Steady State which can encode upto 6000kbps. In this state we also increase the encoding bitrate at a faster rate than we do in the Congested State. A nifty part of dynamically changing H.264 bitrates is that we can also seamlessly switch the streamed resolution according to the available bandwidth, just like YouTube does with DASH!</p>
+<p>This algorithm is fairly simple and wasn't too difficult to implement once I had figured out all the GStreamer plumbing for extracting packets from buffers. With more testing, I would like to add long-term bitrate adaptations for the bitrate selection algorithm.</p>
+<h2>H.264 Encoding</h2>
+<p>This is where we get into the complicated and wonderful world of video compression algorithms.</p>
+<p>Compression algorithms are used in all kinds of media, such as JPEG for still images and MP3 for audio. H.264 is one of several compression algorithms available for video. H.264 takes advantage of the fact that a lot of the information in video between frames is redundant. so instead of saving 30 frames for 1 second of 30fps video, it saves one entire frame (known as the Key Frame or I-Frame) of video and computes and stores only the differences in frames with respect to the keyframe for the subsequent 29 frames. H.264 also applies some logic to <em>predict</em> future frames to further reduce the file size. </p>
+<p>This is by no means close to a complete explanation of how H.264 works, for further reading I suggest checking out Sid Bala's <a href="https://sidbala.com/h-264-is-magic/">explanation</a> on the topic.</p>
+<p>The legendary Tom Scott also has a fun <a href="https://www.youtube.com/watch?v=r6Rp-uo6HmI">video explaining how H.264 is adversely affected by snow and confetti</a>!</p>
+<p>https://www.youtube.com/watch?v=r6Rp-uo6HmI</p>
+<p>The frequency of capturing keyframes can be set by changing the encoder parameters. In the context of live video streaming over unstable links such as WiFi, this is very important as packet loss can cause keyframes to be dropped. Dropped keyframes severely impact the quality of the video until a new keyframe is received. This is because all the frames transmitted after the keyframe only store the differences with respect to the keyframe and do not actually store a full picture on their own.</p>
+<p>Increasing the keyframe interval means we send a large, full frame less frequently, but also means we would suffer from terrible video quality for an extended period of time on losing a keyframe. On the other hand, shorter keyframe intervals can lead to a wastage of bandwidth.</p>
+<p>I found that a keyframe interval of every 10 frames worked much better than the default interval of 60 frames without impacting bandwidth usage too significantly.</p>
+<p>Lastly, H.264 video encoding is a very computationally expensive algorithm. Software-based implementations of H.264 such as <code>x264enc</code> are well supported with several configurable parameters but have prohibitively high CPU requirements, making it all but impossible to livestream H.264 encoded video from low power embedded systems. Fortunately, the Raspberry Pi's Broadcom BCM2837 SoC has a dedicated H.264 hardware encoder pipeline for the Raspberry Pi camera which drastically reduces the CPU load in high definition H.264 encoding. Some webcams such as the Logitech C920 and higher have onboard H.264 hardware encoding thanks to special ASIC's dedicated for this purpose. </p>
+<p>Adaptive Streaming probes for the type of encoding supported by the webcam and whether it has the IOCTL's required for changing the encoding parameters on-the-fly.</p>
+<p>H.264 has been superseded by the more efficient H.265 encoding algorithm, but the CPU requirements for H.265 are even higher and it doesn't enjoy the same hardware support as H.264 does for the time being.</p>
+<h2>GUI</h2>
+<p>The project is soon-to-be integrated with the APWeb project for configuring companion computers. Adaptive Streaming works by creating an RTSP Streaming server running as a daemon process. The APWeb process connects to this daemon service over a local socket to populate the list of cameras, RTSP mount points, and available resolutions of each camera.</p>
+<p><img alt="" src="http://arnavdhamija.com/images/apweb-screenshot.png"></p>
+<p>The GUI is open for improvement and I would love feedback on how to make it easier to use!</p>
+<p>Once the RTSP mount points are generated, one can livestream the video feed by entering in the RTSP URL of the camera into VLC. This works on all devices supporting VLC. However, VLC does add two seconds of latency to the livestream for reducing the jitter. I wasn't able to find a way to configure this in VLC, so an alternative way to get a lower latency stream is by using the following <code>gst-launch</code> command in a terminal:</p>
+<p><code>gst-launch-1.0 playbin uri=&lt;RTSP Mount Point&gt; latency=100</code></p>
+<p>In the scope of the GSoC timeline, I'm looking to wind down the project by working on documentation, testing, and reducing the cruft from the codebase. I'm looking forward to integrating this with companion repository soon!</p>
+<p>Links to the code:</p>
+<p>https://github.com/shortstheory/adaptive-streaming
+https://github.com/shortstheory/APWeb</p>
+            <a href="#" class="go-top">Go Top</a>
+    <div class="comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = "arnavdhamija"; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+<footer class="footer">
+    <p>&copy; Arnav Dhamija &ndash;
+        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+    </div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker("UA-91464572-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+    </script>
+
+</body>
+</html>
