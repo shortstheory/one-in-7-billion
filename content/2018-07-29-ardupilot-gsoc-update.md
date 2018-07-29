@@ -77,7 +77,7 @@ Once the RTSP mount points are generated, one can livestream the video feed by e
 
 In the scope of the GSoC timeline, I'm looking to wind down the project by working on documentation, testing, and reducing the cruft from the codebase. I'm looking forward to integrating this with companion repository soon!
 
-Links to the code:
+## Links to the code
 
 [https://github.com/shortstheory/adaptive-streaming](https://github.com/shortstheory/adaptive-streaming)
 
