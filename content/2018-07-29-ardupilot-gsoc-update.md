@@ -47,7 +47,7 @@ This is by no means close to a complete explanation of how H.264 works, for furt
 
 The legendary Tom Scott also has a fun [video explaining how H.264 is adversely affected by snow and confetti](https://www.youtube.com/watch?v=r6Rp-uo6HmI)!
 
-https://www.youtube.com/watch?v=r6Rp-uo6HmI
+.. youtube:: r6Rp-uo6HmI
 
 The frequency of capturing keyframes can be set by changing the encoder parameters. In the context of live video streaming over unstable links such as WiFi, this is very important as packet loss can cause keyframes to be dropped. Dropped keyframes severely impact the quality of the video until a new keyframe is received. This is because all the frames transmitted after the keyframe only store the differences with respect to the keyframe and do not actually store a full picture on their own.
 
