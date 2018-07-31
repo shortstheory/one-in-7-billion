@@ -25,13 +25,13 @@ Streaming video from aerial robots is probably the most difficult use case of Ad
 
 ## Algorithm
 
-I've used a simplification of TCP's [congestion control](https://en.wikipedia.org/wiki/TCP_congestion_control) algorithm for Adaptive Streaming. I had looked at other interesting approaches including estimating receiver [buffer occupancy](https://www.researchgate.net/publication/280738389_An_Analysis_of_TCP-Tolerant_Real-Time_Multimedia_Distribution_in_Heterogeneous_Networks?_sg=pcxT2q90osdkY06gupLQqwssRN0DZrsL3zP2oyqKVIjTML5RhEIWWX5S3-N4KbDRVqHbTc3i2VNzBBpVuQ72t9iSWyT10_8i6w), but using this approach didn't yield significantly better results. TCP's congestion control algorithm avoids packet loss by mandating ACKs for each successfully delivered packet and steadily increasing sender bandwidth till it reaches a dynamically threshold.
+I've used a simplification of TCP's [congestion control](https://en.wikipedia.org/wiki/TCP_congestion_control) algorithm for Adaptive Streaming. I had looked at other interesting approaches including estimating receiver [buffer occupancy](https://www.researchgate.net/publication/280738389_An_Analysis_of_TCP-Tolerant_Real-Time_Multimedia_Distribution_in_Heterogeneous_Networks?_sg=pcxT2q90osdkY06gupLQqwssRN0DZrsL3zP2oyqKVIjTML5RhEIWWX5S3-N4KbDRVqHbTc3i2VNzBBpVuQ72t9iSWyT10_8i6w), but using this approach didn't yield significantly better results. TCP's congestion control algorithm avoids packet loss by mandating ACKs for each successfully delivered packet and steadily increasing sender bandwidth till it reaches a dynamically set threshold.
 
-A crucial difference for Adaptive Streaming is that 1) we stream over UDP for lower overhead (so no automatic TCP ACKs here!) 2) H.264 live video streaming is fairly loss tolerant so it's okay to lose some packets instead of re-transmitting them. 
+A crucial difference for Adaptive Streaming is that 1) we stream over UDP for lower overhead (so no automatic TCP ACKs here!) 2) H.264 live video streaming is fairly loss tolerant so it's okay to lose some packets instead of re-transmitting them.
 
 Video packets are streamed over dedicated RTP packets and Quality of Service (QoS) reports are sent over RTCP packets. These QoS reports give us all sorts of useful information, but we're mostly interested in seeing the number of packets loss between RTCP transmissions.
 
-On receiving a RTCP packet indicating any packet loss, we immediately shift to a Congested State (better name pending) which significantly reduces the rate at which video streaming bandwidth is increased on receiving a lossless RTCP packet. The encoding H.264 encoding bitrate is limited to no higher than 1000kbps in this state. 
+On receiving a RTCP packet indicating any packet loss, we immediately shift to a Congested State (better name pending) which significantly reduces the rate at which the video streaming bandwidth is increased on receiving a lossless RTCP packet. The encoding H.264 encoding bitrate is limited to no higher than 1000kbps in this state.
 
 Once we've received five lossless RTCP packets, we shift to a Steady State which can encode upto 6000kbps. In this state we also increase the encoding bitrate at a faster rate than we do in the Congested State. A nifty part of dynamically changing H.264 bitrates is that we can also seamlessly switch the streamed resolution according to the available bandwidth, just like YouTube does with DASH!
 
@@ -41,7 +41,7 @@ This algorithm is fairly simple and wasn't too difficult to implement once I had
 
 This is where we get into the complicated and wonderful world of video compression algorithms.
 
-Compression algorithms are used in all kinds of media, such as JPEG for still images and MP3 for audio. H.264 is one of several compression algorithms available for video. H.264 takes advantage of the fact that a lot of the information in video between frames is redundant. so instead of saving 30 frames for 1 second of 30fps video, it saves one entire frame (known as the Key Frame or I-Frame) of video and computes and stores only the differences in frames with respect to the keyframe for the subsequent 29 frames. H.264 also applies some logic to _predict_ future frames to further reduce the file size. 
+Compression algorithms are used in all kinds of media, such as JPEG for still images and MP3 for audio. H.264 is one of several compression algorithms available for video. H.264 takes advantage of the fact that a lot of the information in video between frames is redundant, so instead of saving 30 frames for 1 second of 30fps video, it saves one entire frame (known as the Key Frame or I-Frame) of video and computes and stores only the differences in frames with respect to the keyframe for the subsequent 29 frames. H.264 also applies some logic to _predict_ future frames to further reduce the file size.
 
 This is by no means close to a complete explanation of how H.264 works, for further reading I suggest checking out Sid Bala's [explanation](https://sidbala.com/h-264-is-magic/) on the topic.
 
