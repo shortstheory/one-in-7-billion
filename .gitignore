@@ -1,0 +1,7 @@
+        .ghost-cli
+        .ghostpid
+        config.development.json
+        current
+        static/
+        versions/
+
